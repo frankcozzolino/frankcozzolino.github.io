@@ -544,7 +544,7 @@ body {
     min-height: calc(100vh - 80px);
 }
 
-/* BACKGROUND STYLES - IMAGE SUPPORT WITH COLOR FALLBACKS */
+/* BACKGROUND STYLES - IMAGE SUPPORT WITH B&W HOVER EFFECTS */
 .section-bg {
     position: absolute;
     top: 0;
@@ -554,47 +554,46 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: transform 0.6s ease, filter 0.3s ease;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    /* Default: Black and white */
+    filter: grayscale(100%) brightness(0.7);
 }
 
 /* SAILING SECTION - Ocean Blues */
 .sailing-bg {
     background:
-        url('../images/sailing.jpg'),
+        url('images/sailing.jpg'),
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
         radial-gradient(circle at 30% 70%, #1e3a8a, #3b82f6);
-    filter: grayscale(20%);
 }
 
 /* CODER SECTION - Tech Greens */
 .coder-bg {
     background:
-        url('../images/coding.jpg'),
+        url('images/coding.jpg'),
         linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
         radial-gradient(circle at 70% 30%, #059669, #10b981);
-    filter: grayscale(40%);
 }
 
 /* PRODUCT MANAGER SECTION - Professional Orange/Red */
 .pm-bg {
     background:
-        url('../images/product-management.jpg'),
+        url('images/product-management.jpg'),
         linear-gradient(rgba(180, 50, 50, 0.3), rgba(150, 30, 30, 0.6)),
         radial-gradient(circle at 50% 50%, #ea580c, #f97316);
-    filter: grayscale(0%);
 }
 
 /* HOBBIES SECTION - Creative Purples */
 .hobbies-bg {
     background:
-        url('../images/hobbies.jpg'),
+        url('images/hobbies.jpg'),
         linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
         radial-gradient(circle at 80% 20%, #7c3aed, #a855f7);
-    filter: grayscale(60%);
 }
 
+/* HOVER EFFECTS - Enlarge and restore color */
 .diagonal-section:hover .section-bg {
-    transform: scale(1.02);
+    transform: scale(1.05);
     filter: grayscale(0%) brightness(1.1);
 }
 

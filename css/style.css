@@ -9,7 +9,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #000;
+    background-color: #f8f9fa;
     overflow-x: hidden;
 }
 
@@ -518,45 +518,58 @@ body {
     background: #357abd;
 }
 
-/* DIAGONAL GALLERY - NO BLACK LINES VERSION */
+/* DIAGONAL GALLERY - WHITE LINES HACK */
 .diagonal-gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     min-height: calc(100vh - 80px);
     position: relative;
-    /* Remove any gaps */
     gap: 0;
+    background: #f8f9fa;
 }
 
 .diagonal-section {
     position: relative;
     overflow: hidden;
-    /* Ensure no margins by default */
     margin: 0;
+    /* WHITE LINE HACK - Add white borders and shadows */
+    border-left: 2px solid rgba(255, 255, 255, 0.8);
+    border-right: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow:
+        -2px 0 4px rgba(255, 255, 255, 0.6),
+        2px 0 4px rgba(255, 255, 255, 0.6),
+        inset -2px 0 4px rgba(255, 255, 255, 0.4),
+        inset 2px 0 4px rgba(255, 255, 255, 0.4);
 }
 
-/* REFINED DIAGONAL CUTS - ZERO BLACK LINES */
+/* REFINED DIAGONAL CUTS WITH WHITE ENHANCEMENT */
 .vendee-section {
     clip-path: polygon(0 0, 102% 0, 92% 100%, 0 100%);
     z-index: 4;
+    border-right: 3px solid rgba(248, 249, 250, 0.9);
 }
 
 .skipper-section {
     clip-path: polygon(8% 0, 102% 0, 92% 100%, -2% 100%);
     margin-left: -2%;
     z-index: 3;
+    border-left: 3px solid rgba(248, 249, 250, 0.9);
+    border-right: 3px solid rgba(248, 249, 250, 0.9);
 }
 
 .conference-section {
     clip-path: polygon(8% 0, 102% 0, 92% 100%, -2% 100%);
     margin-left: -2%;
     z-index: 2;
+    border-left: 3px solid rgba(248, 249, 250, 0.9);
+    border-right: 3px solid rgba(248, 249, 250, 0.9);
 }
 
 .entrepreneur-section {
     clip-path: polygon(8% 0, 100% 0, 100% 100%, -2% 100%);
     margin-left: -2%;
     z-index: 1;
+    border-left: 3px solid rgba(248, 249, 250, 0.9);
 }
 
 /* SECTION CONTENT */
@@ -567,7 +580,7 @@ body {
     min-height: calc(100vh - 80px);
 }
 
-/* BACKGROUND STYLES - PROFESSIONAL PHOTO EFFECTS */
+/* BACKGROUND STYLES - ENHANCED WITH WHITE TINTS */
 .section-bg {
     position: absolute;
     top: 0;
@@ -579,31 +592,31 @@ body {
     transition: transform 0.6s ease, filter 0.3s ease;
 }
 
-/* Different backgrounds for each section */
+/* Enhanced backgrounds with white tints */
 .vendee-bg {
     background:
-        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        linear-gradient(rgba(248, 249, 250, 0.1), rgba(0, 0, 0, 0.6)),
         radial-gradient(circle at 30% 70%, #2c3e50, #34495e);
     filter: grayscale(20%);
 }
 
 .skipper-bg {
     background:
-        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+        linear-gradient(rgba(248, 249, 250, 0.1), rgba(0, 0, 0, 0.5)),
         radial-gradient(circle at 70% 30%, #34495e, #2c3e50);
     filter: grayscale(60%);
 }
 
 .conference-bg {
     background:
-        linear-gradient(rgba(180, 50, 50, 0.3), rgba(150, 30, 30, 0.6)),
+        linear-gradient(rgba(248, 249, 250, 0.1), rgba(150, 30, 30, 0.6)),
         radial-gradient(circle at 50% 50%, #c0392b, #a93226);
     filter: grayscale(0%);
 }
 
 .entrepreneur-bg {
     background:
-        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        linear-gradient(rgba(248, 249, 250, 0.1), rgba(0, 0, 0, 0.6)),
         radial-gradient(circle at 80% 20%, #2c3e50, #1a252f);
     filter: grayscale(80%);
 }
@@ -721,29 +734,33 @@ body {
         font-size: 0.8rem;
     }
 
-    /* Adjust clips for tablet - cleaner cuts */
+    /* Adjust clips for tablet with white borders */
     .vendee-section {
         clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
         margin-left: 0;
         z-index: 2;
+        border-right: 2px solid rgba(248, 249, 250, 0.8);
     }
 
     .skipper-section {
         clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%);
         margin-left: 0;
         z-index: 1;
+        border-left: 2px solid rgba(248, 249, 250, 0.8);
     }
 
     .conference-section {
         clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
         margin-left: 0;
         z-index: 2;
+        border-right: 2px solid rgba(248, 249, 250, 0.8);
     }
 
     .entrepreneur-section {
         clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%);
         margin-left: 0;
         z-index: 1;
+        border-left: 2px solid rgba(248, 249, 250, 0.8);
     }
 }
 
@@ -769,7 +786,7 @@ body {
         gap: 0;
     }
 
-    /* Remove clips on mobile for clean stacking */
+    /* Remove clips on mobile but keep white borders */
     .vendee-section,
     .skipper-section,
     .conference-section,
@@ -777,6 +794,8 @@ body {
         clip-path: none;
         margin-left: 0;
         z-index: auto;
+        border: none;
+        border-bottom: 1px solid rgba(248, 249, 250, 0.3);
     }
 
     .section-content {

@@ -544,7 +544,7 @@ body {
     min-height: calc(100vh - 80px);
 }
 
-/* BACKGROUND STYLES - IMAGE SUPPORT WITH B&W HOVER EFFECTS */
+/* BACKGROUND STYLES - IMAGES FIRST, GRADIENTS AS FALLBACK */
 .section-bg {
     position: absolute;
     top: 0;
@@ -555,43 +555,55 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     transition: transform 0.6s ease, filter 0.4s ease;
-    /* Default: Black and white */
-    filter: grayscale(100%) brightness(0.7);
+    /* Default: Slightly desaturated but visible */
+    filter: grayscale(70%) brightness(0.9);
 }
 
-/* SAILING SECTION - Ocean Blues */
+/* SAILING SECTION - Image first, gradient fallback */
 .sailing-bg {
+    background-image: url('images/sailing.jpg');
+    background-color: #1e3a8a;
+    /* Fallback gradient only if image fails */
     background:
         url('images/sailing.jpg'),
-        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)),
         radial-gradient(circle at 30% 70%, #1e3a8a, #3b82f6);
 }
 
-/* CODER SECTION - Tech Greens */
+/* CODER SECTION - Image first, gradient fallback */
 .coder-bg {
+    background-image: url('images/coding.jpg');
+    background-color: #059669;
+    /* Fallback gradient only if image fails */
     background:
         url('images/coding.jpg'),
-        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
         radial-gradient(circle at 70% 30%, #059669, #10b981);
 }
 
-/* PRODUCT MANAGER SECTION - Professional Orange/Red */
+/* PRODUCT MANAGER SECTION - Image first, gradient fallback */
 .pm-bg {
+    background-image: url('images/product-management.jpg');
+    background-color: #ea580c;
+    /* Fallback gradient only if image fails */
     background:
         url('images/product-management.jpg'),
-        linear-gradient(rgba(180, 50, 50, 0.3), rgba(150, 30, 30, 0.6)),
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
         radial-gradient(circle at 50% 50%, #ea580c, #f97316);
 }
 
-/* HOBBIES SECTION - Creative Purples */
+/* HOBBIES SECTION - Image first, gradient fallback */
 .hobbies-bg {
+    background-image: url('images/hobbies.jpg');
+    background-color: #7c3aed;
+    /* Fallback gradient only if image fails */
     background:
         url('images/hobbies.jpg'),
-        linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+        linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
         radial-gradient(circle at 80% 20%, #7c3aed, #a855f7);
 }
 
-/* HOVER EFFECTS - Enlarge and restore color */
+/* HOVER EFFECTS - Enlarge and full color */
 .diagonal-section:hover .section-bg {
     transform: scale(1.05);
     filter: grayscale(0%) brightness(1.1);

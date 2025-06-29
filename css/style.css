@@ -458,16 +458,17 @@ body {
     }
 }
 
-/* PROFESSIONAL NAVIGATION */
+/* PROFESSIONAL NAVIGATION - Ultra transparent to show background images */
 .main-nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(25, 35, 45, 0.7);
-    backdrop-filter: blur(10px);
+    background: rgba(25, 35, 45, 0.2);
+    backdrop-filter: blur(15px);
     z-index: 1000;
     padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-container {
@@ -515,14 +516,45 @@ body {
 .social-icon {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: color 0.3s ease, transform 0.3s ease;
     padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 
 .social-icon:hover {
-    color: #4a9eff;
     transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Brand-specific hover colors */
+.social-icon:hover .fa-whatsapp {
+    color: #25D366;
+}
+
+.social-icon:hover .fa-discord {
+    color: #5865F2;
+}
+
+.social-icon:hover .fa-linkedin {
+    color: #0077B5;
+}
+
+.social-icon:hover .fa-instagram {
+    color: #E4405F;
+}
+
+.social-icon:hover .fa-envelope {
+    color: #EA4335;
+}
+
+.social-icon:hover .fa-github {
+    color: #ffffff;
 }
 
 /* CLEAN HORIZONTAL GALLERY */
@@ -810,6 +842,8 @@ body {
     .social-icon {
         font-size: 1rem;
         padding: 0.3rem;
+        width: 35px;
+        height: 35px;
     }
 
     .section-text h2 {

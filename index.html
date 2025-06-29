@@ -4,86 +4,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Captain Amazing King</title>
+    <title>Captain Amazing King - Official Page</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <header class="hero">
-        <div class="carousel">
-            <img src="images/hero1.jpg" alt="">
-            <img src="images/hero2.jpg" alt="">
-            <img src="images/hero3.jpg" alt="">
-        </div>
-        <div class="hero-text">
+        <div class="hero-content">
             <h1>Captain Amazing King</h1>
-            <p>Skipper • Yachtmaster • Adventurer</p>
+            <p class="hero-subtitle">page officielle</p>
+
             <nav class="hero-nav">
-                <a href="#sailing" class="btn">Sailing</a>
-                <a href="#professional" class="btn">Professional</a>
-                <a href="#hobbies" class="btn">Hobbies</a>
+                <div class="nav-item">
+                    <span class="nav-bullet">•</span>
+                    <span>Ocean Racing 2025</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-bullet">•</span>
+                    <span>Skipper</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-bullet">•</span>
+                    <span>Instructor</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-bullet">•</span>
+                    <span>Adventurer</span>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- SAILING (slant-top) -->
-    <section id="sailing" class="section slant-top">
-        <div class="container grid-2">
-            <div>
-                <h2>Sailing</h2>
-                <p>15+ years, 30 000 nm: Atlantic crossings, regattas, solo passages…</p>
-            </div>
-            <div>
-                <div id="map"></div>
-                <canvas id="skillsRadar"></canvas>
-            </div>
-        </div>
-    </section>
+    <!-- MAIN SECTIONS -->
+    <main class="main-content">
 
-    <!-- PROFESSIONAL (slant-top slant-bottom) -->
-    <section id="professional" class="section slant-top slant-bottom">
-        <div class="container grid-2">
-            <aside>
-                <img src="images/you.jpg" alt="You">
-                <h3>Certifications</h3>
-                <ul>
-                    <li>RYA Yachtmaster Ocean</li>
-                    <li>USCG Master 100 T</li>
-                </ul>
-                <a href="docs/resume.pdf" class="btn">Download CV</a>
-            </aside>
-            <div>
-                <h2>Experience</h2>
-                <ul class="timeline">
-                    <li><strong>2023–Present:</strong> Freelance Skipper & Trainer</li>
-                    <li><strong>2019–2023:</strong> Delivery Captain</li>
-                </ul>
+        <!-- OCEAN RACING SECTION -->
+        <section class="section-card">
+            <div class="card-image">
+                <img src="https://via.placeholder.com/600x400/004a7c/ffffff?text=Ocean+Racing+2025"
+                    alt="Ocean Racing 2025">
             </div>
-        </div>
-    </section>
+            <div class="card-content">
+                <h2>Ocean Racing 2025 en voilier haute performance</h2>
+                <a href="#racing" class="discover-btn">Découvrir</a>
+            </div>
+        </section>
 
-    <!-- HOBBIES (slant-bottom) -->
-    <section id="hobbies" class="section slant-bottom">
-        <div class="container">
-            <h2>Hobbies</h2>
-            <div class="grid-3 cards">
-                <div class="card">
-                    <img src="images/photography.jpg" alt="">
-                    <h3>Photography</h3>
-                </div>
-                <div class="card">
-                    <img src="images/drone.jpg" alt="">
-                    <h3>Drone Videography</h3>
-                </div>
-                <div class="card">
-                    <img src="images/woodwork.jpg" alt="">
-                    <h3>Woodworking</h3>
+        <!-- SKIPPER SECTION -->
+        <section class="section-card">
+            <div class="card-image">
+                <img src="https://via.placeholder.com/600x400/005884/ffffff?text=Professional+Skipper"
+                    alt="Professional Skipper">
+            </div>
+            <div class="card-content">
+                <h2>SKIPPER - L'excellence permet de survivre face aux éléments les plus sauvages</h2>
+                <a href="#skipper" class="discover-btn">Découvrir</a>
+            </div>
+        </section>
+
+        <!-- INSTRUCTOR SECTION -->
+        <section class="section-card">
+            <div class="card-image">
+                <img src="https://via.placeholder.com/600x400/006494/ffffff?text=Sailing+Instructor"
+                    alt="Sailing Instructor">
+            </div>
+            <div class="card-content">
+                <h2>INSTRUCTOR - Navigation, sécurité, excellence et passion en mer comme sur terre.</h2>
+                <a href="#instructor" class="discover-btn">Découvrir</a>
+            </div>
+        </section>
+
+        <!-- ADVENTURER SECTION -->
+        <section class="section-card">
+            <div class="card-image">
+                <img src="https://via.placeholder.com/600x400/003d5c/ffffff?text=Ocean+Adventures"
+                    alt="Ocean Adventures">
+            </div>
+            <div class="card-content">
+                <h2>ADVENTURER - Explorer les océans, partager l'aventure, transmettre la passion c'est dans mon ADN.
+                </h2>
+                <div class="sub-sections">
+                    <a href="#adventures" class="sub-link">Les Aventures</a>
+                    <a href="#expeditions" class="sub-link">Expéditions</a>
                 </div>
             </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section class="section-card">
+            <div class="card-image">
+                <img src="https://via.placeholder.com/600x400/002a3d/ffffff?text=Sailing+Experience"
+                    alt="Sailing Experience">
+            </div>
+            <div class="card-content">
+                <h2>EXPERIENCE - Durant 15+ années j'ai navigué sur tous les océans et partagé ma passion...</h2>
+                <div class="sub-sections">
+                    <a href="#certifications" class="sub-link">Certifications</a>
+                    <a href="#timeline" class="sub-link">Mon Parcours</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; Captain Amazing King 2025. Tous droits réservés.</p>
+            <div class="footer-links">
+                <span><strong>Ocean Racing 2025 - Skipper - Instructor - Adventurer - Experience</strong></span>
+            </div>
+            <div class="footer-nav">
+                <a href="#contact">Contact</a>
+                <a href="#mentions">Mentions légales</a>
+                <a href="#privacy">Politique de confidentialité</a>
+            </div>
         </div>
-    </section>
+    </footer>
 
 </body>
 

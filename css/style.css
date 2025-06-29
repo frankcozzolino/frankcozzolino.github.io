@@ -9,7 +9,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #fafafa;
+    background-color: #000;
 }
 
 /* Utility grids & containers */
@@ -45,7 +45,7 @@ body {
 .hero {
     background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     color: white;
-    min-height: 60vh;
+    min-height: 40vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,7 +61,7 @@ body {
 }
 
 .hero-subtitle {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 300;
     margin-bottom: 3rem;
     opacity: 0.9;
@@ -94,11 +94,12 @@ body {
     margin: 0;
 }
 
-/* Image Gallery - 4 Horizontal Images */
+/* Image Gallery - 4 FULL-PAGE Horizontal Images */
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    min-height: 80vh;
+    min-height: 60vh;
+    height: 60vh;
 }
 
 .image-section {
@@ -110,19 +111,49 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: 80vh;
 }
 
-.image-container img {
+/* Placeholder Images with CSS Backgrounds */
+.placeholder-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    filter: grayscale(20%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.5s ease, filter 0.3s ease;
+    filter: grayscale(30%);
 }
 
-.image-section:hover img {
-    transform: scale(1.05);
+.placeholder-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    transform: rotate(-90deg);
+}
+
+/* Background Colors for Each Section */
+.vendee-bg {
+    background: linear-gradient(45deg, #2c3e50, #34495e);
+}
+
+.skipper-bg {
+    background: linear-gradient(45deg, #34495e, #2c3e50);
+}
+
+.instructor-bg {
+    background: linear-gradient(45deg, #004a7c, #005884);
+}
+
+.adventurer-bg {
+    background: linear-gradient(45deg, #005884, #006494);
+}
+
+.image-section:hover .placeholder-image {
+    transform: scale(1.03);
     filter: grayscale(0%);
 }
 
@@ -135,13 +166,13 @@ body {
     bottom: 0;
     background: linear-gradient(to bottom,
             rgba(0, 0, 0, 0.1) 0%,
-            rgba(0, 0, 0, 0.3) 50%,
-            rgba(0, 0, 0, 0.7) 100%);
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0.8) 100%);
     display: flex;
     align-items: flex-end;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
 }
 
 .image-section:hover .image-overlay {
@@ -152,8 +183,8 @@ body {
     text-align: center;
     color: white;
     padding: 2rem;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
+    transform: translateY(30px);
+    transition: transform 0.4s ease;
 }
 
 .image-section:hover .overlay-content {
@@ -171,17 +202,17 @@ body {
 .overlay-content p {
     font-size: 1rem;
     margin-bottom: 1.5rem;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 /* Buttons */
 .discover-btn {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     color: white;
     text-decoration: none;
     padding: 0.8rem 1.5rem;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.4);
     border-radius: 4px;
     font-weight: 500;
     font-size: 0.9rem;
@@ -192,16 +223,17 @@ body {
 }
 
 .discover-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.7);
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
 /* Footer */
 .footer {
-    background: #2c3e50;
+    background: #1a1a1a;
     color: white;
-    padding: 3rem 2rem 2rem;
+    padding: 2rem;
     text-align: center;
 }
 
@@ -211,21 +243,22 @@ body {
 }
 
 .footer-links {
-    margin: 1.5rem 0;
-    font-size: 0.95rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 .footer-nav {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin-top: 2rem;
-    padding-top: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-nav a {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s ease;
@@ -239,14 +272,21 @@ body {
 @media (max-width: 1024px) {
     .image-gallery {
         grid-template-columns: repeat(2, 1fr);
+        min-height: 80vh;
+        height: 80vh;
     }
 
-    .image-container {
-        min-height: 60vh;
+    .placeholder-text {
+        transform: rotate(0deg);
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 768px) {
+    .hero {
+        min-height: 35vh;
+    }
+
     .hero-nav {
         flex-direction: column;
         gap: 1rem;
@@ -258,22 +298,29 @@ body {
 
     .image-gallery {
         grid-template-columns: 1fr;
+        min-height: 100vh;
+        height: auto;
     }
 
     .image-container {
-        min-height: 50vh;
+        min-height: 25vh;
     }
 
     .image-overlay {
         opacity: 1;
         background: linear-gradient(to bottom,
-                rgba(0, 0, 0, 0.2) 0%,
-                rgba(0, 0, 0, 0.5) 50%,
-                rgba(0, 0, 0, 0.8) 100%);
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.6) 50%,
+                rgba(0, 0, 0, 0.9) 100%);
     }
 
     .overlay-content {
         transform: translateY(0);
+        padding: 1.5rem;
+    }
+
+    .placeholder-text {
+        font-size: 0.9rem;
     }
 
     .footer-nav {
@@ -284,20 +331,15 @@ body {
 
 @media (max-width: 480px) {
     .hero {
-        min-height: 50vh;
         padding: 1rem;
-    }
-
-    .image-container {
-        min-height: 40vh;
-    }
-
-    .overlay-content {
-        padding: 1.5rem;
     }
 
     .overlay-content h2 {
         font-size: 1.4rem;
+    }
+
+    .placeholder-text {
+        font-size: 0.8rem;
     }
 }
 

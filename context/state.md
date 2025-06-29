@@ -1,54 +1,60 @@
 # Project State
 
 ## Current Task
-- ✅ **COMPLETED**: Marc Thiercelin inspired redesign deployed successfully!
-- Clean, professional layout with placeholder images live
+- ✅ **COMPLETED**: Horizontal 4-image gallery layout deployed successfully!
+- Dramatic Vendée Globe inspired design with hover overlays live
 
 ## Last Completed Action
-- **Complete redesign**: Transformed site to match Marc Thiercelin's professional aesthetic from https://marcthiercelin.com/
-- **Added placeholder images**: Using via.placeholder.com for immediate visual feedback
-- **Successfully deployed**: Updated design pushed to GitHub Pages
+- **Complete layout transformation**: Changed from vertical cards to 4 horizontal images
+- **Inspired by user's Vendée Globe image**: Black and white dramatic aesthetic
+- **Added hover overlays**: Interactive content appears on image hover
+- **Successfully deployed**: New gallery layout pushed to GitHub Pages
 
-## Design Transformation
-- **Hero section**: Clean title with "page officielle" subtitle and bullet navigation
-- **Section cards**: 5 main sections with large images and "Découvrir" buttons
-- **Modern typography**: System fonts with professional spacing
-- **Hover effects**: Card lift animations and image scaling
-- **Responsive design**: Mobile-optimized layout
+## Layout Transformation
+- **4 horizontal images**: Side-by-side gallery layout (image / image / image / image)
+- **Portrait placeholders**: 400x600 vertical images for sailing portrait style
+- **Hover overlays**: Gradient overlays with title, description, and "Découvrir" button
+- **Dramatic styling**: Grayscale filter effect with color on hover
+- **Vendée Globe focus**: Updated navigation and hero section
 
-## Website Sections
-1. **Ocean Racing 2025** - High-performance sailing
-2. **SKIPPER** - Professional excellence and survival skills  
-3. **INSTRUCTOR** - Navigation, safety, and passion
-4. **ADVENTURER** - Ocean exploration and adventure sharing
-5. **EXPERIENCE** - 15+ years sailing expertise
+## Website Sections (Horizontal Gallery)
+1. **Vendée Globe 2028** - "Solo non-stop around the world"
+2. **Skipper** - "Excellence face aux éléments"  
+3. **Instructor** - "Navigation et sécurité"
+4. **Adventurer** - "Explorer les océans"
+
+## Technical Features
+- **CSS Grid**: `grid-template-columns: repeat(4, 1fr)` for equal width columns
+- **Hover effects**: Image scale (1.05x) and grayscale removal on hover
+- **Overlay animation**: Smooth opacity transition with content slide-up
+- **Backdrop blur**: Glass morphism effect on buttons
+- **Responsive breakpoints**: 
+  - Desktop: 4 columns
+  - Tablet (1024px): 2 columns  
+  - Mobile (768px): 1 column
 
 ## Technical Status
 - Repository: ✅ frankcozzolino/frankcozzolino.github.io (collaborator access)
-- Deployment: ✅ Live with new design on GitHub Pages  
-- Images: ✅ Placeholder images showing layout preview
-- Responsive: ✅ Mobile-first professional design
-- Typography: ✅ Modern system font stack
+- Deployment: ✅ Live with horizontal gallery layout on GitHub Pages  
+- Images: ✅ Portrait placeholder images (400x600) showing layout preview
+- Responsive: ✅ Mobile-optimized stacking design
+- Interactions: ✅ Smooth hover animations and overlays
 
 ## Next Steps Available
-- **Replace placeholder images**: Add real sailing photos for each section
-- **Content customization**: Update French text to match actual experience
-- **Interactive features**: Optional carousel, maps, charts if desired
-- **Real photos needed**:
-  - Ocean racing yacht (600x400)
-  - Professional skipper action shot
-  - Sailing instruction scene
-  - Adventure/expedition photos
-  - Experience timeline imagery
+- **Replace placeholder images**: Add real Vendée Globe/sailing photos
+- **Fine-tune overlays**: Adjust overlay content and positioning
+- **Add real content**: Update French descriptions to match actual experience
+- **Optional enhancements**: Add carousel between images, loading animations
 
 ## Website URL
 - **Live site**: https://frankcozzolino.github.io
-- **Design inspiration**: Marc Thiercelin's professional sailing site
+- **Design inspiration**: Vendée Globe racing aesthetic with dramatic black/white portraits
 
 ## No Active Blockers
-- Design transformation complete ✅
-- Placeholder images working perfectly ✅  
-- Professional layout deployed ✅
+- Layout transformation complete ✅
+- Horizontal gallery working perfectly ✅  
+- Hover overlays functional ✅
+- Responsive design deployed ✅
 
 ## Last Updated
-2025-06-29 21:25 - **MARC THIERCELIN INSPIRED REDESIGN DEPLOYED** 🎨⚓ 
+2025-06-29 21:35 - **HORIZONTAL 4-IMAGE GALLERY DEPLOYED** 🖼️⚓ 

@@ -4,7 +4,7 @@
 - **Single-page layout**: Hero + 3 diagonal sections (sailing, professional, hobbies)
 - **Diagonal sections**: Using CSS clip-path for modern slanted edges
 - **Color scheme**: Ocean blues (#005884, #004a7c, #006494) for nautical theme
-- **Typography**: System sans-serif for clean, readable text
+- **Typography**: Roboto Condensed for professional nautical aesthetic
 
 ## Layout Strategy
 - **Grid system**: CSS Grid for 2-column and 3-column layouts

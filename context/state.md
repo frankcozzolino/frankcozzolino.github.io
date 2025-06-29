@@ -1,5 +1,10 @@
 # PROJECT STATE - Frank Cozzolino Website
 
+## ⚠️ LATEST UPDATE - NAVBAR TRANSPARENCY ADJUSTED TO 15%
+- **Change**: Reduced navbar transparency from 20% to 15% opacity
+- **Technical**: Updated `background: rgba(25, 35, 45, 0.15)` for more background visibility
+- **Result**: Even more transparent navbar showing background images more clearly
+
 ## ⚠️ CRITICAL FIX APPLIED - OFFICIAL BRAND ICONS IMPLEMENTED
 - **Issue**: Font Awesome icons were NOT the official brand icons for each company
 - **Fix**: Replaced all Font Awesome icons with official SVG icons directly from each brand

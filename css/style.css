@@ -573,28 +573,28 @@ body {
 
 /* SAILING SECTION */
 .sailing-bg {
-    background-image: url('images/sailing.jpg');
+    background-image: url('./images/sailing.jpg');
     background-color: #1e3a8a;
     /* Fallback color */
 }
 
 /* CODER SECTION */
 .coder-bg {
-    background-image: url('images/coding.jpg');
+    background-image: url('./images/coding.jpg');
     background-color: #059669;
     /* Fallback color */
 }
 
 /* PRODUCT MANAGER SECTION */
 .pm-bg {
-    background-image: url('images/product-management.jpg');
+    background-image: url('./images/product-management.jpg');
     background-color: #ea580c;
     /* Fallback color */
 }
 
 /* HOBBIES SECTION */
 .hobbies-bg {
-    background-image: url('images/hobbies.jpg');
+    background-image: url('./images/hobbies.jpg');
     background-color: #7c3aed;
     /* Fallback color */
 }

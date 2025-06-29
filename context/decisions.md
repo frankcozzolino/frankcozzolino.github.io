@@ -32,12 +32,18 @@
 # Technical Decisions & Rationale
 
 ## Image Styling Update (2025-01-12)
-**Decision**: Convert all background images to black and white with increased brightness
+**Decision**: Implement sophisticated blue-tinted grayscale matching Marc Thiercelin's maritime aesthetic
 **Approach**: 
-- Used CSS filters: `grayscale(100%) contrast(200%) brightness(1.5)`
-- Maintained B&W aesthetic on hover with higher brightness: `brightness(1.8)`
+- **Default**: `grayscale(70%) sepia(30%) hue-rotate(180deg) saturate(0.8) brightness(1.1)`
+- **Hover**: `grayscale(60%) sepia(35%) hue-rotate(180deg) saturate(1.0) brightness(1.2)`
 **Rationale**: 
-- User requested B&W conversion with more light due to images being too dark
-- Preserved hover interactions while maintaining consistent aesthetic
-- Applied uniformly across all sections (sailing, coding, PM, hobbies)
+- User requested sophisticated grayscale with blue hint, not pure black/white
+- Professional maritime aesthetic matching high-end sailing portfolio references
+- Sepia-to-blue transformation creates natural, professional color grading
+- Maintains image detail while adding nautical blue tint
+**Technical Details**:
+- `grayscale(70%)`: Partial desaturation preserves depth
+- `sepia(30%)`: Adds warm base for color manipulation
+- `hue-rotate(180deg)`: Converts sepia warmth to cool blue tones
+- `saturate(0.8/1.0)`: Controls blue intensity for subtlety
 **Files Modified**: `css/style.css` - `.section-bg` and `.diagonal-section:hover .section-bg` rules 

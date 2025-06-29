@@ -558,8 +558,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     transition: transform 0.6s ease, filter 0.4s ease;
-    /* Default: Sophisticated blue-tinted grayscale like Marc Thiercelin */
-    filter: grayscale(70%) sepia(30%) hue-rotate(180deg) saturate(0.8) brightness(1.1);
+    /* Default: Pure grayscale with slight enhancement */
+    filter: grayscale(100%) contrast(105%) brightness(1.1);
 }
 
 /* Add dark overlay for text readability */
@@ -572,6 +572,15 @@ body {
     bottom: 0;
     background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
     z-index: 1;
+    transition: background 0.4s ease;
+}
+
+/* Hover: Replace with #2B5C95 gradient overlay */
+.diagonal-section:hover .section-bg::before {
+    background: linear-gradient(to bottom,
+            rgba(43, 92, 149, 0.8) 0%,
+            rgba(43, 92, 149, 0.4) 70%,
+            rgba(43, 92, 149, 0.2) 100%);
 }
 
 /* SAILING SECTION */
@@ -602,10 +611,10 @@ body {
     /* Fallback color */
 }
 
-/* HOVER EFFECTS - Enlarge with enhanced blue-tinted grayscale */
+/* HOVER EFFECTS - Enlarge with full color */
 .diagonal-section:hover .section-bg {
     transform: scale(1.05);
-    filter: grayscale(60%) sepia(35%) hue-rotate(180deg) saturate(1.0) brightness(1.2);
+    filter: brightness(1.05);
 }
 
 /* CONTENT OVERLAY */

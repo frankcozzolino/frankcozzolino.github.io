@@ -32,18 +32,19 @@
 # Technical Decisions & Rationale
 
 ## Image Styling Update (2025-01-12)
-**Decision**: Implement sophisticated blue-tinted grayscale matching Marc Thiercelin's maritime aesthetic
+**Decision**: Implement pure grayscale default with full color + custom gradient overlay on hover
 **Approach**: 
-- **Default**: `grayscale(70%) sepia(30%) hue-rotate(180deg) saturate(0.8) brightness(1.1)`
-- **Hover**: `grayscale(60%) sepia(35%) hue-rotate(180deg) saturate(1.0) brightness(1.2)`
+- **Default**: `grayscale(100%) contrast(105%) brightness(1.1)` - Pure grayscale with slight enhancement
+- **Hover**: `filter: brightness(1.05)` - Full original colors with subtle brightness boost
+- **Gradient Overlay**: #2B5C95 top-to-bottom gradient replacing dark overlay on hover
 **Rationale**: 
-- User requested sophisticated grayscale with blue hint, not pure black/white
-- Professional maritime aesthetic matching high-end sailing portfolio references
-- Sepia-to-blue transformation creates natural, professional color grading
-- Maintains image detail while adding nautical blue tint
-**Technical Details**:
-- `grayscale(70%)`: Partial desaturation preserves depth
-- `sepia(30%)`: Adds warm base for color manipulation
-- `hue-rotate(180deg)`: Converts sepia warmth to cool blue tones
-- `saturate(0.8/1.0)`: Controls blue intensity for subtlety
-**Files Modified**: `css/style.css` - `.section-bg` and `.diagonal-section:hover .section-bg` rules 
+- User requested pure grayscale (not blue-tinted) with full color revelation on hover
+- Custom #2B5C95 gradient overlay adds branded nautical aesthetic
+- Classic interaction pattern: muted default → vibrant hover with branded overlay
+- Maintains professional appearance while providing engaging interaction
+**Technical Implementation**:
+- `grayscale(100%)`: Complete desaturation for clean default state
+- `contrast(105%)`: Subtle definition enhancement
+- Pseudo-element gradient transition for smooth branded overlay effect
+- 0.4s animated transitions for professional feel
+**Files Modified**: `css/style.css` - `.section-bg`, `.diagonal-section:hover .section-bg`, and `.section-bg::before` rules 

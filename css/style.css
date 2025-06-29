@@ -562,7 +562,7 @@ body {
     filter: grayscale(100%) contrast(105%) brightness(1.1);
 }
 
-/* Add dark overlay for text readability */
+/* Default: Subtle blue hint overlay on grayscale (like Marc Thiercelin) */
 .section-bg::before {
     content: '';
     position: absolute;
@@ -570,12 +570,15 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    background: linear-gradient(to bottom,
+            rgba(43, 92, 149, 0.3) 0%,
+            rgba(43, 92, 149, 0.15) 70%,
+            rgba(43, 92, 149, 0.1) 100%);
     z-index: 1;
     transition: background 0.4s ease;
 }
 
-/* Hover: Replace with #2B5C95 gradient overlay */
+/* Hover: Stronger #2B5C95 gradient overlay on full color */
 .diagonal-section:hover .section-bg::before {
     background: linear-gradient(to bottom,
             rgba(43, 92, 149, 0.8) 0%,

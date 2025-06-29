@@ -518,37 +518,45 @@ body {
     background: #357abd;
 }
 
-/* DIAGONAL GALLERY - SIMPLIFIED PROFESSIONAL VERSION */
+/* DIAGONAL GALLERY - NO BLACK LINES VERSION */
 .diagonal-gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     min-height: calc(100vh - 80px);
     position: relative;
+    /* Remove any gaps */
+    gap: 0;
 }
 
 .diagonal-section {
     position: relative;
     overflow: hidden;
+    /* Ensure no margins by default */
+    margin: 0;
 }
 
-/* SIMPLIFIED DIAGONAL CUTS */
+/* REFINED DIAGONAL CUTS - ZERO BLACK LINES */
 .vendee-section {
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+    clip-path: polygon(0 0, 102% 0, 92% 100%, 0 100%);
+    z-index: 4;
 }
 
 .skipper-section {
-    clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
-    margin-left: -3%;
+    clip-path: polygon(8% 0, 102% 0, 92% 100%, -2% 100%);
+    margin-left: -2%;
+    z-index: 3;
 }
 
 .conference-section {
-    clip-path: polygon(15% 0, 100% 0, 85% 100%, 0 100%);
-    margin-left: -3%;
+    clip-path: polygon(8% 0, 102% 0, 92% 100%, -2% 100%);
+    margin-left: -2%;
+    z-index: 2;
 }
 
 .entrepreneur-section {
-    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
-    margin-left: -3%;
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, -2% 100%);
+    margin-left: -2%;
+    z-index: 1;
 }
 
 /* SECTION CONTENT */
@@ -713,24 +721,29 @@ body {
         font-size: 0.8rem;
     }
 
-    /* Adjust clips for tablet */
+    /* Adjust clips for tablet - cleaner cuts */
     .vendee-section {
-        clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+        margin-left: 0;
+        z-index: 2;
     }
 
     .skipper-section {
-        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+        clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%);
         margin-left: 0;
+        z-index: 1;
     }
 
     .conference-section {
-        clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
         margin-left: 0;
+        z-index: 2;
     }
 
     .entrepreneur-section {
-        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+        clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%);
         margin-left: 0;
+        z-index: 1;
     }
 }
 
@@ -756,13 +769,14 @@ body {
         gap: 0;
     }
 
-    /* Remove clips on mobile */
+    /* Remove clips on mobile for clean stacking */
     .vendee-section,
     .skipper-section,
     .conference-section,
     .entrepreneur-section {
         clip-path: none;
         margin-left: 0;
+        z-index: auto;
     }
 
     .section-content {

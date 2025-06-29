@@ -555,8 +555,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     transition: transform 0.6s ease, filter 0.4s ease;
-    /* Default: Fully black and white */
-    filter: grayscale(100%) brightness(0.9);
+    /* Default: True black and white with high contrast */
+    filter: grayscale(100%) contrast(200%) brightness(1.2);
 }
 
 /* Add dark overlay for text readability */

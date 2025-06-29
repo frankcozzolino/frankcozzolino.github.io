@@ -100,28 +100,33 @@ body {
     grid-template-columns: repeat(4, 1fr);
     min-height: 60vh;
     height: 60vh;
+    gap: 0;
 }
 
 .image-section {
     position: relative;
     overflow: hidden;
+    margin: 0;
 }
 
-/* Diagonal Clip-Path Effects for Each Section */
+/* Diagonal Clip-Path Effects - Fixed to Connect Seamlessly */
 .image-section:nth-child(1) {
-    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+    clip-path: polygon(0 0, 105% 0, 95% 100%, 0 100%);
 }
 
 .image-section:nth-child(2) {
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    clip-path: polygon(5% 0, 105% 0, 95% 100%, -5% 100%);
+    margin-left: -5%;
 }
 
 .image-section:nth-child(3) {
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+    clip-path: polygon(5% 0, 105% 0, 95% 100%, -5% 100%);
+    margin-left: -5%;
 }
 
 .image-section:nth-child(4) {
-    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(5% 0, 100% 0, 100% 100%, -5% 100%);
+    margin-left: -5%;
 }
 
 .image-container {
@@ -293,21 +298,25 @@ body {
         height: 80vh;
     }
 
-    /* Adjust diagonal clips for 2-column layout */
+    /* Adjust diagonal clips for 2-column layout - Remove overlaps */
     .image-section:nth-child(1) {
-        clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+        margin-left: 0;
     }
 
     .image-section:nth-child(2) {
-        clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+        margin-left: 0;
     }
 
     .image-section:nth-child(3) {
-        clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+        margin-left: 0;
     }
 
     .image-section:nth-child(4) {
-        clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+        margin-left: 0;
     }
 
     .placeholder-text {
@@ -336,12 +345,13 @@ body {
         height: auto;
     }
 
-    /* Remove diagonal clips on mobile for better readability */
+    /* Remove diagonal clips and margins on mobile for better readability */
     .image-section:nth-child(1),
     .image-section:nth-child(2),
     .image-section:nth-child(3),
     .image-section:nth-child(4) {
         clip-path: none;
+        margin-left: 0;
     }
 
     .image-container {

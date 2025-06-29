@@ -529,6 +529,11 @@ body {
 .diagonal-section {
     position: relative;
     overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.diagonal-section:last-child {
+    border-right: none;
 }
 
 /* SECTION CONTENT */

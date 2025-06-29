@@ -28,3 +28,16 @@
 - Images folder for all visual assets
 - Docs folder for downloadable files
 - Clean semantic HTML structure 
+
+# Technical Decisions & Rationale
+
+## Image Styling Update (2025-01-12)
+**Decision**: Convert all background images to black and white with increased brightness
+**Approach**: 
+- Used CSS filters: `grayscale(100%) contrast(200%) brightness(1.5)`
+- Maintained B&W aesthetic on hover with higher brightness: `brightness(1.8)`
+**Rationale**: 
+- User requested B&W conversion with more light due to images being too dark
+- Preserved hover interactions while maintaining consistent aesthetic
+- Applied uniformly across all sections (sailing, coding, PM, hobbies)
+**Files Modified**: `css/style.css` - `.section-bg` and `.diagonal-section:hover .section-bg` rules 

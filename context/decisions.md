@@ -48,3 +48,19 @@
 - Pseudo-element gradient transition for smooth branded overlay effect
 - 0.4s animated transitions for professional feel
 **Files Modified**: `css/style.css` - `.section-bg`, `.diagonal-section:hover .section-bg`, and `.section-bg::before` rules 
+
+## Social Media Icons: Font Awesome → Official Brand SVGs (CRITICAL REVISION)
+**Original Decision**: Font Awesome CDN for social media icons
+**Issue Identified**: User correctly noted Font Awesome icons ≠ official brand icons
+**Revised Decision**: Official SVG icons directly from each brand's design guidelines
+**Technical Change**:
+- **Removed**: Font Awesome CDN dependency (`link` tag in HTML)
+- **Added**: Inline SVG icons with official brand paths
+- **CSS Update**: Changed from `.fa-icon { color: brand-color }` to `[title="Brand"] svg { fill: brand-color }`
+**Brands Implemented**: WhatsApp, Discord, LinkedIn, Instagram, Gmail, GitHub
+**Key Learning**: 
+- Icon libraries provide interpretations, not official designs
+- Users distinguish authentic brand icons from library versions
+- Professional sites require official brand assets for credibility
+- SVG implementation offers better control and authenticity
+**Result**: Authentic brand representation matching each company's official design 

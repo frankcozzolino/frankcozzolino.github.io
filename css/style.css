@@ -516,7 +516,6 @@ body {
 .social-icon {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    font-size: 1.2rem;
     transition: color 0.3s ease, transform 0.3s ease;
     padding: 0.5rem;
     display: flex;
@@ -527,34 +526,41 @@ body {
     height: 40px;
 }
 
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: fill 0.3s ease;
+}
+
 .social-icon:hover {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* Brand-specific hover colors */
-.social-icon:hover .fa-whatsapp {
-    color: #25D366;
+/* Official brand colors on hover */
+.social-icon:hover[title="WhatsApp"] svg {
+    fill: #25D366;
 }
 
-.social-icon:hover .fa-discord {
-    color: #5865F2;
+.social-icon:hover[title="Discord"] svg {
+    fill: #5865F2;
 }
 
-.social-icon:hover .fa-linkedin {
-    color: #0077B5;
+.social-icon:hover[title="LinkedIn"] svg {
+    fill: #0077B5;
 }
 
-.social-icon:hover .fa-instagram {
-    color: #E4405F;
+.social-icon:hover[title="Instagram"] svg {
+    fill: #E4405F;
 }
 
-.social-icon:hover .fa-envelope {
-    color: #EA4335;
+.social-icon:hover[title="Gmail"] svg {
+    fill: #EA4335;
 }
 
-.social-icon:hover .fa-github {
-    color: #ffffff;
+.social-icon:hover[title="GitHub"] svg {
+    fill: #ffffff;
 }
 
 /* CLEAN HORIZONTAL GALLERY */
@@ -840,10 +846,14 @@ body {
     }
 
     .social-icon {
-        font-size: 1rem;
         padding: 0.3rem;
         width: 35px;
         height: 35px;
+    }
+
+    .social-icon svg {
+        width: 18px;
+        height: 18px;
     }
 
     .section-text h2 {

@@ -2,6 +2,13 @@
 
 ## Key Findings
 
+### 2025-01-12 22:30 - CRITICAL ICON DISCOVERY
+- **Font Awesome ≠ Official Brand Icons**: Icon libraries provide their own interpretations, not official brand designs
+- **User Recognition**: Users can distinguish between icon library versions and authentic brand icons
+- **Implementation Impact**: SVG icons require `fill` property in CSS, not `color` like icon fonts
+- **Authenticity Matters**: Professional websites should use official brand assets for credibility
+- **Technical Switch**: Removing Font Awesome dependency reduced page weight while improving authenticity
+
 ### 2025-06-29 21:06 - Initial Setup
 - Repository is clean GitHub Pages site (frankcozzolino.github.io)
 - PowerShell command syntax differs from bash (mkdir without -p flag)

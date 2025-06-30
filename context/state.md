@@ -1,9 +1,20 @@
 # Project State - Frank Cozzolino Website
 
 ## Current Status: ✅ COMPLETED  
-**Mobile Section Expansion Enhancement - Increased Click Expansion Scale**
+**🔥 CRITICAL FIX - Mobile Title Visibility Issue Resolved**
+**🔥 CRITICAL FIX - Mobile Navbar Shake Issue Resolved**
 
-### Last Completed Action (Issue #40 - Mobile Expansion Scale)
+### Last Completed Action (Issue #41 - Mobile Title Visibility FIX)
+- **PROBLEM RESOLVED**: Fixed 5th reported issue of titles not being visible when clicking mobile sections
+- **Proper Positioning**: Changed overlay from `align-items: flex-end` to `align-items: center` for vertical centering
+- **Left Alignment**: Added `justify-content: flex-start` for proper horizontal left alignment
+- **Full Coverage**: Set `position: absolute` with full top/left/right/bottom positioning
+- **High Contrast**: Simplified to solid dark background `rgba(0, 0, 0, 0.8)` for maximum text visibility
+- **Clean Typography**: Improved font sizes and text shadows for optimal readability
+- **User Request**: "title should be in the middle centered vertically and aligned on the left horizontally"
+- **Result**: ✅ Titles now properly appear when sections are clicked - centered vertically, left-aligned horizontally, fully visible
+
+### Previous Action (Issue #40 - Mobile Expansion Scale)
 - **Expansion Increase**: Enhanced mobile click expansion from 15% to 25% (scale 1.15 → 1.25) for more prominent visual feedback
 - **Better Touch Feedback**: More noticeable section growth when clicked on mobile devices
 - **Maintained Animation**: Kept smooth 0.6s cubic-bezier transition for professional feel
@@ -60,3 +71,13 @@
 - **Branch**: main
 - **Live URL**: https://frankcozzolino.github.io  
 - **Status**: Production ready with enhanced mobile UX - more prominent section expansion on click
+
+### Last Completed Action (Issue #42 - Mobile Navbar Shake Fix)
+- **PROBLEM RESOLVED**: Fixed navbar shake/jitter when clicking sections on mobile devices
+- **Root Cause**: `transition: all 0.6s` on `.mobile-expanded` was causing excessive browser layout recalculations affecting the fixed navbar
+- **Solution Applied**: 
+  - Changed `transition: all` to `transition: transform` to only animate the transform property
+  - Added `will-change: transform` for browser optimization hints
+  - Maintains existing mobile section expansion functionality without navbar interference
+- **Technical Details**: The broad `transition: all` was causing layout reflows that affected the fixed navbar during mobile section scaling animations
+- **Result**: ✅ Mobile sections now expand smoothly without causing navbar shake or visual artifacts

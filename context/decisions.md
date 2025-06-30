@@ -135,3 +135,20 @@
 - Professional sites require official brand assets for credibility
 - SVG implementation offers better control and authenticity
 **Result**: Authentic brand representation matching each company's official design 
+
+## Mobile Navbar Shake Fix (2025-01-12)
+**Decision**: Change mobile section expansion transition from `all` to `transform` only
+**Problem**: User reported "the navbar does a weird shake remove and fix this" when clicking sections on mobile
+**Root Cause**: `transition: all 0.6s` on `.mobile-expanded` was causing excessive browser layout recalculations that affected the fixed navbar positioning during section scaling animations
+**Solution Approach**:
+- **Targeted Transition**: Changed from `transition: all` to `transition: transform 0.6s` to only animate the transform property
+- **Performance Optimization**: Added `will-change: transform` to hint browser for optimization
+- **Maintained Functionality**: Preserves existing mobile section expansion behavior without layout interference
+- **Technical Impact**: Eliminates layout reflows that were causing the navbar to shake/jitter
+**Rationale**:
+- `transition: all` is a performance anti-pattern that causes unnecessary recalculations
+- Fixed navbar with `z-index: 1000` was still affected by layout changes in other elements during broad transitions
+- Targeting only the `transform` property reduces browser work and eliminates visual artifacts
+- Modern browsers optimize transform animations better when they're isolated
+**Result**: Mobile sections expand smoothly without navbar shake, maintaining user experience quality
+**Files Modified**: `css/style.css` - Mobile expansion transition optimization 

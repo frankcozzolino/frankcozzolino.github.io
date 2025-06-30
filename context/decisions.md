@@ -169,3 +169,21 @@
 - Maintains clean, minimalist appearance on all touch devices
 **Result**: Consistent title visibility behavior across all mobile and tablet devices
 **Files Modified**: `css/style.css` - Tablet content overlay opacity fix 
+
+## Mobile Dark Overlay Removal (2025-01-12)
+**Decision**: Remove dark overlay background completely from mobile section clicks
+**Problem**: User reported sections becoming "all dark like if there was some overlay" when clicking on mobile
+**Root Cause**: `.mobile-expanded .content-overlay` had `background: rgba(0, 0, 0, 0.8) !important` creating an 80% opaque black layer covering entire sections
+**Solution Approach**:
+- **Remove Overlay**: Changed overlay background from `rgba(0, 0, 0, 0.8)` to `background: none !important`
+- **Enhanced Text Shadows**: Upgraded title shadows to double-layer: `2px 2px 12px rgba(0, 0, 0, 0.9), 1px 1px 6px rgba(0, 0, 0, 0.8)`
+- **Label Shadow Enhancement**: Improved label shadows: `1px 1px 6px rgba(0, 0, 0, 0.9), 0px 0px 3px rgba(0, 0, 0, 0.8)`
+- **Maintained Functionality**: Preserved click interaction and text positioning without visual obstruction
+**Rationale**:
+- Dark overlay was masking beautiful background images and creating poor visual experience
+- Text readability can be maintained through enhanced shadows without overlay
+- Users want to see the section content, not have it covered by dark backgrounds
+- Clean, overlay-free design aligns with modern UI/UX principles
+- Double-layer text shadows provide excellent contrast against any background
+**Result**: Mobile sections display full background images with clearly readable text on click
+**Files Modified**: `css/style.css` - Mobile overlay background removal, enhanced text shadows 

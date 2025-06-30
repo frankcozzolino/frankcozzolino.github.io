@@ -91,3 +91,14 @@
   - JavaScript click functionality works for both tablets and mobile phones
 - **Technical Details**: CSS cascade conflict was making tablets behave differently than intended mobile design
 - **Result**: ✅ All devices ≤768px now hide titles by default and show them only when sections are clicked
+
+### Last Completed Action (Issue #44 - Mobile Dark Overlay Removal)
+- **PROBLEM RESOLVED**: Removed dark overlay that made mobile sections appear "all dark" when clicked
+- **Root Cause**: `background: rgba(0, 0, 0, 0.8)` created an 80% opaque black overlay covering entire sections
+- **User Request**: "remove the overlay" - wanted to eliminate the dark background completely
+- **Solution Applied**: 
+  - Changed overlay background from `rgba(0, 0, 0, 0.8)` to `background: none` 
+  - Enhanced text shadows for readability without overlay: double-layer shadows with 0.9 opacity
+  - Updated both title and label shadows for consistent visibility against background images
+- **Technical Details**: Removed overlay background while maintaining text readability through enhanced shadows
+- **Result**: ✅ Mobile sections now show beautiful background images when clicked with clearly readable white text (no dark overlay)

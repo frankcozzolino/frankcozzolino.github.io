@@ -1,24 +1,24 @@
 # Project State - Frank Cozzolino Website
 
 ## Current Status: ✅ COMPLETED  
-**Mobile Social Icons Visibility Fix + Complete Mobile Experience**
+**Mobile UX Optimization - Signature, Text & Image Visibility**
 
-### Last Completed Action (Issue #33)
-- **Mobile Footer Fix**: All 8 social icons now visible on tablets (768px) and mobile devices
-- **Visibility Enhancement**: Moved mobile footer from 480px to 768px breakpoint for universal access
-- **Complete Icon Set**: WhatsApp, Discord, LinkedIn, Instagram, Gmail, GitHub, Calendar, YouTube all accessible
-- **Tablet Experience**: Tablets can now see complete social media collection in footer
-- **Previous**: Mobile click expansion + signature width maximization
-- **Result**: Complete mobile/tablet experience with full social media access + interactive features
+### Last Completed Action (Issue #34)
+- **Signature Size Fix**: Reduced from scale(2.4x) to scale(1.6x) for balanced mobile presence
+- **Extra Small Fix**: Reduced from scale(1.8x) to scale(1.3x) for tiny screens
+- **Image Visibility Enhancement**: Changed expansion scale from 1.2x to 0.8x to show MORE image content
+- **Text Readability Boost**: Enhanced overlays, stronger text shadows, explicit white color, z-index positioning
+- **Universal Improvements**: All mobile sections now have clear, readable text with better image visibility
+- **Result**: Perfectly balanced mobile experience with appropriately sized signature + readable text + visible images
 
 ### Implementation Details
-- **Previous Issue**: Mobile footer social icons missing on tablets (768px) - only visible on phones (480px)
-- **User Feedback**: "Missing social icons in mobile at the bottom, it should include them all"
-- **Root Cause**: Mobile footer restricted to 480px breakpoint, hiding all 8 icons from tablet users
-- **Solution**: Moved mobile footer visibility from 480px to 768px breakpoint for universal access
-- **Icon Coverage**: All 8 social media platforms now accessible on tablets and mobile devices
-- **Previous Features**: Mobile click expansion + signature width maximization remain intact
-- **Priority**: Universal social media access across all mobile/tablet screen sizes
+- **User Issues**: "signature too big" + "text not readable in expanded sections" + "image should resize down"
+- **Signature Problem**: scale(2.4x) overwhelming mobile navbar presence
+- **Image Problem**: scale(1.2x) made images larger but showed LESS content (counter-productive)
+- **Text Problem**: Overlay/shadows insufficient for readability across all 4 section backgrounds
+- **Solutions Applied**: Signature scale(1.6x) + image scale(0.8x) + enhanced text visibility system
+- **Text Enhancements**: Better gradient overlay + stronger shadows + explicit white color + z-index positioning
+- **Image Logic**: Scaling DOWN (0.8x) reveals MORE of the background image during expansion
 
 ### Technical Changes
 - **Mobile Footer Visibility**: Moved from @media(480px) to @media(768px) for tablet inclusion

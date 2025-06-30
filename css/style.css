@@ -1025,7 +1025,7 @@ body {
     }
 
     .signature-img {
-        transform: scale(2.4);
+        transform: scale(1.6);
     }
 
     .social-icons {
@@ -1088,7 +1088,7 @@ body {
 
     /* Enhanced image visibility when expanded */
     .mobile-expanded .section-bg {
-        transform: scale(1.2) !important;
+        transform: scale(0.8) !important;
         filter: brightness(1.1) contrast(1.1) !important;
     }
 
@@ -1096,18 +1096,26 @@ body {
     .mobile-expanded .content-overlay {
         background: linear-gradient(to top,
                 rgba(0, 0, 0, 0.95) 0%,
-                rgba(0, 0, 0, 0.7) 50%,
-                rgba(0, 0, 0, 0.3) 100%) !important;
+                rgba(0, 0, 0, 0.8) 30%,
+                rgba(0, 0, 0, 0.6) 60%,
+                rgba(0, 0, 0, 0.4) 100%) !important;
     }
 
     .mobile-expanded .section-text h2 {
         font-size: 1.6rem !important;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+        color: white !important;
+        position: relative;
+        z-index: 10;
     }
 
     .mobile-expanded .section-label {
         font-size: 1rem !important;
         margin-bottom: 1.5rem !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        color: white !important;
+        position: relative;
+        z-index: 10;
     }
 
     /* Mobile: Use default background sizing for image visibility */
@@ -1144,7 +1152,7 @@ body {
     }
 
     .signature-img {
-        transform: scale(1.8);
+        transform: scale(1.3);
     }
 
     .nav-menu {

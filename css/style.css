@@ -514,7 +514,7 @@ body {
     object-fit: cover;
     filter: brightness(0) invert(1);
     transition: filter 0.3s ease, transform 0.3s ease;
-    transform: scale(2.2);
+    transform: scale(1.5);
 }
 
 .nav-menu {
@@ -876,7 +876,7 @@ body {
     }
 
     .signature-img {
-        transform: scale(1.4);
+        transform: scale(0.95);
     }
 
     .nav-menu {
@@ -996,6 +996,11 @@ body {
         width: 18px;
         height: 18px;
     }
+
+    /* Ensure all social icons are visible in mobile footer */
+    .mobile-footer-social .social-icon {
+        display: flex;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1025,7 +1030,7 @@ body {
     }
 
     .signature-img {
-        transform: scale(1.6);
+        transform: scale(1.05);
     }
 
     .social-icons {
@@ -1035,15 +1040,15 @@ body {
     }
 
     /* Show only WhatsApp, LinkedIn, Instagram on mobile navbar */
-    .social-icon:nth-child(2),
+    .nav-container .social-icon:nth-child(2),
     /* Discord */
-    .social-icon:nth-child(5),
+    .nav-container .social-icon:nth-child(5),
     /* Gmail */
-    .social-icon:nth-child(6),
+    .nav-container .social-icon:nth-child(6),
     /* GitHub */
-    .social-icon:nth-child(7),
+    .nav-container .social-icon:nth-child(7),
     /* Calendar */
-    .social-icon:nth-child(8)
+    .nav-container .social-icon:nth-child(8)
 
     /* YouTube */
         {
@@ -1152,7 +1157,7 @@ body {
     }
 
     .signature-img {
-        transform: scale(1.3);
+        transform: scale(0.85);
     }
 
     .nav-menu {
@@ -1167,8 +1172,8 @@ body {
         gap: 0.4rem;
     }
 
-    /* Show only 3 most important social icons on tiny screens */
-    .social-icon:nth-child(n+4) {
+    /* Show only 3 most important social icons on tiny screens navbar */
+    .nav-container .social-icon:nth-child(n+4) {
         display: none;
     }
 

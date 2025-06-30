@@ -1,35 +1,37 @@
 # Project State - Frank Cozzolino Website
 
 ## Current Status: ✅ COMPLETED  
-**Mobile UX Optimization - Signature, Text & Image Visibility**
+**Mobile Footer Social Icons Fix - All 8 Icons Now Visible**
 
-### Last Completed Action (Issue #34)
-- **Signature Size Fix**: Reduced from scale(2.4x) to scale(1.6x) for balanced mobile presence
-- **Extra Small Fix**: Reduced from scale(1.8x) to scale(1.3x) for tiny screens
-- **Image Visibility Enhancement**: Changed expansion scale from 1.2x to 0.8x to show MORE image content
-- **Text Readability Boost**: Enhanced overlays, stronger text shadows, explicit white color, z-index positioning
-- **Universal Improvements**: All mobile sections now have clear, readable text with better image visibility
-- **Result**: Perfectly balanced mobile experience with appropriately sized signature + readable text + visible images
+### Last Completed Action (Issue #35)
+- **Root Cause Found**: Global CSS hiding rule was preventing 5 social icons from showing in mobile footer
+- **Navbar Scoping**: Made hiding rule specific to `.nav-container` only (not global)
+- **Footer Override**: Added explicit rule to show all icons in `.mobile-footer-social`
+- **Extra Small Fix**: Scoped tiny screen hiding rule to navbar only
+- **Complete Icon Set**: All 8 social media icons now visible in mobile footer
+- **Result**: Mobile footer displays all 8 social icons (WhatsApp, Discord, LinkedIn, Instagram, Gmail, GitHub, Calendar, YouTube) while navbar correctly shows only 3
 
 ### Implementation Details
-- **User Issues**: "signature too big" + "text not readable in expanded sections" + "image should resize down"
-- **Signature Problem**: scale(2.4x) overwhelming mobile navbar presence
-- **Image Problem**: scale(1.2x) made images larger but showed LESS content (counter-productive)
-- **Text Problem**: Overlay/shadows insufficient for readability across all 4 section backgrounds
-- **Solutions Applied**: Signature scale(1.6x) + image scale(0.8x) + enhanced text visibility system
-- **Text Enhancements**: Better gradient overlay + stronger shadows + explicit white color + z-index positioning
-- **Image Logic**: Scaling DOWN (0.8x) reveals MORE of the background image during expansion
+- **User Issue**: "i asked you to add all social media icons at the bottom in mobile version"
+- **Bug Discovery**: Mobile footer HTML contained all 8 icons but only 3 were visible
+- **Root Cause**: Global CSS rule `.social-icon:nth-child()` meant for navbar was hiding icons everywhere
+- **Affected Icons**: Discord, Gmail, GitHub, Calendar, YouTube hidden in footer (not just navbar)
+- **Solution Strategy**: Scope navbar hiding rules + explicit footer showing rules
+- **CSS Specificity**: Changed global selectors to `.nav-container .social-icon` for precise targeting
+- **Footer Guarantee**: Added `.mobile-footer-social .social-icon { display: flex; }` to ensure visibility
 
 ### Technical Changes
-- **Mobile Footer Visibility**: Moved from @media(480px) to @media(768px) for tablet inclusion
-- **Social Icon Access**: All 8 icons (WhatsApp, Discord, LinkedIn, Instagram, Gmail, GitHub, Calendar, YouTube) now visible on tablets
-- **Breakpoint Optimization**: Tablets (481px-768px) now see complete social media footer
-- **CSS Cleanup**: Removed duplicate mobile footer rules from 480px breakpoint
-- **Universal Coverage**: Footer navigation + social icons accessible on all mobile/tablet devices
-- **Previous Features Intact**: Mobile click expansion + signature width maximization unaffected
-- **Result**: Complete social media accessibility across all mobile device categories
+- **Navbar Icon Scoping**: Changed `.social-icon:nth-child()` to `.nav-container .social-icon:nth-child()` for precision
+- **Mobile 480px Rule**: Scoped Discord, Gmail, GitHub, Calendar, YouTube hiding to navbar only
+- **Extra Small 360px Rule**: Scoped nth-child(n+4) hiding rule to navbar only (not global)
+- **Footer Icon Override**: Added `.mobile-footer-social .social-icon { display: flex; }` to guarantee visibility
+- **Specificity Fix**: Mobile footer rules now override navbar hiding rules properly
+- **Complete Coverage**: All 8 social icons now display in mobile footer across all screen sizes
+- **Result**: Navbar shows 3 icons (space-constrained) + footer shows all 8 icons (complete access)
 
 ## Previous Completed Features
+✅ **Issue #34 - Mobile UX Optimization**: Signature sizing + text readability + image visibility improvements
+✅ **Issue #33 - Mobile Social Icons**: All 8 social icons visible on tablets (768px) + mobile devices
 ✅ **Mobile Navbar Vertical**: Signature top-center, icons centered below
 ✅ **Mobile Layout Optimization**: Reduced icon spacing + attempted image miniaturization
 ✅ **LinkedIn Profile**: Updated to real LinkedIn URL (https://www.linkedin.com/in/cozzolinofrancesco/)
@@ -58,8 +60,8 @@
 - Update remaining social media placeholder URLs when ready
 
 ## Files Modified
-- `css/style.css` - Mobile footer visibility moved from 480px to 768px breakpoint for tablet inclusion
-- `context/state.md` - Updated project state documentation
+- `css/style.css` - Fixed global CSS social icon hiding rules, scoped to navbar only, added footer visibility override
+- `context/state.md` - Updated project state with Issue #35 mobile footer social icons fix
 
 ## Active Branch
 - **Branch**: main

@@ -31,6 +31,23 @@
 
 # Technical Decisions & Rationale
 
+## Mobile Image Click Expansion Fix (2025-01-12)
+**Decision**: Replace dramatic 150vh full-screen expansion with subtle 15% scaling + visible overlay
+**Problem**: Mobile image click triggered `height: 150vh !important` causing full viewport takeover instead of gentle interaction
+**Solution Approach**:
+- **Expansion Method**: Changed from height manipulation to `transform: scale(1.15)` for subtle 15% growth
+- **Image Scaling**: Modified from `scale(0.8)` (shrinking) to `scale(1.05)` (slight enlargement) 
+- **Overlay Visibility**: Added `opacity: 1 !important` with optimized gradient for clear title/description display
+- **Text Optimization**: Reduced h2 from 1.6rem to 1.4rem, label from 1rem to 0.9rem for better proportions
+- **Animation**: Maintained smooth 0.6s cubic-bezier transition for professional feel
+**Rationale**: 
+- User requested "little bit expansion" not full-screen takeover
+- Subtle scaling provides gentle feedback without overwhelming the interface
+- Transform-based scaling is more performant than height changes
+- Enhanced overlay ensures title/description visibility as requested
+**Result**: Mobile clicks now show gentle 15% section expansion with prominently visible content overlay
+**Files Modified**: `css/style.css` - Mobile expansion classes (.mobile-expanded, .mobile-expanded-*, .mobile-expanded .section-bg, .mobile-expanded .content-overlay)
+
 ## Image Styling Update (2025-01-12)
 **Decision**: Implement pure grayscale default with full color + custom gradient overlay on hover
 **Approach**: 

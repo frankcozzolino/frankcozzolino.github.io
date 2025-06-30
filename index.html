@@ -225,77 +225,96 @@
         </div>
     </footer>
 
-    <!-- Mobile Click Expansion JavaScript -->
+    <!-- NEW MOBILE CLICK EXPANSION SYSTEM - COMPLETE REDESIGN -->
     <script>
-        // Mobile click expansion functionality
         document.addEventListener('DOMContentLoaded', function () {
-            // Only add click handlers on mobile/tablet devices
+            // Mobile device detection (tablets and phones)
             function isMobileDevice() {
                 return window.innerWidth <= 768;
             }
 
-            // Get all diagonal sections
+            // Get all 4 diagonal sections
             const sections = document.querySelectorAll('.diagonal-section');
 
-            // Track expanded state
-            let expandedSection = null;
+            // Track currently expanded section
+            let currentlyExpanded = null;
 
-            // Add click listeners to sections
+            // Add click event listeners to all sections
             sections.forEach((section, index) => {
                 section.addEventListener('click', function (e) {
-                    // Only handle clicks on mobile devices
+                    // Only handle clicks on mobile/tablet devices
                     if (!isMobileDevice()) return;
 
                     e.preventDefault();
+                    e.stopPropagation();
 
-                    // If clicking the same section, toggle it
-                    if (expandedSection === section) {
-                        retractSection(section);
-                        expandedSection = null;
-                    } else {
-                        // Retract any currently expanded section
-                        if (expandedSection) {
-                            retractSection(expandedSection);
-                        }
-
-                        // Expand the clicked section
-                        expandSection(section, index);
-                        expandedSection = section;
+                    // If clicking the same section that's already expanded, close it
+                    if (currentlyExpanded === section) {
+                        closeSection(section);
+                        currentlyExpanded = null;
+                        return;
                     }
+
+                    // Close any currently expanded section
+                    if (currentlyExpanded) {
+                        closeSection(currentlyExpanded);
+                    }
+
+                    // Expand the clicked section
+                    expandSection(section, index);
+                    currentlyExpanded = section;
                 });
             });
 
-            // Expand section with directional logic
+            // Expand section with NEW directional logic
             function expandSection(section, index) {
-                // Remove any existing expansion classes
-                section.classList.remove('mobile-expanded-top', 'mobile-expanded-bottom', 'mobile-expanded-both');
+                // Clean slate - remove all expansion classes
+                section.classList.remove('mobile-expanded-top', 'mobile-expanded-middle', 'mobile-expanded-bottom');
 
-                // Apply directional expansion based on position
+                // Apply directional expansion based on user requirements:
+                // Top section (0): expand 20% downward toward center
+                // Middle sections (1,2): expand 20% total (10% up + 10% down) 
+                // Bottom section (3): expand 20% upward toward center
+
                 if (index === 0) {
-                    // Top section: expand downward (toward center)
+                    // TOP SECTION: 20% expansion downward toward center
                     section.classList.add('mobile-expanded-top');
+                } else if (index === 1 || index === 2) {
+                    // MIDDLE SECTIONS: 20% total expansion (10% each direction)
+                    section.classList.add('mobile-expanded-middle');
                 } else if (index === 3) {
-                    // Bottom section: expand upward (toward center)  
+                    // BOTTOM SECTION: 20% expansion upward toward center
                     section.classList.add('mobile-expanded-bottom');
-                } else {
-                    // Middle sections: expand both directions
-                    section.classList.add('mobile-expanded-both');
                 }
 
-                // Add general expanded class
+                // Add base expanded class (triggers color change, title display)
                 section.classList.add('mobile-expanded');
+
+                console.log(`Expanded section ${index} with directional class`);
             }
 
-            // Retract section
-            function retractSection(section) {
-                section.classList.remove('mobile-expanded', 'mobile-expanded-top', 'mobile-expanded-bottom', 'mobile-expanded-both');
+            // Close/retract section - removes all expansion
+            function closeSection(section) {
+                section.classList.remove('mobile-expanded', 'mobile-expanded-top', 'mobile-expanded-middle', 'mobile-expanded-bottom');
+                console.log('Closed section');
             }
 
-            // Handle window resize to disable expansion on desktop
+            // Handle window resize - disable expansion on desktop
             window.addEventListener('resize', function () {
-                if (!isMobileDevice() && expandedSection) {
-                    retractSection(expandedSection);
-                    expandedSection = null;
+                if (!isMobileDevice() && currentlyExpanded) {
+                    closeSection(currentlyExpanded);
+                    currentlyExpanded = null;
+                }
+            });
+
+            // Optional: Close expanded section when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!isMobileDevice()) return;
+
+                // If clicking outside any section and there's an expanded section
+                if (currentlyExpanded && !e.target.closest('.diagonal-section')) {
+                    closeSection(currentlyExpanded);
+                    currentlyExpanded = null;
                 }
             });
         });

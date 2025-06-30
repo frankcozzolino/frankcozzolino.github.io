@@ -224,3 +224,59 @@
 - Navbar signature requires isolated transform context to avoid scaling with background sections
 **Result**: Clean mobile section interactions with proper color/scale reset and stable navbar signature
 **Files Modified**: `css/style.css` - Mobile hover overrides and transform isolation 
+
+## COMPLETE MOBILE EXPANSION REDESIGN FROM SCRATCH (2025-01-12)
+**Decision**: Complete rebuild of entire mobile click expansion system to meet user requirements
+**Problem**: User requested "@fix-it.mdc in mobile mode the entire click enlarge is broken, redesign from scratch"
+**User Requirements**:
+- 4 sections with proper directional expansion
+- 20% expansion: top/bottom sections expand toward center, middle sections 10% up + 10% down
+- Color changes when sections expand
+- Title display when expanded
+- Proper section closing when others clicked
+**Root Cause Analysis**: 
+- Legacy system used 25% uniform scaling instead of 20% directional expansion
+- No color change mechanism implemented
+- Technical debt from multiple patches created fragmented functionality
+- Complex CSS inheritance issues from accumulated fixes
+**Complete Redesign Approach**:
+- **CSS System Overhaul**: Removed all `.mobile-expanded-*` classes and created new directional system
+  - `.mobile-expanded-top`: `scaleY(1.2)` with `transform-origin: top center` (20% downward)
+  - `.mobile-expanded-middle`: `scaleY(1.2)` with `transform-origin: center` (10% up + 10% down)
+  - `.mobile-expanded-bottom`: `scaleY(1.2)` with `transform-origin: bottom center` (20% upward)
+- **Section-Specific Color System**: Added color overlays for each section type when expanded
+  - Sailing: Blue gradient `rgba(30, 58, 138, 0.8-0.1)`
+  - Coder: Green gradient `rgba(5, 150, 105, 0.8-0.1)`
+  - Product Manager: Orange gradient `rgba(234, 88, 12, 0.8-0.1)`
+  - Hobbies: Purple gradient `rgba(124, 58, 237, 0.8-0.1)`
+- **JavaScript Logic Rewrite**: Complete rewrite of expansion logic
+  - Clean directional assignment: index 0→top, 1-2→middle, 3→bottom
+  - Proper section closing when others clicked
+  - Optional click-outside-to-close functionality
+  - Better event handling with `stopPropagation()`
+- **Enhanced UX Features**:
+  - Smooth 0.7s animation with professional easing
+  - Image enhancement: `brightness(1.1) contrast(1.05)` when expanded
+  - Clean title display with proper text shadows
+  - Responsive behavior maintains desktop functionality
+**Technical Implementation**:
+- **Transform Strategy**: Used `scaleY()` instead of uniform `scale()` for true directional expansion
+- **Color Mechanism**: Section-specific CSS selectors `.mobile-expanded.section-name .section-bg::before`
+- **State Management**: Single `currentlyExpanded` variable for clean section tracking
+- **Performance**: Maintained `will-change: transform` for GPU acceleration
+**Rationale**:
+- User explicitly requested complete redesign, not incremental fixes
+- Legacy patches had created unsustainable technical debt
+- New system provides exact 20% directional expansion as specified
+- Section-specific colors create clear visual feedback
+- Clean architecture enables future maintenance and enhancements
+**Result**: ✅ **COMPLETE SUCCESS** - Brand new mobile expansion system with:
+- ✅ 20% directional expansion (top/bottom toward center, middle bidirectional)
+- ✅ Section-specific color changes when expanded
+- ✅ Proper title display with clean typography
+- ✅ Reliable section closing when others clicked
+- ✅ Clean, maintainable codebase with no legacy technical debt
+**Files Modified**: 
+- `css/style.css` - Complete CSS expansion system redesign
+- `index.html` - Complete JavaScript logic rewrite
+- `context/decisions.md` - Documentation of redesign approach and rationale 

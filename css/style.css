@@ -1114,30 +1114,70 @@ body {
         display: block;
     }
 
-    /* Mobile Click Expansion Classes */
+    /* NEW MOBILE CLICK EXPANSION SYSTEM - COMPLETE REDESIGN */
+
+    /* Base expanded state - all sections use this */
     .mobile-expanded {
-        transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         z-index: 100;
-        transform: scale(1.25);
         will-change: transform;
     }
 
+    /* TOP SECTION (index 0) - expand 20% downward toward center */
     .mobile-expanded-top {
+        transform: scaleY(1.2);
         transform-origin: top center;
     }
 
+    /* MIDDLE SECTIONS (index 1-2) - expand 20% total: 10% up + 10% down */
+    .mobile-expanded-middle {
+        transform: scaleY(1.2);
+        transform-origin: center;
+    }
+
+    /* BOTTOM SECTION (index 3) - expand 20% upward toward center */
     .mobile-expanded-bottom {
+        transform: scaleY(1.2);
         transform-origin: bottom center;
     }
 
-    .mobile-expanded-both {
-        transform-origin: center;
+    /* SECTION-SPECIFIC COLORS WHEN EXPANDED */
+    .mobile-expanded.sailing-section .section-bg::before {
+        background: linear-gradient(to top,
+                rgba(30, 58, 138, 0.8) 0%,
+                rgba(30, 58, 138, 0.6) 40%,
+                rgba(30, 58, 138, 0.3) 70%,
+                rgba(30, 58, 138, 0.1) 100%) !important;
+    }
+
+    .mobile-expanded.coder-section .section-bg::before {
+        background: linear-gradient(to top,
+                rgba(5, 150, 105, 0.8) 0%,
+                rgba(5, 150, 105, 0.6) 40%,
+                rgba(5, 150, 105, 0.3) 70%,
+                rgba(5, 150, 105, 0.1) 100%) !important;
+    }
+
+    .mobile-expanded.pm-section .section-bg::before {
+        background: linear-gradient(to top,
+                rgba(234, 88, 12, 0.8) 0%,
+                rgba(234, 88, 12, 0.6) 40%,
+                rgba(234, 88, 12, 0.3) 70%,
+                rgba(234, 88, 12, 0.1) 100%) !important;
+    }
+
+    .mobile-expanded.hobbies-section .section-bg::before {
+        background: linear-gradient(to top,
+                rgba(124, 58, 237, 0.8) 0%,
+                rgba(124, 58, 237, 0.6) 40%,
+                rgba(124, 58, 237, 0.3) 70%,
+                rgba(124, 58, 237, 0.1) 100%) !important;
     }
 
     /* Enhanced image visibility when expanded */
     .mobile-expanded .section-bg {
         transform: scale(1.05) !important;
-        filter: brightness(1.1) contrast(1.1) !important;
+        filter: brightness(1.1) contrast(1.05) !important;
     }
 
     /* Show titles ONLY when clicked/expanded */
@@ -1175,7 +1215,7 @@ body {
     .mobile-expanded .section-label {
         font-size: 0.9rem !important;
         margin-bottom: 0.8rem !important;
-        color: #4a9eff !important;
+        color: #ffffff !important;
         font-weight: 700 !important;
         letter-spacing: 2px !important;
         text-transform: uppercase !important;

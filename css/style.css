@@ -984,8 +984,8 @@ body {
     }
 
     .social-icons {
-        gap: 0.8rem;
-        /* Split social icons: WhatsApp left, LinkedIn+Instagram right */
+        gap: 0.4rem;
+        /* Closer spacing for mobile icons */
     }
 
     /* Show only WhatsApp, LinkedIn, Instagram on mobile navbar */
@@ -1019,10 +1019,10 @@ body {
         font-size: 1.1rem;
     }
 
-    /* Mobile Background Images: Scale down to show full faces */
+    /* Mobile Background Images: Miniaturized to show complete images */
     .section-bg {
-        background-size: 100%;
-        background-position: center 30%;
+        background-size: 80%;
+        background-position: center center;
     }
 
     /* Mobile Footer: Add navigation and full social icons */
@@ -1116,7 +1116,7 @@ body {
     }
 
     .social-icons {
-        gap: 0.3rem;
+        gap: 0.25rem;
     }
 
     /* Show only 3 most important social icons on tiny screens */

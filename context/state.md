@@ -1,28 +1,29 @@
 # Project State - Frank Cozzolino Website
 
-## Current Status: ✅ COMPLETED
-**Mobile Signature Cutoff Fix**
+## Current Status: ✅ COMPLETED  
+**LinkedIn Profile Link Update**
 
-### Last Completed Action (Issue #25)
-- **Mobile Signature Cutoff**: Fixed signature being cut off at top on mobile devices
-- **Navbar Height Increase**: Mobile navbar increased from 60px to 70px
-- **Extra Small Height**: Extra small navbar increased from 55px to 65px  
-- **Root Cause**: Signature scale(1.3x) exceeded 60px container height
-- **Solution**: Increased container height to accommodate scaled signature
+### Last Completed Action (Issue #26)
+- **LinkedIn URL Update**: Changed LinkedIn links to real profile URL
+- **Old URL**: `https://linkedin.com/in/your-profile` (placeholder)
+- **New URL**: `https://www.linkedin.com/in/cozzolinofrancesco/` (real profile)
+- **Locations Updated**: Main navbar + mobile footer social icons
+- **Result**: LinkedIn icon now links to actual professional profile
 
 ### Implementation Details
-- **Problem**: 1.3x scaled signature (~78px effective) overflowed 60px mobile navbar
-- **Fix**: Progressive navbar heights: 80px desktop → 70px tablet → 70px mobile → 65px extra-small
-- **Math**: 70px container now provides adequate space for 1.3x scaled signature
-- **Consistency**: Mobile now matches tablet navbar height for better visual harmony
+- **Dual Updates**: Updated both navbar and mobile footer LinkedIn links
+- **Real Profile**: Links now point to Francesco Cozzolino's actual LinkedIn profile
+- **Consistent URLs**: Both instances use identical URL for consistency
+- **Professional Branding**: Social media icons now connect to real professional presence
 
-### Technical Fix
-- **Mobile (480px)**: `height: 60px` → `height: 70px`
-- **Extra Small (360px)**: `height: 55px` → `height: 65px`
-- **Scaling Preserved**: Signature scaling (1.3x mobile, 1.0x extra-small) unchanged
-- **Full Visibility**: Signature now displays completely without top cutoff
+### Technical Update
+- **Main Navbar**: Line 39 LinkedIn href updated
+- **Mobile Footer**: Line 173 LinkedIn href updated  
+- **URL Format**: Full https://www.linkedin.com/in/cozzolinofrancesco/ format
+- **Icon Preservation**: LinkedIn SVG icon and styling unchanged
 
 ## Previous Completed Features
+✅ **Mobile Signature Fix**: Fixed signature cutoff on mobile (70px navbar height)
 ✅ **Mobile Background Scaling**: Fixed face visibility on mobile background images
 ✅ **Mobile Navbar Simplification**: Removed nav menu, show only 3 social icons
 ✅ **Footer Navigation**: Complete nav + all social icons in mobile footer
@@ -35,21 +36,22 @@
 ## Current Live Features
 - **Layout**: 4 horizontal sections (Sailing, Coder, Product Manager, Hobbies)
 - **Navigation**: Transparent navbar with complete signature visibility
+- **Social Media**: LinkedIn icon connects to real professional profile
 - **Mobile Experience**: Simplified navbar + complete footer navigation
 - **Background Images**: Optimized scaling for face visibility across devices
 - **Interactive Effects**: Column expansion, image scaling, color transitions
 - **Typography**: Roboto Condensed professional nautical font
 
 ## Next Steps
-- Monitor signature visibility across different mobile devices
-- Potential navbar spacing optimization with increased height
-- Consider signature positioning fine-tuning if needed
+- Update remaining social media placeholder URLs (WhatsApp, Instagram, GitHub, etc.)
+- Consider adding real email address for Gmail link
+- Potential content updates for professional sections
 
 ## Files Modified
-- `css/style.css` - Increased mobile navbar heights for signature visibility
-- `context/state.md` - Updated project state documentation
+- `index.html` - Updated LinkedIn URLs in navbar and mobile footer
+- `context/state.md` - Updated project state documentation  
 
 ## Active Branch
 - **Branch**: main
 - **Live URL**: https://frankcozzolino.github.io  
-- **Status**: Production ready with fully visible mobile signature
+- **Status**: Production ready with real LinkedIn profile connection

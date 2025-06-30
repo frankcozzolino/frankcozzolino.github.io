@@ -8,6 +8,13 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Roboto Condensed', 'Arial Narrow', 'Helvetica Condensed', sans-serif;
     line-height: 1.6;
@@ -94,8 +101,10 @@ body {
 
 /* Main Content */
 .main-content {
-    margin-top: 80px;
+    margin: 0;
     padding: 0;
+    height: 100vh;
+    position: relative;
 }
 
 /* Image Gallery - 4 DIAGONAL FULL-PAGE Horizontal Images */
@@ -582,8 +591,11 @@ body {
 .diagonal-gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    min-height: calc(100vh - 80px);
+    height: 100vh;
+    min-height: 100vh;
     gap: 0;
+    padding-top: 80px;
+    box-sizing: border-box;
 }
 
 .diagonal-section {
@@ -813,15 +825,17 @@ body {
     }
 
     .main-content {
-        margin-top: 120px;
+        margin-top: 0;
+        padding-top: 120px;
     }
 
     .diagonal-gallery {
         grid-template-columns: 1fr;
+        padding-top: 120px;
     }
 
     .section-content {
-        min-height: 60vh;
+        min-height: calc(100vh - 80px);
     }
 
     .content-overlay {

@@ -2,6 +2,13 @@
 
 ## Key Findings
 
+### 2025-01-12 23:45 - VIEWPORT LAYOUT ARCHITECTURE ISSUE
+- **Multiple Spacing Conflicts**: margin-top + calc() subtract created double spacing gaps
+- **CSS Reset Importance**: Missing html/body height: 100% caused viewport calculation errors
+- **Mobile Responsive Complexity**: Different navbar heights (80px desktop, 120px mobile) required separate padding values
+- **Legacy Code Interference**: Old .image-gallery styles (60vh) conflicted with new .diagonal-gallery (100vh)
+- **Fixed Positioning vs Flow**: margin-top doesn't work well with fixed navbar + full viewport requirements
+
 ### 2025-01-12 22:30 - CRITICAL ICON DISCOVERY
 - **Font Awesome ≠ Official Brand Icons**: Icon libraries provide their own interpretations, not official brand designs
 - **User Recognition**: Users can distinguish between icon library versions and authentic brand icons

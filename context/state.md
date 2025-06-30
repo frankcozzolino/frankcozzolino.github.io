@@ -1,13 +1,14 @@
 # PROJECT STATE - Frank Cozzolino Website
 
-## ⚠️ LATEST UPDATE - BACKGROUND IMAGE ASPECT RATIO PRESERVED
-- **User Issue**: Background images deformed when columns expand horizontally (scaleX stretching)
-- **Mathematical Solution**: 
-  - Container expands: scaleX(1.6) → background compensates: scaleX(0.625) 
-  - Net horizontal effect: 1.6 × 0.625 = 1.0 (no distortion)
-  - Maintains scaleY(1.05) for subtle vertical enhancement
-  - Mobile: normal scale(1.05) since no horizontal stretching occurs
-- **Visual Result**: Background images maintain perfect aspect ratio during dramatic column expansion
+## ⚠️ LATEST UPDATE - SUBTLE IMAGE ENLARGEMENT (50% REDUCTION)
+- **User Refinement**: Requested more subtle enlargement - 50% of previous intensity
+- **Refined Implementation**: 
+  - Column expands: scaleX(1.6) horizontally as intended
+  - Image enlarges: scale(1.1) uniformly (10% vs previous 20%) on desktop
+  - Position maintained: background-position center keeps image anchored in place
+  - Mobile: scale(1.075) (7.5% vs previous 15%) for consistent proportional growth
+  - Mathematical precision: Exactly 50% reduction as requested
+- **Visual Result**: More elegant and subtle image growth that enhances without overwhelming
 - **Previous Fixes**: 
   - Signature fills entire rectangular area (160px wide container) with scale(1.25)
   - Dramatic column expansion: directional logic with 60% width increase  

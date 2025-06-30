@@ -738,7 +738,7 @@ body {
 
 /* HOVER EFFECTS - Enlarge image proportionally while staying in place */
 .diagonal-section:hover .section-bg {
-    transform: scale(1.2);
+    transform: scale(1.1);
     filter: brightness(1.05);
 }
 
@@ -898,7 +898,7 @@ body {
 
     /* Mobile: Consistent background scaling */
     .diagonal-section:hover .section-bg {
-        transform: scale(1.15);
+        transform: scale(1.075);
         filter: brightness(1.05);
     }
 

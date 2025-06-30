@@ -504,15 +504,17 @@ body {
     display: flex;
     align-items: center;
     height: 100%;
+    width: 160px;
     overflow: visible;
 }
 
 .signature-img {
     height: 100%;
-    width: auto;
+    width: 100%;
+    object-fit: contain;
     filter: brightness(0) invert(1);
     transition: filter 0.3s ease, transform 0.3s ease;
-    transform: scale(1.15);
+    transform: scale(1.25);
 }
 
 .nav-menu {
@@ -930,9 +932,14 @@ body {
         font-size: 1.2rem;
     }
 
+    .logo-signature {
+        width: 140px;
+    }
+
     .signature-img {
         height: 90%;
-        transform: scale(1.1);
+        width: 100%;
+        transform: scale(1.15);
     }
 
     .nav-menu a {

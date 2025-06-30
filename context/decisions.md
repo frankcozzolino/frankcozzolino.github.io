@@ -152,3 +152,20 @@
 - Modern browsers optimize transform animations better when they're isolated
 **Result**: Mobile sections expand smoothly without navbar shake, maintaining user experience quality
 **Files Modified**: `css/style.css` - Mobile expansion transition optimization 
+
+## Mobile/Tablet Title Visibility Cascade Fix (2025-01-12)
+**Decision**: Fix CSS cascade conflict by hiding content overlay by default on all devices ≤768px
+**Problem**: Tablets (481px-768px) were showing titles by default instead of hiding them like mobile phones
+**Root Cause**: CSS cascade conflict between two media query rules - `@media (max-width: 768px)` set `opacity: 1` while `@media (max-width: 480px)` set `opacity: 0 !important`
+**Solution Approach**:
+- **Unified Behavior**: Changed `@media (max-width: 768px)` content overlay from `opacity: 1` to `opacity: 0 !important`
+- **Consistent UX**: All devices ≤768px now hide titles by default and show them only on click
+- **JavaScript Compatibility**: Existing JavaScript `isMobileDevice()` function already handles tablets (≤768px) for click interactions
+- **Preserved Functionality**: Desktop hover (>768px) and mobile/tablet click (≤768px) behaviors both work correctly
+**Rationale**:
+- Mobile-first design principle: titles should be hidden by default on smaller screens
+- Eliminates confusing inconsistency where tablets always showed titles but mobile phones required clicks
+- JavaScript was already configured to handle tablets, so the fix aligns CSS with existing behavior
+- Maintains clean, minimalist appearance on all touch devices
+**Result**: Consistent title visibility behavior across all mobile and tablet devices
+**Files Modified**: `css/style.css` - Tablet content overlay opacity fix 

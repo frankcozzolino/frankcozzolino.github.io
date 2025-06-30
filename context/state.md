@@ -81,3 +81,13 @@
   - Maintains existing mobile section expansion functionality without navbar interference
 - **Technical Details**: The broad `transition: all` was causing layout reflows that affected the fixed navbar during mobile section scaling animations
 - **Result**: ✅ Mobile sections now expand smoothly without causing navbar shake or visual artifacts
+
+### Last Completed Action (Issue #43 - Mobile/Tablet Title Visibility Cascade Fix)
+- **PROBLEM RESOLVED**: Fixed CSS cascade conflict where tablets (481px-768px) showed titles by default instead of hiding them
+- **Root Cause**: The `@media (max-width: 768px)` rule had `opacity: 1` which made titles always visible on tablets
+- **Solution Applied**: 
+  - Changed tablet content overlay from `opacity: 1` to `opacity: 0 !important` to hide titles by default
+  - This ensures consistent behavior across all mobile and tablet devices (≤768px)
+  - JavaScript click functionality works for both tablets and mobile phones
+- **Technical Details**: CSS cascade conflict was making tablets behave differently than intended mobile design
+- **Result**: ✅ All devices ≤768px now hide titles by default and show them only when sections are clicked

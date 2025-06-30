@@ -1,31 +1,34 @@
 # Project State - Frank Cozzolino Website
 
 ## Current Status: ✅ COMPLETED  
-**LinkedIn Profile Link Update**
+**Mobile Navbar Vertical Layout**
 
-### Last Completed Action (Issue #26)
-- **LinkedIn URL Update**: Changed LinkedIn links to real profile URL
-- **Old URL**: `https://linkedin.com/in/your-profile` (placeholder)
-- **New URL**: `https://www.linkedin.com/in/cozzolinofrancesco/` (real profile)
-- **Locations Updated**: Main navbar + mobile footer social icons
-- **Result**: LinkedIn icon now links to actual professional profile
+### Last Completed Action (Issue #28)
+- **Mobile Layout Change**: Transformed navbar from horizontal to vertical layout
+- **Signature Position**: Moved to top center of navbar
+- **Social Icons**: Centered below signature (WhatsApp, LinkedIn, Instagram)
+- **Navbar Height**: Increased to 85px (mobile) and 80px (extra small) for vertical space
+- **Result**: Clean vertical layout with signature prominent at top, icons accessible below
 
 ### Implementation Details
-- **Dual Updates**: Updated both navbar and mobile footer LinkedIn links
-- **Real Profile**: Links now point to Francesco Cozzolino's actual LinkedIn profile
-- **Consistent URLs**: Both instances use identical URL for consistency
-- **Professional Branding**: Social media icons now connect to real professional presence
+- **Previous Layout**: Horizontal [WhatsApp] [Signature] [LinkedIn Instagram]
+- **New Layout**: Vertical with signature centered at top, 3 icons centered below
+- **Flex Direction**: Changed nav-container to `flex-direction: column`
+- **Alignment**: `align-items: center` and `justify-content: center` with 0.5rem gap
+- **Transparency**: Maintained existing transparent navbar styling
 
-### Technical Update
-- **Main Navbar**: Line 39 LinkedIn href updated
-- **Mobile Footer**: Line 173 LinkedIn href updated  
-- **URL Format**: Full https://www.linkedin.com/in/cozzolinofrancesco/ format
-- **Icon Preservation**: LinkedIn SVG icon and styling unchanged
+### Technical Changes
+- **Mobile (480px)**: Height 70px → 85px, flex-direction: column, gap: 0.5rem
+- **Extra Small (360px)**: Height 65px → 80px, gap: 0.4rem  
+- **Signature**: Removed `flex: 1`, width remains 120px (mobile) / 90px (extra small)
+- **Social Icons**: Gap 0.4rem → 0.6rem, added `justify-content: center`
+- **Padding**: Adjusted vertical padding for better spacing
 
 ## Previous Completed Features
-✅ **Mobile Signature Fix**: Fixed signature cutoff on mobile (70px navbar height)
+✅ **Mobile Layout Optimization**: Reduced icon spacing + miniaturized background images
+✅ **LinkedIn Profile**: Updated to real LinkedIn URL (https://www.linkedin.com/in/cozzolinofrancesco/)
+✅ **Mobile Signature Fix**: Fixed signature cutoff on mobile (navbar height optimization)
 ✅ **Mobile Background Scaling**: Fixed face visibility on mobile background images
-✅ **Mobile Navbar Simplification**: Removed nav menu, show only 3 social icons
 ✅ **Footer Navigation**: Complete nav + all social icons in mobile footer
 ✅ **Signature Logo**: signature.png with white filter and proper scaling
 ✅ **Ultra-Transparent Nav**: 20% opacity with gradient edges
@@ -35,23 +38,23 @@
 
 ## Current Live Features
 - **Layout**: 4 horizontal sections (Sailing, Coder, Product Manager, Hobbies)
-- **Navigation**: Transparent navbar with complete signature visibility
-- **Social Media**: LinkedIn icon connects to real professional profile
-- **Mobile Experience**: Simplified navbar + complete footer navigation
-- **Background Images**: Optimized scaling for face visibility across devices
+- **Navigation**: Transparent vertical mobile navbar with signature prominence
+- **Social Media**: LinkedIn connects to real profile, clean vertical icon arrangement
+- **Mobile Experience**: Signature-focused navbar + complete footer navigation
+- **Background Images**: Miniaturized complete images visible in each section
 - **Interactive Effects**: Column expansion, image scaling, color transitions
 - **Typography**: Roboto Condensed professional nautical font
 
 ## Next Steps
-- Update remaining social media placeholder URLs (WhatsApp, Instagram, GitHub, etc.)
-- Consider adding real email address for Gmail link
-- Potential content updates for professional sections
+- Monitor mobile user experience with new vertical navbar layout
+- Consider signature scaling optimization for enhanced visibility
+- Update remaining social media placeholder URLs when ready
 
 ## Files Modified
-- `index.html` - Updated LinkedIn URLs in navbar and mobile footer
-- `context/state.md` - Updated project state documentation  
+- `css/style.css` - Implemented vertical mobile navbar layout with signature top-center
+- `context/state.md` - Updated project state documentation
 
 ## Active Branch
 - **Branch**: main
 - **Live URL**: https://frankcozzolino.github.io  
-- **Status**: Production ready with real LinkedIn profile connection
+- **Status**: Production ready with vertical mobile navbar layout and signature prominence

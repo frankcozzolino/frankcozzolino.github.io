@@ -955,32 +955,46 @@ body {
 
     .nav-container {
         padding: 0 0.8rem;
-        /* Keep horizontal layout like desktop */
+        /* Simplified layout: signature center, 3 social icons */
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Hide navigation menu on mobile */
+    .nav-menu {
+        display: none;
     }
 
     .logo-signature {
-        width: 80px;
+        width: 120px;
+        /* Center signature between social icons */
+        flex: 1;
+        display: flex;
+        justify-content: center;
     }
 
     .signature-img {
-        transform: scale(1.2);
-    }
-
-    .nav-menu {
-        gap: 1rem;
-    }
-
-    .nav-menu a {
-        font-size: 0.7rem;
-        font-weight: 500;
+        transform: scale(1.3);
     }
 
     .social-icons {
-        gap: 0.5rem;
+        gap: 0.8rem;
+        /* Split social icons: WhatsApp left, LinkedIn+Instagram right */
     }
 
-    /* Show only 4 most important social icons on mobile */
-    .social-icon:nth-child(n+5) {
+    /* Show only WhatsApp, LinkedIn, Instagram on mobile navbar */
+    .social-icon:nth-child(2),
+    /* Discord */
+    .social-icon:nth-child(5),
+    /* Gmail */
+    .social-icon:nth-child(6),
+    /* GitHub */
+    .social-icon:nth-child(7),
+    /* Calendar */
+    .social-icon:nth-child(8)
+
+    /* YouTube */
+        {
         display: none;
     }
 
@@ -998,6 +1012,69 @@ body {
     .section-text h2 {
         font-size: 1.1rem;
     }
+
+    /* Mobile Footer: Add navigation and full social icons */
+    .main-footer {
+        padding: 2rem 1rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* Mobile Footer Navigation */
+    .mobile-footer-nav {
+        display: flex !important;
+        /* Override default hidden state */
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .mobile-footer-menu {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .mobile-footer-menu a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 400;
+        transition: color 0.3s ease;
+    }
+
+    .mobile-footer-menu a:hover {
+        color: white;
+    }
+
+    /* Mobile Footer Social Icons */
+    .mobile-footer-social {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .mobile-footer-social .social-icon {
+        width: 36px;
+        height: 36px;
+        padding: 0.4rem;
+    }
+
+    .mobile-footer-social .social-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Hide mobile footer on desktop by default */
+.mobile-footer-nav {
+    display: none;
 }
 
 /* EXTRA SMALL PHONES */

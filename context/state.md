@@ -1,9 +1,16 @@
 # Project State - Frank Cozzolino Website
 
 ## Current Status: ✅ COMPLETED  
-**Mobile Title Click Visibility Fix - Titles Only Show When Clicked**
+**Mobile Section Expansion Enhancement - Increased Click Expansion Scale**
 
-### Last Completed Action (Issue #39 - Mobile Title Display)
+### Last Completed Action (Issue #40 - Mobile Expansion Scale)
+- **Expansion Increase**: Enhanced mobile click expansion from 15% to 25% (scale 1.15 → 1.25) for more prominent visual feedback
+- **Better Touch Feedback**: More noticeable section growth when clicked on mobile devices
+- **Maintained Animation**: Kept smooth 0.6s cubic-bezier transition for professional feel
+- **User Request**: "when i click i want the section to expand a bit more"
+- **Result**: Mobile sections now expand by 25% when clicked, providing more satisfying visual feedback
+
+### Previous Action (Mobile Title Click Visibility Fix)
 - **Hide Default State**: Removed base mobile overlay visibility - titles now hidden by default as requested
 - **Click-Only Visibility**: Enhanced `.mobile-expanded .content-overlay` to show titles ONLY when sections are clicked
 - **Prominent Title Display**: Increased clicked title size to 1.8rem with strong text shadows and contrast
@@ -11,26 +18,9 @@
 - **Background Optimization**: Stronger gradient (rgba 0.95/0.8/0.5) for better text readability when clicked
 - **Result**: Titles are completely hidden by default and prominently displayed only when mobile sections are clicked
 
-### Implementation Details
-- **User Clarification**: "the title is not visible at all it was not an issue of transparency, there is no title. and i dont want title when the section is not clicked"
-- **Root Cause**: Previous fix incorrectly added base overlay visibility, but user wants titles hidden by default
-- **Technical Solution**:
-  - Set `.content-overlay { opacity: 0 !important; }` for mobile default state
-  - Enhanced `.mobile-expanded .content-overlay` with stronger visibility and styling
-  - Increased title prominence: 1.8rem font-size with 3px shadow and z-index 20
-  - Section labels: 1.1rem, font-weight 700, letter-spacing 2px, uppercase
-  - Stronger background gradient for better text contrast when clicked
-- **Behavior**: Clean sections by default, prominent titles only on click
-
-### Previous Action (Mobile Overlay Visibility & Social Icon Proximity Fix)
-- **Overlay Visibility**: Fixed missing section titles on mobile click by adding base `opacity: 1` to mobile content overlay
-- **Social Icon Proximity**: Eliminated gap between signature and social icons with `gap: 0rem` + negative margin `margin-top: -0.3rem`
-- **Mobile Title Display**: Added mobile-specific overlay styling with optimal gradient and padding
-- **Touch Feedback**: Ensured immediate title/description visibility on mobile click
-- **Visual Cohesion**: Social icons now appear visually connected to signature as requested
-- **Result**: Section titles are now immediately visible on mobile click, and social icons are positioned tight against signature
-
 ### Previous Completed Features
+✅ **Issue #39 - Mobile Title Click Visibility**: Titles only show when clicked, not in default state
+✅ **Issue #38 - Mobile UX Critical Fixes**: Fixed overlay visibility and social icon proximity  
 ✅ **Issue #37 - Mobile Navbar Spacing**: Reduced gaps between signature and social icons
 ✅ **Issue #35 - Mobile Footer Social Icons**: All 8 social icons now visible in mobile footer
 ✅ **Issue #34 - Mobile UX Optimization**: Signature sizing + text readability + image visibility improvements
@@ -49,24 +39,24 @@
 ## Current Live Features
 - **Layout**: 4 horizontal sections (Sailing, Coder, Product Manager, Hobbies)
 - **Navigation**: Transparent vertical mobile navbar with tight signature/icon proximity
-- **Mobile Click Expansion**: Subtle 15% scaling with titles visible ONLY when clicked (FIXED)
+- **Mobile Click Expansion**: Enhanced 25% scaling with titles visible ONLY when clicked (IMPROVED)
 - **Social Media**: All 8 icons accessible on tablets/mobile + LinkedIn connects to real profile
-- **Mobile/Tablet Experience**: Clean default view + prominent title display on click + signature-focused navbar with tight icon placement
+- **Mobile/Tablet Experience**: Clean default view + prominent title display on click + enhanced expansion feedback + signature-focused navbar with tight icon placement
 - **Complete Icon Collection**: WhatsApp, Discord, LinkedIn, Instagram, Gmail, GitHub, Calendar, YouTube visible on all mobile devices
 - **Background Images**: Enhanced visibility with subtle expansion scaling + brightness/contrast boost
-- **Interactive Effects**: Desktop column expansion + mobile gentle click expansion + image scaling + color transitions
+- **Interactive Effects**: Desktop column expansion + mobile enhanced click expansion + image scaling + color transitions
 - **Typography**: Roboto Condensed professional nautical font
 
 ## Next Steps
-- Test mobile title click visibility across different devices
-- Monitor click interaction behavior on various screen sizes
-- Consider adding subtle animation for title appearance
+- Test enhanced mobile expansion across different screen sizes
+- Monitor user feedback on the increased expansion scale
+- Consider fine-tuning expansion if needed based on usage
 
 ## Files Modified
-- `css/style.css` - Removed base mobile overlay visibility, enhanced click-only title display with prominent styling
-- `context/state.md` - Updated project state with Issue #39 mobile title click visibility fix
+- `css/style.css` - Increased mobile expansion scale from 1.15 to 1.25 for better visual feedback
+- `context/state.md` - Updated project state with Issue #40 mobile expansion enhancement
 
 ## Active Branch
 - **Branch**: main
 - **Live URL**: https://frankcozzolino.github.io  
-- **Status**: Production ready with proper mobile UX - clean sections by default, prominent titles only on click
+- **Status**: Production ready with enhanced mobile UX - more prominent section expansion on click

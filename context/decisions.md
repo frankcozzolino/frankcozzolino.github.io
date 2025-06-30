@@ -31,6 +31,22 @@
 
 # Technical Decisions & Rationale
 
+## Mobile Section Expansion Enhancement (2025-01-12)
+**Decision**: Increase mobile click expansion scale from 15% to 25% for more prominent visual feedback
+**Problem**: User requested "when i click i want the section to expand a bit more" - current 15% expansion was too subtle
+**Root Cause**: Scale value of 1.15 provided insufficient visual feedback for mobile touch interaction
+**Solution Approach**:
+- **Expansion Scale**: Changed from `transform: scale(1.15)` to `transform: scale(1.25)` (15% → 25% increase)
+- **Maintained Animation**: Kept smooth 0.6s cubic-bezier transition for professional feel
+- **Touch Feedback**: More noticeable section growth provides better user interaction confirmation
+**Rationale**:
+- Mobile users need clear visual feedback to confirm their touch interaction
+- 15% expansion was too subtle to provide satisfying interaction feedback
+- 25% expansion provides better balance between noticeable growth and maintaining layout integrity
+- Smooth animation ensures the expansion feels natural and professional
+**Result**: Mobile sections now expand by 25% when clicked, providing more satisfying visual feedback
+**Files Modified**: `css/style.css` - Mobile expansion scale value
+
 ## Mobile Title Click Visibility Fix (2025-01-12)
 **Decision**: Hide titles by default, show ONLY when sections are clicked on mobile
 **Problem**: User clarified "the title is not visible at all it was not an issue of transparency, there is no title. and i dont want title when the section is not clicked"

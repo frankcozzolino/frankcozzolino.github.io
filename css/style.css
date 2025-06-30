@@ -942,11 +942,7 @@ body {
         max-width: 100%;
     }
 
-    /* Tablet Background Images: Improve face visibility */
-    .section-bg {
-        background-size: 110%;
-        background-position: center 25%;
-    }
+    /* Tablet: Use default background sizing for reliability */
 
     .footer-content {
         flex-direction: column;
@@ -1021,11 +1017,7 @@ body {
         font-size: 1.1rem;
     }
 
-    /* Mobile Background Images: Miniaturized to show complete images */
-    .section-bg {
-        background-size: 80%;
-        background-position: center center;
-    }
+    /* Mobile: Use default background sizing for image visibility */
 
     /* Mobile Footer: Add navigation and full social icons */
     .main-footer {

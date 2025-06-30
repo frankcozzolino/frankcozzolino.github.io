@@ -31,6 +31,25 @@
 
 # Technical Decisions & Rationale
 
+## Mobile Overlay Visibility & Social Icon Proximity Fix (2025-01-12)
+**Decision**: Fix missing section titles on mobile click + eliminate visual gap between signature and social icons
+**Problem**: 
+- Mobile `.content-overlay` had `opacity: 0` default with no base visibility rule in 480px media query
+- Social icons positioned too far from signature despite gap reduction to 0.08rem
+**Solution Approach**:
+- **Overlay Visibility**: Added base `opacity: 1 !important` to mobile content overlay in 480px media query
+- **Enhanced Gradient**: Optimized background gradient with better contrast ratios (rgba 0.85/0.6/0.3)
+- **Mobile Padding**: Set appropriate padding `2rem 1.5rem` for mobile text readability
+- **Social Icon Proximity**: Set `gap: 0rem` for both 480px and 360px breakpoints
+- **Negative Margin**: Added `margin-top: -0.3rem` to social icons for tight visual connection to signature
+**Rationale**:
+- User reported "title not visible of the section" indicating overlay opacity issue
+- Mobile click expansion relied on `.mobile-expanded .content-overlay` but base overlay was hidden
+- Visual cohesion requires social icons to appear connected to signature, not floating below
+- Negative margin pulls icons closer without affecting functionality or touch targets
+**Result**: Section titles immediately visible on mobile click, social icons positioned tight against signature
+**Files Modified**: `css/style.css` - Mobile overlay visibility rules, social icon gap/margin adjustments
+
 ## Mobile Image Click Expansion Fix (2025-01-12)
 **Decision**: Replace dramatic 150vh full-screen expansion with subtle 15% scaling + visible overlay
 **Problem**: Mobile image click triggered `height: 150vh !important` causing full viewport takeover instead of gentle interaction

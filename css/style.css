@@ -1012,6 +1012,9 @@ body {
                 rgba(25, 35, 45, 0.9) 0%,
                 rgba(25, 35, 45, 0.95) 50%,
                 rgba(25, 35, 45, 0.9) 100%);
+        /* Isolate navbar transforms from section scaling */
+        transform: translateZ(0);
+        will-change: auto;
     }
 
     .nav-container {
@@ -1037,6 +1040,9 @@ body {
 
     .signature-img {
         transform: scale(1.05);
+        /* Isolate signature scaling from section transforms */
+        transform-style: preserve-3d;
+        will-change: auto;
     }
 
     .social-icons {
@@ -1071,6 +1077,29 @@ body {
     .social-icon svg {
         width: 14px;
         height: 14px;
+    }
+
+    /* Disable desktop hover effects on mobile */
+    .diagonal-section:hover {
+        transform: none !important;
+        z-index: auto !important;
+    }
+
+    .diagonal-section:hover .section-bg {
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .diagonal-section:hover .section-bg::before {
+        background: linear-gradient(to top,
+                rgba(43, 92, 149, 0.4) 0%,
+                rgba(43, 92, 149, 0.2) 30%,
+                rgba(43, 92, 149, 0.05) 50%,
+                rgba(43, 92, 149, 0) 100%) !important;
+    }
+
+    .diagonal-section:hover .content-overlay {
+        opacity: 0 !important;
     }
 
     /* Hide titles by default on mobile */
@@ -1182,6 +1211,9 @@ body {
                 rgba(25, 35, 45, 0.9) 0%,
                 rgba(25, 35, 45, 0.95) 50%,
                 rgba(25, 35, 45, 0.9) 100%);
+        /* Isolate navbar transforms from section scaling */
+        transform: translateZ(0);
+        will-change: auto;
     }
 
     .nav-container {
@@ -1195,6 +1227,32 @@ body {
 
     .signature-img {
         transform: scale(0.85);
+        /* Isolate signature scaling from section transforms */
+        transform-style: preserve-3d;
+        will-change: auto;
+    }
+
+    /* Disable desktop hover effects on extra small mobile */
+    .diagonal-section:hover {
+        transform: none !important;
+        z-index: auto !important;
+    }
+
+    .diagonal-section:hover .section-bg {
+        transform: none !important;
+        filter: none !important;
+    }
+
+    .diagonal-section:hover .section-bg::before {
+        background: linear-gradient(to top,
+                rgba(43, 92, 149, 0.4) 0%,
+                rgba(43, 92, 149, 0.2) 30%,
+                rgba(43, 92, 149, 0.05) 50%,
+                rgba(43, 92, 149, 0) 100%) !important;
+    }
+
+    .diagonal-section:hover .content-overlay {
+        opacity: 0 !important;
     }
 
     .nav-menu {

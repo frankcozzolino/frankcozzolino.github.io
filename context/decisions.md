@@ -205,3 +205,22 @@
 - Desktop users retain premium blur experience with capable hardware
 **Result**: Complete elimination of navbar shake on mobile section clicks while maintaining visual design integrity
 **Files Modified**: `css/style.css` - Mobile navbar backdrop-filter removal and background replacement 
+
+## Mobile Section Color Persistence & Signature Scaling Fix (2025-01-12)
+**Decision**: Disable desktop hover effects on mobile and isolate navbar signature from section transforms
+**Problem**: User reported "coder section keep remaining in color even if i click on others" and "when section expand signature keep expanding too"
+**Root Cause**: 
+- Desktop `:hover` CSS rules (transform: scaleX(1.3), z-index: 10) persisted on mobile devices as "sticky" states
+- Navbar signature transform was being affected by section scaling due to lack of transform isolation
+**Solution Approach**:
+- **Desktop Hover Override**: Added mobile-specific CSS to reset all hover effects with `transform: none !important` and `z-index: auto !important`
+- **Background Reset**: Reset section background transforms and filters to default state on mobile hover
+- **Signature Isolation**: Added `transform: translateZ(0)` to navbar and `transform-style: preserve-3d` to signature for 3D rendering context isolation
+- **Dual Breakpoint Coverage**: Applied fixes to both 480px and 360px breakpoints for consistent behavior
+**Rationale**:
+- Mobile devices interpret CSS hover states as persistent until another element is clicked
+- Transform isolation using 3D rendering context prevents parent-child transform inheritance
+- Explicit mobile overrides ensure clean section state management through JavaScript only
+- Navbar signature requires isolated transform context to avoid scaling with background sections
+**Result**: Clean mobile section interactions with proper color/scale reset and stable navbar signature
+**Files Modified**: `css/style.css` - Mobile hover overrides and transform isolation 

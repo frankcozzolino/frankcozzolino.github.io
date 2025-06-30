@@ -113,3 +113,16 @@
   - Desktop blur effect preserved for larger screens
 - **Technical Details**: Backdrop filters require GPU-intensive recalculation during animations, causing visual jitter on mobile devices
 - **Result**: ✅ Navbar and signature remain completely stable during mobile section clicks, no shake or transition effects
+
+### Last Completed Action (Issue #46 - Mobile Section Color Persistence & Signature Scaling Fix)
+- **PROBLEM RESOLVED**: Fixed coder section remaining in color when other sections clicked + signature expanding with sections
+- **Root Cause**: Desktop hover effects (`:hover` CSS) persisted on mobile devices and signature transform was affected by section scaling
+- **Issues Fixed**:
+  1. **Desktop hover persistence**: Coder section stayed colored/scaled when clicking other sections on mobile
+  2. **Signature scaling inheritance**: Navbar signature expanded along with mobile section scaling
+- **Solution Applied**: 
+  - **Mobile hover override**: Added `transform: none !important` and `z-index: auto !important` to disable desktop hover effects on mobile
+  - **Signature isolation**: Added `transform: translateZ(0)` to navbar and `transform-style: preserve-3d` to signature for transform isolation
+  - **Applied to both breakpoints**: Fixed on both 480px and 360px mobile breakpoints
+- **Technical Details**: Mobile devices interpret CSS `:hover` as persistent click state, requiring explicit mobile overrides
+- **Result**: ✅ Sections properly reset color when others are clicked, navbar signature remains stable during section expansion

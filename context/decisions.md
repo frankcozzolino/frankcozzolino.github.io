@@ -31,6 +31,25 @@
 
 # Technical Decisions & Rationale
 
+## Mobile Title Click Visibility Fix (2025-01-12)
+**Decision**: Hide titles by default, show ONLY when sections are clicked on mobile
+**Problem**: User clarified "the title is not visible at all it was not an issue of transparency, there is no title. and i dont want title when the section is not clicked"
+**Root Cause**: Previous fix incorrectly added base overlay visibility, but user wants clean sections by default with titles appearing only on click
+**Solution Approach**:
+- **Hide Default**: Set `.content-overlay { opacity: 0 !important; }` for mobile base state
+- **Click-Only Display**: Enhanced `.mobile-expanded .content-overlay` with strong visibility and styling
+- **Prominent Titles**: Increased title to 1.8rem with heavy text shadows (3px 8px) and z-index 20
+- **Label Enhancement**: Section labels 1.1rem, font-weight 700, letter-spacing 2px, uppercase
+- **Strong Contrast**: Enhanced gradient (rgba 0.95/0.8/0.5) for excellent text readability
+- **Proper Display**: Added explicit display:block and positioning for reliable title rendering
+**Rationale**:
+- User wants clean, minimal mobile experience with titles hidden by default
+- Click interaction should provide clear, prominent title display for section identification
+- Strong contrast and sizing ensure titles are easily readable when they do appear
+- Maintains mobile-first design philosophy with progressive disclosure
+**Result**: Clean mobile sections by default, prominent titles only when clicked
+**Files Modified**: `css/style.css` - Mobile overlay visibility, click-expanded title styling
+
 ## Mobile Overlay Visibility & Social Icon Proximity Fix (2025-01-12)
 **Decision**: Fix missing section titles on mobile click + eliminate visual gap between signature and social icons
 **Problem**: 

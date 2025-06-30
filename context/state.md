@@ -1,39 +1,34 @@
 # Project State - Frank Cozzolino Website
 
 ## Current Status: ✅ COMPLETED  
-**Mobile Overlay Visibility & Social Icon Proximity Fix**
+**Mobile Title Click Visibility Fix - Titles Only Show When Clicked**
 
-### Last Completed Action (Issue #38 - Mobile UX Critical Fixes)
+### Last Completed Action (Issue #39 - Mobile Title Display)
+- **Hide Default State**: Removed base mobile overlay visibility - titles now hidden by default as requested
+- **Click-Only Visibility**: Enhanced `.mobile-expanded .content-overlay` to show titles ONLY when sections are clicked
+- **Prominent Title Display**: Increased clicked title size to 1.8rem with strong text shadows and contrast
+- **Label Enhancement**: Section labels now 1.1rem with 700 font-weight, letter-spacing, and uppercase styling
+- **Background Optimization**: Stronger gradient (rgba 0.95/0.8/0.5) for better text readability when clicked
+- **Result**: Titles are completely hidden by default and prominently displayed only when mobile sections are clicked
+
+### Implementation Details
+- **User Clarification**: "the title is not visible at all it was not an issue of transparency, there is no title. and i dont want title when the section is not clicked"
+- **Root Cause**: Previous fix incorrectly added base overlay visibility, but user wants titles hidden by default
+- **Technical Solution**:
+  - Set `.content-overlay { opacity: 0 !important; }` for mobile default state
+  - Enhanced `.mobile-expanded .content-overlay` with stronger visibility and styling
+  - Increased title prominence: 1.8rem font-size with 3px shadow and z-index 20
+  - Section labels: 1.1rem, font-weight 700, letter-spacing 2px, uppercase
+  - Stronger background gradient for better text contrast when clicked
+- **Behavior**: Clean sections by default, prominent titles only on click
+
+### Previous Action (Mobile Overlay Visibility & Social Icon Proximity Fix)
 - **Overlay Visibility**: Fixed missing section titles on mobile click by adding base `opacity: 1` to mobile content overlay
 - **Social Icon Proximity**: Eliminated gap between signature and social icons with `gap: 0rem` + negative margin `margin-top: -0.3rem`
 - **Mobile Title Display**: Added mobile-specific overlay styling with optimal gradient and padding
 - **Touch Feedback**: Ensured immediate title/description visibility on mobile click
 - **Visual Cohesion**: Social icons now appear visually connected to signature as requested
 - **Result**: Section titles are now immediately visible on mobile click, and social icons are positioned tight against signature
-
-### Implementation Details
-- **User Issues**: "title not visible of the section, social icon still too far down"
-- **Root Cause Analysis**: 
-  - Mobile `.content-overlay` defaulted to `opacity: 0` with no base visibility rule in 480px media query
-  - Social icon `gap: 0.08rem` still created visual separation between signature and icons
-- **Technical Solution**:
-  - Added base mobile overlay: `opacity: 1 !important` with optimized gradient in 480px media query
-  - Set `gap: 0rem` for both 480px and 360px breakpoints
-  - Added `margin-top: -0.3rem` to social icons for tight visual proximity
-  - Enhanced overlay background with better contrast ratios
-- **Cross-Device Testing**: Applied fixes to both 480px and 360px mobile breakpoints
-
-### Previous Action (Mobile Image Click Expansion Fix)
-- **Issue**: Mobile image click caused dramatic 150vh full-screen expansion instead of subtle effect
-- **Root Cause**: CSS rules used `height: 150vh !important` for full viewport takeover
-- **Solution Applied**: Replaced dramatic expansion with subtle 15% scaling + visible overlay
-- **Key Changes**: 
-  - Removed `height: 150vh` from `.mobile-expanded-top/bottom/both` classes
-  - Added `transform: scale(1.15)` to `.mobile-expanded` for subtle section growth
-  - Changed image scaling from `scale(0.8)` to `scale(1.05)` for slight image enlargement
-  - Enhanced overlay visibility with `opacity: 1 !important` and optimized gradient
-  - Refined text sizing: h2 to 1.4rem, label to 0.9rem with improved contrast
-- **Result**: Mobile click now shows gentle 15% expansion with prominently visible title and description
 
 ### Previous Completed Features
 ✅ **Issue #37 - Mobile Navbar Spacing**: Reduced gaps between signature and social icons
@@ -53,25 +48,25 @@
 
 ## Current Live Features
 - **Layout**: 4 horizontal sections (Sailing, Coder, Product Manager, Hobbies)
-- **Navigation**: Transparent vertical mobile navbar with tight signature/icon proximity (FIXED)
-- **Mobile Click Expansion**: Subtle 15% scaling with immediately visible title/description overlay (FIXED)
+- **Navigation**: Transparent vertical mobile navbar with tight signature/icon proximity
+- **Mobile Click Expansion**: Subtle 15% scaling with titles visible ONLY when clicked (FIXED)
 - **Social Media**: All 8 icons accessible on tablets/mobile + LinkedIn connects to real profile
-- **Mobile/Tablet Experience**: Universal footer access (768px+) + gentle interactive section expansion + signature-focused navbar with tight icon placement
+- **Mobile/Tablet Experience**: Clean default view + prominent title display on click + signature-focused navbar with tight icon placement
 - **Complete Icon Collection**: WhatsApp, Discord, LinkedIn, Instagram, Gmail, GitHub, Calendar, YouTube visible on all mobile devices
 - **Background Images**: Enhanced visibility with subtle expansion scaling + brightness/contrast boost
 - **Interactive Effects**: Desktop column expansion + mobile gentle click expansion + image scaling + color transitions
 - **Typography**: Roboto Condensed professional nautical font
 
 ## Next Steps
-- Test mobile overlay visibility across different devices and browsers
-- Monitor social icon proximity on various screen sizes
-- Consider adding touch feedback animations for enhanced mobile UX
+- Test mobile title click visibility across different devices
+- Monitor click interaction behavior on various screen sizes
+- Consider adding subtle animation for title appearance
 
 ## Files Modified
-- `css/style.css` - Added base mobile overlay visibility, eliminated social icon gaps, added negative margin for tight signature/icon proximity
-- `context/state.md` - Updated project state with Issue #38 mobile overlay visibility and social icon proximity fixes
+- `css/style.css` - Removed base mobile overlay visibility, enhanced click-only title display with prominent styling
+- `context/state.md` - Updated project state with Issue #39 mobile title click visibility fix
 
 ## Active Branch
 - **Branch**: main
 - **Live URL**: https://frankcozzolino.github.io  
-- **Status**: Production ready with fully functional mobile UX - visible section titles on click and tightly positioned social icons
+- **Status**: Production ready with proper mobile UX - clean sections by default, prominent titles only on click

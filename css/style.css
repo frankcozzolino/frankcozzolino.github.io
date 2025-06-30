@@ -511,10 +511,10 @@ body {
 .signature-img {
     height: 100%;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     filter: brightness(0) invert(1);
     transition: filter 0.3s ease, transform 0.3s ease;
-    transform: scale(1.25);
+    transform: scale(1.1);
 }
 
 .nav-menu {
@@ -702,7 +702,7 @@ body {
 }
 
 .diagonal-section:nth-child(1):hover {
-    transform: scaleX(1.6);
+    transform: scaleX(1.3);
     z-index: 10;
 }
 
@@ -712,7 +712,7 @@ body {
 }
 
 .diagonal-section:nth-child(2):hover {
-    transform: scaleX(1.6);
+    transform: scaleX(1.3);
     z-index: 10;
 }
 
@@ -722,7 +722,7 @@ body {
 }
 
 .diagonal-section:nth-child(3):hover {
-    transform: scaleX(1.6);
+    transform: scaleX(1.3);
     z-index: 10;
 }
 
@@ -732,7 +732,7 @@ body {
 }
 
 .diagonal-section:nth-child(4):hover {
-    transform: scaleX(1.6);
+    transform: scaleX(1.3);
     z-index: 10;
 }
 
@@ -945,6 +945,7 @@ body {
     .signature-img {
         height: 90%;
         width: 100%;
+        object-fit: cover;
         transform: scale(1.15);
     }
 

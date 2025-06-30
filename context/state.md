@@ -1,14 +1,14 @@
 # PROJECT STATE - Frank Cozzolino Website
 
-## ⚠️ LATEST UPDATE - SUBTLE IMAGE ENLARGEMENT (50% REDUCTION)
-- **User Refinement**: Requested more subtle enlargement - 50% of previous intensity
-- **Refined Implementation**: 
-  - Column expands: scaleX(1.6) horizontally as intended
-  - Image enlarges: scale(1.1) uniformly (10% vs previous 20%) on desktop
-  - Position maintained: background-position center keeps image anchored in place
-  - Mobile: scale(1.075) (7.5% vs previous 15%) for consistent proportional growth
-  - Mathematical precision: Exactly 50% reduction as requested
-- **Visual Result**: More elegant and subtle image growth that enhances without overwhelming
+## ⚠️ LATEST UPDATE - COLUMN EXPANSION REDUCED BY 50%
+- **User Request**: Column expansion too strong - wants 50% of current intensity
+- **Mathematical Implementation**: 
+  - Previous: scaleX(1.6) = 60% expansion across all four columns
+  - New: scaleX(1.3) = 30% expansion (exactly 50% reduction)
+  - Maintains directional transform-origins (left, center, center, right)
+  - Preserves ultra-fast 0.12s cubic-bezier timing
+- **Visual Result**: More refined and elegant expansion that's noticeable but not overwhelming
+- **Previous**: Signature fills navbar extremes (object-fit: cover, scale 1.1 desktop)
 - **Previous Fixes**: 
   - Signature fills entire rectangular area (160px wide container) with scale(1.25)
   - Dramatic column expansion: directional logic with 60% width increase  

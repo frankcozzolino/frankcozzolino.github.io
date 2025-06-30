@@ -490,6 +490,18 @@ body {
     letter-spacing: 1px;
 }
 
+.logo-signature {
+    display: flex;
+    align-items: center;
+}
+
+.signature-img {
+    height: 35px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
@@ -838,6 +850,10 @@ body {
 
     .logo-text {
         font-size: 1.2rem;
+    }
+
+    .signature-img {
+        height: 28px;
     }
 
     .nav-menu a {

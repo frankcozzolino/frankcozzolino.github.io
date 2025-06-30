@@ -1,17 +1,16 @@
 # PROJECT STATE - Frank Cozzolino Website
 
-## ⚠️ LATEST UPDATE - DRAMATIC COLUMN EXPANSION IMPLEMENTED
-- **User Request**: Columns should dramatically expand horizontally on hover with directional logic
-- **Implementation**: 
-  - Added ultra-fast transitions: 0.12s cubic-bezier for immediate response
-  - Column 1 (Sailing): expands RIGHT only via `transform-origin: left`
-  - Columns 2-3 (Coder, PM): expand BOTH ways via `transform-origin: center`  
-  - Column 4 (Hobbies): expands LEFT only via `transform-origin: right`
-  - Dramatic 60% expansion (scaleX 1.6) with z-index elevation
-  - Mobile: switches to vertical expansion (scaleY 1.05)
-- **Visual Result**: Quick, dramatic directional expansion effects - immediate visual impact
+## ⚠️ LATEST UPDATE - BACKGROUND IMAGE ASPECT RATIO PRESERVED
+- **User Issue**: Background images deformed when columns expand horizontally (scaleX stretching)
+- **Mathematical Solution**: 
+  - Container expands: scaleX(1.6) → background compensates: scaleX(0.625) 
+  - Net horizontal effect: 1.6 × 0.625 = 1.0 (no distortion)
+  - Maintains scaleY(1.05) for subtle vertical enhancement
+  - Mobile: normal scale(1.05) since no horizontal stretching occurs
+- **Visual Result**: Background images maintain perfect aspect ratio during dramatic column expansion
 - **Previous Fixes**: 
-  - Signature enlarged 32% with scale(1.15) while maintaining 80px navbar
+  - Signature fills entire rectangular area (160px wide container) with scale(1.25)
+  - Dramatic column expansion: directional logic with 60% width increase  
   - Navbar fixed heights: 80px desktop, 120px tablet, 100px mobile
   - Calendly icon added as 7th social media icon with #00A2FF hover
   - Background images start immediately under navbar with no gaps

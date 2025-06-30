@@ -496,7 +496,7 @@ body {
 }
 
 .signature-img {
-    height: 35px;
+    height: 50px;
     width: auto;
     filter: brightness(0) invert(1);
     transition: filter 0.3s ease;
@@ -853,7 +853,7 @@ body {
     }
 
     .signature-img {
-        height: 28px;
+        height: 40px;
     }
 
     .nav-menu a {

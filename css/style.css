@@ -597,6 +597,10 @@ body {
     fill: #00A2FF;
 }
 
+.social-icon:hover[title="YouTube"] svg {
+    fill: #FF0000;
+}
+
 /* CLEAN HORIZONTAL GALLERY */
 .diagonal-gallery {
     display: grid;

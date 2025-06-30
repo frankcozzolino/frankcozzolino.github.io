@@ -502,10 +502,11 @@ body {
 .logo-signature {
     display: flex;
     align-items: center;
+    height: 100%;
 }
 
 .signature-img {
-    height: 50px;
+    height: 85%;
     width: auto;
     filter: brightness(0) invert(1);
     transition: filter 0.3s ease;
@@ -585,6 +586,10 @@ body {
 
 .social-icon:hover[title="GitHub"] svg {
     fill: #ffffff;
+}
+
+.social-icon:hover[title="Schedule a Call"] svg {
+    fill: #00A2FF;
 }
 
 /* CLEAN HORIZONTAL GALLERY */
@@ -864,7 +869,7 @@ body {
     }
 
     .signature-img {
-        height: 40px;
+        height: 80%;
     }
 
     .nav-menu a {

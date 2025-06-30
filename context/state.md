@@ -1,28 +1,30 @@
 # Project State - Frank Cozzolino Website
 
 ## Current Status: ✅ COMPLETED  
-**Simplified Background Images for Visibility**
+**Enhanced Mobile Signature Prominence**
 
-### Last Completed Action (Issue #29)
-- **Image Visibility Fix**: Removed complex mobile/tablet background-size overrides
-- **Simplification**: Restored default `background-size: cover` for reliable image display
-- **Mobile Fix**: Removed problematic 80% sizing that prevented image visibility
-- **Tablet Fix**: Removed excessive 110% sizing for consistency
-- **Result**: Background images now visible and properly displayed across all devices
+### Last Completed Action (Issue #30)
+- **Signature Enhancement**: Scaled mobile signature 2x larger (scale(2.0))
+- **Icon Positioning**: Moved icons closer to signature (gap: 0.2rem)
+- **Navbar Expansion**: Increased mobile navbar height (110px) to contain larger signature
+- **Extra Small Adjustment**: Proportional scaling for 360px screens (scale(1.6), height: 95px)
+- **Result**: Prominent signature with tightly grouped icons, all contained within navbar bounds
 
 ### Implementation Details
-- **Problem**: Mobile 80% background-size + tablet 110% sizing caused image visibility issues
-- **User Feedback**: "Images not visible just simplify and let images visible"
-- **Solution**: Removed all responsive background-size overrides
-- **Default Behavior**: Now uses reliable `background-size: cover` + `background-position: center`
-- **Priority**: Image visibility over custom sizing effects
+- **Problem**: Mobile signature too small (scale 1.3) with icons positioned too far away (gap 0.5rem)
+- **User Feedback**: "Signature bigger 2x and icons closer to signature should stay within the navbar"
+- **Solution**: Doubled signature scale, reduced icon gap, increased navbar height for containment
+- **Mobile Changes**: scale(2.0), gap(0.2rem), height(110px)
+- **Extra Small Changes**: scale(1.6), gap(0.15rem), height(95px)
+- **Priority**: Signature prominence with tight icon grouping
 
 ### Technical Changes
-- **Removed**: `background-size: 110%` from tablet (768px breakpoint)
-- **Removed**: `background-size: 80%` from mobile (480px breakpoint)  
-- **Removed**: Custom `background-position` overrides
-- **Result**: All devices now use default `.section-bg` CSS (cover + center)
-- **Reliability**: Proven CSS approach ensures images always display
+- **Mobile Navbar**: Height increased from 85px to 110px for signature containment
+- **Mobile Signature**: Scaling increased from scale(1.3) to scale(2.0) for 2x size
+- **Mobile Icon Gap**: Reduced from 0.5rem to 0.2rem for closer positioning
+- **Extra Small Navbar**: Height increased from 80px to 95px for proportional scaling
+- **Extra Small Signature**: Scaling increased from scale(1.0) to scale(1.6) proportionally
+- **Result**: Prominent signature with tight icon grouping across all mobile screen sizes
 
 ## Previous Completed Features
 ✅ **Mobile Navbar Vertical**: Signature top-center, icons centered below
@@ -51,7 +53,7 @@
 - Update remaining social media placeholder URLs when ready
 
 ## Files Modified
-- `css/style.css` - Removed complex mobile/tablet background-size overrides for simplicity
+- `css/style.css` - Enhanced mobile signature scaling and positioning with increased navbar heights
 - `context/state.md` - Updated project state documentation
 
 ## Active Branch

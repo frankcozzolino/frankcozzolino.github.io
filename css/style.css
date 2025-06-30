@@ -952,7 +952,7 @@ body {
 
 @media (max-width: 480px) {
     .main-nav {
-        height: 85px;
+        height: 110px;
     }
 
     .nav-container {
@@ -961,7 +961,7 @@ body {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 0.5rem;
+        gap: 0.2rem;
     }
 
     /* Hide navigation menu on mobile */
@@ -977,7 +977,7 @@ body {
     }
 
     .signature-img {
-        transform: scale(1.3);
+        transform: scale(2.0);
     }
 
     .social-icons {
@@ -1086,12 +1086,12 @@ body {
 /* EXTRA SMALL PHONES */
 @media (max-width: 360px) {
     .main-nav {
-        height: 80px;
+        height: 95px;
     }
 
     .nav-container {
         padding: 0.4rem 0.5rem;
-        gap: 0.4rem;
+        gap: 0.15rem;
     }
 
     .logo-signature {
@@ -1099,7 +1099,7 @@ body {
     }
 
     .signature-img {
-        transform: scale(1.0);
+        transform: scale(1.6);
     }
 
     .nav-menu {

@@ -514,7 +514,7 @@ body {
     object-fit: cover;
     filter: brightness(0) invert(1);
     transition: filter 0.3s ease, transform 0.3s ease;
-    transform: scale(1.1);
+    transform: scale(2.2);
 }
 
 .nav-menu {
@@ -950,7 +950,7 @@ body {
         height: 90%;
         width: 100%;
         object-fit: cover;
-        transform: scale(1.15);
+        transform: scale(2.3);
     }
 
     .nav-menu a {

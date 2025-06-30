@@ -608,6 +608,8 @@ body {
     position: relative;
     overflow: hidden;
     border-right: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center;
 }
 
 .diagonal-section:last-child {
@@ -689,6 +691,47 @@ body {
     background-image: url('../images/hobbies.jpg');
     background-color: #7c3aed;
     /* Fallback color */
+}
+
+/* DRAMATIC COLUMN EXPANSION EFFECTS */
+/* First column (Sailing) - expand RIGHT only */
+.diagonal-section:nth-child(1) {
+    transform-origin: left center;
+}
+
+.diagonal-section:nth-child(1):hover {
+    transform: scaleX(1.6);
+    z-index: 10;
+}
+
+/* Second column (Coder) - expand BOTH ways */
+.diagonal-section:nth-child(2) {
+    transform-origin: center;
+}
+
+.diagonal-section:nth-child(2):hover {
+    transform: scaleX(1.6);
+    z-index: 10;
+}
+
+/* Third column (PM) - expand BOTH ways */
+.diagonal-section:nth-child(3) {
+    transform-origin: center;
+}
+
+.diagonal-section:nth-child(3):hover {
+    transform: scaleX(1.6);
+    z-index: 10;
+}
+
+/* Fourth column (Hobbies) - expand LEFT only */
+.diagonal-section:nth-child(4) {
+    transform-origin: right center;
+}
+
+.diagonal-section:nth-child(4):hover {
+    transform: scaleX(1.6);
+    z-index: 10;
 }
 
 /* HOVER EFFECTS - Enlarge with full color */
@@ -841,6 +884,14 @@ body {
 
     .diagonal-gallery {
         grid-template-columns: 1fr;
+    }
+
+    /* Mobile: Vertical expansion instead of horizontal */
+    .diagonal-section:nth-child(1):hover,
+    .diagonal-section:nth-child(2):hover,
+    .diagonal-section:nth-child(3):hover,
+    .diagonal-section:nth-child(4):hover {
+        transform: scaleY(1.05);
     }
 
     .section-content {

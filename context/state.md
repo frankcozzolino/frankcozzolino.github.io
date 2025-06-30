@@ -1,15 +1,17 @@
 # PROJECT STATE - Frank Cozzolino Website
 
-## ⚠️ LATEST UPDATE - SIGNATURE VISUAL ENLARGEMENT APPLIED
-- **User Challenge**: Signature too small but navbar must maintain fixed height (80px)
-- **Creative Solution**: 
-  - Signature height: 85% → 100% (uses full container height)
-  - Added `transform: scale(1.15)` for 15% visual enlargement on desktop
-  - Added `overflow: visible` to logo-signature for extending bounds
-  - Mobile: 90% height + scale(1.1) for 10% enlargement
-  - Added smooth transform transitions
-- **Visual Result**: Signature appears ~32% larger overall while navbar stays 80px fixed
+## ⚠️ LATEST UPDATE - DRAMATIC COLUMN EXPANSION IMPLEMENTED
+- **User Request**: Columns should dramatically expand horizontally on hover with directional logic
+- **Implementation**: 
+  - Added ultra-fast transitions: 0.12s cubic-bezier for immediate response
+  - Column 1 (Sailing): expands RIGHT only via `transform-origin: left`
+  - Columns 2-3 (Coder, PM): expand BOTH ways via `transform-origin: center`  
+  - Column 4 (Hobbies): expands LEFT only via `transform-origin: right`
+  - Dramatic 60% expansion (scaleX 1.6) with z-index elevation
+  - Mobile: switches to vertical expansion (scaleY 1.05)
+- **Visual Result**: Quick, dramatic directional expansion effects - immediate visual impact
 - **Previous Fixes**: 
+  - Signature enlarged 32% with scale(1.15) while maintaining 80px navbar
   - Navbar fixed heights: 80px desktop, 120px tablet, 100px mobile
   - Calendly icon added as 7th social media icon with #00A2FF hover
   - Background images start immediately under navbar with no gaps

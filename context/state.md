@@ -102,3 +102,14 @@
   - Updated both title and label shadows for consistent visibility against background images
 - **Technical Details**: Removed overlay background while maintaining text readability through enhanced shadows
 - **Result**: ✅ Mobile sections now show beautiful background images when clicked with clearly readable white text (no dark overlay)
+
+### Last Completed Action (Issue #45 - Mobile Navbar Shake Complete Fix)
+- **PROBLEM RESOLVED**: Eliminated navbar/signature shake when clicking mobile sections by removing performance-intensive backdrop blur
+- **Root Cause**: `backdrop-filter: blur(15px)` on navbar was causing expensive recalculation during mobile section `transform: scale(1.25)` animations
+- **Solution Applied**: 
+  - Removed `backdrop-filter` on mobile devices (≤480px and ≤360px)
+  - Replaced with optimized static gradient background: `rgba(25, 35, 45, 0.9-0.95)`
+  - Maintains visual consistency without performance overhead
+  - Desktop blur effect preserved for larger screens
+- **Technical Details**: Backdrop filters require GPU-intensive recalculation during animations, causing visual jitter on mobile devices
+- **Result**: ✅ Navbar and signature remain completely stable during mobile section clicks, no shake or transition effects

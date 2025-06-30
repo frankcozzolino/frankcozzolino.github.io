@@ -187,3 +187,21 @@
 - Double-layer text shadows provide excellent contrast against any background
 **Result**: Mobile sections display full background images with clearly readable text on click
 **Files Modified**: `css/style.css` - Mobile overlay background removal, enhanced text shadows 
+
+## Mobile Navbar Shake Complete Fix (2025-01-12)
+**Decision**: Remove backdrop-filter blur on mobile devices and replace with static gradient background
+**Problem**: User reported continued navbar/signature shake when clicking mobile sections despite previous transition optimization
+**Root Cause**: `backdrop-filter: blur(15px)` on navbar was causing expensive GPU recalculation during mobile section `transform: scale(1.25)` animations, creating visual jitter
+**Solution Approach**:
+- **Remove Performance Bottleneck**: Set `backdrop-filter: none` on mobile devices (≤480px and ≤360px breakpoints)
+- **Visual Replacement**: Added optimized static gradient `rgba(25, 35, 45, 0.9-0.95)` to maintain navbar appearance
+- **Preserve Desktop Experience**: Desktop blur effect (>480px) remains unchanged for users with capable hardware
+- **Consistent Mobile Experience**: Applied fix to both 480px and 360px breakpoints for uniform behavior
+**Rationale**:
+- Backdrop filters are computationally expensive on mobile GPUs, especially during animations
+- Even optimized `transition: transform` animations can trigger blur recalculation when sections scale behind fixed navbar
+- Static gradient provides similar visual effect without performance overhead
+- Mobile devices benefit more from smooth interactions than advanced visual effects
+- Desktop users retain premium blur experience with capable hardware
+**Result**: Complete elimination of navbar shake on mobile section clicks while maintaining visual design integrity
+**Files Modified**: `css/style.css` - Mobile navbar backdrop-filter removal and background replacement 

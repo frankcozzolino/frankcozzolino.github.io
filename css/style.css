@@ -942,6 +942,12 @@ body {
         max-width: 100%;
     }
 
+    /* Tablet Background Images: Improve face visibility */
+    .section-bg {
+        background-size: 110%;
+        background-position: center 25%;
+    }
+
     .footer-content {
         flex-direction: column;
         gap: 1rem;
@@ -950,7 +956,7 @@ body {
 
 @media (max-width: 480px) {
     .main-nav {
-        height: 60px;
+        height: 70px;
     }
 
     .nav-container {
@@ -1011,6 +1017,12 @@ body {
 
     .section-text h2 {
         font-size: 1.1rem;
+    }
+
+    /* Mobile Background Images: Scale down to show full faces */
+    .section-bg {
+        background-size: 100%;
+        background-position: center 30%;
     }
 
     /* Mobile Footer: Add navigation and full social icons */
@@ -1080,7 +1092,7 @@ body {
 /* EXTRA SMALL PHONES */
 @media (max-width: 360px) {
     .main-nav {
-        height: 55px;
+        height: 65px;
     }
 
     .nav-container {

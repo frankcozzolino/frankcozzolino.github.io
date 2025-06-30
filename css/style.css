@@ -736,9 +736,9 @@ body {
     z-index: 10;
 }
 
-/* HOVER EFFECTS - Enlarge with full color */
+/* HOVER EFFECTS - Compensate for horizontal stretch + enlarge */
 .diagonal-section:hover .section-bg {
-    transform: scale(1.05);
+    transform: scaleX(0.625) scaleY(1.05);
     filter: brightness(1.05);
 }
 
@@ -894,6 +894,12 @@ body {
     .diagonal-section:nth-child(3):hover,
     .diagonal-section:nth-child(4):hover {
         transform: scaleY(1.05);
+    }
+
+    /* Mobile: Normal background scaling since no horizontal stretch */
+    .diagonal-section:hover .section-bg {
+        transform: scale(1.05);
+        filter: brightness(1.05);
     }
 
     .section-content {

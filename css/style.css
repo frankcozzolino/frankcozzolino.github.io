@@ -948,6 +948,54 @@ body {
         flex-direction: column;
         gap: 1rem;
     }
+
+    /* Mobile/Tablet Footer: Show navigation and all social icons */
+    .mobile-footer-nav {
+        display: flex !important;
+        /* Override default hidden state */
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .mobile-footer-menu {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .mobile-footer-menu a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 400;
+        transition: color 0.3s ease;
+    }
+
+    .mobile-footer-menu a:hover {
+        color: white;
+    }
+
+    /* Mobile/Tablet Footer Social Icons */
+    .mobile-footer-social {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .mobile-footer-social .social-icon {
+        width: 36px;
+        height: 36px;
+        padding: 0.4rem;
+    }
+
+    .mobile-footer-social .social-icon svg {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1064,7 +1112,7 @@ body {
 
     /* Mobile: Use default background sizing for image visibility */
 
-    /* Mobile Footer: Add navigation and full social icons */
+    /* Mobile Footer: Enhanced styling for 480px screens */
     .main-footer {
         padding: 2rem 1rem;
     }
@@ -1072,54 +1120,6 @@ body {
     .footer-content {
         flex-direction: column;
         gap: 2rem;
-    }
-
-    /* Mobile Footer Navigation */
-    .mobile-footer-nav {
-        display: flex !important;
-        /* Override default hidden state */
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-
-    .mobile-footer-menu {
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .mobile-footer-menu a {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-size: 1rem;
-        font-weight: 400;
-        transition: color 0.3s ease;
-    }
-
-    .mobile-footer-menu a:hover {
-        color: white;
-    }
-
-    /* Mobile Footer Social Icons */
-    .mobile-footer-social {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .mobile-footer-social .social-icon {
-        width: 36px;
-        height: 36px;
-        padding: 0.4rem;
-    }
-
-    .mobile-footer-social .social-icon svg {
-        width: 18px;
-        height: 18px;
     }
 }
 

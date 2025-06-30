@@ -336,10 +336,6 @@ body {
         transform: rotate(0deg);
         font-size: 1rem;
     }
-
-    .social-icons {
-        gap: 1rem;
-    }
 }
 
 @media (max-width: 768px) {
@@ -396,117 +392,514 @@ body {
         flex-direction: column;
         gap: 1rem;
     }
+}
 
-    .section-content {
-        min-height: 100vh;
+@media (max-width: 480px) {
+    .hero {
+        padding: 1rem;
     }
 
-    .section-text {
-        max-width: 100%;
+    .overlay-content h2 {
+        font-size: 1.4rem;
     }
 
-    /* Tablet: Use default background sizing for reliability */
+    .placeholder-text {
+        font-size: 0.8rem;
+    }
+}
 
-    .footer-content {
-        flex-direction: column;
-        gap: 1rem;
+/* Sections */
+.section {
+    position: relative;
+    color: #fff;
+}
+
+.section h2 {
+    margin-bottom: 1rem;
+}
+
+.section p,
+.section ul {
+    margin-bottom: 1.5rem;
+}
+
+/* Slanted edges via clip-path */
+.slant-top {
+    background: #004a7c;
+    clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+}
+
+.slant-bottom {
+    background: #006494;
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+}
+
+/* Timeline list */
+.timeline li {
+    margin-bottom: 1rem;
+}
+
+/* Cards */
+.cards .card {
+    position: relative;
+    overflow: hidden;
+}
+
+.cards img {
+    width: 100%;
+    display: block;
+}
+
+.cards h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: .5rem;
+    background: rgba(0, 0, 0, .6);
+}
+
+/* Responsive tweaks */
+@media(max-width:768px) {
+
+    .grid-2,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* PROFESSIONAL NAVIGATION - Ultra transparent to show background images */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom,
+            rgba(25, 35, 45, 0.05) 0%,
+            rgba(25, 35, 45, 0.15) 50%,
+            rgba(25, 35, 45, 0.05) 100%);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    height: 80px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 100%;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.logo-signature {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 160px;
+    overflow: visible;
+}
+
+.signature-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease, transform 0.3s ease;
+    transform: scale(1.5);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav-menu a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #4a9eff;
+}
+
+/* SOCIAL MEDIA ICONS */
+.social-icons {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.social-icon {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: fill 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Official brand colors on hover */
+.social-icon:hover[title="WhatsApp"] svg {
+    fill: #25D366;
+}
+
+.social-icon:hover[title="Discord"] svg {
+    fill: #5865F2;
+}
+
+.social-icon:hover[title="LinkedIn"] svg {
+    fill: #0077B5;
+}
+
+.social-icon:hover[title="Instagram"] svg {
+    fill: #E4405F;
+}
+
+.social-icon:hover[title="Gmail"] svg {
+    fill: #EA4335;
+}
+
+.social-icon:hover[title="GitHub"] svg {
+    fill: #ffffff;
+}
+
+.social-icon:hover[title="Schedule a Call"] svg {
+    fill: #00A2FF;
+}
+
+.social-icon:hover[title="YouTube"] svg {
+    fill: #FF0000;
+}
+
+/* CLEAN HORIZONTAL GALLERY */
+.diagonal-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100vh;
+    min-height: 100vh;
+    gap: 0;
+}
+
+.diagonal-section {
+    position: relative;
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center;
+}
+
+.diagonal-section:last-child {
+    border-right: none;
+}
+
+/* SECTION CONTENT */
+.section-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+}
+
+/* BACKGROUND STYLES - SIMPLIFIED FOR VISIBILITY */
+.section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    /* Default: Pure grayscale with slight enhancement */
+    filter: grayscale(100%) contrast(105%) brightness(1.1);
+}
+
+/* Default: Blue hint from mid-bottom, none at top */
+.section-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top,
+            rgba(43, 92, 149, 0.4) 0%,
+            rgba(43, 92, 149, 0.2) 30%,
+            rgba(43, 92, 149, 0.05) 50%,
+            rgba(43, 92, 149, 0) 100%);
+    z-index: 1;
+    transition: background 0.4s ease;
+}
+
+/* Hover: Stronger blue from mid-bottom, none at top */
+.diagonal-section:hover .section-bg::before {
+    background: linear-gradient(to top,
+            rgba(43, 92, 149, 0.9) 0%,
+            rgba(43, 92, 149, 0.6) 30%,
+            rgba(43, 92, 149, 0.2) 50%,
+            rgba(43, 92, 149, 0) 100%);
+}
+
+/* SAILING SECTION */
+.sailing-bg {
+    background-image: url('../images/sailing.jpg');
+    background-color: #1e3a8a;
+    /* Fallback color */
+}
+
+/* CODER SECTION */
+.coder-bg {
+    background-image: url('../images/coding.jpg');
+    background-color: #059669;
+    /* Fallback color */
+}
+
+/* PRODUCT MANAGER SECTION */
+.pm-bg {
+    background-image: url('../images/product-management.jpg');
+    background-color: #ea580c;
+    /* Fallback color */
+}
+
+/* HOBBIES SECTION */
+.hobbies-bg {
+    background-image: url('../images/hobbies.jpg');
+    background-color: #7c3aed;
+    /* Fallback color */
+}
+
+/* DRAMATIC COLUMN EXPANSION EFFECTS */
+/* First column (Sailing) - expand RIGHT only */
+.diagonal-section:nth-child(1) {
+    transform-origin: left center;
+}
+
+.diagonal-section:nth-child(1):hover {
+    transform: scaleX(1.3);
+    z-index: 10;
+}
+
+/* Second column (Coder) - expand BOTH ways */
+.diagonal-section:nth-child(2) {
+    transform-origin: center;
+}
+
+.diagonal-section:nth-child(2):hover {
+    transform: scaleX(1.3);
+    z-index: 10;
+}
+
+/* Third column (PM) - expand BOTH ways */
+.diagonal-section:nth-child(3) {
+    transform-origin: center;
+}
+
+.diagonal-section:nth-child(3):hover {
+    transform: scaleX(1.3);
+    z-index: 10;
+}
+
+/* Fourth column (Hobbies) - expand LEFT only */
+.diagonal-section:nth-child(4) {
+    transform-origin: right center;
+}
+
+.diagonal-section:nth-child(4):hover {
+    transform: scaleX(1.3);
+    z-index: 10;
+}
+
+/* HOVER EFFECTS - Enlarge image proportionally while staying in place */
+.diagonal-section:hover .section-bg {
+    transform: scale(1.1);
+    filter: brightness(1.05);
+}
+
+/* CONTENT OVERLAY */
+.content-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.4) 70%,
+            rgba(0, 0, 0, 0) 100%);
+    padding: 3rem 2rem;
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+    /* Above the dark overlay */
+}
+
+.diagonal-section:hover .content-overlay {
+    opacity: 1;
+}
+
+/* TYPOGRAPHY */
+.section-text {
+    color: white;
+    max-width: 80%;
+}
+
+.section-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #4a9eff;
+    margin-bottom: 1rem;
+}
+
+.section-text h2 {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 300;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.discover-link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.8rem 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.discover-link:hover {
+    border-bottom-color: #4a9eff;
+}
+
+/* FOOTER */
+.main-footer {
+    background: #0f1419;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 2rem;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .diagonal-gallery {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Mobile/Tablet Footer: Show navigation and all social icons */
-    .mobile-footer-nav {
-        display: flex !important;
-        /* Override default hidden state */
-        flex-direction: column;
+    .nav-menu {
         gap: 1.5rem;
-        align-items: center;
-        margin-bottom: 1rem;
     }
 
-    .mobile-footer-menu {
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        justify-content: center;
+    .nav-menu a {
+        font-size: 0.8rem;
     }
 
-    .mobile-footer-menu a {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-size: 1rem;
-        font-weight: 400;
-        transition: color 0.3s ease;
-    }
-
-    .mobile-footer-menu a:hover {
-        color: white;
-    }
-
-    /* Mobile/Tablet Footer Social Icons */
-    .mobile-footer-social {
-        display: flex;
+    .social-icons {
         gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        height: 70px;
     }
 
-    .mobile-footer-social .social-icon {
-        width: 36px;
-        height: 36px;
-        padding: 0.4rem;
+    .nav-container {
+        padding: 0 1rem;
+        /* Keep horizontal layout like desktop */
     }
 
-    .mobile-footer-social .social-icon svg {
-        width: 18px;
-        height: 18px;
+    .logo-signature {
+        width: 100px;
     }
 
-    /* Ensure all social icons are visible in mobile footer */
-    .mobile-footer-social .social-icon {
-        display: flex;
+    .signature-img {
+        transform: scale(0.95);
     }
 
-    /* FORCEFUL OVERRIDE FOR TEXT VISIBILITY ON CLICK */
-    /* This rule ensures that when a section is expanded, the text content WILL be visible */
-    body .mobile-expanded .content-overlay {
-        opacity: 1 !important;
-        background: none !important;
-        padding: 2rem !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        position: absolute !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        z-index: 100 !important;
+    .nav-menu {
+        gap: 1.5rem;
     }
 
-    body .mobile-expanded .section-text {
-        max-width: 100% !important;
-        color: white !important;
+    .nav-menu a {
+        font-size: 0.8rem;
     }
 
-    body .mobile-expanded .section-text h2 {
-        font-size: 1.8rem !important;
-        color: white !important;
-        font-weight: 500 !important;
-        line-height: 1.3 !important;
-        margin: 0 !important;
-        display: block !important;
-        text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9), 1px 1px 6px rgba(0, 0, 0, 0.8) !important;
-        max-width: 85% !important;
+    .social-icons {
+        gap: 0.8rem;
     }
 
-    body .mobile-expanded .section-label {
-        font-size: 0.9rem !important;
-        margin-bottom: 0.8rem !important;
-        color: #ffffff !important;
-        font-weight: 700 !important;
-        letter-spacing: 2px !important;
-        text-transform: uppercase !important;
-        display: block !important;
-        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9), 0px 0px 3px rgba(0, 0, 0, 0.8) !important;
+    .social-icon {
+        width: 32px;
+        height: 32px;
+        padding: 0.3rem;
+    }
+
+    .social-icon svg {
+        width: 16px;
+        height: 16px;
     }
 
     .main-content {
@@ -611,18 +1004,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    .hero {
-        padding: 1rem;
-    }
-
-    .overlay-content h2 {
-        font-size: 1.4rem;
-    }
-
-    .placeholder-text {
-        font-size: 0.8rem;
-    }
-
     .main-nav {
         height: 120px;
         /* Remove backdrop blur on mobile to prevent shake */
@@ -802,6 +1183,17 @@ body {
     /* Show titles ONLY when clicked/expanded */
     .mobile-expanded .content-overlay {
         opacity: 1 !important;
+        background: none !important;
+        padding: 2rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        z-index: 100 !important;
     }
 
     .mobile-expanded .section-text {
@@ -931,8 +1323,4 @@ body {
         width: 12px;
         height: 12px;
     }
-}
-
-.discover-link:hover {
-    border-bottom-color: #4a9eff;
 }

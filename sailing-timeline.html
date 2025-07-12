@@ -206,7 +206,7 @@
         .timeline {
             position: relative;
             padding: 2rem 0;
-            min-height: 800px;
+            min-height: 1600px;
         }
 
         /* S-Shaped Timeline Line */
@@ -225,13 +225,14 @@
             height: 100%;
         }
 
-        /* Static Sailboat */
+        /* Animated Sailboat */
         .timeline__boat {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            top: 15%;
+            top: 5%;
             z-index: 10;
+            transition: top 0.1s ease-out;
         }
 
         /* Trip Cards */
@@ -276,6 +277,14 @@
 
         .timeline__card:nth-child(4) {
             animation-delay: 0.6s;
+        }
+
+        .timeline__card:nth-child(5) {
+            animation-delay: 0.8s;
+        }
+
+        .timeline__card:nth-child(6) {
+            animation-delay: 1.0s;
         }
 
         .timeline__card--left {
@@ -344,6 +353,46 @@
             font-size: 0.85rem;
             font-weight: 500;
             box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Expandable Description Styles */
+        .trip-description {
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .description-preview {
+            display: block;
+        }
+
+        .description-full {
+            display: none;
+        }
+
+        .description-full.expanded {
+            display: block;
+        }
+
+        .description-preview.collapsed {
+            display: none;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #21618C;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: underline;
+            padding: 0;
+            margin-top: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .expand-btn:hover {
+            color: #1a4d73;
         }
 
         /* Responsive Design */
@@ -483,27 +532,27 @@
     <div class="timeline-container">
         <div class="timeline-header">
             <h2>Sailing Journey</h2>
-            <p>My sailing adventure began in 2023 with the RYA Day Skipper qualification, opening up a world of ocean
-                exploration and maritime skills.</p>
+            <p>My sailing adventure began in 2019 with exploring the Dutch waters, leading to the RYA Day Skipper
+                qualification in 2023, opening up a world of ocean exploration and maritime skills.</p>
         </div>
 
         <main class="timeline" id="timeline">
             <!-- S-Shaped Timeline Line -->
             <div class="timeline__line">
-                <svg viewBox="0 0 100 800" preserveAspectRatio="none">
+                <svg viewBox="0 0 100 1600" preserveAspectRatio="none">
                     <defs>
                         <pattern id="dashPattern" patternUnits="userSpaceOnUse" width="8" height="8">
                             <circle cx="4" cy="4" r="1.5" fill="white" opacity="0.8" />
                         </pattern>
                     </defs>
-                    <path d="M 50 0 Q 20 100 50 200 Q 80 300 50 400 Q 20 500 50 600 Q 80 700 50 800" stroke="white"
+                    <path d="M 50 0 Q 20 200 50 400 Q 80 600 50 800 Q 20 1000 50 1200 Q 80 1400 50 1600" stroke="white"
                         stroke-width="4" stroke-dasharray="8,8" fill="none"
                         filter="drop-shadow(0 0 8px rgba(255,255,255,0.6))" />
                 </svg>
             </div>
 
-            <!-- Static Sailboat -->
-            <div class="timeline__boat">
+            <!-- Animated Sailboat -->
+            <div class="timeline__boat" id="sailboat">
                 <svg width="80" height="60" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <!-- Hull Shadow -->
                     <ellipse cx="102" cy="132" rx="55" ry="8" fill="rgba(0,0,0,0.2)" />
@@ -574,6 +623,219 @@
                         <circle cx="52" cy="38" r="2" fill="#8B4513" />
                     </svg>
                 </div>
+                <h3>Dutch Waters Exploration</h3>
+                <div class="trip-route">Monnickendam → Stavoren → Hoorn → Monnickendam</div>
+                <div class="trip-stats">
+                    <span>📅 2019</span>
+                    <span>⚓ 78 nm</span>
+                    <span>⏱️ 3 days</span>
+                </div>
+                <div class="trip-description">
+                    <div class="description-preview">
+                        My first extended sailing adventure through the historic Dutch waters, exploring the IJsselmeer
+                        and connecting three beautiful maritime towns. This journey laid the foundation for my love of
+                        sailing...
+                    </div>
+                    <div class="description-full">
+                        My first extended sailing adventure through the historic Dutch waters, exploring the IJsselmeer
+                        and connecting three beautiful maritime towns. This journey laid the foundation for my love of
+                        sailing.
+                        <br><br>
+                        <strong>Route Details:</strong> Starting from Monnickendam's historic harbor, I sailed across
+                        the IJsselmeer to Stavoren, one of the oldest cities in Friesland. From there, a beautiful
+                        coastal sail brought me to Hoorn, with its rich maritime heritage and stunning architecture.
+                        <br><br>
+                        <strong>Highlights:</strong> Experiencing the traditional Dutch sailing culture, navigating the
+                        inland seas, and discovering the maritime history of these ancient trading ports. The weather
+                        was perfect with steady winds and calm seas.
+                        <br><br>
+                        This trip sparked my passion for sailing and the Dutch maritime tradition, leading to further
+                        adventures and eventually formal training.
+                    </div>
+                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <span class="badge">First Adventure</span>
+            </div>
+
+            <div class="timeline__card timeline__card--right">
+                <div class="island-graphic">
+                    <svg width="80" height="60" viewBox="0 0 100 80">
+                        <!-- Island -->
+                        <ellipse cx="50" cy="65" rx="35" ry="10" fill="#F4A460" stroke="#DEB887" stroke-width="1" />
+                        <!-- Lighthouse -->
+                        <rect x="47" y="25" width="6" height="40" fill="#FFFFFF" stroke="#DDD" stroke-width="1" />
+                        <rect x="45" y="30" width="10" height="5" fill="#FF0000" />
+                        <rect x="45" y="40" width="10" height="5" fill="#FF0000" />
+                        <rect x="45" y="50" width="10" height="5" fill="#FF0000" />
+                        <!-- Light beam -->
+                        <path d="M50 25 L35 15 L65 15 Z" fill="#FFFF00" opacity="0.5" />
+                        <!-- Rocks -->
+                        <circle cx="35" cy="62" r="3" fill="#8B7355" />
+                        <circle cx="65" cy="60" r="4" fill="#8B7355" />
+                        <circle cx="40" cy="68" r="2" fill="#8B7355" />
+                    </svg>
+                </div>
+                <h3>Batavia Heritage Journey</h3>
+                <div class="trip-route">Monnickendam → Batavia (Lelystad) → Monnickendam</div>
+                <div class="trip-stats">
+                    <span>📅 2019</span>
+                    <span>⚓ 38 nm</span>
+                    <span>⏱️ 2 days</span>
+                </div>
+                <div class="trip-description">
+                    <div class="description-preview">
+                        A heritage-focused sailing trip to Batavia, the replica of the famous Dutch East India Company
+                        ship. This journey connected me with the golden age of Dutch maritime history...
+                    </div>
+                    <div class="description-full">
+                        A heritage-focused sailing trip to Batavia, the replica of the famous Dutch East India Company
+                        ship. This journey connected me with the golden age of Dutch maritime history.
+                        <br><br>
+                        <strong>Historical Significance:</strong> Batavia was built as a replica of the original 1628
+                        flagship of the Dutch East India Company. Visiting this maritime museum in Lelystad provided
+                        incredible insights into 17th-century seafaring.
+                        <br><br>
+                        <strong>Sailing Experience:</strong> The route took us through the heart of the IJsselmeer, past
+                        the modern engineering marvel of the Oostvaardersplassen nature reserve. The contrast between
+                        historical maritime heritage and modern land reclamation was fascinating.
+                        <br><br>
+                        This trip deepened my appreciation for Dutch maritime heritage and the skills required by
+                        historical navigators.
+                    </div>
+                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <span class="badge">Heritage</span>
+            </div>
+
+            <div class="timeline__card timeline__card--left">
+                <div class="island-graphic">
+                    <svg width="80" height="60" viewBox="0 0 100 80">
+                        <!-- Harbor -->
+                        <ellipse cx="50" cy="65" rx="40" ry="12" fill="#4682B4" stroke="#4169E1" stroke-width="1" />
+                        <!-- Dock -->
+                        <rect x="30" y="55" width="40" height="4" fill="#8B4513" />
+                        <!-- Boats -->
+                        <path d="M35 55 Q35 52 40 55 L45 55 Q50 52 50 55" fill="#FFFFFF" stroke="#DDD"
+                            stroke-width="1" />
+                        <path d="M55 55 Q55 52 60 55 L65 55 Q70 52 70 55" fill="#FFFFFF" stroke="#DDD"
+                            stroke-width="1" />
+                        <!-- Masts -->
+                        <line x1="42" y1="55" x2="42" y2="35" stroke="#8B4513" stroke-width="2" />
+                        <line x1="62" y1="55" x2="62" y2="35" stroke="#8B4513" stroke-width="2" />
+                        <!-- Buildings -->
+                        <rect x="20" y="40" width="15" height="15" fill="#CD853F" />
+                        <rect x="65" y="35" width="15" height="20" fill="#CD853F" />
+                        <rect x="22" y="42" width="4" height="4" fill="#87CEEB" />
+                        <rect x="67" y="37" width="4" height="4" fill="#87CEEB" />
+                    </svg>
+                </div>
+                <h3>Extended Batavia & Urk Circuit</h3>
+                <div class="trip-route">Monnickendam → Batavia (Lelystad) → Urk → Monnickendam</div>
+                <div class="trip-stats">
+                    <span>📅 2022</span>
+                    <span>⚓ 69 nm</span>
+                    <span>⏱️ 4 days</span>
+                </div>
+                <div class="trip-description">
+                    <div class="description-preview">
+                        An extended sailing adventure combining historical exploration with the unique experience of
+                        visiting Urk, a former island with a rich fishing tradition...
+                    </div>
+                    <div class="description-full">
+                        An extended sailing adventure combining historical exploration with the unique experience of
+                        visiting Urk, a former island with a rich fishing tradition.
+                        <br><br>
+                        <strong>Multi-destination Journey:</strong> This ambitious trip combined a return visit to
+                        Batavia with exploration of Urk, showcasing the diversity of Dutch maritime culture. Urk, once
+                        an island in the Zuiderzee, maintains its unique fishing village character.
+                        <br><br>
+                        <strong>Cultural Immersion:</strong> Urk provided a fascinating glimpse into traditional Dutch
+                        fishing culture, with its distinctive local dialect and customs. The harbor, though now inland,
+                        still bustles with fishing boats and maritime activity.
+                        <br><br>
+                        <strong>Navigation Challenge:</strong> The longer distance and multiple ports provided excellent
+                        practice in passage planning and navigation, building confidence for future adventures.
+                    </div>
+                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <span class="badge">Extended Circuit</span>
+            </div>
+
+            <div class="timeline__card timeline__card--right">
+                <div class="island-graphic">
+                    <svg width="80" height="60" viewBox="0 0 100 80">
+                        <!-- Seascape -->
+                        <ellipse cx="50" cy="65" rx="40" ry="12" fill="#4682B4" stroke="#4169E1" stroke-width="1" />
+                        <!-- Breakwater -->
+                        <rect x="15" y="55" width="70" height="3" fill="#696969" />
+                        <!-- Lighthouse -->
+                        <rect x="80" y="40" width="4" height="15" fill="#FFFFFF" stroke="#DDD" stroke-width="1" />
+                        <rect x="78" y="45" width="8" height="3" fill="#FF0000" />
+                        <!-- Waves -->
+                        <path d="M10 60 Q20 57 30 60 T50 60 T70 60 T90 60" stroke="#FFFFFF" stroke-width="2" fill="none"
+                            opacity="0.8" />
+                        <path d="M15 63 Q25 60 35 63 T55 63 T75 63 T95 63" stroke="#FFFFFF" stroke-width="2" fill="none"
+                            opacity="0.6" />
+                        <!-- Harbor entrance -->
+                        <rect x="40" y="58" width="20" height="2" fill="#4682B4" />
+                        <!-- Ships -->
+                        <ellipse cx="25" cy="62" rx="8" ry="2" fill="#8B4513" />
+                        <ellipse cx="75" cy="61" rx="6" ry="2" fill="#8B4513" />
+                    </svg>
+                </div>
+                <h3>North Sea Access Journey</h3>
+                <div class="trip-route">Monnickendam → IJmuiden → Monnickendam</div>
+                <div class="trip-stats">
+                    <span>📅 2022</span>
+                    <span>⚓ 40 nm</span>
+                    <span>⏱️ 2 days</span>
+                </div>
+                <div class="trip-description">
+                    <div class="description-preview">
+                        A significant milestone journey to IJmuiden, the gateway to the North Sea. This trip marked my
+                        first experience with sea locks and North Sea conditions...
+                    </div>
+                    <div class="description-full">
+                        A significant milestone journey to IJmuiden, the gateway to the North Sea. This trip marked my
+                        first experience with sea locks and North Sea conditions.
+                        <br><br>
+                        <strong>Gateway to the Sea:</strong> IJmuiden serves as the primary entrance from the inland
+                        waters to the North Sea. The massive sea locks and the busy commercial port provided an
+                        impressive introduction to serious maritime infrastructure.
+                        <br><br>
+                        <strong>Technical Learning:</strong> Navigating the approach to IJmuiden required coordination
+                        with port authority and understanding of commercial shipping lanes. The experience of using the
+                        sea locks was both exciting and educational.
+                        <br><br>
+                        <strong>Weather Awareness:</strong> Even in the protected approach to IJmuiden, I experienced
+                        the different conditions near the North Sea, with stronger winds and more challenging seas than
+                        the inland IJsselmeer.
+                        <br><br>
+                        This journey built confidence for future coastal sailing and provided essential experience with
+                        maritime infrastructure.
+                    </div>
+                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
+                </div>
+                <span class="badge">Sea Access</span>
+            </div>
+
+            <div class="timeline__card timeline__card--left">
+                <div class="island-graphic">
+                    <svg width="80" height="60" viewBox="0 0 100 80">
+                        <!-- British Isles outline -->
+                        <ellipse cx="50" cy="65" rx="30" ry="10" fill="#228B22" stroke="#32CD32" stroke-width="1" />
+                        <!-- UK flag on pole -->
+                        <rect x="47" y="25" width="2" height="30" fill="#8B4513" />
+                        <rect x="40" y="25" width="14" height="10" fill="#FF0000" />
+                        <path d="M40 25 L54 35 M54 25 L40 35" stroke="#FFFFFF" stroke-width="1" />
+                        <path d="M47 25 L47 35 M40 30 L54 30" stroke="#FFFFFF" stroke-width="2" />
+                        <!-- Water -->
+                        <path d="M20 62 Q30 59 40 62 T60 62 T80 62" stroke="#4682B4" stroke-width="2" fill="none" />
+                        <!-- Cliffs -->
+                        <path d="M25 50 L30 55 L35 50 L40 55 L45 50" stroke="#8B7355" stroke-width="2" fill="none" />
+                        <path d="M55 50 L60 55 L65 50 L70 55 L75 50" stroke="#8B7355" stroke-width="2" fill="none" />
+                    </svg>
+                </div>
                 <h3>RYA Day Skipper Qualification</h3>
                 <div class="trip-route">UKSA Isle of Wight → Solent → Return</div>
                 <div class="trip-stats">
@@ -581,21 +843,32 @@
                     <span>⚓ 120 nm</span>
                     <span>⏱️ 5 days</span>
                 </div>
-                <div class="trip-details">
-                    <strong>RYA Day Skipper Practical</strong> is a comprehensive 5-day certification course that
-                    enables you to safely skipper a yacht in familiar waters during daylight hours. The course
-                    concentrates on pilotage, navigation and boat handling under both sail and power, developing
-                    seamanship and safety skills.
-                    <br><br>
-                    <strong>Course Coverage:</strong> Preparation for sea, deck work (reefing, anchoring, mooring),
-                    navigation (visual fixes, electronic equipment, tidal calculations), pilotage planning, meteorology,
-                    rules of the road, emergency procedures (man overboard, distress signals), yacht handling under sail
-                    and power, and coastal passage making.
-                    <br><br>
-                    Completed at <strong>UKSA Isle of Wight</strong> - the world's largest RYA training centre - with
-                    expert instructors in the challenging tidal waters of the Solent. This qualification satisfies the
-                    minimum experience requirement for bare boat charter and provides the foundation for advanced
-                    sailing certifications.
+                <div class="trip-description">
+                    <div class="description-preview">
+                        RYA Day Skipper Practical is a comprehensive 5-day certification course that enables you to
+                        safely skipper a yacht in familiar waters during daylight hours...
+                    </div>
+                    <div class="description-full">
+                        <strong>RYA Day Skipper Practical</strong> is a comprehensive 5-day certification course that
+                        enables you to safely skipper a yacht in familiar waters during daylight hours. The course
+                        concentrates on pilotage, navigation and boat handling under both sail and power, developing
+                        seamanship and safety skills.
+                        <br><br>
+                        <strong>Course Coverage:</strong> Preparation for sea, deck work (reefing, anchoring, mooring),
+                        navigation (visual fixes, electronic equipment, tidal calculations), pilotage planning,
+                        meteorology, rules of the road, emergency procedures (man overboard, distress signals), yacht
+                        handling under sail and power, and coastal passage making.
+                        <br><br>
+                        Completed at <strong>UKSA Isle of Wight</strong> - the world's largest RYA training centre -
+                        with expert instructors in the challenging tidal waters of the Solent. This qualification
+                        satisfies the minimum experience requirement for bare boat charter and provides the foundation
+                        for advanced sailing certifications.
+                        <br><br>
+                        <strong>Solent Experience:</strong> The Solent provides some of the most challenging sailing
+                        conditions in the world, with strong tides, busy shipping lanes, and variable weather. Training
+                        here builds confidence for sailing anywhere.
+                    </div>
+                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
                 </div>
                 <span class="badge">RYA Day Skipper</span>
             </div>
@@ -613,6 +886,67 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Expandable descriptions functionality
+        function toggleDescription(button) {
+            const card = button.closest('.timeline__card');
+            const preview = card.querySelector('.description-preview');
+            const full = card.querySelector('.description-full');
+
+            if (full.classList.contains('expanded')) {
+                // Collapse
+                full.classList.remove('expanded');
+                preview.classList.remove('collapsed');
+                button.textContent = 'Read more';
+            } else {
+                // Expand
+                full.classList.add('expanded');
+                preview.classList.add('collapsed');
+                button.textContent = 'Read less';
+            }
+        }
+
+        // Scroll-based boat movement
+        function updateBoatPosition() {
+            const timeline = document.querySelector('.timeline');
+            const boat = document.getElementById('sailboat');
+
+            if (!timeline || !boat) return;
+
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const timelineRect = timeline.getBoundingClientRect();
+            const timelineTop = timelineRect.top + scrollTop;
+            const timelineHeight = timelineRect.height;
+
+            // Calculate position relative to timeline
+            const relativeScroll = scrollTop - timelineTop;
+            const scrollProgress = Math.max(0, Math.min(1, relativeScroll / (timelineHeight - window.innerHeight)));
+
+            // Move boat from 5% to 95% of timeline height
+            const boatPosition = 5 + (scrollProgress * 90);
+            boat.style.top = `${boatPosition}%`;
+        }
+
+        // Throttled scroll event listener
+        let ticking = false;
+        function onScroll() {
+            if (!ticking) {
+                requestAnimationFrame(function () {
+                    updateBoatPosition();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        // Initialize
+        window.addEventListener('scroll', onScroll);
+        window.addEventListener('resize', updateBoatPosition);
+
+        // Set initial position
+        updateBoatPosition();
+    </script>
 
 </body>
 

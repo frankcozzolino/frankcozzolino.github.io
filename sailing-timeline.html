@@ -209,21 +209,20 @@
             min-height: 800px;
         }
 
-        /* Dashed Timeline Line */
+        /* S-Shaped Timeline Line */
         .timeline__line {
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 4px;
+            width: 100px;
             height: 100%;
-            background: repeating-linear-gradient(to bottom,
-                    white 0px,
-                    white 20px,
-                    transparent 20px,
-                    transparent 40px);
-            border-radius: 2px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            z-index: 1;
+        }
+
+        .timeline__line svg {
+            width: 100%;
+            height: 100%;
         }
 
         /* Static Sailboat */
@@ -383,6 +382,7 @@
             .timeline__line {
                 left: 5%;
                 transform: none;
+                width: 60px;
             }
 
             .timeline__boat {
@@ -488,8 +488,19 @@
         </div>
 
         <main class="timeline" id="timeline">
-            <!-- Zig-zag Timeline Line -->
-            <div class="timeline__line"></div>
+            <!-- S-Shaped Timeline Line -->
+            <div class="timeline__line">
+                <svg viewBox="0 0 100 800" preserveAspectRatio="none">
+                    <defs>
+                        <pattern id="dashPattern" patternUnits="userSpaceOnUse" width="8" height="8">
+                            <circle cx="4" cy="4" r="1.5" fill="white" opacity="0.8" />
+                        </pattern>
+                    </defs>
+                    <path d="M 50 0 Q 20 100 50 200 Q 80 300 50 400 Q 20 500 50 600 Q 80 700 50 800" stroke="white"
+                        stroke-width="4" stroke-dasharray="8,8" fill="none"
+                        filter="drop-shadow(0 0 8px rgba(255,255,255,0.6))" />
+                </svg>
+            </div>
 
             <!-- Static Sailboat -->
             <div class="timeline__boat">
@@ -566,18 +577,25 @@
                 <h3>RYA Day Skipper Qualification</h3>
                 <div class="trip-route">UKSA Isle of Wight → Solent → Return</div>
                 <div class="trip-stats">
-                    <span>📅 September 2023</span>
+                    <span>📅 2023</span>
                     <span>⚓ 120 nm</span>
                     <span>⏱️ 5 days</span>
                 </div>
                 <div class="trip-details">
-                    <strong>RYA Day Skipper</strong> is a practical sailing qualification that enables you to safely
-                    skipper a yacht up to 20m in familiar waters during daylight hours. The course covers boat handling
-                    under sail and power, navigation, pilotage, meteorology, rules of the road, and safety procedures.
+                    <strong>RYA Day Skipper Practical</strong> is a comprehensive 5-day certification course that
+                    enables you to safely skipper a yacht in familiar waters during daylight hours. The course
+                    concentrates on pilotage, navigation and boat handling under both sail and power, developing
+                    seamanship and safety skills.
                     <br><br>
-                    Completed at the prestigious UKSA Isle of Wight in the challenging waters of the Solent. This
-                    qualification provided the foundation skills and confidence needed for independent sailing
-                    adventures.
+                    <strong>Course Coverage:</strong> Preparation for sea, deck work (reefing, anchoring, mooring),
+                    navigation (visual fixes, electronic equipment, tidal calculations), pilotage planning, meteorology,
+                    rules of the road, emergency procedures (man overboard, distress signals), yacht handling under sail
+                    and power, and coastal passage making.
+                    <br><br>
+                    Completed at <strong>UKSA Isle of Wight</strong> - the world's largest RYA training centre - with
+                    expert instructors in the challenging tidal waters of the Solent. This qualification satisfies the
+                    minimum experience requirement for bare boat charter and provides the foundation for advanced
+                    sailing certifications.
                 </div>
                 <span class="badge">RYA Day Skipper</span>
             </div>

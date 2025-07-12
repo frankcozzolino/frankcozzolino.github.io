@@ -19,935 +19,580 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #333;
-            background: linear-gradient(180deg, #87CEEB 0%, #4682B4 40%, #1E90FF 100%);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            line-height: 1.6;
         }
 
-        a {
-            color: #25D366;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            color: #1ea952;
-            text-decoration: underline;
-        }
-
-        /* Header Navigation */
-        .nav-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+        /* Header */
+        .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .nav-logo {
+        .header h1 {
+            font-size: 3rem;
             font-weight: 700;
-            font-size: 1.5rem;
-            color: #21618C;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #21618C;
-        }
-
-        /* Banner Section */
-        .banner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 2rem 3rem;
-            background: linear-gradient(135deg, #006994 0%, #003d5c 100%);
-            color: white;
-            margin-top: 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,60 Q250,20 500,60 T1000,60 L1000,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>') repeat-x;
-            animation: waves 6s ease-in-out infinite;
-        }
-
-        @keyframes waves {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            50% {
-                transform: translateX(-50px);
-            }
-        }
-
-        .banner-content {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            max-width: 600px;
-        }
-
-        .banner__photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            flex-shrink: 0;
-        }
-
-        .banner__info h1 {
-            margin: 0 0 0.5rem;
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        .banner__certs {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-
-        .banner__contact {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            color: white;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .contact-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .contact-btn svg {
-            width: 20px;
-            height: 20px;
+        .header p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-weight: 400;
         }
 
         /* Timeline Container */
         .timeline-container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            background: linear-gradient(180deg, rgba(135, 206, 235, 0.3) 0%, rgba(30, 144, 255, 0.1) 100%);
-            border-radius: 20px;
-            margin-top: 2rem;
+            margin: 4rem auto;
+            padding: 0 2rem;
             position: relative;
         }
 
-        .timeline-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .timeline-header h2 {
-            font-size: 2.5rem;
-            color: #21618C;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .timeline-header p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-            min-height: 1600px;
-        }
-
-        /* S-Shaped Timeline Line */
-        .timeline__line {
+        /* Timeline Line */
+        .timeline-line {
             position: absolute;
-            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 4px;
             height: 100%;
+            background: linear-gradient(to bottom, #3498db, #2ecc71);
+            border-radius: 2px;
             z-index: 1;
         }
 
-        .timeline__line svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Animated Sailboat */
-        .timeline__boat {
+        /* Animated Boat */
+        .boat {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            top: 5%;
+            width: 60px;
+            height: 60px;
             z-index: 10;
             transition: top 0.1s ease-out;
+            margin-left: 2px;
         }
 
-        /* Trip Cards */
-        .timeline__card {
+        .boat svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        /* Timeline Items */
+        .timeline-item {
             position: relative;
-            width: 45%;
-            max-width: 400px;
-            padding: 2rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             margin: 4rem 0;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 0.6s ease forwards;
+            z-index: 2;
         }
 
-        .island-graphic {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1rem;
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 52%;
         }
 
-        .island-graphic svg {
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 52%;
         }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .timeline__card:nth-child(2) {
-            animation-delay: 0.2s;
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
 
-        .timeline__card:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        .timeline__card:nth-child(4) {
-            animation-delay: 0.6s;
-        }
-
-        .timeline__card:nth-child(5) {
-            animation-delay: 0.8s;
-        }
-
-        .timeline__card:nth-child(6) {
-            animation-delay: 1.0s;
-        }
-
-        .timeline__card--left {
-            left: 0;
-            margin-right: auto;
-        }
-
-        .timeline__card--right {
-            left: 55%;
-            margin-left: auto;
-        }
-
-        .timeline__card::before {
-            content: '';
+        /* Timeline Dot */
+        .timeline-dot {
             position: absolute;
-            top: 50%;
-            width: 24px;
-            height: 24px;
-            background: #FFD700;
+            left: 50%;
+            top: 2rem;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #3498db;
             border-radius: 50%;
-            transform: translateY(-50%);
-            box-shadow: 0 0 0 4px white, 0 0 0 8px #FFD700, 0 0 20px rgba(255, 215, 0, 0.5);
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 4px #3498db;
+            z-index: 5;
         }
 
-        .timeline__card--left::before {
-            right: -60px;
-        }
-
-        .timeline__card--right::before {
-            left: -60px;
-        }
-
-        .timeline__card h3 {
-            margin: 0 0 1rem;
-            font-size: 1.5rem;
-            color: #21618C;
-            font-weight: 600;
-        }
-
-        .timeline__card .trip-details {
-            margin-bottom: 1.5rem;
-            color: #666;
-            font-size: 1rem;
-        }
-
-        .timeline__card .trip-route {
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline__card .trip-stats {
-            display: flex;
-            gap: 1rem;
+        /* Content Styling */
+        .year {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
             margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: #666;
         }
 
-        .badge {
+        .trip-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 1rem;
+        }
+
+        .distance {
             display: inline-block;
-            padding: 0.4em 0.8em;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #3498db;
             color: white;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
             font-weight: 500;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+            margin-bottom: 1rem;
         }
 
-        /* Expandable Description Styles */
-        .trip-description {
-            margin-bottom: 1.5rem;
-            color: #666;
+        .description {
+            color: #7f8c8d;
             font-size: 1rem;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        .description-preview {
+        .description.preview {
             display: block;
         }
 
-        .description-full {
+        .description.full {
             display: none;
         }
 
-        .description-full.expanded {
+        .description.full.expanded {
             display: block;
         }
 
-        .description-preview.collapsed {
+        .description.preview.collapsed {
             display: none;
         }
 
-        .expand-btn {
-            background: none;
+        .read-more-btn {
+            background: #3498db;
+            color: white;
             border: none;
-            color: #21618C;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: 500;
-            text-decoration: underline;
-            padding: 0;
-            margin-top: 0.5rem;
-            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
         }
 
-        .expand-btn:hover {
-            color: #1a4d73;
+        .read-more-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Certification Styling */
+        .certification {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .certification .distance {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .certification .timeline-dot {
+            background: #f5576c;
+            box-shadow: 0 0 0 4px #f5576c;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .banner-content {
-                flex-direction: column;
-                text-align: center;
+            .timeline-line {
+                left: 2rem;
             }
 
-            .banner__photo {
-                width: 100px;
-                height: 100px;
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(odd) .timeline-content {
+                margin-left: 3rem;
+                margin-right: 1rem;
             }
 
-            .banner__info h1 {
+            .timeline-dot {
+                left: 2rem;
+                transform: translateX(-50%);
+            }
+
+            .boat {
+                left: 2rem;
+                transform: translateX(-50%);
+                margin-left: 2px;
+            }
+
+            .header h1 {
                 font-size: 2rem;
             }
 
-            .timeline-header h2 {
-                font-size: 2rem;
-            }
-
-            .timeline__card,
-            .timeline__card--right,
-            .timeline__card--left {
-                width: 90%;
-                left: 5% !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-            }
-
-            .timeline__card::before {
-                display: none;
-            }
-
-            .timeline__line {
-                left: 5%;
-                transform: none;
-                width: 60px;
-            }
-
-            .timeline__boat {
-                left: 5%;
-                transform: none;
-                top: 10%;
-            }
-
-            .nav-links {
-                display: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .banner {
-                padding: 6rem 1rem 2rem;
-            }
-
-            .timeline-container {
-                padding: 2rem 1rem;
-            }
-
-            .timeline__card {
-                padding: 1.5rem;
-            }
-
-            .banner__info h1 {
-                font-size: 1.5rem;
-            }
-
-            .timeline-header h2 {
-                font-size: 1.5rem;
+            .header p {
+                font-size: 1rem;
             }
         }
 
         /* Footer */
         .footer {
-            background: #2c3e50;
-            color: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
             text-align: center;
-            padding: 2rem;
             margin-top: 4rem;
         }
 
-        .footer a {
-            color: #ecf0f1;
-            margin: 0 1rem;
-        }
-
-        .footer a:hover {
-            color: #3498db;
+        .footer p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 
 <body>
-
-    <!-- Navigation Header -->
-    <nav class="nav-header">
-        <div class="nav-container">
-            <div class="nav-logo">Frank Cozzolino</div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="#timeline">Timeline</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Banner Section -->
-    <header class="banner">
-        <div class="banner-content">
-            <img src="images/sailing.jpg" alt="Frank Cozzolino" class="banner__photo">
-            <div class="banner__info">
-                <h1>Frank Cozzolino</h1>
-                <div class="banner__certs">RYA Day Skipper (2023)</div>
-                <div class="banner__contact">
-                    <a href="https://wa.me/41791234567" class="contact-btn" target="_blank">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.891 3.488" />
-                        </svg>
-                        WhatsApp
-                    </a>
-                    <a href="mailto:frank@cozzolino.com" class="contact-btn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
-                        </svg>
-                        Email
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Timeline Section -->
-    <div class="timeline-container">
-        <div class="timeline-header">
-            <h2>Sailing Journey</h2>
-            <p>My sailing adventure began in 2019 with exploring the Dutch waters, leading to the RYA Day Skipper
-                qualification in 2023, opening up a world of ocean exploration and maritime skills.</p>
-        </div>
-
-        <main class="timeline" id="timeline">
-            <!-- S-Shaped Timeline Line -->
-            <div class="timeline__line">
-                <svg viewBox="0 0 100 1600" preserveAspectRatio="none">
-                    <defs>
-                        <pattern id="dashPattern" patternUnits="userSpaceOnUse" width="8" height="8">
-                            <circle cx="4" cy="4" r="1.5" fill="white" opacity="0.8" />
-                        </pattern>
-                    </defs>
-                    <path d="M 50 0 Q 20 200 50 400 Q 80 600 50 800 Q 20 1000 50 1200 Q 80 1400 50 1600" stroke="white"
-                        stroke-width="4" stroke-dasharray="8,8" fill="none"
-                        filter="drop-shadow(0 0 8px rgba(255,255,255,0.6))" />
-                </svg>
-            </div>
-
-            <!-- Animated Sailboat -->
-            <div class="timeline__boat" id="sailboat">
-                <svg width="80" height="60" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Hull Shadow -->
-                    <ellipse cx="102" cy="132" rx="55" ry="8" fill="rgba(0,0,0,0.2)" />
-
-                    <!-- Hull -->
-                    <path
-                        d="M50 120 Q50 125 55 128 L145 128 Q150 125 150 120 L145 115 Q100 105 100 105 Q100 105 55 115 Z"
-                        fill="#8B4513" stroke="#654321" stroke-width="2" />
-                    <path d="M55 115 Q100 110 145 115 L145 120 Q100 115 55 120 Z" fill="#A0522D" />
-
-                    <!-- Mast -->
-                    <line x1="100" y1="125" x2="100" y2="30" stroke="#8B4513" stroke-width="4" stroke-linecap="round" />
-
-                    <!-- Boom -->
-                    <line x1="100" y1="90" x2="140" y2="95" stroke="#8B4513" stroke-width="3" stroke-linecap="round" />
-
-                    <!-- Main Sail -->
-                    <path d="M100 30 Q130 35 140 95 L100 90 Z" fill="#F8F8FF" stroke="#E0E0E0" stroke-width="1" />
-                    <path d="M100 35 Q125 40 135 85" stroke="#D3D3D3" stroke-width="1" fill="none" />
-                    <path d="M100 45 Q120 50 130 80" stroke="#D3D3D3" stroke-width="1" fill="none" />
-
-                    <!-- Jib Sail -->
-                    <path d="M100 30 Q75 40 65 75 L100 70 Z" fill="#F0F8FF" stroke="#E0E0E0" stroke-width="1" />
-                    <path d="M100 35 Q80 42 72 70" stroke="#D3D3D3" stroke-width="1" fill="none" />
-
-                    <!-- Forestay -->
-                    <line x1="100" y1="30" x2="65" y2="75" stroke="#666" stroke-width="1" />
-
-                    <!-- Shrouds -->
-                    <line x1="100" y1="30" x2="85" y2="125" stroke="#666" stroke-width="1" />
-                    <line x1="100" y1="30" x2="115" y2="125" stroke="#666" stroke-width="1" />
-
-                    <!-- Cabin -->
-                    <rect x="90" y="115" width="20" height="8" rx="2" fill="#654321" stroke="#8B4513"
-                        stroke-width="1" />
-
-                    <!-- Windows -->
-                    <circle cx="95" cy="119" r="1.5" fill="#87CEEB" />
-                    <circle cx="105" cy="119" r="1.5" fill="#87CEEB" />
-
-                    <!-- Flag -->
-                    <path d="M100 30 L100 25 L115 28 L100 31 Z" fill="#FF4444" />
-
-                    <!-- Water waves -->
-                    <path d="M30 130 Q50 127 70 130 T110 130 T150 130 T190 130" stroke="#4A9FDD" stroke-width="2"
-                        fill="none" opacity="0.6" />
-                    <path d="M25 135 Q45 132 65 135 T105 135 T145 135 T185 135" stroke="#6BB6FF" stroke-width="2"
-                        fill="none" opacity="0.4" />
-                </svg>
-            </div>
-
-            <!-- Trip Cards -->
-            <div class="timeline__card timeline__card--left">
-                <div class="island-graphic">
-                    <svg width="80" height="60" viewBox="0 0 100 80">
-                        <!-- Island -->
-                        <ellipse cx="50" cy="65" rx="40" ry="12" fill="#F4A460" stroke="#DEB887" stroke-width="1" />
-                        <!-- Palm Tree Trunk -->
-                        <rect x="47" y="35" width="6" height="30" fill="#8B4513" rx="3" />
-                        <!-- Palm Leaves -->
-                        <path d="M50 35 Q35 25 25 30" stroke="#228B22" stroke-width="4" fill="none" />
-                        <path d="M50 35 Q65 25 75 30" stroke="#228B22" stroke-width="4" fill="none" />
-                        <path d="M50 35 Q45 20 35 25" stroke="#32CD32" stroke-width="4" fill="none" />
-                        <path d="M50 35 Q55 20 65 25" stroke="#32CD32" stroke-width="4" fill="none" />
-                        <path d="M50 35 Q50 18 50 15" stroke="#228B22" stroke-width="4" fill="none" />
-                        <!-- Coconuts -->
-                        <circle cx="48" cy="40" r="2" fill="#8B4513" />
-                        <circle cx="52" cy="38" r="2" fill="#8B4513" />
-                    </svg>
-                </div>
-                <h3>Dutch Waters Exploration</h3>
-                <div class="trip-route">Monnickendam → Stavoren → Hoorn → Monnickendam</div>
-                <div class="trip-stats">
-                    <span>📅 2019</span>
-                    <span>⚓ 78 nm</span>
-                    <span>⏱️ 3 days</span>
-                </div>
-                <div class="trip-description">
-                    <div class="description-preview">
-                        My first extended sailing adventure through the historic Dutch waters, exploring the IJsselmeer
-                        and connecting three beautiful maritime towns. This journey laid the foundation for my love of
-                        sailing...
-                    </div>
-                    <div class="description-full">
-                        My first extended sailing adventure through the historic Dutch waters, exploring the IJsselmeer
-                        and connecting three beautiful maritime towns. This journey laid the foundation for my love of
-                        sailing.
-                        <br><br>
-                        <strong>Route Details:</strong> Starting from Monnickendam's historic harbor, I sailed across
-                        the IJsselmeer to Stavoren, one of the oldest cities in Friesland. From there, a beautiful
-                        coastal sail brought me to Hoorn, with its rich maritime heritage and stunning architecture.
-                        <br><br>
-                        <strong>Highlights:</strong> Experiencing the traditional Dutch sailing culture, navigating the
-                        inland seas, and discovering the maritime history of these ancient trading ports. The weather
-                        was perfect with steady winds and calm seas.
-                        <br><br>
-                        This trip sparked my passion for sailing and the Dutch maritime tradition, leading to further
-                        adventures and eventually formal training.
-                    </div>
-                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
-                </div>
-                <span class="badge">First Adventure</span>
-            </div>
-
-            <div class="timeline__card timeline__card--right">
-                <div class="island-graphic">
-                    <svg width="80" height="60" viewBox="0 0 100 80">
-                        <!-- Island -->
-                        <ellipse cx="50" cy="65" rx="35" ry="10" fill="#F4A460" stroke="#DEB887" stroke-width="1" />
-                        <!-- Lighthouse -->
-                        <rect x="47" y="25" width="6" height="40" fill="#FFFFFF" stroke="#DDD" stroke-width="1" />
-                        <rect x="45" y="30" width="10" height="5" fill="#FF0000" />
-                        <rect x="45" y="40" width="10" height="5" fill="#FF0000" />
-                        <rect x="45" y="50" width="10" height="5" fill="#FF0000" />
-                        <!-- Light beam -->
-                        <path d="M50 25 L35 15 L65 15 Z" fill="#FFFF00" opacity="0.5" />
-                        <!-- Rocks -->
-                        <circle cx="35" cy="62" r="3" fill="#8B7355" />
-                        <circle cx="65" cy="60" r="4" fill="#8B7355" />
-                        <circle cx="40" cy="68" r="2" fill="#8B7355" />
-                    </svg>
-                </div>
-                <h3>Batavia Heritage Journey</h3>
-                <div class="trip-route">Monnickendam → Batavia (Lelystad) → Monnickendam</div>
-                <div class="trip-stats">
-                    <span>📅 2019</span>
-                    <span>⚓ 38 nm</span>
-                    <span>⏱️ 2 days</span>
-                </div>
-                <div class="trip-description">
-                    <div class="description-preview">
-                        A heritage-focused sailing trip to Batavia, the replica of the famous Dutch East India Company
-                        ship. This journey connected me with the golden age of Dutch maritime history...
-                    </div>
-                    <div class="description-full">
-                        A heritage-focused sailing trip to Batavia, the replica of the famous Dutch East India Company
-                        ship. This journey connected me with the golden age of Dutch maritime history.
-                        <br><br>
-                        <strong>Historical Significance:</strong> Batavia was built as a replica of the original 1628
-                        flagship of the Dutch East India Company. Visiting this maritime museum in Lelystad provided
-                        incredible insights into 17th-century seafaring.
-                        <br><br>
-                        <strong>Sailing Experience:</strong> The route took us through the heart of the IJsselmeer, past
-                        the modern engineering marvel of the Oostvaardersplassen nature reserve. The contrast between
-                        historical maritime heritage and modern land reclamation was fascinating.
-                        <br><br>
-                        This trip deepened my appreciation for Dutch maritime heritage and the skills required by
-                        historical navigators.
-                    </div>
-                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
-                </div>
-                <span class="badge">Heritage</span>
-            </div>
-
-            <div class="timeline__card timeline__card--left">
-                <div class="island-graphic">
-                    <svg width="80" height="60" viewBox="0 0 100 80">
-                        <!-- Harbor -->
-                        <ellipse cx="50" cy="65" rx="40" ry="12" fill="#4682B4" stroke="#4169E1" stroke-width="1" />
-                        <!-- Dock -->
-                        <rect x="30" y="55" width="40" height="4" fill="#8B4513" />
-                        <!-- Boats -->
-                        <path d="M35 55 Q35 52 40 55 L45 55 Q50 52 50 55" fill="#FFFFFF" stroke="#DDD"
-                            stroke-width="1" />
-                        <path d="M55 55 Q55 52 60 55 L65 55 Q70 52 70 55" fill="#FFFFFF" stroke="#DDD"
-                            stroke-width="1" />
-                        <!-- Masts -->
-                        <line x1="42" y1="55" x2="42" y2="35" stroke="#8B4513" stroke-width="2" />
-                        <line x1="62" y1="55" x2="62" y2="35" stroke="#8B4513" stroke-width="2" />
-                        <!-- Buildings -->
-                        <rect x="20" y="40" width="15" height="15" fill="#CD853F" />
-                        <rect x="65" y="35" width="15" height="20" fill="#CD853F" />
-                        <rect x="22" y="42" width="4" height="4" fill="#87CEEB" />
-                        <rect x="67" y="37" width="4" height="4" fill="#87CEEB" />
-                    </svg>
-                </div>
-                <h3>Extended Batavia & Urk Circuit</h3>
-                <div class="trip-route">Monnickendam → Batavia (Lelystad) → Urk → Monnickendam</div>
-                <div class="trip-stats">
-                    <span>📅 2022</span>
-                    <span>⚓ 69 nm</span>
-                    <span>⏱️ 4 days</span>
-                </div>
-                <div class="trip-description">
-                    <div class="description-preview">
-                        An extended sailing adventure combining historical exploration with the unique experience of
-                        visiting Urk, a former island with a rich fishing tradition...
-                    </div>
-                    <div class="description-full">
-                        An extended sailing adventure combining historical exploration with the unique experience of
-                        visiting Urk, a former island with a rich fishing tradition.
-                        <br><br>
-                        <strong>Multi-destination Journey:</strong> This ambitious trip combined a return visit to
-                        Batavia with exploration of Urk, showcasing the diversity of Dutch maritime culture. Urk, once
-                        an island in the Zuiderzee, maintains its unique fishing village character.
-                        <br><br>
-                        <strong>Cultural Immersion:</strong> Urk provided a fascinating glimpse into traditional Dutch
-                        fishing culture, with its distinctive local dialect and customs. The harbor, though now inland,
-                        still bustles with fishing boats and maritime activity.
-                        <br><br>
-                        <strong>Navigation Challenge:</strong> The longer distance and multiple ports provided excellent
-                        practice in passage planning and navigation, building confidence for future adventures.
-                    </div>
-                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
-                </div>
-                <span class="badge">Extended Circuit</span>
-            </div>
-
-            <div class="timeline__card timeline__card--right">
-                <div class="island-graphic">
-                    <svg width="80" height="60" viewBox="0 0 100 80">
-                        <!-- Seascape -->
-                        <ellipse cx="50" cy="65" rx="40" ry="12" fill="#4682B4" stroke="#4169E1" stroke-width="1" />
-                        <!-- Breakwater -->
-                        <rect x="15" y="55" width="70" height="3" fill="#696969" />
-                        <!-- Lighthouse -->
-                        <rect x="80" y="40" width="4" height="15" fill="#FFFFFF" stroke="#DDD" stroke-width="1" />
-                        <rect x="78" y="45" width="8" height="3" fill="#FF0000" />
-                        <!-- Waves -->
-                        <path d="M10 60 Q20 57 30 60 T50 60 T70 60 T90 60" stroke="#FFFFFF" stroke-width="2" fill="none"
-                            opacity="0.8" />
-                        <path d="M15 63 Q25 60 35 63 T55 63 T75 63 T95 63" stroke="#FFFFFF" stroke-width="2" fill="none"
-                            opacity="0.6" />
-                        <!-- Harbor entrance -->
-                        <rect x="40" y="58" width="20" height="2" fill="#4682B4" />
-                        <!-- Ships -->
-                        <ellipse cx="25" cy="62" rx="8" ry="2" fill="#8B4513" />
-                        <ellipse cx="75" cy="61" rx="6" ry="2" fill="#8B4513" />
-                    </svg>
-                </div>
-                <h3>North Sea Access Journey</h3>
-                <div class="trip-route">Monnickendam → IJmuiden → Monnickendam</div>
-                <div class="trip-stats">
-                    <span>📅 2022</span>
-                    <span>⚓ 40 nm</span>
-                    <span>⏱️ 2 days</span>
-                </div>
-                <div class="trip-description">
-                    <div class="description-preview">
-                        A significant milestone journey to IJmuiden, the gateway to the North Sea. This trip marked my
-                        first experience with sea locks and North Sea conditions...
-                    </div>
-                    <div class="description-full">
-                        A significant milestone journey to IJmuiden, the gateway to the North Sea. This trip marked my
-                        first experience with sea locks and North Sea conditions.
-                        <br><br>
-                        <strong>Gateway to the Sea:</strong> IJmuiden serves as the primary entrance from the inland
-                        waters to the North Sea. The massive sea locks and the busy commercial port provided an
-                        impressive introduction to serious maritime infrastructure.
-                        <br><br>
-                        <strong>Technical Learning:</strong> Navigating the approach to IJmuiden required coordination
-                        with port authority and understanding of commercial shipping lanes. The experience of using the
-                        sea locks was both exciting and educational.
-                        <br><br>
-                        <strong>Weather Awareness:</strong> Even in the protected approach to IJmuiden, I experienced
-                        the different conditions near the North Sea, with stronger winds and more challenging seas than
-                        the inland IJsselmeer.
-                        <br><br>
-                        This journey built confidence for future coastal sailing and provided essential experience with
-                        maritime infrastructure.
-                    </div>
-                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
-                </div>
-                <span class="badge">Sea Access</span>
-            </div>
-
-            <div class="timeline__card timeline__card--left">
-                <div class="island-graphic">
-                    <svg width="80" height="60" viewBox="0 0 100 80">
-                        <!-- British Isles outline -->
-                        <ellipse cx="50" cy="65" rx="30" ry="10" fill="#228B22" stroke="#32CD32" stroke-width="1" />
-                        <!-- UK flag on pole -->
-                        <rect x="47" y="25" width="2" height="30" fill="#8B4513" />
-                        <rect x="40" y="25" width="14" height="10" fill="#FF0000" />
-                        <path d="M40 25 L54 35 M54 25 L40 35" stroke="#FFFFFF" stroke-width="1" />
-                        <path d="M47 25 L47 35 M40 30 L54 30" stroke="#FFFFFF" stroke-width="2" />
-                        <!-- Water -->
-                        <path d="M20 62 Q30 59 40 62 T60 62 T80 62" stroke="#4682B4" stroke-width="2" fill="none" />
-                        <!-- Cliffs -->
-                        <path d="M25 50 L30 55 L35 50 L40 55 L45 50" stroke="#8B7355" stroke-width="2" fill="none" />
-                        <path d="M55 50 L60 55 L65 50 L70 55 L75 50" stroke="#8B7355" stroke-width="2" fill="none" />
-                    </svg>
-                </div>
-                <h3>RYA Day Skipper Qualification</h3>
-                <div class="trip-route">UKSA Isle of Wight → Solent → Return</div>
-                <div class="trip-stats">
-                    <span>📅 2023</span>
-                    <span>⚓ 120 nm</span>
-                    <span>⏱️ 5 days</span>
-                </div>
-                <div class="trip-description">
-                    <div class="description-preview">
-                        RYA Day Skipper Practical is a comprehensive 5-day certification course that enables you to
-                        safely skipper a yacht in familiar waters during daylight hours...
-                    </div>
-                    <div class="description-full">
-                        <strong>RYA Day Skipper Practical</strong> is a comprehensive 5-day certification course that
-                        enables you to safely skipper a yacht in familiar waters during daylight hours. The course
-                        concentrates on pilotage, navigation and boat handling under both sail and power, developing
-                        seamanship and safety skills.
-                        <br><br>
-                        <strong>Course Coverage:</strong> Preparation for sea, deck work (reefing, anchoring, mooring),
-                        navigation (visual fixes, electronic equipment, tidal calculations), pilotage planning,
-                        meteorology, rules of the road, emergency procedures (man overboard, distress signals), yacht
-                        handling under sail and power, and coastal passage making.
-                        <br><br>
-                        Completed at <strong>UKSA Isle of Wight</strong> - the world's largest RYA training centre -
-                        with expert instructors in the challenging tidal waters of the Solent. This qualification
-                        satisfies the minimum experience requirement for bare boat charter and provides the foundation
-                        for advanced sailing certifications.
-                        <br><br>
-                        <strong>Solent Experience:</strong> The Solent provides some of the most challenging sailing
-                        conditions in the world, with strong tides, busy shipping lanes, and variable weather. Training
-                        here builds confidence for sailing anywhere.
-                    </div>
-                    <button class="expand-btn" onclick="toggleDescription(this)">Read more</button>
-                </div>
-                <span class="badge">RYA Day Skipper</span>
-            </div>
-        </main>
+    <div class="header">
+        <h1>⛵ Frank Cozzolino</h1>
+        <p>Sailing Journey Timeline</p>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div>
-            <p>&copy; 2025 Frank Cozzolino. All rights reserved.</p>
-            <div>
-                <a href="index.html">Home</a>
-                <a href="https://www.linkedin.com/in/cozzolinofrancesco/">LinkedIn</a>
-                <a href="https://github.com/frankcozzolino">GitHub</a>
+    <div class="timeline-container">
+        <!-- Timeline Line -->
+        <div class="timeline-line"></div>
+
+        <!-- Animated Boat -->
+        <div class="boat" id="boat">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 20 L30 70 L70 70 Z" fill="#3498db" stroke="#2980b9" stroke-width="2" />
+                <path d="M50 20 L50 50" stroke="#e74c3c" stroke-width="3" />
+                <path d="M50 30 L65 45" stroke="#e74c3c" stroke-width="2" />
+                <circle cx="50" cy="80" r="3" fill="#34495e" />
+            </svg>
+        </div>
+
+        <!-- Timeline Items -->
+        <!-- Pre-2013 Italian Sailing License -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content certification">
+                <div class="year">Pre-2013</div>
+                <div class="trip-title">🎓 Italian Sailing License Theory</div>
+                <div class="distance">Above 12 Miles Certification</div>
+                <div class="description preview">
+                    Obtained theoretical certification for sailing above 12 nautical miles in Italian waters...
+                </div>
+                <div class="description full">
+                    Obtained theoretical certification for sailing above 12 nautical miles in Italian waters. This
+                    comprehensive course covered navigation theory, maritime regulations, weather systems, and safety
+                    procedures required for offshore sailing. The certification allowed me to legally skipper vessels in
+                    Italian territorial waters and beyond the 12-mile limit, opening up opportunities for longer coastal
+                    passages and island-hopping adventures in the Mediterranean.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
             </div>
         </div>
-    </footer>
+
+        <!-- Pre-2013 Porto Pozzo Sailing School -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">Pre-2013</div>
+                <div class="trip-title">🏫 Porto Pozzo Sailing School</div>
+                <div class="distance">~5 NM Training</div>
+                <div class="description preview">
+                    Intensive sailing training at Porto Pozzo, Sardinia, focusing on practical maneuvers and boat
+                    handling...
+                </div>
+                <div class="description full">
+                    Intensive sailing training at Porto Pozzo, Sardinia, focusing on practical maneuvers and boat
+                    handling. This beautiful location on the northern coast of Sardinia provided excellent conditions
+                    for learning advanced sailing techniques. The training covered close-quarters maneuvering, anchoring
+                    techniques, sail trimming, and emergency procedures. The crystal-clear waters and consistent winds
+                    of the Costa Smeralda made it an ideal learning environment for developing confidence and skill on
+                    the water.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- Pre-2013 Italian Mediterranean Adventure -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">Pre-2013</div>
+                <div class="trip-title">🏛️ Italian Mediterranean Adventure</div>
+                <div class="distance">~530 NM Total</div>
+                <div class="description preview">
+                    Epic sailing journey from Policoro to Gallipoli, Santa Maria di Leuca, across to Mathraki Port in
+                    Greece...
+                </div>
+                <div class="description full">
+                    Epic sailing journey from Policoro to Gallipoli, Santa Maria di Leuca, across to Mathraki Port in
+                    Greece, and back to Policoro. This was a true Mediterranean adventure covering the stunning
+                    coastlines of Southern Italy and the Greek islands. The route took us through the historic waters of
+                    the Ionian Sea, passing ancient settlements and dramatic coastal landscapes. From the beaches of
+                    Basilicata to the baroque architecture of Lecce, then to the southernmost point of Puglia at Santa
+                    Maria di Leuca, before crossing to the remote Greek island of Mathraki. This journey combined
+                    navigation challenges, cultural discovery, and the pure joy of sailing in some of the most beautiful
+                    waters in the world.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2013 RYA Yachtmaster Theory -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content certification">
+                <div class="year">2013</div>
+                <div class="trip-title">🎓 RYA Yachtmaster Theory</div>
+                <div class="distance">Poland SailPro</div>
+                <div class="description preview">
+                    Completed RYA Yachtmaster Theory certification in Poland through SailPro sailing school...
+                </div>
+                <div class="description full">
+                    Completed RYA Yachtmaster Theory certification in Poland through SailPro sailing school. This
+                    internationally recognized qualification covered advanced navigation, meteorology, collision
+                    regulations, and passage planning. The comprehensive course included chart work, tidal calculations,
+                    electronic navigation systems, and emergency procedures. The RYA Yachtmaster Theory is a prestigious
+                    qualification that demonstrates competency in all aspects of yacht navigation and seamanship,
+                    preparing skippers for challenging offshore passages and leadership responsibilities on board.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2016 Lelystad Training -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2016</div>
+                <div class="trip-title">🎯 Lelystad Maneuver Course</div>
+                <div class="distance">19 NM Total</div>
+                <div class="description preview">
+                    Intensive maneuvering course between Lelystad and Batavia, followed by passage to Amsterdam
+                    Central...
+                </div>
+                <div class="description full">
+                    Intensive maneuvering course between Lelystad and Batavia, followed by passage to Amsterdam Central.
+                    This training focused on precise boat handling in the challenging waters of the IJsselmeer. The
+                    course covered close-quarters maneuvering, docking techniques, and navigation in busy commercial
+                    waterways. Lelystad Airport provided a unique landmark for navigation practice, while the historic
+                    town of Batavia offered excellent training grounds for anchoring and mooring. The final leg to
+                    Amsterdam Central tested urban navigation skills, requiring careful attention to commercial traffic
+                    and complex harbor approaches.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2017 Amsterdam to Monnickedam -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2017</div>
+                <div class="trip-title">🏛️ Amsterdam Central to Monnickedam</div>
+                <div class="distance">12 NM</div>
+                <div class="description preview">
+                    Sailed from Amsterdam Central marina to the historic port of Monnickedam...
+                </div>
+                <div class="description full">
+                    Sailed from Amsterdam Central marina to the historic port of Monnickedam. This scenic passage took
+                    us through the heart of the Dutch sailing region, passing traditional fishing villages and historic
+                    waterways. Monnickedam, with its beautiful 14th-century architecture and charming harbor, provided a
+                    perfect destination for this coastal cruise. The route showcased the best of Dutch maritime
+                    heritage, from the bustling modern marina at Amsterdam Central to the peaceful, historic harbor of
+                    Monnickedam. The journey offered excellent opportunities to practice navigation in tidal waters and
+                    experience the traditional Dutch sailing culture.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2018 Private Training -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2018</div>
+                <div class="trip-title">👨‍🏫 Private Training Maneuvers</div>
+                <div class="distance">24 NM Total</div>
+                <div class="description preview">
+                    Advanced training with private instructor from Monnickedam to Amsterdam Central and back...
+                </div>
+                <div class="description full">
+                    Advanced training with private instructor from Monnickedam to Amsterdam Central and back. This
+                    intensive one-on-one training session focused on advanced sailing techniques and boat handling
+                    skills. The private instructor provided personalized feedback on sailing efficiency, safety
+                    procedures, and navigation techniques. The round-trip route allowed for comprehensive practice in
+                    varying conditions and traffic situations. This training session was particularly valuable for
+                    developing confidence in independent sailing and preparing for more challenging passages. The
+                    personalized instruction helped refine skills in areas such as sail trimming, weather reading, and
+                    emergency procedures.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2019 Stavoren-Hoorn-Monnickedam -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2019</div>
+                <div class="trip-title">🏰 Historic Ports Triangle</div>
+                <div class="distance">67 NM Total</div>
+                <div class="description preview">
+                    Sailed from Monnickedam to Stavoren, then to Hoorn, and back to Monnickedam...
+                </div>
+                <div class="description full">
+                    Sailed from Monnickedam to Stavoren, then to Hoorn, and back to Monnickedam, creating a perfect
+                    triangle of historic Dutch ports. This journey showcased three of the most beautiful harbors in the
+                    Netherlands, each with its own unique character and maritime history. Stavoren, once a powerful
+                    Hanseatic League port, offered insights into medieval trading routes. Hoorn, with its magnificent
+                    harbor and historic buildings, provided a glimpse into the Dutch Golden Age. The circular route
+                    allowed for experiencing different wind conditions and tidal patterns, making it an excellent
+                    training ground for developing sailing skills in varying conditions.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2019 Batavia Round Trip -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2019</div>
+                <div class="trip-title">🚢 Batavia Discovery</div>
+                <div class="distance">17 NM Round Trip</div>
+                <div class="description preview">
+                    Round trip from Monnickedam to Batavia and back, exploring the historic shipyard...
+                </div>
+                <div class="description full">
+                    Round trip from Monnickedam to Batavia and back, exploring the historic shipyard and maritime
+                    heritage center. Batavia, located in Lelystad, houses the remarkable replica of the 17th-century VOC
+                    ship Batavia, providing a unique connection to Dutch maritime history. This sailing trip combined
+                    practical navigation with cultural discovery, as we explored the shipyard where traditional Dutch
+                    sailing vessels are still built using historical techniques. The route offered excellent sailing
+                    conditions in the protected waters of the IJsselmeer, while the destination provided fascinating
+                    insights into the golden age of Dutch exploration and trade.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2022 Batavia-Urk Adventure -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2022</div>
+                <div class="trip-title">🏝️ Batavia-Urk Adventure</div>
+                <div class="distance">39 NM Total</div>
+                <div class="description preview">
+                    Sailed from Monnickedam to Batavia, then continued to the historic fishing village of Urk...
+                </div>
+                <div class="description full">
+                    Sailed from Monnickedam to Batavia, then continued to the historic fishing village of Urk, and back
+                    to Monnickedam. This extended journey took us to one of the most authentic fishing communities in
+                    the Netherlands. Urk, a former island that maintained its maritime character even after the
+                    IJsselmeer was created, offered a unique glimpse into traditional Dutch fishing culture. The
+                    village's narrow streets, traditional houses, and active fishing fleet created an atmosphere
+                    unchanged by centuries. The sailing conditions varied from the protected waters near Batavia to the
+                    more open waters approaching Urk, providing excellent practice in different sailing environments.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2022 IJmuiden Marina -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2022</div>
+                <div class="trip-title">🌊 IJmuiden Marina Challenge</div>
+                <div class="distance">48 NM Round Trip</div>
+                <div class="description preview">
+                    Challenging passage from Monnickedam to IJmuiden marina and back...
+                </div>
+                <div class="description full">
+                    Challenging passage from Monnickedam to IJmuiden marina and back, navigating through the busy North
+                    Sea Canal. IJmuiden, located at the mouth of the North Sea Canal, serves as Amsterdam's gateway to
+                    the sea and one of Europe's largest fishing ports. This trip required careful navigation through
+                    commercial shipping lanes and lock systems, providing excellent experience in handling traffic
+                    separation schemes and harbor approaches. The marina offered modern facilities and spectacular views
+                    of the North Sea, while the return journey tested endurance and navigation skills. The passage
+                    showcased the contrast between inland sailing and coastal navigation, with tidal influences and sea
+                    conditions adding complexity to the sailing experience.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Frank Cozzolino - Sailing Adventures Timeline</p>
+    </div>
 
     <script>
-        // Expandable descriptions functionality
-        function toggleDescription(button) {
-            const card = button.closest('.timeline__card');
-            const preview = card.querySelector('.description-preview');
-            const full = card.querySelector('.description-full');
+        // Boat animation based on scroll
+        function animateBoat() {
+            const boat = document.getElementById('boat');
+            const timeline = document.querySelector('.timeline-container');
+            const timelineHeight = timeline.offsetHeight;
+            const scrolled = window.pageYOffset;
+            const timelineTop = timeline.offsetTop;
+            const timelineBottom = timelineTop + timelineHeight;
 
-            if (full.classList.contains('expanded')) {
-                // Collapse
-                full.classList.remove('expanded');
-                preview.classList.remove('collapsed');
-                button.textContent = 'Read more';
-            } else {
-                // Expand
-                full.classList.add('expanded');
-                preview.classList.add('collapsed');
-                button.textContent = 'Read less';
+            // Calculate boat position based on scroll
+            if (scrolled >= timelineTop && scrolled <= timelineBottom) {
+                const progress = (scrolled - timelineTop) / timelineHeight;
+                const boatPosition = progress * timelineHeight;
+                boat.style.top = `${boatPosition}px`;
             }
         }
 
-        // Scroll-based boat movement
-        function updateBoatPosition() {
-            const timeline = document.querySelector('.timeline');
-            const boat = document.getElementById('sailboat');
-
-            if (!timeline || !boat) return;
-
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const timelineRect = timeline.getBoundingClientRect();
-            const timelineTop = timelineRect.top + scrollTop;
-            const timelineHeight = timelineRect.height;
-
-            // Calculate position relative to timeline
-            const relativeScroll = scrollTop - timelineTop;
-            const scrollProgress = Math.max(0, Math.min(1, relativeScroll / (timelineHeight - window.innerHeight)));
-
-            // Move boat from 5% to 95% of timeline height
-            const boatPosition = 5 + (scrollProgress * 90);
-            boat.style.top = `${boatPosition}%`;
-        }
-
-        // Throttled scroll event listener
+        // Smooth scrolling boat animation
         let ticking = false;
-        function onScroll() {
+        function updateBoat() {
             if (!ticking) {
                 requestAnimationFrame(function () {
-                    updateBoatPosition();
+                    animateBoat();
                     ticking = false;
                 });
                 ticking = true;
             }
         }
 
-        // Initialize
-        window.addEventListener('scroll', onScroll);
-        window.addEventListener('resize', updateBoatPosition);
+        window.addEventListener('scroll', updateBoat);
+        window.addEventListener('resize', updateBoat);
 
-        // Set initial position
-        updateBoatPosition();
+        // Initialize boat position
+        animateBoat();
+
+        // Toggle description function
+        function toggleDescription(button) {
+            const timelineContent = button.parentNode;
+            const previewDesc = timelineContent.querySelector('.description.preview');
+            const fullDesc = timelineContent.querySelector('.description.full');
+
+            if (fullDesc.classList.contains('expanded')) {
+                // Collapse
+                fullDesc.classList.remove('expanded');
+                previewDesc.classList.remove('collapsed');
+                button.textContent = 'Read more';
+            } else {
+                // Expand
+                fullDesc.classList.add('expanded');
+                previewDesc.classList.add('collapsed');
+                button.textContent = 'Read less';
+            }
+        }
     </script>
-
 </body>
 
 </html>

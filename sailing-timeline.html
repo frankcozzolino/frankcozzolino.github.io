@@ -226,32 +226,13 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        /* Animated Boat */
+        /* Static Sailboat */
         .timeline__boat {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            top: 5%;
-            animation: sail 12s linear infinite;
+            top: 15%;
             z-index: 10;
-        }
-
-        @keyframes sail {
-            0% {
-                top: 5%;
-            }
-
-            100% {
-                top: 95%;
-            }
-        }
-
-        /* Respect reduced motion preference */
-        @media (prefers-reduced-motion: reduce) {
-            .timeline__boat {
-                animation: none;
-                top: 50%;
-            }
         }
 
         /* Trip Cards */
@@ -407,6 +388,7 @@
             .timeline__boat {
                 left: 5%;
                 transform: none;
+                top: 10%;
             }
 
             .nav-links {
@@ -509,21 +491,56 @@
             <!-- Zig-zag Timeline Line -->
             <div class="timeline__line"></div>
 
-            <!-- Animated Sailboat -->
+            <!-- Static Sailboat -->
             <div class="timeline__boat">
-                <svg width="60" height="40" viewBox="0 0 120 80">
-                    <!-- Boat Hull -->
-                    <ellipse cx="60" cy="65" rx="45" ry="8" fill="#8B4513" stroke="#654321" stroke-width="1" />
+                <svg width="80" height="60" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hull Shadow -->
+                    <ellipse cx="102" cy="132" rx="55" ry="8" fill="rgba(0,0,0,0.2)" />
+
+                    <!-- Hull -->
+                    <path
+                        d="M50 120 Q50 125 55 128 L145 128 Q150 125 150 120 L145 115 Q100 105 100 105 Q100 105 55 115 Z"
+                        fill="#8B4513" stroke="#654321" stroke-width="2" />
+                    <path d="M55 115 Q100 110 145 115 L145 120 Q100 115 55 120 Z" fill="#A0522D" />
+
                     <!-- Mast -->
-                    <line x1="60" y1="65" x2="60" y2="15" stroke="#654321" stroke-width="3" />
+                    <line x1="100" y1="125" x2="100" y2="30" stroke="#8B4513" stroke-width="4" stroke-linecap="round" />
+
+                    <!-- Boom -->
+                    <line x1="100" y1="90" x2="140" y2="95" stroke="#8B4513" stroke-width="3" stroke-linecap="round" />
+
                     <!-- Main Sail -->
-                    <path d="M60 15 L90 25 L90 55 L60 65 Z" fill="#E6E6FA" stroke="#D3D3D3" stroke-width="1" />
+                    <path d="M100 30 Q130 35 140 95 L100 90 Z" fill="#F8F8FF" stroke="#E0E0E0" stroke-width="1" />
+                    <path d="M100 35 Q125 40 135 85" stroke="#D3D3D3" stroke-width="1" fill="none" />
+                    <path d="M100 45 Q120 50 130 80" stroke="#D3D3D3" stroke-width="1" fill="none" />
+
                     <!-- Jib Sail -->
-                    <path d="M60 15 L35 25 L60 45 Z" fill="#F0F8FF" stroke="#D3D3D3" stroke-width="1" />
+                    <path d="M100 30 Q75 40 65 75 L100 70 Z" fill="#F0F8FF" stroke="#E0E0E0" stroke-width="1" />
+                    <path d="M100 35 Q80 42 72 70" stroke="#D3D3D3" stroke-width="1" fill="none" />
+
+                    <!-- Forestay -->
+                    <line x1="100" y1="30" x2="65" y2="75" stroke="#666" stroke-width="1" />
+
+                    <!-- Shrouds -->
+                    <line x1="100" y1="30" x2="85" y2="125" stroke="#666" stroke-width="1" />
+                    <line x1="100" y1="30" x2="115" y2="125" stroke="#666" stroke-width="1" />
+
+                    <!-- Cabin -->
+                    <rect x="90" y="115" width="20" height="8" rx="2" fill="#654321" stroke="#8B4513"
+                        stroke-width="1" />
+
+                    <!-- Windows -->
+                    <circle cx="95" cy="119" r="1.5" fill="#87CEEB" />
+                    <circle cx="105" cy="119" r="1.5" fill="#87CEEB" />
+
                     <!-- Flag -->
-                    <rect x="60" y="12" width="15" height="8" fill="#FF6B6B" />
-                    <!-- Waves -->
-                    <path d="M10 70 Q30 65 50 70 T90 70 T130 70" stroke="#87CEEB" stroke-width="2" fill="none" />
+                    <path d="M100 30 L100 25 L115 28 L100 31 Z" fill="#FF4444" />
+
+                    <!-- Water waves -->
+                    <path d="M30 130 Q50 127 70 130 T110 130 T150 130 T190 130" stroke="#4A9FDD" stroke-width="2"
+                        fill="none" opacity="0.6" />
+                    <path d="M25 135 Q45 132 65 135 T105 135 T145 135 T185 135" stroke="#6BB6FF" stroke-width="2"
+                        fill="none" opacity="0.4" />
                 </svg>
             </div>
 
@@ -546,17 +563,21 @@
                         <circle cx="52" cy="38" r="2" fill="#8B4513" />
                     </svg>
                 </div>
-                <h3>Day Skipper Qualification</h3>
-                <div class="trip-route">Solent → Isle of Wight → Portsmouth</div>
+                <h3>RYA Day Skipper Qualification</h3>
+                <div class="trip-route">UKSA Isle of Wight → Solent → Return</div>
                 <div class="trip-stats">
                     <span>📅 September 2023</span>
                     <span>⚓ 120 nm</span>
                     <span>⏱️ 5 days</span>
                 </div>
                 <div class="trip-details">
-                    Completed my RYA Day Skipper practical course in the challenging waters of the Solent. Learned boat
-                    handling, navigation, weather interpretation, and safety procedures. This qualification opened up my
-                    passion for sailing and gave me the confidence to skippper small craft in familiar waters.
+                    <strong>RYA Day Skipper</strong> is a practical sailing qualification that enables you to safely
+                    skipper a yacht up to 20m in familiar waters during daylight hours. The course covers boat handling
+                    under sail and power, navigation, pilotage, meteorology, rules of the road, and safety procedures.
+                    <br><br>
+                    Completed at the prestigious UKSA Isle of Wight in the challenging waters of the Solent. This
+                    qualification provided the foundation skills and confidence needed for independent sailing
+                    adventures.
                 </div>
                 <span class="badge">RYA Day Skipper</span>
             </div>

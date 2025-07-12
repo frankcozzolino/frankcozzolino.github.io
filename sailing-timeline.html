@@ -19,8 +19,9 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #333;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(180deg, #87CEEB 0%, #4682B4 40%, #1E90FF 100%);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         a {
@@ -83,9 +84,34 @@
             align-items: center;
             justify-content: center;
             padding: 8rem 2rem 3rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #006994 0%, #003d5c 100%);
             color: white;
             margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100"><path d="M0,60 Q250,20 500,60 T1000,60 L1000,100 L0,100 Z" fill="rgba(255,255,255,0.1)"/></svg>') repeat-x;
+            animation: waves 6s ease-in-out infinite;
+        }
+
+        @keyframes waves {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-50px);
+            }
         }
 
         .banner-content {
@@ -152,6 +178,10 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 4rem 2rem;
+            background: linear-gradient(180deg, rgba(135, 206, 235, 0.3) 0%, rgba(30, 144, 255, 0.1) 100%);
+            border-radius: 20px;
+            margin-top: 2rem;
+            position: relative;
         }
 
         .timeline-header {
@@ -179,7 +209,7 @@
             min-height: 800px;
         }
 
-        /* Zig-Zag Timeline Line */
+        /* Dashed Timeline Line */
         .timeline__line {
             position: absolute;
             top: 0;
@@ -187,17 +217,13 @@
             transform: translateX(-50%);
             width: 4px;
             height: 100%;
-            background: linear-gradient(to bottom, #667eea, #764ba2);
-            clip-path: polygon(0% 0%, 100% 0%,
-                    100% 8%, 0% 12%,
-                    0% 20%, 100% 24%,
-                    100% 32%, 0% 36%,
-                    0% 44%, 100% 48%,
-                    100% 56%, 0% 60%,
-                    0% 68%, 100% 72%,
-                    100% 80%, 0% 84%,
-                    0% 92%, 100% 96%,
-                    100% 100%, 0% 100%);
+            background: repeating-linear-gradient(to bottom,
+                    white 0px,
+                    white 20px,
+                    transparent 20px,
+                    transparent 40px);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         /* Animated Boat */
@@ -243,6 +269,16 @@
             animation: fadeInUp 0.6s ease forwards;
         }
 
+        .island-graphic {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .island-graphic svg {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -276,12 +312,12 @@
             content: '';
             position: absolute;
             top: 50%;
-            width: 20px;
-            height: 20px;
-            background: #667eea;
+            width: 24px;
+            height: 24px;
+            background: #FFD700;
             border-radius: 50%;
             transform: translateY(-50%);
-            box-shadow: 0 0 0 4px white, 0 0 0 8px #667eea;
+            box-shadow: 0 0 0 4px white, 0 0 0 8px #FFD700, 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
         .timeline__card--left::before {
@@ -440,7 +476,7 @@
             <img src="images/sailing.jpg" alt="Frank Cozzolino" class="banner__photo">
             <div class="banner__info">
                 <h1>Frank Cozzolino</h1>
-                <div class="banner__certs">RYA Day Skipper • ICC Coastal • ASA 101</div>
+                <div class="banner__certs">RYA Day Skipper (2023)</div>
                 <div class="banner__contact">
                     <a href="https://wa.me/41791234567" class="contact-btn" target="_blank">
                         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -464,104 +500,65 @@
     <!-- Timeline Section -->
     <div class="timeline-container">
         <div class="timeline-header">
-            <h2>Sailing Adventures</h2>
-            <p>Navigating the Mediterranean seas, building experience, and collecting memories one nautical mile at a
-                time.</p>
+            <h2>Sailing Journey</h2>
+            <p>My sailing adventure began in 2023 with the RYA Day Skipper qualification, opening up a world of ocean
+                exploration and maritime skills.</p>
         </div>
 
         <main class="timeline" id="timeline">
             <!-- Zig-zag Timeline Line -->
             <div class="timeline__line"></div>
 
-            <!-- Animated Boat -->
+            <!-- Animated Sailboat -->
             <div class="timeline__boat">
-                <svg width="50" height="30" viewBox="0 0 200 100">
-                    <polygon points="20,85 100,25 180,85" fill="#ffffff" stroke="#333" stroke-width="2" />
-                    <polygon points="40,85 100,45 160,85" fill="#f0f0f0" stroke="#333" stroke-width="2" />
-                    <line x1="100" y1="25" x2="100" y2="10" stroke="#333" stroke-width="2" />
-                    <polygon points="95,10 100,5 105,10" fill="#ff6b6b" />
+                <svg width="60" height="40" viewBox="0 0 120 80">
+                    <!-- Boat Hull -->
+                    <ellipse cx="60" cy="65" rx="45" ry="8" fill="#8B4513" stroke="#654321" stroke-width="1" />
+                    <!-- Mast -->
+                    <line x1="60" y1="65" x2="60" y2="15" stroke="#654321" stroke-width="3" />
+                    <!-- Main Sail -->
+                    <path d="M60 15 L90 25 L90 55 L60 65 Z" fill="#E6E6FA" stroke="#D3D3D3" stroke-width="1" />
+                    <!-- Jib Sail -->
+                    <path d="M60 15 L35 25 L60 45 Z" fill="#F0F8FF" stroke="#D3D3D3" stroke-width="1" />
+                    <!-- Flag -->
+                    <rect x="60" y="12" width="15" height="8" fill="#FF6B6B" />
+                    <!-- Waves -->
+                    <path d="M10 70 Q30 65 50 70 T90 70 T130 70" stroke="#87CEEB" stroke-width="2" fill="none" />
                 </svg>
             </div>
 
             <!-- Trip Cards -->
             <div class="timeline__card timeline__card--left">
-                <h3>Mediterranean Coastal Cruise</h3>
-                <div class="trip-route">Barcelona → Mallorca → Ibiza</div>
+                <div class="island-graphic">
+                    <svg width="80" height="60" viewBox="0 0 100 80">
+                        <!-- Island -->
+                        <ellipse cx="50" cy="65" rx="40" ry="12" fill="#F4A460" stroke="#DEB887" stroke-width="1" />
+                        <!-- Palm Tree Trunk -->
+                        <rect x="47" y="35" width="6" height="30" fill="#8B4513" rx="3" />
+                        <!-- Palm Leaves -->
+                        <path d="M50 35 Q35 25 25 30" stroke="#228B22" stroke-width="4" fill="none" />
+                        <path d="M50 35 Q65 25 75 30" stroke="#228B22" stroke-width="4" fill="none" />
+                        <path d="M50 35 Q45 20 35 25" stroke="#32CD32" stroke-width="4" fill="none" />
+                        <path d="M50 35 Q55 20 65 25" stroke="#32CD32" stroke-width="4" fill="none" />
+                        <path d="M50 35 Q50 18 50 15" stroke="#228B22" stroke-width="4" fill="none" />
+                        <!-- Coconuts -->
+                        <circle cx="48" cy="40" r="2" fill="#8B4513" />
+                        <circle cx="52" cy="38" r="2" fill="#8B4513" />
+                    </svg>
+                </div>
+                <h3>Day Skipper Qualification</h3>
+                <div class="trip-route">Solent → Isle of Wight → Portsmouth</div>
                 <div class="trip-stats">
-                    <span>📅 May 2024</span>
-                    <span>⚓ 180 nm</span>
+                    <span>📅 September 2023</span>
+                    <span>⚓ 120 nm</span>
                     <span>⏱️ 5 days</span>
                 </div>
                 <div class="trip-details">
-                    My first major sailing adventure through the Balearic Islands. Perfect weather conditions and steady
-                    winds made for an unforgettable introduction to blue water sailing. Learned advanced navigation
-                    techniques and night sailing procedures.
+                    Completed my RYA Day Skipper practical course in the challenging waters of the Solent. Learned boat
+                    handling, navigation, weather interpretation, and safety procedures. This qualification opened up my
+                    passion for sailing and gave me the confidence to skippper small craft in familiar waters.
                 </div>
                 <span class="badge">RYA Day Skipper</span>
-            </div>
-
-            <div class="timeline__card timeline__card--right">
-                <h3>Overnight Passage Challenge</h3>
-                <div class="trip-route">Mallorca → Menorca → Costa Brava</div>
-                <div class="trip-stats">
-                    <span>📅 August 2024</span>
-                    <span>⚓ 85 nm</span>
-                    <span>⏱️ 3 days</span>
-                </div>
-                <div class="trip-details">
-                    First solo overnight passage as skipper. Challenging conditions with 15-20 knot winds and 2-meter
-                    swells. Successfully navigated through heavy shipping traffic and made landfall at dawn. Confidence
-                    and seamanship skills significantly improved.
-                </div>
-                <span class="badge">ASA 101</span>
-            </div>
-
-            <div class="timeline__card timeline__card--left">
-                <h3>Island Hopping Adventure</h3>
-                <div class="trip-route">Sardinia → Corsica → French Riviera</div>
-                <div class="trip-stats">
-                    <span>📅 October 2024</span>
-                    <span>⏱️ 7 days</span>
-                    <span>⚓ 220 nm</span>
-                </div>
-                <div class="trip-details">
-                    Epic journey through some of the Mediterranean's most beautiful waters. Explored hidden coves,
-                    ancient harbors, and experienced the changing seasons at sea. Mastered advanced anchoring techniques
-                    and weather routing.
-                </div>
-                <span class="badge">ICC Coastal</span>
-            </div>
-
-            <div class="timeline__card timeline__card--right">
-                <h3>Winter Training Expedition</h3>
-                <div class="trip-route">Monaco → Nice → Cannes</div>
-                <div class="trip-stats">
-                    <span>📅 December 2024</span>
-                    <span>⚓ 45 nm</span>
-                    <span>⏱️ 2 days</span>
-                </div>
-                <div class="trip-details">
-                    Intensive winter sailing course focusing on heavy weather techniques and emergency procedures.
-                    Learned storm tactics, man overboard recovery, and advanced sail handling in challenging conditions.
-                    Preparation for offshore sailing certification.
-                </div>
-                <span class="badge">Heavy Weather</span>
-            </div>
-
-            <div class="timeline__card timeline__card--left">
-                <h3>Upcoming: Atlantic Crossing</h3>
-                <div class="trip-route">Gibraltar → Canary Islands → Caribbean</div>
-                <div class="trip-stats">
-                    <span>📅 Spring 2025</span>
-                    <span>⚓ 3,000 nm</span>
-                    <span>⏱️ 3 weeks</span>
-                </div>
-                <div class="trip-details">
-                    <em>Planned expedition:</em> First transatlantic crossing as crew member. Will be joining an
-                    experienced skipper for the classic Atlantic circuit. Expecting to gain invaluable offshore
-                    experience and celestial navigation skills.
-                </div>
-                <span class="badge">Offshore Training</span>
             </div>
         </main>
     </div>

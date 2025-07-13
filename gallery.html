@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Frank Cozzolino - Sailing Timeline</title>
+    <title>Frank Cozzolino - Photo Gallery</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,216 +158,165 @@
             fill: #FF0000;
         }
 
-        /* Banner Section */
-        .banner {
+        /* Gallery Header */
+        .gallery-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 8rem 0 4rem;
             text-align: center;
         }
 
-        .banner-content {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            padding: 0 2rem;
-        }
-
-        .banner__photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            flex-shrink: 0;
-        }
-
-        .banner__info h1 {
-            margin: 0 0 0.5rem;
-            font-size: 2.5rem;
+        .gallery-header h1 {
+            font-size: 3rem;
             font-weight: 700;
-        }
-
-        .banner__certification {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
-            font-weight: 500;
-            font-style: italic;
-        }
-
-        .banner__certification p {
-            margin: 0;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .banner__availability {
-            font-size: 1.1rem;
             margin-bottom: 1rem;
+        }
+
+        .gallery-header p {
+            font-size: 1.2rem;
             opacity: 0.9;
-            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .banner__availability p {
-            margin: 0;
-            color: white;
-        }
-
-        /* Timeline Container */
-        .timeline-container {
+        /* Gallery Container */
+        .gallery-container {
             max-width: 1200px;
             margin: 4rem auto;
             padding: 0 2rem;
+        }
+
+        /* Instagram-style Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-item {
             position: relative;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Timeline Line */
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, #3498db, #2ecc71);
-            border-radius: 2px;
-            z-index: 1;
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
-        /* Animated Boat */
-        .boat {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
-            z-index: 10;
-            transition: top 0.1s ease-out;
-            margin-left: 2px;
-        }
-
-        .boat svg {
+        .gallery-item img {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        /* Timeline Items */
-        .timeline-item {
-            position: relative;
-            margin: 4rem 0;
-            z-index: 2;
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
 
-        .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 52%;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            margin-right: 52%;
-        }
-
-        .timeline-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .timeline-content.certification {
-            background: linear-gradient(145deg, #fff5f5, #ffffff);
-            border-left: 4px solid #e74c3c;
-        }
-
-        .timeline-content.milestone {
-            background: linear-gradient(145deg, #f0f8ff, #ffffff);
-            border-left: 4px solid #3498db;
-        }
-
-        .timeline-content.training {
-            background: linear-gradient(145deg, #f8fff8, #ffffff);
-            border-left: 4px solid #2ecc71;
-        }
-
-        /* Timeline Dot */
-        .timeline-dot {
+        .gallery-overlay {
             position: absolute;
-            left: 50%;
-            top: 2rem;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: #3498db;
-            border-radius: 50%;
-            border: 4px solid #fff;
-            box-shadow: 0 0 0 4px #3498db;
-            z-index: 5;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
         }
 
-        /* Content Styling */
-        .year {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 1rem;
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
         }
 
-        .trip-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #34495e;
-            margin-bottom: 1rem;
-        }
-
-        .distance {
-            display: inline-block;
-            background: #3498db;
+        .gallery-caption {
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
             font-size: 0.9rem;
             font-weight: 500;
-            margin-bottom: 1rem;
         }
 
-        .description {
-            color: #7f8c8d;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        .description.preview {
-            display: block;
-        }
-
-        .description.full {
+        /* Lightbox */
+        .lightbox {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            padding: 2rem;
         }
 
-        .read-more-btn {
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background: #3498db;
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .lightbox img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
             color: white;
-            border: none;
-            border-radius: 25px;
+            font-size: 2rem;
             cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #4a9eff;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: background 0.3s ease;
         }
 
-        .read-more-btn:hover {
-            background: #2980b9;
+        .lightbox-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-prev {
+            left: -4rem;
+        }
+
+        .lightbox-next {
+            right: -4rem;
         }
 
         /* Footer */
@@ -433,39 +382,27 @@
                 height: 16px;
             }
 
-            .banner-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .banner__photo {
-                width: 100px;
-                height: 100px;
-            }
-
-            .banner__info h1 {
+            .gallery-header h1 {
                 font-size: 2rem;
             }
 
-            .timeline-line {
-                left: 2rem;
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
             }
 
-            .timeline-item:nth-child(even) .timeline-content,
-            .timeline-item:nth-child(odd) .timeline-content {
-                margin-left: 3rem;
-                margin-right: 1rem;
+            .lightbox-nav {
+                display: none;
             }
 
-            .timeline-dot {
-                left: 2rem;
-                transform: translateX(-50%);
+            .footer div {
+                flex-direction: column;
+                gap: 1rem;
             }
 
-            .boat {
-                left: 2rem;
-                transform: translateX(-50%);
-                margin-left: 2px;
+            .footer div div {
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
 
@@ -500,44 +437,21 @@
                 height: 14px;
             }
 
-            .banner {
+            .gallery-header {
                 padding: 6rem 0 2rem;
             }
 
-            .banner__info h1 {
+            .gallery-header h1 {
                 font-size: 1.8rem;
             }
 
-            .timeline-container {
+            .gallery-container {
                 padding: 0 1rem;
             }
 
-            .timeline-item:nth-child(even) .timeline-content,
-            .timeline-item:nth-child(odd) .timeline-content {
-                margin-left: 2.5rem;
-                margin-right: 0.5rem;
-            }
-
-            .timeline-content {
-                padding: 1.5rem;
-            }
-
-            .year {
-                font-size: 1.5rem;
-            }
-
-            .trip-title {
-                font-size: 1.2rem;
-            }
-
-            .footer div {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .footer div div {
-                flex-wrap: wrap;
-                justify-content: center;
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 0.5rem;
             }
         }
     </style>
@@ -579,7 +493,7 @@
                             d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                 </a>
-                <a href="https://instagram.com/your-profile" class="social-icon" title="Instagram">
+                <a href="https://instagram.com/franksailing.switzerland" class="social-icon" title="Instagram">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <title>Instagram</title>
                         <path
@@ -618,38 +532,27 @@
         </div>
     </nav>
 
-    <!-- Banner Section -->
-    <header class="banner">
-        <div class="banner-content">
-            <img src="images/sailing.jpg" alt="Frank Cozzolino" class="banner__photo">
-            <div class="banner__info">
-                <h1>Frank Cozzolino</h1>
-                <div class="banner__certification">
-                    <p>Currently holding certification: Day skipper</p>
-                </div>
-                <div class="banner__availability">
-                    <p>Available for sailboat transport, skipper assistance, and regatta crew work</p>
-                </div>
-            </div>
-        </div>
+    <!-- Gallery Header -->
+    <header class="gallery-header">
+        <h1>Photo Gallery</h1>
+        <p>Moments captured from sailing adventures, travels, and life experiences</p>
     </header>
 
-    <div class="timeline-container" id="timeline">
-        <!-- Timeline Line -->
-        <div class="timeline-line"></div>
-
-        <!-- Animated Boat -->
-        <div class="boat" id="boat">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 20 L30 70 L70 70 Z" fill="#3498db" stroke="#2980b9" stroke-width="2" />
-                <path d="M50 20 L50 50" stroke="#e74c3c" stroke-width="3" />
-                <path d="M50 30 L65 45" stroke="#e74c3c" stroke-width="2" />
-                <circle cx="50" cy="80" r="3" fill="#34495e" />
-            </svg>
+    <!-- Gallery Container -->
+    <div class="gallery-container">
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Gallery items will be populated with JavaScript -->
         </div>
+    </div>
 
-        <!-- Timeline Items will be loaded dynamically -->
-        <div id="timeline-items"></div>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <div class="lightbox-prev" onclick="changeLightboxImage(-1)">&#8249;</div>
+            <div class="lightbox-next" onclick="changeLightboxImage(1)">&#8250;</div>
+            <img id="lightbox-img" src="" alt="">
+        </div>
     </div>
 
     <!-- Footer -->
@@ -665,115 +568,176 @@
     </footer>
 
     <script>
-        // Function to toggle description visibility
-        function toggleDescription(btn) {
-            const content = btn.parentElement;
-            const preview = content.querySelector('.preview');
-            const full = content.querySelector('.full');
-
-            if (preview.style.display === 'none') {
-                preview.style.display = 'block';
-                full.style.display = 'none';
-                btn.textContent = 'Read more';
-            } else {
-                preview.style.display = 'none';
-                full.style.display = 'block';
-                btn.textContent = 'Read less';
+        // Sample photos data (replace with your actual photos)
+        const galleryPhotos = [
+            {
+                src: 'images/sailing.jpg',
+                alt: 'Sailing Adventure',
+                caption: 'Beautiful day sailing in the Netherlands'
+            },
+            {
+                src: 'images/coding.jpg',
+                alt: 'Coding Session',
+                caption: 'Working on exciting projects'
+            },
+            {
+                src: 'images/product-management.jpg',
+                alt: 'Product Management',
+                caption: 'Strategy and planning session'
+            },
+            {
+                src: 'images/hobbies.jpg',
+                alt: 'Hobbies',
+                caption: 'Weekend adventures and exploration'
+            },
+            // TO ADD YOUR INSTAGRAM PHOTOS:
+            // 1. Save photos from https://www.instagram.com/franksailing.switzerland/
+            // 2. Add them to images/ folder
+            // 3. Replace these placeholder entries with your actual photos:
+            /*
+            {
+                src: 'images/sailing-gibraltar.jpg',
+                alt: 'Sailing in Gibraltar',
+                caption: 'Exploring the waters around Gibraltar'
+            },
+            {
+                src: 'images/sailing-switzerland.jpg',
+                alt: 'Swiss Lake Sailing',
+                caption: 'Perfect sailing conditions in Switzerland'
+            },
+            {
+                src: 'images/sailing-morocco.jpg',
+                alt: 'Morocco Adventure',
+                caption: 'Sailing adventure to Morocco'
+            },
+            {
+                src: 'images/sailing-crew.jpg',
+                alt: 'Sailing Crew',
+                caption: 'Great crew on sailing adventures'
+            },
+            {
+                src: 'images/sailing-sunset.jpg',
+                alt: 'Sunset Sailing',
+                caption: 'Beautiful sunset on the water'
+            },
+            {
+                src: 'images/sailing-regatta.jpg',
+                alt: 'Regatta Competition',
+                caption: 'Racing in sailing regatta'
             }
+            */
+            // Temporary placeholder images (remove these when adding your photos)
+            {
+                src: 'https://picsum.photos/600/600?random=1',
+                alt: 'Adventure 1',
+                caption: 'Exploring new horizons'
+            },
+            {
+                src: 'https://picsum.photos/600/600?random=2',
+                alt: 'Adventure 2',
+                caption: 'Capturing beautiful moments'
+            },
+            {
+                src: 'https://picsum.photos/600/600?random=3',
+                alt: 'Adventure 3',
+                caption: 'Life through the lens'
+            },
+            {
+                src: 'https://picsum.photos/600/600?random=4',
+                alt: 'Adventure 4',
+                caption: 'Memorable experiences'
+            },
+            {
+                src: 'https://picsum.photos/600/600?random=5',
+                alt: 'Adventure 5',
+                caption: 'Journey continues'
+            }
+        ];
+
+        let currentImageIndex = 0;
+
+        // Populate gallery
+        function populateGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+
+            galleryPhotos.forEach((photo, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.onclick = () => openLightbox(index);
+
+                galleryItem.innerHTML = `
+                    <img src="${photo.src}" alt="${photo.alt}" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">${photo.caption}</div>
+                    </div>
+                `;
+
+                galleryGrid.appendChild(galleryItem);
+            });
         }
 
-        // Load timeline data and create timeline items
-        async function loadTimelineData() {
-            try {
-                const response = await fetch('sailing-timeline-data.json');
-                const data = await response.json();
+        // Open lightbox
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
 
-                const timelineContainer = document.getElementById('timeline-items');
+            lightboxImg.src = galleryPhotos[index].src;
+            lightboxImg.alt = galleryPhotos[index].alt;
+            lightbox.classList.add('active');
 
-                data.timeline.forEach((item, index) => {
-                    const timelineItem = document.createElement('div');
-                    timelineItem.className = 'timeline-item';
-
-                    const contentClass = item.type === 'certification' ? 'timeline-content certification' :
-                        item.type === 'milestone' ? 'timeline-content milestone' :
-                            item.type === 'training' ? 'timeline-content training' :
-                                'timeline-content';
-
-                    timelineItem.innerHTML = `
-                        <div class="timeline-dot"></div>
-                        <div class="${contentClass}">
-                            <div class="year">${item.year}</div>
-                            <div class="trip-title">${item.title}</div>
-                            <div class="distance">${item.distance}</div>
-                            <div class="description preview">
-                                ${item.preview}
-                            </div>
-                            <div class="description full">
-                                ${item.full}
-                            </div>
-                            <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-                        </div>
-                    `;
-
-                    timelineContainer.appendChild(timelineItem);
-                });
-            } catch (error) {
-                console.error('Error loading timeline data:', error);
-                // Fallback: show error message
-                document.getElementById('timeline-items').innerHTML =
-                    '<p style="text-align: center; color: #e74c3c;">Error loading timeline data. Please try again later.</p>';
-            }
+            // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         }
 
-        // Boat animation based on scroll - forever scrolling
-        function animateBoat() {
-            const boat = document.getElementById('boat');
-            const timeline = document.querySelector('.timeline-container');
-            const timelineHeight = timeline.offsetHeight;
-            const scrolled = window.pageYOffset;
-            const timelineTop = timeline.offsetTop;
-            const documentHeight = document.body.scrollHeight;
-            const windowHeight = window.innerHeight;
-
-            // Start boat animation when timeline becomes visible
-            if (scrolled >= timelineTop - windowHeight) {
-                // Calculate progress from timeline start to document end
-                const totalScrollableHeight = documentHeight - timelineTop;
-                const progress = Math.max(0, Math.min(1, (scrolled - timelineTop + windowHeight) / totalScrollableHeight));
-
-                // Allow boat to travel the full height of timeline + extra for "forever scroll"
-                const maxBoatTravel = timelineHeight + (windowHeight * 2);
-                const boatPosition = progress * maxBoatTravel;
-                boat.style.top = `${Math.min(boatPosition, timelineHeight + windowHeight)}px`;
-
-                // Keep boat visible
-                boat.style.opacity = '1';
-            } else {
-                // Hide boat when timeline not in view
-                boat.style.opacity = '0';
-            }
+        // Close lightbox
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
-        // Smooth scrolling boat animation
-        let ticking = false;
-        function updateBoat() {
-            if (!ticking) {
-                requestAnimationFrame(function () {
-                    animateBoat();
-                    ticking = false;
-                });
-                ticking = true;
+        // Change lightbox image
+        function changeLightboxImage(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex >= galleryPhotos.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = galleryPhotos.length - 1;
             }
+
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = galleryPhotos[currentImageIndex].src;
+            lightboxImg.alt = galleryPhotos[currentImageIndex].alt;
         }
 
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function () {
-            loadTimelineData();
-            updateBoat();
+        // Keyboard navigation
+        document.addEventListener('keydown', function (e) {
+            const lightbox = document.getElementById('lightbox');
+
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    changeLightboxImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeLightboxImage(1);
+                }
+            }
         });
 
-        window.addEventListener('scroll', updateBoat);
-        window.addEventListener('resize', updateBoat);
+        // Close lightbox when clicking outside image
+        document.getElementById('lightbox').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Initialize gallery
+        document.addEventListener('DOMContentLoaded', function () {
+            populateGallery();
+        });
     </script>
 </body>
 

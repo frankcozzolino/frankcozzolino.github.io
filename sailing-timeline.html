@@ -35,49 +35,131 @@
             text-decoration: underline;
         }
 
-        /* Header Navigation */
-        .nav-header {
+        /* Professional Navigation */
+        .main-nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(to bottom,
+                    rgba(25, 35, 45, 0.05) 0%,
+                    rgba(25, 35, 45, 0.15) 50%,
+                    rgba(25, 35, 45, 0.05) 100%);
+            backdrop-filter: blur(15px);
             z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            height: 80px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             padding: 0 2rem;
+            height: 100%;
         }
 
-        .nav-logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #21618C;
-        }
-
-        .nav-links {
+        .logo-signature {
             display: flex;
-            gap: 2rem;
+            align-items: center;
+            height: 100%;
+            width: 160px;
+            overflow: visible;
         }
 
-        .nav-links a {
-            color: #333;
+        .signature-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease, transform 0.3s ease;
+            transform: scale(1.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-menu a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.9rem;
             font-weight: 500;
+            letter-spacing: 0.5px;
             transition: color 0.3s ease;
-            text-decoration: none;
         }
 
-        .nav-links a:hover {
-            color: #21618C;
+        .nav-menu a:hover {
+            color: #4a9eff;
+        }
+
+        /* Social Media Icons */
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+        }
+
+        .social-icon {
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .social-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            transition: fill 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Official brand colors on hover */
+        .social-icon:hover[title="WhatsApp"] svg {
+            fill: #25D366;
+        }
+
+        .social-icon:hover[title="Discord"] svg {
+            fill: #5865F2;
+        }
+
+        .social-icon:hover[title="LinkedIn"] svg {
+            fill: #0077B5;
+        }
+
+        .social-icon:hover[title="Instagram"] svg {
+            fill: #E4405F;
+        }
+
+        .social-icon:hover[title="Gmail"] svg {
+            fill: #EA4335;
+        }
+
+        .social-icon:hover[title="GitHub"] svg {
+            fill: #ffffff;
+        }
+
+        .social-icon:hover[title="Schedule a Call"] svg {
+            fill: #00A2FF;
+        }
+
+        .social-icon:hover[title="YouTube"] svg {
+            fill: #FF0000;
         }
 
         /* Banner Section */
@@ -340,6 +422,40 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .main-nav {
+                height: 70px;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo-signature {
+                width: 120px;
+            }
+
+            .signature-img {
+                transform: scale(1.2);
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .social-icons {
+                gap: 0.8rem;
+            }
+
+            .social-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .social-icon svg {
+                width: 16px;
+                height: 16px;
+            }
+
             .banner-content {
                 flex-direction: column;
                 text-align: center;
@@ -374,13 +490,39 @@
                 transform: translateX(-50%);
                 margin-left: 2px;
             }
-
-            .nav-links {
-                display: none;
-            }
         }
 
         @media (max-width: 480px) {
+            .main-nav {
+                height: 60px;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .logo-signature {
+                width: 100px;
+            }
+
+            .signature-img {
+                transform: scale(1.0);
+            }
+
+            .social-icons {
+                gap: 0.5rem;
+            }
+
+            .social-icon {
+                width: 30px;
+                height: 30px;
+            }
+
+            .social-icon svg {
+                width: 14px;
+                height: 14px;
+            }
+
             .banner {
                 padding: 6rem 1rem 2rem;
             }
@@ -415,14 +557,76 @@
 </head>
 
 <body>
-    <!-- Navigation Header -->
-    <nav class="nav-header">
+    <!-- PROFESSIONAL NAVIGATION -->
+    <nav class="main-nav">
         <div class="nav-container">
-            <div class="nav-logo">Frank Cozzolino</div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="#timeline">Timeline</a>
-                <a href="#contact">Contact</a>
+            <div class="logo-signature">
+                <img src="images/signature.png" alt="Frank Cozzolino" class="signature-img">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sailing-timeline.html">Sailing</a></li>
+                <li><a href="index.html#coder">Coder</a></li>
+                <li><a href="index.html#pm">Product Manager</a></li>
+                <li><a href="index.html#hobbies">Hobbies</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="https://wa.me/your-number" class="social-icon" title="WhatsApp">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>WhatsApp</title>
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.891 3.488" />
+                    </svg>
+                </a>
+                <a href="https://discord.gg/your-server" class="social-icon" title="Discord">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Discord</title>
+                        <path
+                            d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/cozzolinofrancesco/" class="social-icon" title="LinkedIn">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>LinkedIn</title>
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                </a>
+                <a href="https://instagram.com/your-profile" class="social-icon" title="Instagram">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Instagram</title>
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+                <a href="mailto:your.email@gmail.com" class="social-icon" title="Gmail">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gmail</title>
+                        <path
+                            d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+                    </svg>
+                </a>
+                <a href="https://github.com/your-profile" class="social-icon" title="GitHub">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>GitHub</title>
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                </a>
+                <a href="https://calendly.com/your-profile" class="social-icon" title="Schedule a Call">
+                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <title>Calendar</title>
+                        <path
+                            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H5V10h14v8z" />
+                    </svg>
+                </a>
+                <a href="https://youtube.com/@your-channel" class="social-icon" title="YouTube">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>YouTube</title>
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                </a>
             </div>
         </div>
     </nav>
@@ -469,256 +673,63 @@
         </div>
 
         <!-- Timeline Items -->
-        <!-- Pre-2013 Italian Sailing License -->
+        <!-- 2025 Coastal Skipper Gibraltar -->
         <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content certification">
-                <div class="year">Pre-2013</div>
-                <div class="trip-title">🎓 Italian Sailing License Theory</div>
-                <div class="distance">Above 12 Miles Certification</div>
+                <div class="year">2025</div>
+                <div class="trip-title">🎓 Coastal Skipper 5-Day Course</div>
+                <div class="distance">Gibraltar Training - 80 NM</div>
                 <div class="description preview">
-                    Obtained theoretical certification for sailing above 12 nautical miles in Italian waters...
+                    Advanced RYA Coastal Skipper certification in Gibraltar waters, building on Day Skipper skills...
                 </div>
                 <div class="description full">
-                    Obtained theoretical certification for sailing above 12 nautical miles in Italian waters. This
-                    comprehensive course covered navigation theory, maritime regulations, weather systems, and safety
-                    procedures required for offshore sailing. The certification allowed me to legally skipper vessels in
-                    Italian territorial waters and beyond the 12-mile limit, opening up opportunities for longer coastal
-                    passages and island-hopping adventures in the Mediterranean.
+                    Advanced RYA Coastal Skipper certification in Gibraltar waters, building on Day Skipper skills with
+                    5 days of intensive training. This qualification enables skippers to take charge of a yacht on
+                    coastal passages by day and night, in tidal waters up to 20 miles from a safe haven. The course
+                    covers advanced navigation, passage planning, watch keeping, meteorology, and crew management in the
+                    challenging waters around Gibraltar.
+                    <br><br>
+                    <strong>Course Coverage:</strong> Night sailing, pilotage by day and night, passage planning and
+                    preparation, weather routing, yacht handling in confined waters, emergency procedures, and advanced
+                    navigation techniques. The strategic position of Gibraltar provides excellent training conditions
+                    with Atlantic swells, Mediterranean conditions, and busy shipping lanes.
+                    <br><br>
+                    <strong>Gibraltar Experience:</strong> Training in one of the world's most challenging sailing
+                    areas, with the meeting point of Atlantic and Mediterranean waters, strong currents, and complex
+                    weather patterns. The Rock of Gibraltar provides excellent landmark navigation practice while the
+                    Strait offers real-world experience in international waters.
                 </div>
                 <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
             </div>
         </div>
 
-        <!-- Pre-2013 Porto Pozzo Sailing School -->
+        <!-- 2025 Gibraltar to Morocco Weekend Trip -->
         <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
-                <div class="year">Pre-2013</div>
-                <div class="trip-title">🏫 Porto Pozzo Sailing School</div>
-                <div class="distance">~5 NM Training</div>
+                <div class="year">2025</div>
+                <div class="trip-title">🏴‍☠️ Gibraltar-Morocco Adventure</div>
+                <div class="distance">66 NM Round Trip</div>
                 <div class="description preview">
-                    Intensive sailing training at Porto Pozzo, Sardinia, focusing on practical maneuvers and boat
-                    handling...
+                    Epic weekend sailing adventure from Gibraltar to Tangier, Morocco and back...
                 </div>
                 <div class="description full">
-                    Intensive sailing training at Porto Pozzo, Sardinia, focusing on practical maneuvers and boat
-                    handling. This beautiful location on the northern coast of Sardinia provided excellent conditions
-                    for learning advanced sailing techniques. The training covered close-quarters maneuvering, anchoring
-                    techniques, sail trimming, and emergency procedures. The crystal-clear waters and consistent winds
-                    of the Costa Smeralda made it an ideal learning environment for developing confidence and skill on
-                    the water.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- Pre-2013 Italian Mediterranean Adventure -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="year">Pre-2013</div>
-                <div class="trip-title">🏛️ Italian Mediterranean Adventure</div>
-                <div class="distance">~530 NM Total</div>
-                <div class="description preview">
-                    Epic sailing journey from Policoro to Gallipoli, Santa Maria di Leuca, across to Mathraki Port in
-                    Greece...
-                </div>
-                <div class="description full">
-                    Epic sailing journey from Policoro to Gallipoli, Santa Maria di Leuca, across to Mathraki Port in
-                    Greece, and back to Policoro. This was a true Mediterranean adventure covering the stunning
-                    coastlines of Southern Italy and the Greek islands. The route took us through the historic waters of
-                    the Ionian Sea, passing ancient settlements and dramatic coastal landscapes. From the beaches of
-                    Basilicata to the baroque architecture of Lecce, then to the southernmost point of Puglia at Santa
-                    Maria di Leuca, before crossing to the remote Greek island of Mathraki. This journey combined
-                    navigation challenges, cultural discovery, and the pure joy of sailing in some of the most beautiful
-                    waters in the world.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- 2013 RYA Yachtmaster Theory -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content certification">
-                <div class="year">2013</div>
-                <div class="trip-title">🎓 RYA Yachtmaster Theory</div>
-                <div class="distance">Poland SailPro</div>
-                <div class="description preview">
-                    Completed RYA Yachtmaster Theory certification in Poland through SailPro sailing school...
-                </div>
-                <div class="description full">
-                    Completed RYA Yachtmaster Theory certification in Poland through SailPro sailing school. This
-                    internationally recognized qualification covered advanced navigation, meteorology, collision
-                    regulations, and passage planning. The comprehensive course included chart work, tidal calculations,
-                    electronic navigation systems, and emergency procedures. The RYA Yachtmaster Theory is a prestigious
-                    qualification that demonstrates competency in all aspects of yacht navigation and seamanship,
-                    preparing skippers for challenging offshore passages and leadership responsibilities on board.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- 2016 Lelystad Training -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="year">2016</div>
-                <div class="trip-title">🎯 Lelystad Maneuver Course</div>
-                <div class="distance">19 NM Total</div>
-                <div class="description preview">
-                    Intensive maneuvering course between Lelystad and Batavia, followed by passage to Amsterdam
-                    Central...
-                </div>
-                <div class="description full">
-                    Intensive maneuvering course between Lelystad and Batavia, followed by passage to Amsterdam Central.
-                    This training focused on precise boat handling in the challenging waters of the IJsselmeer. The
-                    course covered close-quarters maneuvering, docking techniques, and navigation in busy commercial
-                    waterways. Lelystad Airport provided a unique landmark for navigation practice, while the historic
-                    town of Batavia offered excellent training grounds for anchoring and mooring. The final leg to
-                    Amsterdam Central tested urban navigation skills, requiring careful attention to commercial traffic
-                    and complex harbor approaches.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- 2017 Amsterdam to Monnickedam -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="year">2017</div>
-                <div class="trip-title">🏛️ Amsterdam Central to Monnickedam</div>
-                <div class="distance">12 NM</div>
-                <div class="description preview">
-                    Sailed from Amsterdam Central marina to the historic port of Monnickedam...
-                </div>
-                <div class="description full">
-                    Sailed from Amsterdam Central marina to the historic port of Monnickedam. This scenic passage took
-                    us through the heart of the Dutch sailing region, passing traditional fishing villages and historic
-                    waterways. Monnickedam, with its beautiful 14th-century architecture and charming harbor, provided a
-                    perfect destination for this coastal cruise. The route showcased the best of Dutch maritime
-                    heritage, from the bustling modern marina at Amsterdam Central to the peaceful, historic harbor of
-                    Monnickedam. The journey offered excellent opportunities to practice navigation in tidal waters and
-                    experience the traditional Dutch sailing culture.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- 2018 Private Training -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="year">2018</div>
-                <div class="trip-title">👨‍🏫 Private Training Maneuvers</div>
-                <div class="distance">24 NM Total</div>
-                <div class="description preview">
-                    Advanced training with private instructor from Monnickedam to Amsterdam Central and back...
-                </div>
-                <div class="description full">
-                    Advanced training with private instructor from Monnickedam to Amsterdam Central and back. This
-                    intensive one-on-one training session focused on advanced sailing techniques and boat handling
-                    skills. The private instructor provided personalized feedback on sailing efficiency, safety
-                    procedures, and navigation techniques. The round-trip route allowed for comprehensive practice in
-                    varying conditions and traffic situations. This training session was particularly valuable for
-                    developing confidence in independent sailing and preparing for more challenging passages. The
-                    personalized instruction helped refine skills in areas such as sail trimming, weather reading, and
-                    emergency procedures.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- 2019 Stavoren-Hoorn-Monnickedam -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="year">2019</div>
-                <div class="trip-title">🏰 Historic Ports Triangle</div>
-                <div class="distance">67 NM Total</div>
-                <div class="description preview">
-                    Sailed from Monnickedam to Stavoren, then to Hoorn, and back to Monnickedam...
-                </div>
-                <div class="description full">
-                    Sailed from Monnickedam to Stavoren, then to Hoorn, and back to Monnickedam, creating a perfect
-                    triangle of historic Dutch ports. This journey showcased three of the most beautiful harbors in the
-                    Netherlands, each with its own unique character and maritime history. Stavoren, once a powerful
-                    Hanseatic League port, offered insights into medieval trading routes. Hoorn, with its magnificent
-                    harbor and historic buildings, provided a glimpse into the Dutch Golden Age. The circular route
-                    allowed for experiencing different wind conditions and tidal patterns, making it an excellent
-                    training ground for developing sailing skills in varying conditions.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- 2019 Batavia Round Trip -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="year">2019</div>
-                <div class="trip-title">🚢 Batavia Discovery</div>
-                <div class="distance">17 NM Round Trip</div>
-                <div class="description preview">
-                    Round trip from Monnickedam to Batavia and back, exploring the historic shipyard...
-                </div>
-                <div class="description full">
-                    Round trip from Monnickedam to Batavia and back, exploring the historic shipyard and maritime
-                    heritage center. Batavia, located in Lelystad, houses the remarkable replica of the 17th-century VOC
-                    ship Batavia, providing a unique connection to Dutch maritime history. This sailing trip combined
-                    practical navigation with cultural discovery, as we explored the shipyard where traditional Dutch
-                    sailing vessels are still built using historical techniques. The route offered excellent sailing
-                    conditions in the protected waters of the IJsselmeer, while the destination provided fascinating
-                    insights into the golden age of Dutch exploration and trade.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- 2022 Batavia-Urk Adventure -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="year">2022</div>
-                <div class="trip-title">🏝️ Batavia-Urk Adventure</div>
-                <div class="distance">39 NM Total</div>
-                <div class="description preview">
-                    Sailed from Monnickedam to Batavia, then continued to the historic fishing village of Urk...
-                </div>
-                <div class="description full">
-                    Sailed from Monnickedam to Batavia, then continued to the historic fishing village of Urk, and back
-                    to Monnickedam. This extended journey took us to one of the most authentic fishing communities in
-                    the Netherlands. Urk, a former island that maintained its maritime character even after the
-                    IJsselmeer was created, offered a unique glimpse into traditional Dutch fishing culture. The
-                    village's narrow streets, traditional houses, and active fishing fleet created an atmosphere
-                    unchanged by centuries. The sailing conditions varied from the protected waters near Batavia to the
-                    more open waters approaching Urk, providing excellent practice in different sailing environments.
-                </div>
-                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
-            </div>
-        </div>
-
-        <!-- 2022 IJmuiden Marina -->
-        <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <div class="year">2022</div>
-                <div class="trip-title">🌊 IJmuiden Marina Challenge</div>
-                <div class="distance">48 NM Round Trip</div>
-                <div class="description preview">
-                    Challenging passage from Monnickedam to IJmuiden marina and back...
-                </div>
-                <div class="description full">
-                    Challenging passage from Monnickedam to IJmuiden marina and back, navigating through the busy North
-                    Sea Canal. IJmuiden, located at the mouth of the North Sea Canal, serves as Amsterdam's gateway to
-                    the sea and one of Europe's largest fishing ports. This trip required careful navigation through
-                    commercial shipping lanes and lock systems, providing excellent experience in handling traffic
-                    separation schemes and harbor approaches. The marina offered modern facilities and spectacular views
-                    of the North Sea, while the return journey tested endurance and navigation skills. The passage
-                    showcased the contrast between inland sailing and coastal navigation, with tidal influences and sea
-                    conditions adding complexity to the sailing experience.
+                    Epic weekend sailing adventure from Gibraltar to Tangier, Morocco and back, crossing the historic
+                    Strait of Gibraltar. This international passage connects Europe and Africa across one of the world's
+                    most significant waterways, following the ancient routes of Phoenician traders and modern commercial
+                    shipping. The 33-nautical-mile crossing each way offers spectacular views of both continents and
+                    provides experience in international waters with strong currents and variable conditions.
+                    <br><br>
+                    <strong>Navigation Challenge:</strong> The Strait of Gibraltar presents unique challenges with tidal
+                    streams up to 3 knots, busy shipping lanes, and dramatic weather changes. The crossing requires
+                    careful timing and route planning to work with the currents and avoid the heaviest commercial
+                    traffic.
+                    <br><br>
+                    <strong>Cultural Experience:</strong> Tangier offers a fascinating blend of European and African
+                    cultures, with its historic medina, beautiful harbor, and traditional Moroccan hospitality. The
+                    contrast between Gibraltar's British character and Morocco's Arab-Berber heritage makes this a truly
+                    memorable sailing adventure combining maritime skills with cultural discovery.
                 </div>
                 <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
             </div>
@@ -753,6 +764,261 @@
                     <strong>Solent Experience:</strong> The Solent provides some of the most challenging sailing
                     conditions in the world, with strong tides, busy shipping lanes, and variable weather. Training here
                     builds confidence for sailing anywhere.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2022 IJmuiden Marina -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2022</div>
+                <div class="trip-title">🌊 IJmuiden Marina Challenge</div>
+                <div class="distance">48 NM Round Trip</div>
+                <div class="description preview">
+                    Challenging passage from Monnickedam to IJmuiden marina and back...
+                </div>
+                <div class="description full">
+                    Challenging passage from Monnickedam to IJmuiden marina and back, navigating through the busy North
+                    Sea Canal. IJmuiden, located at the mouth of the North Sea Canal, serves as Amsterdam's gateway to
+                    the sea and one of Europe's largest fishing ports. This trip required careful navigation through
+                    commercial shipping lanes and lock systems, providing excellent experience in handling traffic
+                    separation schemes and harbor approaches. The marina offered modern facilities and spectacular views
+                    of the North Sea, while the return journey tested endurance and navigation skills. The passage
+                    showcased the contrast between inland sailing and coastal navigation, with tidal influences and sea
+                    conditions adding complexity to the sailing experience.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2022 Batavia-Urk Adventure -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2022</div>
+                <div class="trip-title">🏝️ Batavia-Urk Adventure</div>
+                <div class="distance">39 NM Total</div>
+                <div class="description preview">
+                    Sailed from Monnickedam to Batavia, then continued to the historic fishing village of Urk...
+                </div>
+                <div class="description full">
+                    Sailed from Monnickedam to Batavia, then continued to the historic fishing village of Urk, and back
+                    to Monnickedam. This extended journey took us to one of the most authentic fishing communities in
+                    the Netherlands. Urk, a former island that maintained its maritime character even after the
+                    IJsselmeer was created, offered a unique glimpse into traditional Dutch fishing culture. The
+                    village's narrow streets, traditional houses, and active fishing fleet created an atmosphere
+                    unchanged by centuries. The sailing conditions varied from the protected waters near Batavia to the
+                    more open waters approaching Urk, providing excellent practice in different sailing environments.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2019 Batavia Round Trip -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2019</div>
+                <div class="trip-title">🚢 Batavia Discovery</div>
+                <div class="distance">17 NM Round Trip</div>
+                <div class="description preview">
+                    Round trip from Monnickedam to Batavia and back, exploring the historic shipyard...
+                </div>
+                <div class="description full">
+                    Round trip from Monnickedam to Batavia and back, exploring the historic shipyard and maritime
+                    heritage center. Batavia, located in Lelystad, houses the remarkable replica of the 17th-century VOC
+                    ship Batavia, providing a unique connection to Dutch maritime history. This sailing trip combined
+                    practical navigation with cultural discovery, as we explored the shipyard where traditional Dutch
+                    sailing vessels are still built using historical techniques. The route offered excellent sailing
+                    conditions in the protected waters of the IJsselmeer, while the destination provided fascinating
+                    insights into the golden age of Dutch exploration and trade.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2019 Stavoren-Hoorn-Monnickedam -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2019</div>
+                <div class="trip-title">🏰 Historic Ports Triangle</div>
+                <div class="distance">67 NM Total</div>
+                <div class="description preview">
+                    Sailed from Monnickedam to Stavoren, then to Hoorn, and back to Monnickedam...
+                </div>
+                <div class="description full">
+                    Sailed from Monnickedam to Stavoren, then to Hoorn, and back to Monnickedam, creating a perfect
+                    triangle of historic Dutch ports. This journey showcased three of the most beautiful harbors in the
+                    Netherlands, each with its own unique character and maritime history. Stavoren, once a powerful
+                    Hanseatic League port, offered insights into medieval trading routes. Hoorn, with its magnificent
+                    harbor and historic buildings, provided a glimpse into the Dutch Golden Age. The circular route
+                    allowed for experiencing different wind conditions and tidal patterns, making it an excellent
+                    training ground for developing sailing skills in varying conditions.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2018 Private Training -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2018</div>
+                <div class="trip-title">👨‍🏫 Private Training Maneuvers</div>
+                <div class="distance">24 NM Total</div>
+                <div class="description preview">
+                    Advanced training with private instructor from Monnickedam to Amsterdam Central and back...
+                </div>
+                <div class="description full">
+                    Advanced training with private instructor from Monnickedam to Amsterdam Central and back. This
+                    intensive one-on-one training session focused on advanced sailing techniques and boat handling
+                    skills. The private instructor provided personalized feedback on sailing efficiency, safety
+                    procedures, and navigation techniques. The round-trip route allowed for comprehensive practice in
+                    varying conditions and traffic situations. This training session was particularly valuable for
+                    developing confidence in independent sailing and preparing for more challenging passages. The
+                    personalized instruction helped refine skills in areas such as sail trimming, weather reading, and
+                    emergency procedures.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2017 Amsterdam to Monnickedam -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2017</div>
+                <div class="trip-title">🏛️ Amsterdam Central to Monnickedam</div>
+                <div class="distance">12 NM</div>
+                <div class="description preview">
+                    Sailed from Amsterdam Central marina to the historic port of Monnickedam...
+                </div>
+                <div class="description full">
+                    Sailed from Amsterdam Central marina to the historic port of Monnickedam. This scenic passage took
+                    us through the heart of the Dutch sailing region, passing traditional fishing villages and historic
+                    waterways. Monnickedam, with its beautiful 14th-century architecture and charming harbor, provided a
+                    perfect destination for this coastal cruise. The route showcased the best of Dutch maritime
+                    heritage, from the bustling modern marina at Amsterdam Central to the peaceful, historic harbor of
+                    Monnickedam. The journey offered excellent opportunities to practice navigation in tidal waters and
+                    experience the traditional Dutch sailing culture.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2016 Lelystad Training -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">2016</div>
+                <div class="trip-title">🎯 Lelystad Maneuver Course</div>
+                <div class="distance">19 NM Total</div>
+                <div class="description preview">
+                    Intensive maneuvering course between Lelystad and Batavia, followed by passage to Amsterdam
+                    Central...
+                </div>
+                <div class="description full">
+                    Intensive maneuvering course between Lelystad and Batavia, followed by passage to Amsterdam Central.
+                    This training focused on precise boat handling in the challenging waters of the IJsselmeer. The
+                    course covered close-quarters maneuvering, docking techniques, and navigation in busy commercial
+                    waterways. Lelystad Airport provided a unique landmark for navigation practice, while the historic
+                    town of Batavia offered excellent training grounds for anchoring and mooring. The final leg to
+                    Amsterdam Central tested urban navigation skills, requiring careful attention to commercial traffic
+                    and complex harbor approaches.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- 2013 RYA Yachtmaster Theory -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content certification">
+                <div class="year">2013</div>
+                <div class="trip-title">🎓 RYA Yachtmaster Theory</div>
+                <div class="distance">Poland SailPro</div>
+                <div class="description preview">
+                    Completed RYA Yachtmaster Theory certification in Poland through SailPro sailing school...
+                </div>
+                <div class="description full">
+                    Completed RYA Yachtmaster Theory certification in Poland through SailPro sailing school. This
+                    internationally recognized qualification covered advanced navigation, meteorology, collision
+                    regulations, and passage planning. The comprehensive course included chart work, tidal calculations,
+                    electronic navigation systems, and emergency procedures. The RYA Yachtmaster Theory is a prestigious
+                    qualification that demonstrates competency in all aspects of yacht navigation and seamanship,
+                    preparing skippers for challenging offshore passages and leadership responsibilities on board.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- Pre-2013 Italian Mediterranean Adventure -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">Pre-2013</div>
+                <div class="trip-title">🏛️ Italian Mediterranean Adventure</div>
+                <div class="distance">~530 NM Total</div>
+                <div class="description preview">
+                    Epic sailing journey from Policoro to Gallipoli, Santa Maria di Leuca, across to Mathraki Port in
+                    Greece...
+                </div>
+                <div class="description full">
+                    Epic sailing journey from Policoro to Gallipoli, Santa Maria di Leuca, across to Mathraki Port in
+                    Greece, and back to Policoro. This was a true Mediterranean adventure covering the stunning
+                    coastlines of Southern Italy and the Greek islands. The route took us through the historic waters of
+                    the Ionian Sea, passing ancient settlements and dramatic coastal landscapes. From the beaches of
+                    Basilicata to the baroque architecture of Lecce, then to the southernmost point of Puglia at Santa
+                    Maria di Leuca, before crossing to the remote Greek island of Mathraki. This journey combined
+                    navigation challenges, cultural discovery, and the pure joy of sailing in some of the most beautiful
+                    waters in the world.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- Pre-2013 Porto Pozzo Sailing School -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <div class="year">Pre-2013</div>
+                <div class="trip-title">🏫 Porto Pozzo Sailing School</div>
+                <div class="distance">~5 NM Training</div>
+                <div class="description preview">
+                    Intensive sailing training at Porto Pozzo, Sardinia, focusing on practical maneuvers and boat
+                    handling...
+                </div>
+                <div class="description full">
+                    Intensive sailing training at Porto Pozzo, Sardinia, focusing on practical maneuvers and boat
+                    handling. This beautiful location on the northern coast of Sardinia provided excellent conditions
+                    for learning advanced sailing techniques. The training covered close-quarters maneuvering, anchoring
+                    techniques, sail trimming, and emergency procedures. The crystal-clear waters and consistent winds
+                    of the Costa Smeralda made it an ideal learning environment for developing confidence and skill on
+                    the water.
+                </div>
+                <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
+            </div>
+        </div>
+
+        <!-- Pre-2013 Italian Sailing License -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content certification">
+                <div class="year">Pre-2013</div>
+                <div class="trip-title">🎓 Italian Sailing License Theory</div>
+                <div class="distance">Above 12 Miles Certification</div>
+                <div class="description preview">
+                    Obtained theoretical certification for sailing above 12 nautical miles in Italian waters...
+                </div>
+                <div class="description full">
+                    Obtained theoretical certification for sailing above 12 nautical miles in Italian waters. This
+                    comprehensive course covered navigation theory, maritime regulations, weather systems, and safety
+                    procedures required for offshore sailing. The certification allowed me to legally skipper vessels in
+                    Italian territorial waters and beyond the 12-mile limit, opening up opportunities for longer coastal
+                    passages and island-hopping adventures in the Mediterranean.
                 </div>
                 <button class="read-more-btn" onclick="toggleDescription(this)">Read more</button>
             </div>

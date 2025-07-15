@@ -1,68 +1,77 @@
 # Current Project State
 
-## ✅ COMPLETED: Sailing Timeline Vanta.js Waves Background (January 2025)
+## ✅ COMPLETED: Text Readability & Waves Visibility (January 2025)
 
 ### Latest Task Completed:
-**Sailing Timeline Enhancement** - Successfully added Vanta.js waves effect as full-page background that persists when scrolling
+**Text Readability & Waves Enhancement** - Improved text readability on project management and hobbies pages, enhanced waves visibility on sailing page
 
 ### Changes Made:
-- **Vanta.js Waves Integration**: Added beautiful animated waves background using waves effect
-- **Full-Page Background**: Waves effect covers entire page and persists when scrolling down
-- **Fixed Position Canvas**: Background canvas is fixed to viewport for continuous effect
-- **Banner Update**: Updated banner to use semi-transparent background with backdrop blur
-- **Consistent Color Scheme**: Uses same muted blue color (`0x4a90e2`) as other pages
-- **Enhanced Visual Appeal**: Creates immersive ocean-like atmosphere perfect for sailing theme
+- **Project Management Text Readability**:
+  - Added semi-transparent white background with backdrop blur to hero content
+  - Added text shadows to all text elements for better contrast
+  - Enhanced visual separation from background clouds
+- **Hobbies Text Readability**:
+  - Added semi-transparent white background with backdrop blur to hero content
+  - Added text shadows to all text elements for better contrast
+  - Enhanced visual separation from green cells background
+- **Sailing Waves Visibility**:
+  - Increased wave height from 40.50 to 80.00 for more prominent waves
+  - Increased wave speed from 1.05 to 1.50 for more dynamic movement
+  - Reduced shininess from 27.00 to 15.00 for less reflective, more visible waves
+  - Increased zoom from 0.65 to 0.8 for better wave visibility
+  - Waves now much more prominent and ocean-like
 
-### Technical Implementation:
-- **Canvas Element**: Added `#vanta-canvas` div with fixed positioning
-- **Z-Index Management**: Canvas positioned behind all content (z-index: -1)
-- **Responsive Design**: Waves effect works on all screen sizes
-- **Performance Optimized**: Uses CDN libraries for fast loading
-
-### Vanta.js Configuration:
-- **Effect**: Waves with ocean-like movement
-- **Color**: Muted blue (`0x4a90e2`) matching other pages
-- **Wave Height**: 40.50 for realistic ocean waves
-- **Wave Speed**: 1.05 for smooth, natural movement
-- **Shininess**: 27.00 for realistic water appearance
-- **Zoom**: 0.65 for optimal viewing
+### Technical Improvements:
+- **Hero Content Enhancement**: All hero sections now have `rgba(255, 255, 255, 0.9)` background with `backdrop-filter: blur(10px)`
+- **Text Shadows**: Added subtle shadows (`0 2px 4px rgba(0, 0, 0, 0.1)`) to titles and (`0 1px 2px rgba(0, 0, 0, 0.1)`) to subtitles/descriptions
+- **Visual Separation**: Rounded corners and box shadows create clear content separation
+- **Waves Optimization**: More dramatic wave movement and visibility while maintaining performance
 
 ### Previous Completed Tasks:
-1. **Coder Page**: Created with Vanta.js birds and Medium articles
-2. **Hobbies Page**: Created with Vanta.js cells and Medium articles
-3. **Project Management Page**: Created with Vanta.js clouds and Medium articles
-4. **LinkedIn Button Fixes**: Updated to go to profile instead of chat
-5. **Gallery Page Deletion**: Removed gallery page and updated navigation
-6. **Instagram Integration**: Was implemented but removed with gallery deletion
-7. **Banner Certification**: Added "Currently holding certification: Day skipper" under name
-8. **WhatsApp Privacy**: Removed specific phone number from link
-9. **2024 Sailboat Sale**: Added proper timeline entry positioned between 2025 and 2023
-10. **Banner Simplification**: Streamlined to photo + certification + availability message  
-11. **2016 Sailboat Ownership**: Added purchase timeline entry
-12. **Navigation Consistency**: Professional navbar across all pages
-13. **Timeline Reversal**: Newest entries first chronological order
-14. **2025 Entries**: Added Gibraltar coastal skipper and Morocco trips
+1. **Color Scheme Optimization**: Updated hobbies to green theme and reduced project management contrast
+2. **Sailing Timeline Enhancement**: Added Vanta.js waves effect as full-page background
+3. **Coder Page**: Created with Vanta.js birds and Medium articles
+4. **Hobbies Page**: Created with Vanta.js cells and Medium articles
+5. **Project Management Page**: Created with Vanta.js clouds and Medium articles
+6. **LinkedIn Button Fixes**: Updated to go to profile instead of chat
+7. **Gallery Page Deletion**: Removed gallery page and updated navigation
+8. **Instagram Integration**: Was implemented but removed with gallery deletion
+9. **Banner Certification**: Added "Currently holding certification: Day skipper" under name
+10. **WhatsApp Privacy**: Removed specific phone number from link
+11. **2024 Sailboat Sale**: Added proper timeline entry positioned between 2025 and 2023
+12. **Banner Simplification**: Streamlined to photo + certification + availability message  
+13. **2016 Sailboat Ownership**: Added purchase timeline entry
+14. **Navigation Consistency**: Professional navbar across all pages
+15. **Timeline Reversal**: Newest entries first chronological order
+16. **2025 Entries**: Added Gibraltar coastal skipper and Morocco trips
 
 ### Status: 
-✅ **Sailing Timeline Enhanced** - Beautiful waves background that persists on scroll
-✅ **All Pages Complete** - Every page now has unique Vanta.js background effects
+✅ **Text Readability Optimized** - All text now clearly readable against animated backgrounds
+✅ **Waves Visibility Enhanced** - Sailing page waves are now prominent and ocean-like
+✅ **All Pages Complete** - Every page has unique Vanta.js background effects with proper colors and readability
 ✅ **Navigation Complete** - All pages link to dedicated sections
 ✅ **Professional Design** - Consistent with existing site aesthetic
 ✅ **LinkedIn Integration** - Direct profile buttons on all pages
 
 ### Current Website Structure:
 - **index.html**: Main page with professional navbar and sections
-- **sailing-timeline.html**: Timeline with sailing history + Vanta.js waves background
-- **project-management.html**: Dedicated project management page with clouds effect
-- **hobbies.html**: Dedicated hobbies page with cells effect
+- **sailing-timeline.html**: Timeline with sailing history + Vanta.js waves background (enhanced visibility)
+- **project-management.html**: Dedicated project management page with clouds effect (muted) + readable text
+- **hobbies.html**: Dedicated hobbies page with cells effect (green theme) + readable text
 - **coder.html**: Dedicated coder page with birds effect
 - **Navigation**: Complete 5-item navigation menu with all links functional
 
 ### Vanta.js Effects Summary:
-- **Sailing Timeline**: Waves effect (ocean-like, full-page, scroll-persistent)
-- **Project Management**: Clouds effect with muted colors
-- **Hobbies**: Cells effect with same muted color scheme
+- **Sailing Timeline**: Waves effect (ocean-like, full-page, scroll-persistent, enhanced visibility)
+- **Project Management**: Clouds effect (muted blue sky, soft white clouds, reduced contrast)
+- **Hobbies**: Cells effect (green theme: `0x2ecc71`, `0x27ae60`)
 - **Coder**: Birds effect with same muted color scheme
+
+### Color Themes by Page:
+- **Sailing**: Ocean blue waves (`0x4a90e2`) - perfect for sailing theme with enhanced visibility
+- **Project Management**: Muted blue sky (`0x7ba7d1`) with soft clouds - professional and calm
+- **Hobbies**: Green cells (`0x2ecc71`, `0x27ae60`) - natural and organic
+- **Coder**: Blue birds - consistent with overall site theme
 
 ### Next Steps:
 - Add actual Medium article links when available

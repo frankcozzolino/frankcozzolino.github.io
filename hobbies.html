@@ -7,6 +7,12 @@
     <title>Hobbies - Frank Cozzolino</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Hobbies Page Specific Navigation */
+        .nav-menu a:hover {
+            color: #00A0A0 !important;
+            text-shadow: 0 2px 8px rgba(0, 160, 160, 0.3) !important;
+        }
+
         /* Hobbies Page Specific Styles */
         .vanta-hero {
             height: 100vh;
@@ -261,61 +267,61 @@
 
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .article-card {
+        .hobby-card {
             background: #f8f9fa;
             border-radius: 15px;
             padding: 2rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
-        .article-card:hover {
+        .hobby-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
 
-        .article-title {
-            font-size: 1.3rem;
+        .hobby-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hobby-title {
+            font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: #2c3e50;
             line-height: 1.4;
         }
 
-        .article-excerpt {
+        .hobby-description {
             color: #666;
             line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .article-meta {
+            font-size: 0.95rem;
+            flex-grow: 1;
             display: flex;
-            justify-content: space-between;
             align-items: center;
         }
 
-        .medium-badge {
-            background: #00ab6c;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
 
-        .read-more {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .read-more:hover {
-            color: #2980b9;
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 768px) {
@@ -329,6 +335,11 @@
 
             .articles-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .hobby-card {
+                height: auto;
+                min-height: 250px;
             }
 
             .color-panel {
@@ -355,6 +366,7 @@
                 <li><a href="coder.html">Coder</a></li>
                 <li><a href="project-management.html">Project Management</a></li>
                 <li><a href="hobbies.html">Hobbies</a></li>
+                <li><a href="blog.html">Blog</a></li>
             </ul>
             <div class="social-icons">
                 <a href="https://wa.me/your-number" class="social-icon" title="WhatsApp">
@@ -481,85 +493,61 @@
         </div>
     </section>
 
-    <!-- Medium Articles Section -->
+    <!-- Hobbies Section -->
     <section class="articles-section">
         <div class="articles-container">
-            <h2 class="section-title">Hobbies & Lifestyle Insights</h2>
+            <h2 class="section-title">My Hobbies & Interests</h2>
             <div class="articles-grid">
-                <div class="article-card">
-                    <h3 class="article-title">The Art of Stakeholder Management in Digital Transformation</h3>
-                    <p class="article-excerpt">
-                        Explore proven strategies for managing diverse stakeholder expectations during complex digital
-                        transformation projects.
-                        Learn how to align technical and business objectives while maintaining project momentum.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">🌱</div>
+                    <h3 class="hobby-title">Hydroponics</h3>
+                    <p class="hobby-description">Growing plants without soil using nutrient-rich water solutions and
+                        innovative growing systems.</p>
                 </div>
 
-                <div class="article-card">
-                    <h3 class="article-title">Agile vs Waterfall: Choosing the Right Methodology</h3>
-                    <p class="article-excerpt">
-                        A comprehensive guide to selecting the optimal project management methodology based on project
-                        scope,
-                        team dynamics, and organizational culture. Real-world case studies and decision frameworks.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">✍️</div>
+                    <h3 class="hobby-title">Writing</h3>
+                    <p class="hobby-description">Crafting stories, articles, and creative content across various genres
+                        and platforms.</p>
                 </div>
 
-                <div class="article-card">
-                    <h3 class="article-title">Solution Architecture: From Requirements to Implementation</h3>
-                    <p class="article-excerpt">
-                        Step-by-step approach to designing robust solution architectures that scale.
-                        Covering requirement analysis, technology selection, and implementation strategies.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">📈</div>
+                    <h3 class="hobby-title">Trading</h3>
+                    <p class="hobby-description">Analyzing financial markets, developing trading strategies, and
+                        managing investment portfolios.</p>
                 </div>
 
-                <div class="article-card">
-                    <h3 class="article-title">Risk Management in Software Development Projects</h3>
-                    <p class="article-excerpt">
-                        Proactive risk identification and mitigation strategies for software development projects.
-                        Tools, techniques, and best practices for maintaining project health and delivery timelines.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">🌌</div>
+                    <h3 class="hobby-title">Astrophotography</h3>
+                    <p class="hobby-description">Capturing the beauty of celestial objects and night sky phenomena
+                        through specialized photography techniques.</p>
                 </div>
 
-                <div class="article-card">
-                    <h3 class="article-title">Building High-Performance Project Teams</h3>
-                    <p class="article-excerpt">
-                        Leadership strategies for assembling and motivating cross-functional project teams.
-                        Focus on communication, collaboration, and continuous improvement in project delivery.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">⚡</div>
+                    <h3 class="hobby-title">Electronics</h3>
+                    <p class="hobby-description">Building circuits, working with microcontrollers, and creating
+                        electronic projects and prototypes.</p>
                 </div>
 
-                <div class="article-card">
-                    <h3 class="article-title">Digital Transformation: A Project Manager's Perspective</h3>
-                    <p class="article-excerpt">
-                        Insights from leading digital transformation initiatives across various industries.
-                        Key success factors, common pitfalls, and lessons learned from real-world implementations.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">🏛️</div>
+                    <h3 class="hobby-title">Archeology (History)</h3>
+                    <p class="hobby-description">Exploring ancient civilizations, historical artifacts, and
+                        understanding human cultural evolution.</p>
+                </div>
+
+                <div class="hobby-card">
+                    <div class="hobby-icon">🌍</div>
+                    <h3 class="hobby-title">GeoGuessing</h3>
+                    <p class="hobby-description">Using geographical clues and visual analysis to identify locations
+                        around the world through online games and challenges.</p>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -568,212 +556,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
     <script>
-        // Global variable to store the Vanta instance
-        let vantaEffect = null;
-
         // Initialize Vanta.js
-        function initVanta() {
-            if (vantaEffect) {
-                vantaEffect.destroy();
-            }
-
-            vantaEffect = VANTA.CELLS({
-                el: "#vanta-canvas",
-                mouseControls: true,
-                touchControls: true,
-                gyroControls: false,
-                minHeight: 200.00,
-                minWidth: 200.00,
-                scale: 1.00,
-                color1: 0x00A0A0,
-                color2: 0xF2E735,
-                size: 1.50,
-                speed: 1.00
-            });
-        }
-
-        // Initialize on page load
-        initVanta();
-
-        // Panel functionality disabled - panel is commented out
-        // All event listeners and functions below are disabled to prevent errors
-
-        // Color picker event listeners
-        document.getElementById('color1-picker').addEventListener('input', function (e) {
-            const hex = e.target.value.toUpperCase();
-            document.getElementById('color1-hex').value = hex;
+        VANTA.CELLS({
+            el: "#vanta-canvas",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            color1: 0x00A0A0,
+            color2: 0xF2E735,
+            size: 1.50,
+            speed: 1.00
         });
-
-        document.getElementById('color2-picker').addEventListener('input', function (e) {
-            const hex = e.target.value.toUpperCase();
-            document.getElementById('color2-hex').value = hex;
-        });
-
-        // Hex input event listeners
-        document.getElementById('color1-hex').addEventListener('input', function (e) {
-            let hex = e.target.value.toUpperCase();
-            if (hex.startsWith('#')) {
-                hex = hex.substring(1);
-            }
-            if (hex.length === 6) {
-                document.getElementById('color1-picker').value = '#' + hex;
-            }
-        });
-
-        document.getElementById('color2-hex').addEventListener('input', function (e) {
-            let hex = e.target.value.toUpperCase();
-            if (hex.startsWith('#')) {
-                hex = hex.substring(1);
-            }
-            if (hex.length === 6) {
-                document.getElementById('color2-picker').value = '#' + hex;
-            }
-        });
-
-        // Slider event listeners
-        document.getElementById('size-slider').addEventListener('input', function (e) {
-            const value = parseFloat(e.target.value).toFixed(2);
-            document.getElementById('size-input').value = value;
-            document.getElementById('size-value').textContent = value;
-        });
-
-        document.getElementById('speed-slider').addEventListener('input', function (e) {
-            const value = parseFloat(e.target.value).toFixed(2);
-            document.getElementById('speed-input').value = value;
-            document.getElementById('speed-value').textContent = value;
-        });
-
-        // Input field event listeners
-        document.getElementById('size-input').addEventListener('input', function (e) {
-            const value = parseFloat(e.target.value).toFixed(2);
-            document.getElementById('size-slider').value = value;
-            document.getElementById('size-value').textContent = value;
-        });
-
-        document.getElementById('speed-input').addEventListener('input', function (e) {
-            const value = parseFloat(e.target.value).toFixed(2);
-            document.getElementById('speed-slider').value = value;
-            document.getElementById('speed-value').textContent = value;
-        });
-
-        // Apply changes function
-        function applyChanges() {
-            // Show visual feedback
-            const applyBtn = document.querySelector('.btn-apply');
-            const statusMsg = document.getElementById('status-message');
-            const originalText = applyBtn.textContent;
-            applyBtn.textContent = 'Applying...';
-            applyBtn.style.background = '#FF9800';
-
-            // Apply changes
-            initVanta();
-            updateLinkedInButton();
-
-            // Show status message
-            statusMsg.textContent = 'Changes applied!';
-            statusMsg.style.color = '#4CAF50';
-
-            // Reset button and status after a short delay
-            setTimeout(() => {
-                applyBtn.textContent = originalText;
-                applyBtn.style.background = '#4CAF50';
-                statusMsg.textContent = '';
-            }, 1500);
-        }
-
-        // Reset to default function
-        function resetToDefault() {
-            document.getElementById('color1-picker').value = '#1B1F0D';
-            document.getElementById('color1-hex').value = '#1B1F0D';
-            document.getElementById('color2-picker').value = '#F5FF53';
-            document.getElementById('color2-hex').value = '#F5FF53';
-            document.getElementById('size-slider').value = '1.5';
-            document.getElementById('size-input').value = '1.50';
-            document.getElementById('size-value').textContent = '1.50';
-            document.getElementById('speed-slider').value = '1';
-            document.getElementById('speed-input').value = '1.00';
-            document.getElementById('speed-value').textContent = '1.00';
-
-            initVanta();
-            updateLinkedInButton();
-        }
-
-        // Copy code function
-        function copyCode() {
-            const color1 = document.getElementById('color1-hex').value.replace('#', '0x');
-            const color2 = document.getElementById('color2-hex').value.replace('#', '0x');
-            const size = document.getElementById('size-input').value;
-            const speed = document.getElementById('speed-input').value;
-
-            const code = `VANTA.CELLS({
-    el: "#vanta-canvas",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.00,
-    color1: ${color1},
-    color2: ${color2},
-    size: ${size},
-    speed: ${speed}
-})`;
-
-            navigator.clipboard.writeText(code).then(function () {
-                alert('Code copied to clipboard!');
-            }).catch(function (err) {
-                console.error('Could not copy text: ', err);
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = code;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                alert('Code copied to clipboard!');
-            });
-        }
-
-        // Update LinkedIn button colors
-        function updateLinkedInButton() {
-            const color1 = document.getElementById('color1-hex').value;
-            const color2 = document.getElementById('color2-hex').value;
-            const button = document.querySelector('.linkedin-chat-btn');
-
-            button.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
-            button.style.boxShadow = `0 4px 15px ${color1}4D`;
-
-            // Update hover state
-            const style = document.createElement('style');
-            style.textContent = `
-                .linkedin-chat-btn:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 6px 20px ${color1}66;
-                    background: linear-gradient(135deg, ${color2}, ${color1}) !important;
-                }
-            `;
-
-            // Remove old style if exists
-            const oldStyle = document.querySelector('style[data-linkedin-hover]');
-            if (oldStyle) {
-                oldStyle.remove();
-            }
-
-            style.setAttribute('data-linkedin-hover', 'true');
-            document.head.appendChild(style);
-        }
-
-        // Auto-apply changes on input for real-time updates
-        document.getElementById('color1-picker').addEventListener('change', applyChanges);
-        document.getElementById('color2-picker').addEventListener('change', applyChanges);
-        document.getElementById('size-slider').addEventListener('change', applyChanges);
-        document.getElementById('speed-slider').addEventListener('change', applyChanges);
-
-        // Also apply on hex input changes
-        document.getElementById('color1-hex').addEventListener('change', applyChanges);
-        document.getElementById('color2-hex').addEventListener('change', applyChanges);
-        document.getElementById('size-input').addEventListener('change', applyChanges);
-        document.getElementById('speed-input').addEventListener('change', applyChanges);
     </script>
 </body>
 

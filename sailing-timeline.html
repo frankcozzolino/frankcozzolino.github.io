@@ -9,6 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Sailing Page Specific Navigation */
+        .nav-menu a:hover {
+            color: #8e44ad !important;
+            text-shadow: 0 2px 8px rgba(142, 68, 173, 0.3) !important;
+        }
+
         /* Global Styles */
         * {
             margin: 0;
@@ -100,7 +106,10 @@
         }
 
         .nav-menu a:hover {
-            color: #4a9eff;
+            color: #8e44ad;
+            text-decoration: none;
+            transform: translateY(-2px);
+            text-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
         }
 
         /* Social Media Icons */
@@ -571,6 +580,7 @@
                 <li><a href="coder.html">Coder</a></li>
                 <li><a href="project-management.html">Project Management</a></li>
                 <li><a href="hobbies.html">Hobbies</a></li>
+                <li><a href="blog.html">Blog</a></li>
             </ul>
             <div class="social-icons">
                 <a href="https://wa.me/your-number" class="social-icon" title="WhatsApp">
@@ -699,8 +709,83 @@
         // Load timeline data and create timeline items
         async function loadTimelineData() {
             try {
-                const response = await fetch('sailing-timeline-data.json');
-                const data = await response.json();
+                // Inline timeline data to avoid CORS issues with local files
+                const data = {
+                    "timeline": [
+                        {
+                            "year": 2025,
+                            "title": "Gibraltar Coastal Skipper",
+                            "distance": "Gibraltar Strait",
+                            "type": "certification",
+                            "preview": "Planned to undertake Coastal Skipper certification in Gibraltar, mastering navigation in challenging strait conditions.",
+                            "full": "Planning to complete intensive Coastal Skipper course in Gibraltar, focusing on advanced navigation techniques, weather routing, and handling challenging conditions in the Strait of Gibraltar. The course will cover night navigation, emergency procedures, and advanced seamanship skills required for coastal and offshore sailing."
+                        },
+                        {
+                            "year": 2025,
+                            "title": "Morocco Coastal Trip",
+                            "distance": "Gibraltar to Tangier",
+                            "type": "milestone",
+                            "preview": "Planning coastal navigation trip from Gibraltar to Tangier, Morocco.",
+                            "full": "Planning to lead a crew on a coastal navigation trip from Gibraltar to Tangier, Morocco. This journey will involve crossing international waters, dealing with varying weather conditions, and navigating through busy shipping lanes. The trip will provide valuable experience in international sailing and crew management."
+                        },
+                        {
+                            "year": 2024,
+                            "title": "Sailboat Sale",
+                            "distance": "N/A",
+                            "type": "milestone",
+                            "preview": "Successfully sold previous sailboat and upgraded to new vessel.",
+                            "full": "Completed the sale of previous sailboat and acquired a new vessel better suited for longer voyages and more challenging conditions. This transition involved extensive boat surveying, negotiation, and transfer of ownership documentation."
+                        },
+                        {
+                            "year": 2023,
+                            "title": "Mediterranean Cruise",
+                            "distance": "500+ nautical miles",
+                            "type": "milestone",
+                            "preview": "Completed extended Mediterranean cruise visiting multiple ports and islands.",
+                            "full": "Embarked on an extended Mediterranean cruise covering over 500 nautical miles. The journey included stops at various ports and islands, providing experience in different sailing conditions, port procedures, and international maritime regulations. This trip significantly enhanced offshore sailing skills and confidence."
+                        },
+                        {
+                            "year": 2022,
+                            "title": "Day Skipper Certification",
+                            "distance": "Various training areas",
+                            "type": "certification",
+                            "preview": "Obtained Day Skipper certification, qualifying to skipper yachts up to 24 meters.",
+                            "full": "Successfully completed Day Skipper course, gaining comprehensive knowledge of navigation, seamanship, and yacht handling. The certification qualifies to skipper yachts up to 24 meters in familiar waters during daylight hours. Course included practical navigation, safety procedures, and crew management."
+                        },
+                        {
+                            "year": 2021,
+                            "title": "Competent Crew Training",
+                            "distance": "Training waters",
+                            "type": "training",
+                            "preview": "Completed Competent Crew course, learning fundamental sailing skills and safety procedures.",
+                            "full": "Attended Competent Crew course to develop fundamental sailing skills including rope work, sail handling, helming, and safety procedures. This foundational training provided essential knowledge for safe participation in sailing activities and crew operations."
+                        },
+                        {
+                            "year": 2020,
+                            "title": "First Solo Sail",
+                            "distance": "50 nautical miles",
+                            "type": "milestone",
+                            "preview": "Completed first solo sailing trip, marking a significant personal achievement.",
+                            "full": "Successfully completed first solo sailing trip covering 50 nautical miles. This milestone represented a major step in sailing confidence and independence, requiring complete self-reliance in navigation, boat handling, and decision-making under various conditions."
+                        },
+                        {
+                            "year": 2019,
+                            "title": "Sailing Course Introduction",
+                            "distance": "Local waters",
+                            "type": "training",
+                            "preview": "Began formal sailing education with introductory courses.",
+                            "full": "Started formal sailing education with introductory courses covering basic sailing theory, safety procedures, and practical skills. These foundational courses provided the essential knowledge and confidence to begin sailing independently and pursue further certifications."
+                        },
+                        {
+                            "year": 2018,
+                            "title": "First Sailing Experience",
+                            "distance": "Local waters",
+                            "type": "milestone",
+                            "preview": "First introduction to sailing, sparking passion for maritime activities.",
+                            "full": "Experienced sailing for the first time, which ignited a passion for maritime activities and ocean navigation. This initial experience led to the decision to pursue formal sailing education and certifications to develop professional sailing skills."
+                        }
+                    ]
+                };
 
                 const timelineContainer = document.getElementById('timeline-items');
 

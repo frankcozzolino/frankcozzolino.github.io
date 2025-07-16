@@ -533,7 +533,10 @@ body {
 }
 
 .nav-menu a:hover {
-    color: #4a9eff;
+    color: #8e44ad;
+    text-decoration: none;
+    transform: translateY(-2px);
+    text-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
 }
 
 /* SOCIAL MEDIA ICONS */

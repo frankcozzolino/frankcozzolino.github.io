@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Blog - Frank Cozzolino</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Blog Page Specific Navigation */
+        .nav-menu a:hover {
+            color: #3498db !important;
+            text-shadow: 0 2px 8px rgba(52, 152, 219, 0.3) !important;
+        }
+
+        /* Blog Page Specific Styles */
+        .vanta-hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #333;
+            z-index: 10;
+            max-width: 800px;
+            padding: 0 20px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #34495e;
+            font-weight: 300;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+            line-height: 1.8;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .linkedin-chat-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .linkedin-chat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+        }
+
+        .articles-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .articles-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .article-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 350px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .article-excerpt {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .medium-badge {
+            background: #00ab6c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .read-more {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #2980b9;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-card {
+                height: auto;
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- PROFESSIONAL NAVIGATION -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo-signature">
+                <img src="images/signature.png" alt="Frank Cozzolino" class="signature-img">
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sailing-timeline.html">Sailing</a></li>
+                <li><a href="coder.html">Coder</a></li>
+                <li><a href="project-management.html">Project Management</a></li>
+                <li><a href="hobbies.html">Hobbies</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="https://wa.me/your-number" class="social-icon" title="WhatsApp">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>WhatsApp</title>
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.891 3.488" />
+                    </svg>
+                </a>
+                <a href="https://discord.gg/your-server" class="social-icon" title="Discord">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Discord</title>
+                        <path
+                            d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/cozzolinofrancesco/" class="social-icon" title="LinkedIn">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>LinkedIn</title>
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                </a>
+                <a href="https://instagram.com/your-profile" class="social-icon" title="Instagram">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Instagram</title>
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+                <a href="mailto:your.email@gmail.com" class="social-icon" title="Gmail">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Gmail</title>
+                        <path
+                            d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+                    </svg>
+                </a>
+                <a href="https://github.com/your-profile" class="social-icon" title="GitHub">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>GitHub</title>
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                </a>
+                <a href="https://calendly.com/your-profile" class="social-icon" title="Schedule a Call">
+                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <title>Calendar</title>
+                        <path
+                            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H5V10h14v8z" />
+                    </svg>
+                </a>
+                <a href="https://youtube.com/@your-channel" class="social-icon" title="YouTube">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>YouTube</title>
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Vanta.js Hero Section -->
+    <section class="vanta-hero" id="vanta-canvas">
+        <div class="hero-content">
+            <h1 class="hero-title">Blog & Insights</h1>
+            <p class="hero-subtitle">Thoughts, ideas, and professional insights</p>
+            <p class="hero-description">
+                Welcome to my blog where I share thoughts on technology, project management, and professional
+                development.
+                From technical deep-dives to industry insights, explore articles that bridge the gap between innovation
+                and practical application.
+            </p>
+            <a href="https://www.linkedin.com/in/cozzolinofrancesco/" class="linkedin-chat-btn" target="_blank">
+                Let's Connect on LinkedIn
+            </a>
+        </div>
+    </section>
+
+    <!-- Medium Articles Section -->
+    <section class="articles-section">
+        <div class="articles-container">
+            <h2 class="section-title">Latest Articles</h2>
+            <div id="blog-content" class="articles-grid">
+                <!-- Articles will be loaded here dynamically -->
+                <div style="text-align:center;padding:3rem;color:#666;">
+                    <h3>Loading articles...</h3>
+                    <div
+                        style="width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #3498db;border-radius:50%;animation:spin 1s linear infinite;margin:1rem auto;">
+                    </div>
+                </div>
+            </div>
+            <script>
+                // RSS to JSON conversion service
+                const RSS_TO_JSON_API = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@francesco.cozzolino';
+
+                let articles = [];
+                let currentArticleId = null;
+
+                // Initialize the page
+                document.addEventListener('DOMContentLoaded', function () {
+                    handleURLNavigation();
+                    loadArticles();
+                });
+
+                // Handle URL navigation for direct article links
+                function handleURLNavigation() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const articleId = urlParams.get('article');
+                    if (articleId) {
+                        currentArticleId = articleId;
+                        // Show loading state for article
+                        const container = document.getElementById('blog-content');
+                        container.innerHTML = `
+                            <div style="text-align:center;padding:3rem;color:#666;">
+                                <h3>Loading article...</h3>
+                                <div style="width:40px;height:40px;border:4px solid #f3f3f3;border-top:4px solid #3498db;border-radius:50%;animation:spin 1s linear infinite;margin:1rem auto;"></div>
+                            </div>
+                        `;
+                    }
+                }
+
+                // Generate URL-friendly ID from article title
+                function generateArticleId(title) {
+                    return title.toLowerCase()
+                        .replace(/[^a-z0-9\s]/g, '')
+                        .replace(/\s+/g, '-')
+                        .substring(0, 50);
+                }
+
+                // Load articles from RSS feed
+                async function loadArticles() {
+                    try {
+                        const response = await fetch(RSS_TO_JSON_API);
+                        const data = await response.json();
+
+                        if (data.status === 'ok') {
+                            articles = data.items.map((item, index) => ({
+                                id: generateArticleId(item.title),
+                                title: item.title,
+                                content: item.content,
+                                textContent: extractTextContent(item.content),
+                                link: item.link,
+                                pubDate: new Date(item.pubDate).toLocaleDateString(),
+                                description: item.description || extractDescription(item.content),
+                                image: extractFirstImage(item.content)
+                            }));
+
+                            // Always render the grid first, then show article if needed
+                            if (currentArticleId) {
+                                // Find the article and show it
+                                const article = articles.find(a => a.id === currentArticleId);
+                                if (article) {
+                                    showArticle(currentArticleId);
+                                } else {
+                                    // Article not found, show grid
+                                    currentArticleId = null;
+                                    renderArticleGrid();
+                                }
+                            } else {
+                                renderArticleGrid();
+                            }
+                        } else {
+                            showError('Failed to load articles');
+                        }
+                    } catch (error) {
+                        console.error('Error loading articles:', error);
+                        showError('Error loading articles. Please try again later.');
+                    }
+                }
+
+                // Extract first image from article content
+                function extractFirstImage(content) {
+                    const imgMatch = content.match(/<img[^>]+src="([^"]+)"/);
+                    return imgMatch ? imgMatch[1] : 'https://miro.medium.com/v2/resize:fill:400:200/1*6Q2vQw1n6Qw1n6Q2vQw1nA.png';
+                }
+
+                // Extract description from content
+                function extractDescription(content) {
+                    const textContent = content.replace(/<[^>]+>/g, '');
+                    return textContent.substring(0, 150) + '...';
+                }
+
+                // Extract text content without images
+                function extractTextContent(content) {
+                    // Remove all image tags but keep the rest of the HTML structure
+                    return content.replace(/<img[^>]*>/g, '');
+                }
+
+                // Render the article grid
+                function renderArticleGrid() {
+                    document.querySelector('.section-title').textContent = 'Latest Articles';
+
+                    const container = document.getElementById('blog-content');
+                    container.innerHTML = '';
+                    container.className = 'articles-grid';
+
+                    articles.forEach(article => {
+                        const card = document.createElement('div');
+                        card.className = 'article-card';
+                        card.style.cursor = 'pointer';
+                        card.innerHTML = `
+                         <img src="${article.image}" alt="${article.title}" style="width:100%;height:200px;object-fit:cover;border-radius:15px 15px 0 0;flex-shrink:0;">
+                         <div style="padding:1.5rem;flex-grow:1;display:flex;flex-direction:column;">
+                             <h3 class="article-title" style="margin:0 0 0.5rem 0;font-size:1.1rem;line-height:1.3;font-weight:600;">${article.title}</h3>
+                             <p class="article-excerpt" style="margin:0;color:#666;font-size:0.9rem;line-height:1.4;flex-grow:1;">${article.description}</p>
+                             <p style="margin:0.5rem 0 0 0;color:#999;font-size:0.8rem;">${article.pubDate}</p>
+                         </div>
+                     `;
+                        card.onclick = () => showArticle(article.id);
+                        container.appendChild(card);
+                    });
+                }
+
+                // Show individual article
+                function showArticle(articleId) {
+                    const article = articles.find(a => a.id === articleId);
+                    if (!article) return;
+
+                    // Update URL without page reload
+                    const newUrl = `${window.location.pathname}?article=${articleId}`;
+                    window.history.pushState({ articleId }, '', newUrl);
+
+                    document.querySelector('.section-title').innerHTML = `
+                        <a href="javascript:void(0)" onclick="showArticleGrid()" style="color:#2c3e50;text-decoration:none;font-size:1.2rem;font-weight:600;transition:color 0.3s ease;display:inline-block;margin-bottom:1rem;">← Back to Articles</a>
+                    `;
+
+                    const container = document.getElementById('blog-content');
+                    // Remove grid class and apply full width
+                    container.className = '';
+                    container.style.maxWidth = 'none';
+                    container.innerHTML = `
+                     <div class="article-content" style="max-width:1200px;margin:0 auto;padding:2rem;">
+                         <h1 style="font-size:2.5rem;margin-bottom:1rem;color:#2c3e50;line-height:1.2;font-weight:700;">${article.title}</h1>
+                         <p style="color:#34495e;margin-bottom:2rem;font-size:1rem;border-bottom:1px solid #eee;padding-bottom:1rem;font-weight:300;">Published: ${article.pubDate}</p>
+                         
+                         <!-- Featured Image -->
+                         <div style="margin:2rem 0;text-align:center;">
+                             <img src="${article.image}" alt="${article.title}" style="max-width:600px;width:100%;height:auto;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+                         </div>
+                         
+                         <div class="article-body" style="position:relative;overflow:hidden;max-height:700px;">
+                             ${article.textContent}
+                             
+                             <!-- Fade overlay -->
+                             <div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(transparent 0%, rgba(255,255,255,0.8) 70%, rgba(255,255,255,0.95) 90%, white 100%);pointer-events:none;"></div>
+                         </div>
+                         
+                         <div style="text-align:center;margin-top:2rem;padding:2rem;">
+                             <a href="${article.link}" target="_blank" style="display:inline-block;background:linear-gradient(135deg, #3498db, #2c3e50);color:white;padding:15px 30px;text-decoration:none;border-radius:50px;font-weight:600;font-size:1.1rem;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(52,152,219,0.3);">
+                                 Continue reading on Medium →
+                             </a>
+                             <div style="margin-top:1.5rem;">
+                                 <span style="color:#666;font-size:0.9rem;margin-right:0.5rem;">Share this article</span>
+                                 <button onclick="copyArticleUrl()" style="background:none;border:none;cursor:pointer;color:#999;padding:6px;border-radius:4px;transition:all 0.2s ease;opacity:0.6;" title="Copy link to share">
+                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                     </svg>
+                                 </button>
+                             </div>
+                         </div>
+                     </div>
+                 `;
+
+                    // Style the article content
+                    const articleBody = container.querySelector('.article-body');
+                    articleBody.style.overflow = 'hidden';
+                    articleBody.style.wordWrap = 'break-word';
+
+                    // Style any remaining images in content (should be none now, but just in case)
+                    const images = articleBody.querySelectorAll('img');
+                    images.forEach(img => {
+                        img.style.maxWidth = '100%';
+                        img.style.width = '100%';
+                        img.style.height = 'auto';
+                        img.style.borderRadius = '12px';
+                        img.style.margin = '2rem 0';
+                        img.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                        img.style.display = 'block';
+                        img.style.clear = 'both';
+                    });
+
+                    // Style paragraphs
+                    const paragraphs = articleBody.querySelectorAll('p');
+                    paragraphs.forEach(p => {
+                        p.style.marginBottom = '1.5rem';
+                        p.style.lineHeight = '1.8';
+                        p.style.fontSize = '1.1rem';
+                        p.style.color = '#2c3e50';
+                        p.style.clear = 'both';
+                        p.style.overflow = 'hidden';
+                        p.style.fontWeight = '300';
+                    });
+
+                    // Style headings
+                    const headings = articleBody.querySelectorAll('h1, h2, h3, h4, h5, h6');
+                    headings.forEach(h => {
+                        h.style.marginTop = '2rem';
+                        h.style.marginBottom = '1rem';
+                        h.style.color = '#2c3e50';
+                        h.style.fontWeight = '600';
+                    });
+
+                    // Style code blocks
+                    const codeBlocks = articleBody.querySelectorAll('pre, code');
+                    codeBlocks.forEach(code => {
+                        code.style.backgroundColor = '#f8f9fa';
+                        code.style.padding = '0.5rem';
+                        code.style.borderRadius = '6px';
+                        code.style.fontSize = '0.9rem';
+                        code.style.fontFamily = 'monospace';
+                    });
+
+                    // Add hover effects for buttons
+                    const mediumBtn = container.querySelector('a[href*="medium.com"]');
+                    const copyBtn = container.querySelector('button[onclick="copyArticleUrl()"]');
+                    const backBtn = document.querySelector('.section-title a');
+
+                    if (mediumBtn) {
+                        mediumBtn.addEventListener('mouseenter', function () {
+                            this.style.transform = 'translateY(-2px)';
+                            this.style.boxShadow = '0 6px 20px rgba(52,152,219,0.4)';
+                            this.style.background = 'linear-gradient(135deg, #2c3e50, #3498db)';
+                        });
+                        mediumBtn.addEventListener('mouseleave', function () {
+                            this.style.transform = 'translateY(0)';
+                            this.style.boxShadow = '0 4px 15px rgba(52,152,219,0.3)';
+                            this.style.background = 'linear-gradient(135deg, #3498db, #2c3e50)';
+                        });
+                    }
+
+                    if (copyBtn) {
+                        copyBtn.addEventListener('mouseenter', function () {
+                            this.style.opacity = '1';
+                            this.style.color = '#3498db';
+                            this.style.transform = 'scale(1.1)';
+                            this.style.background = 'rgba(52, 152, 219, 0.1)';
+                        });
+                        copyBtn.addEventListener('mouseleave', function () {
+                            this.style.opacity = '0.6';
+                            this.style.color = '#999';
+                            this.style.transform = 'scale(1)';
+                            this.style.background = 'none';
+                        });
+                    }
+
+                    if (backBtn) {
+                        backBtn.addEventListener('mouseenter', function () {
+                            this.style.color = '#3498db';
+                            this.style.transform = 'translateX(-5px)';
+                        });
+                        backBtn.addEventListener('mouseleave', function () {
+                            this.style.color = '#2c3e50';
+                            this.style.transform = 'translateX(0)';
+                        });
+                    }
+                }
+
+                // Show article grid (back navigation)
+                function showArticleGrid() {
+                    // Update URL without page reload
+                    window.history.pushState({}, '', window.location.pathname);
+
+                    // Restore grid layout
+                    const container = document.getElementById('blog-content');
+                    container.className = 'articles-grid';
+                    container.style.maxWidth = '';
+
+                    renderArticleGrid();
+                }
+
+                // Copy article URL for sharing
+                function copyArticleUrl() {
+                    const url = window.location.href;
+                    navigator.clipboard.writeText(url).then(() => {
+                        alert('Article link copied to clipboard!');
+                    }).catch(() => {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = url;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        alert('Article link copied to clipboard!');
+                    });
+                }
+
+                // Show error message
+                function showError(message) {
+                    const container = document.getElementById('blog-content');
+                    container.innerHTML = `
+                        <div style="text-align:center;padding:3rem;color:#666;">
+                            <h3>Unable to load articles</h3>
+                            <p>${message}</p>
+                            <button onclick="loadArticles()" style="background:#3498db;color:white;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;">
+                                Try Again
+                            </button>
+                        </div>
+                    `;
+                }
+
+                // Handle browser back/forward buttons
+                window.addEventListener('popstate', function (event) {
+                    if (event.state && event.state.articleId) {
+                        showArticle(event.state.articleId);
+                    } else {
+                        renderArticleGrid();
+                    }
+                });
+            </script>
+        </div>
+    </section>
+
+    <!-- Vanta.js Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script>
+        // Global variable to store the Vanta instance
+        let vantaEffect = null;
+
+        // Initialize Vanta.js
+        function initVanta() {
+            if (vantaEffect) {
+                vantaEffect.destroy();
+            }
+
+            vantaEffect = VANTA.NET({
+                el: "#vanta-canvas",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x3498db,
+                backgroundColor: 0xffffff,
+                points: 10.00,
+                maxDistance: 20.00,
+                spacing: 15.00
+            });
+        }
+
+        // Initialize on page load
+        initVanta();
+    </script>
+</body>
+
+</html>

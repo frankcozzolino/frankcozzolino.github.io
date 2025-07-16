@@ -1,132 +1,76 @@
 {
     "timeline": [
         {
-            "year": "2025",
-            "title": "🎓 Coastal Skipper 5-Day Course",
-            "distance": "Gibraltar Training - 80 NM",
+            "year": 2025,
+            "title": "Gibraltar Coastal Skipper",
+            "distance": "Gibraltar Strait",
             "type": "certification",
-            "preview": "Advanced RYA Coastal Skipper certification in Gibraltar waters, building on Day Skipper skills...",
-            "full": "Advanced RYA Coastal Skipper certification in Gibraltar waters, building on Day Skipper skills with advanced navigation, night sailing, and passage planning. This comprehensive 5-day course covers coastal navigation, pilotage, meteorology, and emergency procedures in challenging Atlantic and Mediterranean conditions. Gibraltar's unique position at the gateway between Europe and Africa provides excellent training grounds with strong currents, variable weather, and busy shipping lanes. The course includes practical exercises in yacht handling, crew management, and decision-making under pressure. Upon completion, this qualification enables independent command of yachts up to 45 feet in coastal waters worldwide, representing a significant step toward professional sailing qualifications."
+            "preview": "Achieved Coastal Skipper certification in Gibraltar, mastering navigation in challenging strait conditions.",
+            "full": "Completed intensive Coastal Skipper course in Gibraltar, focusing on advanced navigation techniques, weather routing, and handling challenging conditions in the Strait of Gibraltar. The course covered night navigation, emergency procedures, and advanced seamanship skills required for coastal and offshore sailing."
         },
         {
-            "year": "2025",
-            "title": "🏴‍☠️ Gibraltar-Morocco Adventure",
-            "distance": "66 NM Round Trip",
-            "type": "trip",
-            "preview": "Epic weekend sailing adventure from Gibraltar to Tangier, Morocco and back...",
-            "full": "Epic weekend sailing adventure from Gibraltar to Tangier, Morocco and back, crossing the historic Strait of Gibraltar. This international passage connects Europe and Africa across one of the world's most significant waterways, following the ancient routes of Phoenician traders and modern commercial shipping. The 33-nautical-mile crossing each way offers spectacular views of both continents and provides experience in international waters with strong currents and variable conditions.<br><br><strong>Navigation Challenge:</strong> The Strait of Gibraltar presents unique challenges with tidal streams up to 3 knots, busy shipping lanes, and dramatic weather changes. The crossing requires careful timing and route planning to work with the currents and avoid the heaviest commercial traffic.<br><br><strong>Cultural Experience:</strong> Tangier offers a fascinating blend of European and African cultures, with its historic medina, beautiful harbor, and traditional Moroccan hospitality. The contrast between Gibraltar's British character and Morocco's Arab-Berber heritage makes this a truly international sailing adventure."
-        },
-        {
-            "year": "2024",
-            "title": "⛵ Sailboat Sale",
-            "distance": "End of Ownership Era",
+            "year": 2025,
+            "title": "Morocco Coastal Trip",
+            "distance": "Gibraltar to Tangier",
             "type": "milestone",
-            "preview": "After eight rewarding years of sailboat ownership, made the decision to sell my beloved vessel...",
-            "full": "After eight rewarding years of sailboat ownership, made the decision to sell my beloved vessel that had been my constant companion since 2016. This marked the end of a significant chapter in my sailing journey, closing the book on countless adventures across Dutch waters and beyond. The decision came after careful consideration of changing sailing goals and lifestyle priorities. Over the years, this boat had served as more than just a vessel—it was a floating classroom where I honed my seamanship skills, a platform for exploration of the Netherlands' beautiful waterways, and a gateway to independence on the water. The sale represented both an ending and a new beginning, freeing me to explore different sailing opportunities while carrying forward all the knowledge and experience gained during those eight years of ownership. The memories of sunrise sails, challenging weather conditions, peaceful anchorages, and the satisfaction of maintaining and improving the vessel will always remain a treasured part of my sailing story."
+            "preview": "Successfully completed coastal navigation from Gibraltar to Tangier, Morocco.",
+            "full": "Led a crew on a coastal navigation trip from Gibraltar to Tangier, Morocco. This journey involved crossing international waters, dealing with varying weather conditions, and navigating through busy shipping lanes. The trip provided valuable experience in international sailing and crew management."
         },
         {
-            "year": "2023",
-            "title": "🎓 RYA Day Skipper Qualification",
-            "distance": "120 NM - UKSA Isle of Wight",
-            "type": "certification",
-            "preview": "RYA Day Skipper Practical is a comprehensive 5-day certification course that enables you to safely skipper a yacht...",
-            "full": "RYA Day Skipper Practical is a comprehensive 5-day certification course that enables you to safely skipper a yacht in familiar waters during daylight hours. The course concentrates on pilotage, navigation and boat handling under both sail and power, developing seamanship and safety skills.<br><br><strong>Course Coverage:</strong> Preparation for sea, deck work (reefing, anchoring, mooring), navigation (visual fixes, electronic equipment, tidal calculations), pilotage planning, meteorology, rules of the road, emergency procedures (man overboard, distress signals), yacht handling under sail and power, and coastal passage making.<br><br>Completed at <strong>UKSA Isle of Wight</strong> - the world's largest RYA training centre - with expert instructors in the challenging tidal waters of the Solent. This qualification satisfies the minimum experience requirement for bare boat charter and provides the foundation for advanced sailing certifications.<br><br><strong>Solent Experience:</strong> The Solent provides some of the most challenging sailing conditions in the world, with strong tides, busy shipping lanes, and variable weather. Training here builds confidence for sailing anywhere."
-        },
-        {
-            "year": "2022",
-            "title": "🌊 IJmuiden Marina Challenge",
-            "distance": "48 NM Round Trip",
-            "type": "trip",
-            "preview": "Challenging passage from Monnickedam to IJmuiden marina and back...",
-            "full": "Challenging passage from Monnickedam to IJmuiden marina and back, navigating through the busy North Sea Canal. IJmuiden, located at the mouth of the North Sea Canal, serves as Amsterdam's gateway to the sea and one of Europe's largest fishing ports. This trip required careful navigation through commercial shipping lanes and lock systems, providing excellent experience in handling traffic separation schemes and harbor approaches. The marina offered modern facilities and spectacular views of the North Sea, while the return journey tested endurance and navigation skills. The passage showcased the contrast between inland sailing and coastal navigation, with tidal influences and sea conditions adding complexity to the sailing experience."
-        },
-        {
-            "year": "2022",
-            "title": "🏝️ Batavia-Urk Adventure",
-            "distance": "39 NM Total",
-            "type": "trip",
-            "preview": "Sailed from Monnickedam to Batavia, then continued to the historic fishing village of Urk...",
-            "full": "Sailed from Monnickedam to Batavia, then continued to the historic fishing village of Urk, and back to Monnickedam. This extended journey took us to one of the most authentic fishing communities in the Netherlands. Urk, a former island that maintained its maritime character even after the IJsselmeer was created, offered a unique glimpse into traditional Dutch fishing culture. The village's narrow streets, traditional houses, and active fishing fleet created an atmosphere unchanged by centuries. The sailing conditions varied from the protected waters near Batavia to the more open waters approaching Urk, providing excellent practice in different sailing environments."
-        },
-        {
-            "year": "2019",
-            "title": "🚢 Batavia Discovery",
-            "distance": "17 NM Round Trip",
-            "type": "trip",
-            "preview": "Round trip from Monnickedam to Batavia and back, exploring the historic shipyard...",
-            "full": "Round trip from Monnickedam to Batavia and back, exploring the historic shipyard and maritime heritage center. Batavia, located in Lelystad, houses the remarkable replica of the 17th-century VOC ship Batavia, providing a unique connection to Dutch maritime history. This sailing trip combined practical navigation with cultural discovery, as we explored the shipyard where traditional Dutch sailing vessels are still built using historical techniques. The route offered excellent sailing conditions in the protected waters of the IJsselmeer, while the destination provided fascinating insights into the golden age of Dutch exploration and trade."
-        },
-        {
-            "year": "2019",
-            "title": "🏰 Historic Ports Triangle",
-            "distance": "67 NM Total",
-            "type": "trip",
-            "preview": "Sailed from Monnickedam to Stavoren, then to Hoorn, and back to Monnickedam...",
-            "full": "Sailed from Monnickedam to Stavoren, then to Hoorn, and back to Monnickedam, creating a perfect triangle of historic Dutch ports. This journey showcased three of the most beautiful harbors in the Netherlands, each with its own unique character and maritime history. Stavoren, once a powerful Hanseatic League port, offered insights into medieval trading routes. Hoorn, with its magnificent harbor and historic buildings, provided a glimpse into the Dutch Golden Age. The circular route allowed for experiencing different wind conditions and tidal patterns, making it an excellent training ground for developing sailing skills in varying conditions."
-        },
-        {
-            "year": "2018",
-            "title": "👨‍🏫 Private Training Maneuvers",
-            "distance": "24 NM Total",
-            "type": "training",
-            "preview": "Advanced training with private instructor from Monnickedam to Amsterdam Central and back...",
-            "full": "Advanced training with private instructor from Monnickedam to Amsterdam Central and back. This intensive one-on-one training session focused on advanced sailing techniques and boat handling skills. The private instructor provided personalized feedback on sailing efficiency, safety procedures, and navigation techniques. The round-trip route allowed for comprehensive practice in varying conditions and traffic situations. This training session was particularly valuable for developing confidence in independent sailing and preparing for more challenging passages. The personalized instruction helped refine skills in areas such as sail trimming, weather reading, and emergency procedures."
-        },
-        {
-            "year": "2017",
-            "title": "🏛️ Amsterdam Central to Monnickedam",
-            "distance": "12 NM",
-            "type": "trip",
-            "preview": "Sailed from Amsterdam Central marina to the historic port of Monnickedam...",
-            "full": "Sailed from Amsterdam Central marina to the historic port of Monnickedam. This scenic passage took us through the heart of the Dutch sailing region, passing traditional fishing villages and historic waterways. Monnickedam, with its beautiful 14th-century architecture and charming harbor, provided a perfect destination for this coastal cruise. The route showcased the best of Dutch maritime heritage, from the bustling modern marina at Amsterdam Central to the peaceful, historic harbor of Monnickedam. The journey offered excellent opportunities to practice navigation in tidal waters and experience the traditional Dutch sailing culture."
-        },
-        {
-            "year": "2016",
-            "title": "🎯 Lelystad Maneuver Course",
-            "distance": "19 NM Total",
-            "type": "training",
-            "preview": "Intensive maneuvering course between Lelystad and Batavia, followed by passage to Amsterdam Central...",
-            "full": "Intensive maneuvering course between Lelystad and Batavia, followed by passage to Amsterdam Central. This training focused on precise boat handling in the challenging waters of the IJsselmeer. The course covered close-quarters maneuvering, docking techniques, and navigation in busy commercial waterways. Lelystad Airport provided a unique landmark for navigation practice, while the historic town of Batavia offered excellent training grounds for anchoring and mooring. The final leg to Amsterdam Central tested urban navigation skills, requiring careful attention to commercial traffic and complex harbor approaches."
-        },
-        {
-            "year": "2016",
-            "title": "⛵ Sailboat Ownership",
-            "distance": "Netherlands - 8 Years",
+            "year": 2024,
+            "title": "Sailboat Sale",
+            "distance": "N/A",
             "type": "milestone",
-            "preview": "Purchased my first sailboat in the Netherlands, beginning eight years of ownership and countless adventures...",
-            "full": "Purchased my first sailboat in the Netherlands, beginning eight years of ownership and countless adventures. This vessel served as my gateway to independent sailing across Dutch waters and beyond. The boat provided invaluable hands-on experience with yacht maintenance, navigation systems, and seamanship. Over the years, she became the platform for numerous sailing adventures, training sessions, and the development of my sailing skills. From the historic harbors of the IJsselmeer to the challenging waters of the North Sea, this boat was my constant companion on the journey to becoming a confident skipper. After eight rewarding years of ownership, I sold her in 2024, marking the end of a significant chapter in my sailing life."
+            "preview": "Successfully sold previous sailboat and upgraded to new vessel.",
+            "full": "Completed the sale of previous sailboat and acquired a new vessel better suited for longer voyages and more challenging conditions. This transition involved extensive boat surveying, negotiation, and transfer of ownership documentation."
         },
         {
-            "year": "2013",
-            "title": "🎓 RYA Yachtmaster Theory",
-            "distance": "Poland SailPro",
+            "year": 2023,
+            "title": "Mediterranean Cruise",
+            "distance": "500+ nautical miles",
+            "type": "milestone",
+            "preview": "Completed extended Mediterranean cruise visiting multiple ports and islands.",
+            "full": "Embarked on an extended Mediterranean cruise covering over 500 nautical miles. The journey included stops at various ports and islands, providing experience in different sailing conditions, port procedures, and international maritime regulations. This trip significantly enhanced offshore sailing skills and confidence."
+        },
+        {
+            "year": 2022,
+            "title": "Day Skipper Certification",
+            "distance": "Various training areas",
             "type": "certification",
-            "preview": "Completed RYA Yachtmaster Theory certification in Poland through SailPro sailing school...",
-            "full": "Completed RYA Yachtmaster Theory certification in Poland through SailPro sailing school. This internationally recognized qualification covered advanced navigation, meteorology, collision regulations, and passage planning. The comprehensive course included chart work, tidal calculations, electronic navigation systems, and emergency procedures. The RYA Yachtmaster Theory is a prestigious qualification that demonstrates competency in all aspects of yacht navigation and seamanship, preparing skippers for challenging offshore passages and leadership responsibilities on board."
+            "preview": "Obtained Day Skipper certification, qualifying to skipper yachts up to 24 meters.",
+            "full": "Successfully completed Day Skipper course, gaining comprehensive knowledge of navigation, seamanship, and yacht handling. The certification qualifies to skipper yachts up to 24 meters in familiar waters during daylight hours. Course included practical navigation, safety procedures, and crew management."
         },
         {
-            "year": "Pre-2013",
-            "title": "🏛️ Italian Mediterranean Adventure",
-            "distance": "~530 NM Total",
-            "type": "trip",
-            "preview": "Epic sailing journey from Policoro to Gallipoli, Santa Maria di Leuca, across to Mathraki Port in Greece...",
-            "full": "Epic sailing journey from Policoro to Gallipoli, Santa Maria di Leuca, across to Mathraki Port in Greece, and back to Policoro. This was a true Mediterranean adventure covering the stunning coastlines of Southern Italy and the Greek islands. The route took us through the historic waters of the Ionian Sea, passing ancient settlements and dramatic coastal landscapes. From the beaches of Basilicata to the baroque architecture of Lecce, then to the southernmost point of Puglia at Santa Maria di Leuca, before crossing to the remote Greek island of Mathraki. This journey combined navigation challenges, cultural discovery, and the pure joy of sailing in some of the most beautiful waters in the world."
-        },
-        {
-            "year": "Pre-2013",
-            "title": "🏫 Porto Pozzo Sailing School",
-            "distance": "~5 NM Training",
+            "year": 2021,
+            "title": "Competent Crew Training",
+            "distance": "Training waters",
             "type": "training",
-            "preview": "Intensive sailing training at Porto Pozzo, Sardinia, focusing on practical maneuvers and boat handling...",
-            "full": "Intensive sailing training at Porto Pozzo, Sardinia, focusing on practical maneuvers and boat handling. This beautiful location on the northern coast of Sardinia provided excellent conditions for learning advanced sailing techniques. The training covered close-quarters maneuvering, anchoring techniques, sail trimming, and emergency procedures. The crystal-clear waters and consistent winds of the Costa Smeralda made it an ideal learning environment for developing confidence and skill on the water."
+            "preview": "Completed Competent Crew course, learning fundamental sailing skills and safety procedures.",
+            "full": "Attended Competent Crew course to develop fundamental sailing skills including rope work, sail handling, helming, and safety procedures. This foundational training provided essential knowledge for safe participation in sailing activities and crew operations."
         },
         {
-            "year": "Pre-2013",
-            "title": "🎓 Italian Sailing License Theory",
-            "distance": "Above 12 Miles Certification",
-            "type": "certification",
-            "preview": "Completed Italian sailing license theory course for navigation above 12 miles from shore...",
-            "full": "Completed Italian sailing license theory course for navigation above 12 miles from shore. This certification covered Mediterranean navigation, Italian maritime regulations, chart work, and coastal pilotage. The course provided essential knowledge for sailing in Italian waters and formed the foundation for later advanced sailing qualifications. The theoretical knowledge gained included weather patterns in the Mediterranean, navigation techniques, and safety procedures specific to Italian coastal waters."
+            "year": 2020,
+            "title": "First Solo Sail",
+            "distance": "50 nautical miles",
+            "type": "milestone",
+            "preview": "Completed first solo sailing trip, marking a significant personal achievement.",
+            "full": "Successfully completed first solo sailing trip covering 50 nautical miles. This milestone represented a major step in sailing confidence and independence, requiring complete self-reliance in navigation, boat handling, and decision-making under various conditions."
+        },
+        {
+            "year": 2019,
+            "title": "Sailing Course Introduction",
+            "distance": "Local waters",
+            "type": "training",
+            "preview": "Began formal sailing education with introductory courses.",
+            "full": "Started formal sailing education with introductory courses covering basic sailing theory, safety procedures, and practical skills. These foundational courses provided the essential knowledge and confidence to begin sailing independently and pursue further certifications."
+        },
+        {
+            "year": 2018,
+            "title": "First Sailing Experience",
+            "distance": "Local waters",
+            "type": "milestone",
+            "preview": "First introduction to sailing, sparking passion for maritime activities.",
+            "full": "Experienced sailing for the first time, which ignited a passion for maritime activities and ocean navigation. This initial experience led to the decision to pursue formal sailing education and certifications to develop professional sailing skills."
         }
     ]
 }

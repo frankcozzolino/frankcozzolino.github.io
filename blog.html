@@ -300,8 +300,8 @@
                 </div>
             </div>
             <script>
-                // RSS to JSON conversion service
-                const RSS_TO_JSON_API = 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@francesco.cozzolino';
+                // Direct RSS feed URL
+                const RSS_FEED_URL = 'https://medium.com/feed/@francesco.cozzolino';
 
                 let articles = [];
                 let currentArticleId = null;
@@ -337,32 +337,113 @@
                         .substring(0, 50);
                 }
 
-                // Load articles from RSS feed
+                // Clear RSS feed cache (for debugging)
+                function clearRSSCache() {
+                    localStorage.removeItem('rss_feed_cache');
+                    localStorage.removeItem('rss_feed_cache_timestamp');
+                    console.log('RSS feed cache cleared');
+                }
+
+                // Load articles directly from RSS feed
                 async function loadArticles() {
+                    console.log('Loading articles from RSS feed:', RSS_FEED_URL);
+
                     try {
-                        const response = await fetch(RSS_TO_JSON_API);
-                        const data = await response.json();
+                        // Check cache first (1 hour = 3600000 milliseconds)
+                        const cacheKey = 'rss_feed_cache';
+                        const cacheTimestampKey = 'rss_feed_cache_timestamp';
+                        const cacheExpiry = 60 * 60 * 1000; // 1 hour in milliseconds
 
-                        if (data.status === 'ok') {
-                            articles = data.items.map((item, index) => ({
-                                id: generateArticleId(item.title),
-                                title: item.title,
-                                content: item.content,
-                                textContent: extractTextContent(item.content),
-                                link: item.link,
-                                pubDate: new Date(item.pubDate).toLocaleDateString(),
-                                description: item.description || extractDescription(item.content),
-                                image: extractFirstImage(item.content)
-                            }));
+                        const cachedData = localStorage.getItem(cacheKey);
+                        const cacheTimestamp = localStorage.getItem(cacheTimestampKey);
+                        const now = Date.now();
 
-                            // Always render the grid first, then show article if needed
+                        let xmlText;
+
+                        if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp)) < cacheExpiry) {
+                            console.log('Using cached RSS feed data (cached', Math.round((now - parseInt(cacheTimestamp)) / 1000 / 60), 'minutes ago)');
+                            xmlText = cachedData;
+                        } else {
+                            console.log('Cache expired or missing, fetching fresh RSS feed data');
+
+                            // Use a CORS proxy to fetch the RSS feed
+                            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_FEED_URL)}`;
+                            console.log('Fetching RSS feed through proxy:', proxyUrl);
+
+                            const response = await fetch(proxyUrl);
+                            xmlText = await response.text();
+
+                            // Cache the fresh data
+                            localStorage.setItem(cacheKey, xmlText);
+                            localStorage.setItem(cacheTimestampKey, now.toString());
+                            console.log('RSS feed fetched and cached successfully');
+                        }
+
+                        // Parse the XML
+                        const parser = new DOMParser();
+                        const xml = parser.parseFromString(xmlText, 'text/xml');
+                        const items = xml.querySelectorAll('item');
+
+                        console.log(`Found ${items.length} articles in RSS feed`);
+
+                        if (items.length > 0) {
+                            // Extract article data from RSS items
+                            const rssItems = Array.from(items).map(item => {
+                                // Try multiple selectors for content:encoded
+                                let contentEncoded = item.querySelector('content\\:encoded')?.textContent || '';
+                                if (!contentEncoded) {
+                                    contentEncoded = item.getElementsByTagName('content:encoded')[0]?.textContent || '';
+                                }
+                                if (!contentEncoded) {
+                                    contentEncoded = item.getElementsByTagNameNS('http://purl.org/rss/1.0/modules/content/', 'encoded')[0]?.textContent || '';
+                                }
+
+                                const basicDescription = item.querySelector('description')?.textContent || '';
+
+                                console.log('Content for article:', item.querySelector('title')?.textContent);
+                                console.log('Content length:', contentEncoded?.length || 0);
+
+                                return {
+                                    title: item.querySelector('title')?.textContent || '',
+                                    link: item.querySelector('link')?.textContent || '',
+                                    pubDate: item.querySelector('pubDate')?.textContent || '',
+                                    description: basicDescription,
+                                    content: contentEncoded || basicDescription,
+                                    guid: item.querySelector('guid')?.textContent || '',
+                                    creator: item.querySelector('creator')?.textContent || 'Francesco C.',
+                                    categories: Array.from(item.querySelectorAll('category')).map(cat => cat.textContent)
+                                };
+                            });
+
+                            console.log('Latest article:', rssItems[0]);
+                            console.log('Sample content preview:', rssItems[0]?.content?.substring(0, 500));
+
+                            // Transform to our format
+                            articles = rssItems.map((item, index) => {
+                                console.log(`Processing article ${index + 1}: ${item.title}`);
+                                const extractedImage = extractFirstImage(item.content);
+                                console.log(`Final image for article ${index + 1}:`, extractedImage);
+
+                                return {
+                                    id: generateArticleId(item.title),
+                                    title: item.title,
+                                    content: item.content,
+                                    textContent: extractTextContent(item.content),
+                                    link: item.link,
+                                    pubDate: new Date(item.pubDate).toLocaleDateString(),
+                                    description: item.description || extractDescription(item.content),
+                                    image: extractedImage,
+                                    creator: item.creator,
+                                    categories: item.categories
+                                };
+                            });
+
+                            // Render articles
                             if (currentArticleId) {
-                                // Find the article and show it
                                 const article = articles.find(a => a.id === currentArticleId);
                                 if (article) {
                                     showArticle(currentArticleId);
                                 } else {
-                                    // Article not found, show grid
                                     currentArticleId = null;
                                     renderArticleGrid();
                                 }
@@ -370,24 +451,80 @@
                                 renderArticleGrid();
                             }
                         } else {
-                            showError('Failed to load articles');
+                            showError('No articles found in RSS feed');
                         }
                     } catch (error) {
-                        console.error('Error loading articles:', error);
-                        showError('Error loading articles. Please try again later.');
+                        console.error('Error loading RSS feed:', error);
+                        showError('Failed to load articles. Please try again later.');
                     }
                 }
 
                 // Extract first image from article content
                 function extractFirstImage(content) {
-                    const imgMatch = content.match(/<img[^>]+src="([^"]+)"/);
-                    return imgMatch ? imgMatch[1] : 'https://miro.medium.com/v2/resize:fill:400:200/1*6Q2vQw1n6Qw1n6Q2vQw1nA.png';
+                    console.log('Extracting image from content length:', content?.length || 0);
+                    if (!content) {
+                        console.log('No content provided, using fallback image');
+                        return 'https://miro.medium.com/v2/resize:fill:400:200/1*6Q2vQw1n6Qw1n6Q2vQw1nA.png';
+                    }
+
+                    // Look for images in the content, excluding small tracking images
+                    const imgMatches = content.match(/<img[^>]+src="([^"]+)"[^>]*>/g);
+                    console.log('Found image matches:', imgMatches ? imgMatches.length : 0);
+
+                    if (imgMatches) {
+                        for (const match of imgMatches) {
+                            const srcMatch = match.match(/src="([^"]+)"/);
+                            if (srcMatch) {
+                                const imgUrl = srcMatch[1];
+                                console.log('Checking image URL:', imgUrl);
+
+                                // Skip tiny tracking images (usually 1x1 pixels or stat tracking)
+                                if (match.includes('width="1"') || match.includes('height="1"') ||
+                                    imgUrl.includes('stat?event=') || imgUrl.includes('clientViewed')) {
+                                    console.log('Skipping tracking image:', imgUrl);
+                                    continue;
+                                }
+
+                                console.log('Using image:', imgUrl);
+                                return imgUrl;
+                            }
+                        }
+                    }
+
+                    console.log('No valid images found, using fallback');
+                    return 'https://miro.medium.com/v2/resize:fill:400:200/1*6Q2vQw1n6Qw1n6Q2vQw1nA.png';
                 }
 
                 // Extract description from content
                 function extractDescription(content) {
-                    const textContent = content.replace(/<[^>]+>/g, '');
-                    return textContent.substring(0, 150) + '...';
+                    if (!content) return 'Click to read the full article...';
+
+                    // Remove HTML tags and get clean text
+                    const textContent = content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+
+                    // Skip common Medium boilerplate text
+                    let cleanText = textContent
+                        .replace(/^.*?was originally published in.*?on Medium.*?$/, '')
+                        .replace(/Thank you for being a part of the community.*$/s, '')
+                        .replace(/Before you go:.*$/s, '')
+                        .trim();
+
+                    // If we removed too much, use original text
+                    if (cleanText.length < 50) {
+                        cleanText = textContent;
+                    }
+
+                    // Get first meaningful paragraph
+                    const sentences = cleanText.split(/[.!?]+/).filter(s => s.trim().length > 20);
+                    if (sentences.length > 0) {
+                        let preview = sentences[0].trim();
+                        if (preview.length > 200) {
+                            preview = preview.substring(0, 200);
+                        }
+                        return preview + '...';
+                    }
+
+                    return cleanText.substring(0, 150) + '...';
                 }
 
                 // Extract text content without images

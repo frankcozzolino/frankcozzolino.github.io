@@ -7,6 +7,12 @@
     <title>Frank Cozzolino - Personal Website</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Frank Cozzolino">
+    <link rel="apple-touch-icon" href="images/signature.png">
     <style>
         /* Home Page Specific Navigation */
         .nav-menu a:hover {
@@ -327,6 +333,47 @@
                 }
             });
         });
+    </script>
+
+    <!-- SERVICE WORKER REGISTRATION -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', function() {
+                            const newWorker = registration.installing;
+                            console.log('New Service Worker found, installing...');
+                            
+                            newWorker.addEventListener('statechange', function() {
+                                if (newWorker.state === 'installed') {
+                                    if (navigator.serviceWorker.controller) {
+                                        console.log('New content available, page will refresh.');
+                                        // Optionally auto-refresh or show update notification
+                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                    } else {
+                                        console.log('Content cached for offline use.');
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch(function(error) {
+                        console.error('Service Worker registration failed:', error);
+                    });
+                    
+                // Listen for service worker updates
+                navigator.serviceWorker.addEventListener('controllerchange', function() {
+                    console.log('Service Worker updated, reloading page...');
+                    window.location.reload();
+                });
+            });
+        } else {
+            console.log('Service Worker not supported');
+        }
     </script>
 
 </body>

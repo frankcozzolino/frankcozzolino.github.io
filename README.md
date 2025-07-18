@@ -1,178 +1,128 @@
 # Frank Cozzolino - Personal Website
 
-A modern, responsive personal portfolio website showcasing professional experience, skills, and interests across multiple interactive pages.
+A professional portfolio website with blog functionality, RSS feed, and Progressive Web App features.
 
-## 🌟 Features
+## Features
 
-### Multi-Page Portfolio
-- **Home Page**: Professional introduction with gray-blue navigation theme
-- **Sailing Timeline**: Interactive timeline with purple waves effect
-- **Coder Portfolio**: Development projects with orange birds effect  
-- **Project Management**: Professional experience with blue clouds effect
-- **Hobbies**: Personal interests with vibrant green cells effect
-- **Blog**: RSS-integrated articles with blue NET effect
+- **Portfolio Sections**: Home, Sailing, Coder, Project Management, Hobbies, Blog
+- **Blog Integration**: Dynamic loading of Medium articles with full content viewer
+- **RSS Feed**: Automatically generated RSS feed with latest Medium articles
+- **Progressive Web App**: Offline support with Service Worker caching
+- **Responsive Design**: Mobile-friendly and optimized for all devices
+- **Image Optimization**: Automatic image extraction from articles
 
-### Interactive Visual Effects
-- **Vanta.js Animations**: Each page features unique animated backgrounds
-- **Responsive Design**: Optimized for desktop and mobile devices
-- **Page-Specific Themes**: Color-coordinated navigation and effects per page
-- **Professional Navigation**: Consistent navbar with signature branding
+## RSS Feed
 
-### Content Systems
-- **Blog Integration**: RSS-based Medium article integration
-- **Sailing Timeline**: JSON-driven timeline with planned activities
-- **Hobby Categories**: 7 distinct hobby areas with icons and descriptions
-- **Social Integration**: WhatsApp, Discord, and LinkedIn connectivity
+The website includes a fully automated RSS feed that pulls from Medium articles:
 
-## 🚀 Live Demo
+### RSS Feed URLs
+- **Primary**: `https://frankcozzolino.github.io/rss.xml`
+- **Redirect**: `https://frankcozzolino.github.io/rss` (redirects to RSS XML)
 
-Visit the website at: [frankcozzolino.github.io](https://frankcozzolino.github.io)
+### RSS Features
+- **Auto-Discovery**: RSS feed is automatically detected by RSS readers
+- **Rich Content**: Full article content with HTML formatting
+- **Image Support**: First image from each article included as enclosure
+- **Categories**: Proper categorization from Medium tags
+- **Offline Support**: Cached by Service Worker for offline reading
 
-## 🛠️ Technical Implementation
+### Manual RSS Update
+To manually update the RSS feed with latest Medium articles:
 
-### Technologies Used
-- **HTML5**: Semantic markup and structure
-- **CSS3**: Modern styling with custom animations
-- **JavaScript**: Interactive functionality and API integration
-- **Vanta.js**: 3D animated backgrounds with Three.js/p5.js
-- **RSS Integration**: Dynamic blog content loading
-- **JSON Data**: Structured content management
-
-### Dependencies
-- **Three.js r134**: 3D graphics library for Vanta.js effects
-- **p5.js 1.1.9**: Animation calculations and rendering
-- **Vanta.js**: Latest CDN version for background effects
-- **Inter Font**: Google Fonts integration for typography
-
-### Page-Specific Effects
-- **Sailing**: Purple waves (0x23153c) - oceanic theme
-- **Project Management**: Blue clouds (0x68b8d7) - professional sky
-- **Hobbies**: Vibrant green cells (0x00ff7f, 0x32cd32) - energetic
-- **Coder**: Orange/yellow birds (0xff8c00, 0xffd700) - creative
-- **Blog**: Blue NET effect with article grid
-- **Home**: Clean presentation with gray-blue accents
-
-## 📁 Project Structure
-
-```
-frankcozzolino.github.io/
-├── index.html                    # Main homepage
-├── sailing-timeline.html         # Sailing experiences & timeline
-├── sailing-timeline-data.json    # Timeline entries data
-├── project-management.html       # Professional PM experience
-├── hobbies.html                  # Personal interests showcase
-├── coder.html                    # Development portfolio
-├── blog.html                     # RSS-integrated blog
-├── css/
-│   └── style.css                 # Main stylesheet
-├── images/                       # Assets and imagery
-├── docs/                         # Documentation files
-├── context/                      # Development documentation
-│   ├── state.md                  # Current project state
-│   ├── schema.md                 # Technical specifications
-│   ├── decisions.md              # Technical decisions log
-│   └── insights.md               # Development insights
-└── README.md                     # This file
+```bash
+node scripts/generate-rss.js
 ```
 
-## 🎨 Design Features
+### Automated Updates
+The RSS feed is automatically updated daily at 9:00 AM UTC via GitHub Actions. The workflow:
 
-### Visual Themes
-- **Consistent Navigation**: Professional navbar with signature branding
-- **Color Coordination**: Each page has unique color schemes
-- **Responsive Layout**: Mobile-optimized design patterns
-- **Interactive Elements**: Hover effects and smooth transitions
+1. Fetches latest Medium articles
+2. Generates new RSS XML
+3. Commits changes if new articles are found
+4. Pushes updates to GitHub Pages
 
-### Content Areas
-- **Hydroponics**: Growing plants without soil using nutrient solutions
-- **Writing**: Crafting stories, articles, and creative content  
-- **Trading**: Analyzing financial markets and investment strategies
-- **Astrophotography**: Capturing celestial objects and night sky phenomena
-- **Electronics**: Building circuits and electronic projects
-- **Archaeology**: Exploring ancient civilizations and artifacts
-- **GeoGuessing**: Using geographical clues to identify world locations
+### Local RSS Update (Windows)
+Run the batch script for local updates with Git integration:
 
-## 🚀 Getting Started
+```bash
+scripts/update-rss.bat
+```
 
-### Running Locally
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/frankcozzolino/frankcozzolino.github.io.git
-   ```
+## Technology Stack
 
-2. Navigate to the project directory:
-   ```bash
-   cd frankcozzolino.github.io
-   ```
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Styling**: CSS Grid, Flexbox, Custom Properties
+- **PWA**: Service Worker, Web App Manifest
+- **RSS Generation**: Node.js custom parser
+- **Automation**: GitHub Actions
+- **Hosting**: GitHub Pages
+- **External APIs**: Medium RSS feed
 
-3. Open with a local server (recommended):
-   ```bash
-   # Using Python 3
-   python -m http.server 8000
-   
-   # Using Node.js
-   npx http-server
-   
-   # Using Live Server extension in VS Code
-   ```
+## Development
 
-4. Visit `http://localhost:8000` in your browser
+### Prerequisites
+- Node.js 18+ (for RSS generation)
+- Git (for automated updates)
+
+### Local Development
+1. Clone the repository
+2. Open `index.html` in your browser
+3. For RSS updates: `node scripts/generate-rss.js`
+
+### RSS Feed Development
+The RSS feed is generated from Medium articles using a custom Node.js parser that:
+- Fetches Medium RSS feed via HTTPS
+- Parses XML with CDATA handling
+- Extracts first image from each article
+- Generates clean RSS 2.0 XML
+- Creates URL-friendly article IDs
 
 ### Deployment
-- **GitHub Pages**: Automatically deployed from main branch
-- **Custom Domain**: Configure in repository settings
-- **CDN Integration**: Vanta.js and fonts loaded from CDN
+The site is automatically deployed via GitHub Pages. RSS updates are handled by GitHub Actions.
 
-## 📝 Content Management
+## File Structure
 
-### Updating Timeline Data
-Edit `sailing-timeline-data.json` to modify sailing timeline entries:
-```json
-{
-  "date": "2025-01-15",
-  "title": "New Timeline Entry",
-  "description": "Entry description",
-  "category": "achievement"
-}
+```
+.
+├── index.html              # Home page
+├── blog.html               # Blog viewer
+├── rss.xml                 # Generated RSS feed
+├── rss                     # RSS redirect page
+├── css/
+│   └── style.css          # Main stylesheet
+├── scripts/
+│   ├── generate-rss.js    # RSS generation script
+│   └── update-rss.bat     # Windows update script
+├── .github/
+│   └── workflows/
+│       └── update-rss.yml # GitHub Action for RSS updates
+├── images/                # Image assets
+├── sw.js                  # Service Worker
+└── manifest.json          # PWA manifest
 ```
 
-### Adding Blog Content
-The blog page integrates with RSS feeds. Update the RSS URL in `blog.html` to connect your own blog source.
+## RSS Feed Technical Details
 
-### Modifying Hobby Categories
-Edit the hobby cards in `hobbies.html` to customize interests and descriptions.
+### RSS 2.0 Format
+- Valid RSS 2.0 XML with proper namespaces
+- `content:encoded` for full HTML content
+- `dc:creator` for author attribution
+- `enclosure` elements for images
+- Categories extracted from Medium tags
 
-## 🎯 Performance Optimization
+### Image Extraction
+The RSS generator automatically extracts the first meaningful image from each Medium article:
+- Skips tracking pixels and tiny images
+- Filters out images smaller than 100px
+- Prioritizes content images over decorative ones
+- Includes as `<enclosure>` element in RSS
 
-- **CDN Usage**: External libraries loaded from CDN
-- **Responsive Images**: Optimized for different screen sizes
-- **Smooth Animations**: Hardware-accelerated CSS transitions
-- **Mobile Optimization**: Touch-friendly navigation and interactions
+### Automated Updates
+- **Schedule**: Daily at 9:00 AM UTC
+- **Trigger**: GitHub Actions workflow
+- **Process**: Fetch → Parse → Generate → Commit → Deploy
+- **Fallback**: Manual trigger available
 
-## 🔧 Development Notes
+## License
 
-### Recent Updates
-- Simplified hobbies page with 7 hobby categories
-- Added page-specific navigation hover colors
-- Implemented RSS-based article system for blog
-- Fixed all Vanta.js effects with proper dependencies
-- Updated all pages with unique color schemes
-
-### Known Limitations
-- RSS integration requires CORS-enabled feed
-- Vanta.js effects require WebGL support
-- Some effects may impact performance on low-end devices
-
-## 📧 Contact
-
-**Frank Cozzolino**
-- LinkedIn: [cozzolinofrancesco](https://www.linkedin.com/in/cozzolinofrancesco/)
-- Website: [frankcozzolino.github.io](https://frankcozzolino.github.io)
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-*Last updated: January 2025*
+This project is open source and available under the MIT License.

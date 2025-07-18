@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=rss.xml">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to RSS Feed</title>
+    <link rel="canonical" href="rss.xml">
+</head>
+
+<body>
+    <script>
+        // Immediate redirect to RSS feed
+        window.location.href = 'rss.xml';
+    </script>
+    <p>Redirecting to <a href="rss.xml">RSS Feed</a>...</p>
+</body>
+
+</html>

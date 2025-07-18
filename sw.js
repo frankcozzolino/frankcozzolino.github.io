@@ -17,7 +17,9 @@ const STATIC_ASSETS = [
   '/images/product-management.jpg',
   '/images/sailing.jpg',
   '/images/signature.png',
-  '/sailing-timeline-data.json'
+  '/sailing-timeline-data.json',
+  '/rss.xml',
+  '/rss'
 ];
 
 // Network-first resources (always try to get fresh data)

@@ -44,6 +44,38 @@
             padding: 10px 12px;
             backdrop-filter: blur(6px);
             max-width: calc(100% - 24px);
+            transition: all 0.3s ease;
+        }
+
+        .hud.collapsed {
+            padding: 8px;
+            max-width: 60px;
+        }
+
+        .hud.collapsed .hud-content {
+            display: none;
+        }
+
+        .hud-toggle {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            color: var(--txt);
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .hud-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .hud h1 {
@@ -185,6 +217,100 @@
             border-radius: 12px;
             padding: 10px 12px;
             max-width: 360px;
+            transition: all 0.3s ease;
+        }
+
+        .panel.collapsed {
+            padding: 8px;
+            max-width: 60px;
+        }
+
+        .panel.collapsed .panel-content {
+            display: none;
+        }
+
+        .panel-toggle {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            color: var(--txt);
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .panel-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Mobile and tablet responsive styles */
+        @media (max-width: 768px) {
+
+            .hud-toggle,
+            .panel-toggle {
+                display: flex;
+            }
+
+            .hud,
+            .panel {
+                max-width: calc(100% - 24px);
+            }
+
+            .hud.collapsed,
+            .panel.collapsed {
+                max-width: 48px;
+                height: 48px;
+            }
+
+            .hud h1 {
+                font-size: 12px;
+            }
+
+            .row {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            select,
+            button,
+            input[type=range] {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .legend {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .hud,
+            .panel {
+                left: 8px;
+                right: 8px;
+                top: 8px;
+                max-width: calc(100% - 16px);
+            }
+
+            .panel {
+                right: 8px;
+                left: auto;
+            }
+
+            .hud.collapsed,
+            .panel.collapsed {
+                max-width: 40px;
+                height: 40px;
+            }
         }
 
         /* Fog Sounds Menu */
@@ -421,64 +547,58 @@
 <body>
     <div id="app"></div>
     <div class="hud" id="hud">
-        <h1>Night & Fog Navigation Trainer — Three.js MVP</h1>
-        <div class="row">
-            <label>Scenario:</label>
-            <select id="scenario">
-                <option value="night_basic" selected>Night — Basic</option>
-            </select>
-            <button class="primary" id="startBtn">Start</button>
-            <button id="pauseBtn">Pause</button>
-            <button id="spawnMenuBtn">Spawn Menu</button>
-            <button id="fogSoundsBtn" style="display: none;">Fog Sounds</button>
-        </div>
-        <div class="row">
-            <label>Fog Level</label><input id="fogRng" type="range" min="0" max="4" step="1" value="1">
-            <label>Ship Count</label><input id="shipCountRng" type="range" min="1" max="10" step="1" value="4">
-        </div>
-        <div class="row">
-            <label>Zoom:</label>
-            <button id="zoom1x" class="primary">1x</button>
-            <button id="zoom2x">2x</button>
-            <button id="zoom5x">5x</button>
-            <button id="zoom10x">10x</button>
-        </div>
-        <div class="row">
-            <label>Mode:</label>
-            <button id="learningMode" class="primary">Learning</button>
-        </div>
+        <button class="hud-toggle" id="hudToggle">☰</button>
+        <div class="hud-content" id="hudContent">
+            <h1>Night & Fog Navigation Trainer — Three.js MVP</h1>
+            <div class="row">
+                <label>Scenario:</label>
+                <select id="scenario">
+                    <option value="night_basic" selected>Night — Basic</option>
+                </select>
+                <button class="primary" id="startBtn">Start</button>
+                <button id="pauseBtn">Pause</button>
+                <button id="spawnMenuBtn">Spawn Menu</button>
+                <button id="fogSoundsBtn" style="display: none;">Fog Sounds</button>
+            </div>
+            <div class="row">
+                <label>Fog Level</label><input id="fogRng" type="range" min="0" max="4" step="1" value="1">
+                <label>Ship Count</label><input id="shipCountRng" type="range" min="1" max="10" step="1" value="4">
+            </div>
+            <div class="row">
+                <label>Zoom:</label>
+                <button id="zoom1x" class="primary">1x</button>
+                <button id="zoom2x">2x</button>
+                <button id="zoom5x">5x</button>
+                <button id="zoom10x">10x</button>
+            </div>
+            <div class="row">
+                <label>Mode:</label>
+                <button id="learningMode" class="primary">Learning</button>
+            </div>
 
-        <div class="row">
-            <label>View:</label>
-            <button id="freeViewBtn" class="primary">Free</button>
-            <button id="firstPersonViewBtn">First Person</button>
-        </div>
+            <div class="row">
+                <label>View:</label>
+                <button id="freeViewBtn" class="primary">Free</button>
+                <button id="firstPersonViewBtn">First Person</button>
+            </div>
 
-
-        <div class="legend">
-            <div><span class="dot red"></span>Port</div>
-            <div><span class="dot green"></span>Starboard</div>
-            <div><span class="dot white"></span>Masthead / Stern / Anchor</div>
-            <div><span class="dot yellow"></span>Towing</div>
-        </div>
-        <div style="margin-top:6px; font-size:12px; opacity:.85">Controls: drag to look • <span
-                class="kbd">W/A/S/D</span> move • <span class="kbd">Q/E</span> up/down • <span class="kbd">Space</span>
-            or <span class="kbd">Click</span>
-            identify • <span class="kbd">1/2/5/0</span> zoom • <span class="kbd">ESC</span> reset zoom • <span
-                class="kbd">L/T</span> mode • <span class="kbd">F/V</span> view • <span class="kbd">P</span> pause •
-            <span class="kbd">S</span> stop sounds
+            <div class="legend">
+                <div><span class="dot red"></span>Port</div>
+                <div><span class="dot green"></span>Starboard</div>
+                <div><span class="dot white"></span>Masthead / Stern / Anchor</div>
+                <div><span class="dot yellow"></span>Towing</div>
+            </div>
+            <div style="margin-top:6px; font-size:12px; opacity:.85">Controls: drag to look • <span
+                    class="kbd">W/A/S/D</span> move • <span class="kbd">Q/E</span> up/down • <span
+                    class="kbd">Space</span>
+                or <span class="kbd">Click</span>
+                identify • <span class="kbd">1/2/5/0</span> zoom • <span class="kbd">ESC</span> reset zoom • <span
+                    class="kbd">L/T</span> mode • <span class="kbd">F/V</span> view • <span class="kbd">P</span> pause •
+                <span class="kbd">S</span> stop sounds
+            </div>
         </div>
     </div>
-    <div class="panel" id="panel">
-        <h2>Status</h2>
-        <div class="score" id="scoreBox"></div>
-        <div style="height:8px"></div>
-        <div id="helpBox" style="font-size:12px; opacity:.9">
-            <b>Headphones recommended</b> for positional audio. In fog: identify by sound pattern + bearing.
-        </div>
-        <div style="height:8px"></div>
-        <!-- Removed colorblind and subtitles buttons -->
-    </div>
+
 
     <!-- Global Stop Sounds Button -->
     <button class="global-stop-sounds" id="globalStopSounds">
@@ -488,114 +608,117 @@
 
     <!-- Vessel Spawning Menu -->
     <div class="panel" id="spawnPanel" style="right: 12px; top: 280px; display: none;">
-        <h2>Spawn Vessel</h2>
+        <button class="panel-toggle" id="spawnPanelToggle">☰</button>
+        <div class="panel-content" id="spawnPanelContent">
+            <h2>Spawn Vessel</h2>
 
-        <div style="margin: 6px 0;">
-            <label>Type:</label>
-            <select id="spawnVesselType" style="width: 100%; margin-top: 4px;">
-                <optgroup label="Power-driven">
-                    <option value="power_lt50">Power-driven (&lt;50 m)</option>
-                    <option value="power_ge50">Power-driven (≥50 m)</option>
-                </optgroup>
-                <optgroup label="Sailing">
-                    <option value="sailing">Sailing (under sail)</option>
-                    <option value="sailing_tricolor_small">Sailing (tricolor)</option>
-                </optgroup>
-                <optgroup label="Fishing">
-                    <option value="trawling">Fishing (trawling)</option>
-                    <option value="fishing">Fishing (other)</option>
-                    <option value="fishing_gear_long_port">Fishing (gear >150m port)</option>
-                    <option value="fishing_gear_long_starboard">Fishing (gear >150m starboard)</option>
-                </optgroup>
-                <optgroup label="Towing">
-                    <option value="towing_le200">Towing (≤200 m)</option>
-                    <option value="towing_gt200">Towing (>200 m)</option>
-                    <option value="tow_object">Tow (object/barge)</option>
-                    <option value="pushing_alongside">Pushing/Alongside</option>
-                    <option value="pushing_ahead">Pushing Ahead (composite)</option>
-                    <option value="towing_ram">Towing + RAM (severely restricted)</option>
-                    <option value="submerged_tow_breadth_lt25">Partly Submerged Tow (&lt;25 m breadth)</option>
-                    <option value="submerged_tow_breadth_ge25">Partly Submerged Tow (≥25 m breadth)</option>
-                    <option value="submerged_tow_len_gt100">Partly Submerged Tow (&gt;100 m length)</option>
-                </optgroup>
-                <optgroup label="Restricted">
-                    <option value="nuc">Not Under Command</option>
-                    <option value="ram">Restricted Maneuverability</option>
-                    <option value="cbd">Constrained by Draft</option>
-                </optgroup>
-                <optgroup label="Anchored/Aground">
-                    <option value="anchor">At Anchor</option>
-                    <option value="pilot_anchor">Pilot at Anchor</option>
-                    <option value="aground">Aground</option>
-                </optgroup>
-                <optgroup label="Special">
-                    <option value="pilot">Pilot Vessel</option>
-                    <option value="air_cushion">Air-cushion</option>
-                    <option value="wig">WIG Craft</option>
-                    <option value="diving_ops">Diving Operations</option>
-                    <option value="dredging_obstruction_port">Dredging (port obstruction)</option>
-                    <option value="dredging_obstruction_starboard">Dredging (starboard obstruction)</option>
-                    <option value="mine_clearance">Mine Clearance</option>
-                </optgroup>
-            </select>
-        </div>
+            <div style="margin: 6px 0;">
+                <label>Type:</label>
+                <select id="spawnVesselType" style="width: 100%; margin-top: 4px;">
+                    <optgroup label="Power-driven">
+                        <option value="power_lt50">Power-driven (&lt;50 m)</option>
+                        <option value="power_ge50">Power-driven (≥50 m)</option>
+                    </optgroup>
+                    <optgroup label="Sailing">
+                        <option value="sailing">Sailing (under sail)</option>
+                        <option value="sailing_tricolor_small">Sailing (tricolor)</option>
+                    </optgroup>
+                    <optgroup label="Fishing">
+                        <option value="trawling">Fishing (trawling)</option>
+                        <option value="fishing">Fishing (other)</option>
+                        <option value="fishing_gear_long_port">Fishing (gear >150m port)</option>
+                        <option value="fishing_gear_long_starboard">Fishing (gear >150m starboard)</option>
+                    </optgroup>
+                    <optgroup label="Towing">
+                        <option value="towing_le200">Towing (≤200 m)</option>
+                        <option value="towing_gt200">Towing (>200 m)</option>
+                        <option value="tow_object">Tow (object/barge)</option>
+                        <option value="pushing_alongside">Pushing/Alongside</option>
+                        <option value="pushing_ahead">Pushing Ahead (composite)</option>
+                        <option value="towing_ram">Towing + RAM (severely restricted)</option>
+                        <option value="submerged_tow_breadth_lt25">Partly Submerged Tow (&lt;25 m breadth)</option>
+                        <option value="submerged_tow_breadth_ge25">Partly Submerged Tow (≥25 m breadth)</option>
+                        <option value="submerged_tow_len_gt100">Partly Submerged Tow (&gt;100 m length)</option>
+                    </optgroup>
+                    <optgroup label="Restricted">
+                        <option value="nuc">Not Under Command</option>
+                        <option value="ram">Restricted Maneuverability</option>
+                        <option value="cbd">Constrained by Draft</option>
+                    </optgroup>
+                    <optgroup label="Anchored/Aground">
+                        <option value="anchor">At Anchor</option>
+                        <option value="pilot_anchor">Pilot at Anchor</option>
+                        <option value="aground">Aground</option>
+                    </optgroup>
+                    <optgroup label="Special">
+                        <option value="pilot">Pilot Vessel</option>
+                        <option value="air_cushion">Air-cushion</option>
+                        <option value="wig">WIG Craft</option>
+                        <option value="diving_ops">Diving Operations</option>
+                        <option value="dredging_obstruction_port">Dredging (port obstruction)</option>
+                        <option value="dredging_obstruction_starboard">Dredging (starboard obstruction)</option>
+                        <option value="mine_clearance">Mine Clearance</option>
+                    </optgroup>
+                </select>
+            </div>
 
-        <div style="margin: 6px 0; display: none;">
-            <label>Status:</label>
-            <select id="spawnStatus" style="width: 100%; margin-top: 4px;">
-                <optgroup label="Normal Operations">
-                    <option value="underway">Underway</option>
-                    <option value="stopped">Stopped</option>
-                </optgroup>
-                <optgroup label="Anchored/Grounded">
-                    <option value="anchored">Anchored</option>
-                    <option value="aground">Aground</option>
-                </optgroup>
-                <optgroup label="Restricted Ability">
-                    <option value="nuc">Not Under Command (NUC)</option>
-                    <option value="ram">Restricted in Ability to Manoeuvre (RAM)</option>
-                    <option value="cbd">Constrained by Draft (CBD)</option>
-                </optgroup>
-                <optgroup label="Working Vessels">
-                    <option value="fishing">Engaged in Fishing</option>
-                    <option value="trawling">Trawling</option>
-                    <option value="diving">Diving Operations</option>
-                    <option value="dredging">Dredging/Underwater Operations</option>
-                    <option value="mine_clearance">Mine Clearance</option>
-                </optgroup>
-                <optgroup label="Towing Operations">
-                    <option value="towing">Towing</option>
-                    <option value="pushing">Pushing/Alongside</option>
-                    <option value="being_towed">Being Towed</option>
-                </optgroup>
-                <optgroup label="Special Vessels">
-                    <option value="pilot">Pilot Vessel</option>
-                    <option value="air_cushion">Air-cushion Operation</option>
-                    <option value="wig">WIG Craft Operation</option>
-                </optgroup>
-            </select>
-        </div>
+            <div style="margin: 6px 0; display: none;">
+                <label>Status:</label>
+                <select id="spawnStatus" style="width: 100%; margin-top: 4px;">
+                    <optgroup label="Normal Operations">
+                        <option value="underway">Underway</option>
+                        <option value="stopped">Stopped</option>
+                    </optgroup>
+                    <optgroup label="Anchored/Grounded">
+                        <option value="anchored">Anchored</option>
+                        <option value="aground">Aground</option>
+                    </optgroup>
+                    <optgroup label="Restricted Ability">
+                        <option value="nuc">Not Under Command (NUC)</option>
+                        <option value="ram">Restricted in Ability to Manoeuvre (RAM)</option>
+                        <option value="cbd">Constrained by Draft (CBD)</option>
+                    </optgroup>
+                    <optgroup label="Working Vessels">
+                        <option value="fishing">Engaged in Fishing</option>
+                        <option value="trawling">Trawling</option>
+                        <option value="diving">Diving Operations</option>
+                        <option value="dredging">Dredging/Underwater Operations</option>
+                        <option value="mine_clearance">Mine Clearance</option>
+                    </optgroup>
+                    <optgroup label="Towing Operations">
+                        <option value="towing">Towing</option>
+                        <option value="pushing">Pushing/Alongside</option>
+                        <option value="being_towed">Being Towed</option>
+                    </optgroup>
+                    <optgroup label="Special Vessels">
+                        <option value="pilot">Pilot Vessel</option>
+                        <option value="air_cushion">Air-cushion Operation</option>
+                        <option value="wig">WIG Craft Operation</option>
+                    </optgroup>
+                </select>
+            </div>
 
-        <div style="margin: 6px 0;">
-            <label>Heading: <span id="headingValue">000°</span></label>
-            <input id="spawnHeading" type="range" min="0" max="359" step="1" value="0"
-                style="width: 100%; margin-top: 4px;">
-        </div>
+            <div style="margin: 6px 0;">
+                <label>Heading: <span id="headingValue">000°</span></label>
+                <input id="spawnHeading" type="range" min="0" max="359" step="1" value="0"
+                    style="width: 100%; margin-top: 4px;">
+            </div>
 
-        <div style="margin: 6px 0;">
-            <label>Speed: <span id="speedValue">5.0</span> knots</label>
-            <input id="spawnSpeed" type="range" min="0" max="15" step="0.5" value="5"
-                style="width: 100%; margin-top: 4px;">
-        </div>
+            <div style="margin: 6px 0;">
+                <label>Speed: <span id="speedValue">5.0</span> knots</label>
+                <input id="spawnSpeed" type="range" min="0" max="15" step="0.5" value="5"
+                    style="width: 100%; margin-top: 4px;">
+            </div>
 
-        <div style="margin: 6px 0;">
-            <label>Distance: <span id="distanceValue">80</span>m</label>
-            <input id="spawnDistance" type="range" min="30" max="150" step="10" value="80"
-                style="width: 100%; margin-top: 4px;">
-        </div>
+            <div style="margin: 6px 0;">
+                <label>Distance: <span id="distanceValue">80</span>m</label>
+                <input id="spawnDistance" type="range" min="30" max="150" step="10" value="80"
+                    style="width: 100%; margin-top: 4px;">
+            </div>
 
-        <div style="margin: 10px 0;">
-            <button id="spawnVesselBtn" class="primary" style="width: 100%;">Spawn Vessel</button>
+            <div style="margin: 10px 0;">
+                <button id="spawnVesselBtn" class="primary" style="width: 100%;">Spawn Vessel</button>
+            </div>
         </div>
     </div>
     <div class="toast" id="toast"></div>
@@ -2457,12 +2580,46 @@
         function updateScore(correct) {
             attempts++; if (correct) { score += 10; streak++; } else { streak = 0; score = Math.max(0, score - 5); }
             const acc = attempts ? Math.round((score / (attempts * 10)) * 100) : 0;
-            document.getElementById('scoreBox').innerHTML = `Score: <b>${score}</b> • Attempts: ${attempts} • Accuracy: <b>${acc}%</b> • Streak: <b>${streak}</b>`;
+            // Score display removed - just store stats
             localStorage.setItem('navTrainerStats', JSON.stringify({ score, attempts, streak }));
+            // Show score in toast instead
+            toast(`Score: ${score} • Accuracy: ${acc}% • Streak: ${streak}`);
         }
         (function loadStats() { try { const s = JSON.parse(localStorage.getItem('navTrainerStats') || '{}'); if (s.attempts) { score = s.score || 0; attempts = s.attempts || 0; streak = s.streak || 0; updateScore(false); attempts--; } } catch (e) { } })();
 
         function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(t._t); t._t = setTimeout(() => t.style.display = 'none', 1600); }
+
+        // ====== Mobile Menu Toggle Functionality ======
+
+        // HUD Toggle
+        document.getElementById('hudToggle').addEventListener('click', () => {
+            const hud = document.getElementById('hud');
+            const toggle = document.getElementById('hudToggle');
+            hud.classList.toggle('collapsed');
+            toggle.textContent = hud.classList.contains('collapsed') ? '☰' : '✕';
+        });
+
+        // Spawn Panel Toggle
+        document.getElementById('spawnPanelToggle').addEventListener('click', () => {
+            const panel = document.getElementById('spawnPanel');
+            const toggle = document.getElementById('spawnPanelToggle');
+            panel.classList.toggle('collapsed');
+            toggle.textContent = panel.classList.contains('collapsed') ? '☰' : '✕';
+        });
+
+        // Auto-collapse menus on mobile when interacting with controls
+        function autoCollapseOnMobile() {
+            if (window.innerWidth <= 768) {
+                const hud = document.getElementById('hud');
+                const spawnPanel = document.getElementById('spawnPanel');
+
+                // Collapse HUD after a short delay when a control is used
+                setTimeout(() => {
+                    hud.classList.add('collapsed');
+                    document.getElementById('hudToggle').textContent = '☰';
+                }, 2000);
+            }
+        }
 
         // ====== UI controls ======
 
@@ -2470,6 +2627,7 @@
             // Ensure audio context is active before starting scenario
             ensureAudioContext();
             setupScenario(document.getElementById('scenario').value);
+            autoCollapseOnMobile();
         };
 
 
@@ -2556,7 +2714,10 @@
 
         // Zoom button event listeners
         Object.keys(zoomLevels).forEach(zoomKey => {
-            document.getElementById(`zoom${zoomKey}`).onclick = () => setZoom(zoomLevels[zoomKey]);
+            document.getElementById(`zoom${zoomKey}`).onclick = () => {
+                setZoom(zoomLevels[zoomKey]);
+                autoCollapseOnMobile();
+            };
         });
 
         // Close zoom button
@@ -2582,24 +2743,35 @@
             // Update vessel display
             updateVesselInfoDisplay();
 
-            // Update help text
-            const helpBox = document.getElementById('helpBox');
-            helpBox.innerHTML = '<b>Learning Mode:</b> Vessel information is displayed. Use this to learn vessel types and light patterns.';
+            // Show help text in toast instead of removed helpBox
+            toast('Learning Mode: Vessel information is displayed for educational purposes');
         }
 
         // Mode button event listener - always learning mode
-        document.getElementById('learningMode').onclick = () => setMode(true);
+        document.getElementById('learningMode').onclick = () => {
+            setMode(true);
+            autoCollapseOnMobile();
+        };
 
 
 
         // View control functionality
-        document.getElementById('freeViewBtn').onclick = () => setView('free');
-        document.getElementById('firstPersonViewBtn').onclick = () => setView('firstPerson');
+        document.getElementById('freeViewBtn').onclick = () => {
+            setView('free');
+            autoCollapseOnMobile();
+        };
+        document.getElementById('firstPersonViewBtn').onclick = () => {
+            setView('firstPerson');
+            autoCollapseOnMobile();
+        };
 
         // Path lines always visible for moving vessels
         let showPathLines = true;
 
-        document.getElementById('pauseBtn').onclick = () => togglePause();
+        document.getElementById('pauseBtn').onclick = () => {
+            togglePause();
+            autoCollapseOnMobile();
+        };
         let paused = false; function togglePause() { paused = !paused; document.getElementById('pauseBtn').textContent = paused ? 'Resume' : 'Pause'; if (!paused) lastT = performance.now(); }
 
         // Fog level control
@@ -2619,6 +2791,7 @@
             // Update fog level display
             const fogLabels = ['Clear', '25%', '50%', '75%', '100%'];
             toast(`Fog: ${fogLabels[fogLevel]}`);
+            autoCollapseOnMobile();
         });
 
         // Ship count control
@@ -2626,6 +2799,7 @@
         shipCountRng.addEventListener('input', () => {
             const shipCount = parseInt(shipCountRng.value);
             toast(`Ship Count: ${shipCount}`);
+            autoCollapseOnMobile();
         });
 
         // Removed UI buttons: colorblind and subtitles (handlers disabled)

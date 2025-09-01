@@ -1,13 +1,13 @@
 # Project State - Frank Cozzolino Website
 
-## Current Status: ✅ COMPLETED - RSS Feed with Images & Auto-Updates
+## Current Status: ✅ COMPLETED - Projects Dropdown with Firefox Addons
 
-### Last Completed Action (2025-01-27 23:30)
-- **Image Extraction**: Added automatic first image extraction from Medium articles
-- **RSS Enclosures**: Images included as `<enclosure>` elements in RSS feed
-- **Automated Updates**: Set up GitHub Actions for daily RSS updates
-- **Update Scripts**: Created Windows batch script and manual update commands
-- **Documentation**: Updated README with complete RSS feed documentation
+### Last Completed Action (2025-01-27 23:55)
+- **Firefox Addons Section**: Added Firefox addons sub-section to Projects dropdown
+- **External Links**: Integrated 4 Firefox addons with external links to Mozilla store
+- **Dropdown Styling**: Added dividers and headers for better organization
+- **Cross-Page Consistency**: Updated all website pages with new dropdown structure
+- **Node.js Server**: Set up http-server for local development and testing
 
 ### RSS Feed Implementation Details
 - **RSS Feed URL**: `/rss.xml` (also accessible via `/rss` redirect)

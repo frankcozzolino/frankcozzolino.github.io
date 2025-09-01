@@ -1,5 +1,21 @@
 # Project Insights - Frank Cozzolino Website
 
+## Maritime Navigation Trainer Integration - 2025-01-27 23:45
+
+### Key Implementation Decisions
+- **File Naming**: Chose `maritime-navigation-trainer.html` for SEO-friendly URL
+- **Navigation Pattern**: Created reusable dropdown menu system for future project additions
+- **Full-Screen Strategy**: Used `window.open()` with screen dimensions + fullscreen API for immersive experience
+- **Cross-Page Consistency**: Implemented dropdown functionality across all website pages
+- **Service Worker Integration**: Added trainer to static cache for offline availability
+
+### Technical Discoveries
+- **Dropdown CSS**: Created sophisticated dropdown with backdrop blur and smooth animations
+- **Full-Screen Launch**: Combined window.open with requestFullscreen API for best user experience
+- **JavaScript Modularization**: Implemented defensive programming with null checks for dropdown elements
+- **Cross-Browser Compatibility**: Added fallbacks for different fullscreen API implementations
+- **Performance Optimization**: Navigation trainer cached by Service Worker for instant offline access
+
 ## RSS Feed with Real Medium Articles - 2025-01-27 23:15
 
 ### Key Achievements

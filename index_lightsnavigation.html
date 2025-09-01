@@ -1,0 +1,2840 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Night & Fog Navigation Trainer (Three.js MVP) - v2024-12-28-11:10</title>
+    <style>
+        :root {
+            --bg: #000;
+            --panel: rgba(0, 0, 0, .6);
+            --line: #333;
+            --txt: #eaeaea;
+            --accent: #7dd3fc;
+        }
+
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            background: var(--bg);
+            color: var(--txt);
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial, sans-serif;
+        }
+
+        #app {
+            position: fixed;
+            inset: 0;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hud {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 10px 12px;
+            backdrop-filter: blur(6px);
+            max-width: calc(100% - 24px);
+        }
+
+        .hud h1 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 6px 0;
+        }
+
+        select,
+        button,
+        input[type=range] {
+            background: #111;
+            color: var(--txt);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 6px 8px;
+            box-sizing: border-box;
+        }
+
+        button.primary {
+            background: #0b3a55;
+            border-color: #0b3a55;
+        }
+
+        .legend {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        .red {
+            background: #ff4040;
+        }
+
+        .green {
+            background: #00e68c;
+        }
+
+        .white {
+            background: #fff;
+        }
+
+        .yellow {
+            background: #ffd400;
+        }
+
+        .foot {
+            position: absolute;
+            right: 12px;
+            bottom: 10px;
+            font-size: 12px;
+            opacity: .8;
+        }
+
+        .toast {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 16px;
+            background: rgba(20, 20, 20, .85);
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* Telescope barrel effect */
+        .telescope-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 500;
+            display: none;
+            background: radial-gradient(circle at center, transparent 20%, transparent 25%, rgba(0, 0, 0, 0.3) 26%, rgba(0, 0, 0, 0.8) 30%, black 35%);
+        }
+
+        .telescope-overlay.active {
+            display: block;
+        }
+
+        /* Close zoom button */
+        .zoom-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 600;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+            transition: background-color 0.2s;
+        }
+
+        .zoom-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .zoom-close.active {
+            display: flex;
+        }
+
+        .panel {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 10px 12px;
+            max-width: 360px;
+        }
+
+        /* Fog Sounds Menu */
+        .fog-sounds-menu {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--panel);
+            border: 2px solid var(--line);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 600px;
+            max-height: 70vh;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .fog-sounds-menu h2 {
+            margin: 0 0 16px 0;
+            color: var(--txt);
+            text-align: center;
+        }
+
+        .fog-sound-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin: 8px 0;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+
+        .fog-sound-info {
+            flex: 1;
+            margin-right: 12px;
+        }
+
+        .fog-sound-name {
+            font-weight: bold;
+            color: var(--txt);
+            margin-bottom: 4px;
+        }
+
+        .fog-sound-pattern {
+            font-size: 11px;
+            color: #888;
+            font-family: monospace;
+            margin-bottom: 4px;
+        }
+
+        .fog-sound-description {
+            font-size: 12px;
+            color: #aaa;
+            line-height: 1.3;
+        }
+
+        .fog-sound-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .fog-sound-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            background: #111;
+            color: var(--txt);
+            cursor: pointer;
+            font-size: 11px;
+            transition: background-color 0.2s;
+        }
+
+        .fog-sound-btn:hover {
+            background: #333;
+        }
+
+        .fog-sound-btn.playing {
+            background: #0b3a55;
+            border-color: #0b3a55;
+        }
+
+        .fog-sounds-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .fog-sounds-close:hover {
+            color: var(--txt);
+        }
+
+        /* Global Stop Sounds Button */
+        .global-stop-sounds {
+            position: absolute;
+            top: 60px;
+            right: 12px;
+            background: #8b2635;
+            border: 2px solid #a73545;
+            border-radius: 8px;
+            color: white;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .global-stop-sounds:hover {
+            background: #a73545;
+            border-color: #c84555;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .global-stop-sounds:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Light Tooltip Styles */
+        .light-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: 'Courier New', monospace;
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 250px;
+            border: 1px solid #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .tooltip-content {
+            line-height: 1.4;
+        }
+
+        .tooltip-light-type {
+            color: #4CAF50;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .tooltip-description {
+            color: #E0E0E0;
+            font-size: 11px;
+        }
+
+        .panel h2 {
+            font-size: 14px;
+            margin: 0 0 6px 0;
+        }
+
+        .score {
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btnpad {
+            display: flex;
+            gap: 6px;
+        }
+
+        .kbd {
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 2px 6px;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, .5);
+        }
+
+        .modal .card {
+            background: #0b0b0b;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 16px;
+            width: min(420px, 92%);
+        }
+
+        .modal h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .subtitle {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 56px;
+            background: rgba(0, 0, 0, .6);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 6px 10px;
+            font-size: 13px;
+            display: none;
+        }
+
+        /* Constrain spawn panel controls to the panel width */
+        #spawnPanel select,
+        #spawnPanel input[type=range],
+        #spawnPanel button {
+            width: 100%;
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <div class="hud" id="hud">
+        <h1>Night & Fog Navigation Trainer — Three.js MVP</h1>
+        <div class="row">
+            <label>Scenario:</label>
+            <select id="scenario">
+                <option value="night_basic" selected>Night — Basic</option>
+            </select>
+            <button class="primary" id="startBtn">Start</button>
+            <button id="pauseBtn">Pause</button>
+            <button id="spawnMenuBtn">Spawn Menu</button>
+            <button id="fogSoundsBtn" style="display: none;">Fog Sounds</button>
+        </div>
+        <div class="row">
+            <label>Fog Level</label><input id="fogRng" type="range" min="0" max="4" step="1" value="1">
+            <label>Ship Count</label><input id="shipCountRng" type="range" min="1" max="10" step="1" value="4">
+        </div>
+        <div class="row">
+            <label>Zoom:</label>
+            <button id="zoom1x" class="primary">1x</button>
+            <button id="zoom2x">2x</button>
+            <button id="zoom5x">5x</button>
+            <button id="zoom10x">10x</button>
+        </div>
+        <div class="row">
+            <label>Mode:</label>
+            <button id="learningMode" class="primary">Learning</button>
+        </div>
+
+        <div class="row">
+            <label>View:</label>
+            <button id="freeViewBtn" class="primary">Free</button>
+            <button id="firstPersonViewBtn">First Person</button>
+        </div>
+
+
+        <div class="legend">
+            <div><span class="dot red"></span>Port</div>
+            <div><span class="dot green"></span>Starboard</div>
+            <div><span class="dot white"></span>Masthead / Stern / Anchor</div>
+            <div><span class="dot yellow"></span>Towing</div>
+        </div>
+        <div style="margin-top:6px; font-size:12px; opacity:.85">Controls: drag to look • <span
+                class="kbd">W/A/S/D</span> move • <span class="kbd">Q/E</span> up/down • <span class="kbd">Space</span>
+            or <span class="kbd">Click</span>
+            identify • <span class="kbd">1/2/5/0</span> zoom • <span class="kbd">ESC</span> reset zoom • <span
+                class="kbd">L/T</span> mode • <span class="kbd">F/V</span> view • <span class="kbd">P</span> pause •
+            <span class="kbd">S</span> stop sounds
+        </div>
+    </div>
+    <div class="panel" id="panel">
+        <h2>Status</h2>
+        <div class="score" id="scoreBox"></div>
+        <div style="height:8px"></div>
+        <div id="helpBox" style="font-size:12px; opacity:.9">
+            <b>Headphones recommended</b> for positional audio. In fog: identify by sound pattern + bearing.
+        </div>
+        <div style="height:8px"></div>
+        <!-- Removed colorblind and subtitles buttons -->
+    </div>
+
+    <!-- Global Stop Sounds Button -->
+    <button class="global-stop-sounds" id="globalStopSounds">
+        🔇 Stop All Sounds
+        <div style="font-size: 10px; opacity: 0.8; margin-top: 2px;">Press 'S' key</div>
+    </button>
+
+    <!-- Vessel Spawning Menu -->
+    <div class="panel" id="spawnPanel" style="right: 12px; top: 280px; display: none;">
+        <h2>Spawn Vessel</h2>
+
+        <div style="margin: 6px 0;">
+            <label>Type:</label>
+            <select id="spawnVesselType" style="width: 100%; margin-top: 4px;">
+                <optgroup label="Power-driven">
+                    <option value="power_lt50">Power-driven (&lt;50 m)</option>
+                    <option value="power_ge50">Power-driven (≥50 m)</option>
+                </optgroup>
+                <optgroup label="Sailing">
+                    <option value="sailing">Sailing (under sail)</option>
+                    <option value="sailing_tricolor_small">Sailing (tricolor)</option>
+                </optgroup>
+                <optgroup label="Fishing">
+                    <option value="trawling">Fishing (trawling)</option>
+                    <option value="fishing">Fishing (other)</option>
+                    <option value="fishing_gear_long_port">Fishing (gear >150m port)</option>
+                    <option value="fishing_gear_long_starboard">Fishing (gear >150m starboard)</option>
+                </optgroup>
+                <optgroup label="Towing">
+                    <option value="towing_le200">Towing (≤200 m)</option>
+                    <option value="towing_gt200">Towing (>200 m)</option>
+                    <option value="tow_object">Tow (object/barge)</option>
+                    <option value="pushing_alongside">Pushing/Alongside</option>
+                    <option value="pushing_ahead">Pushing Ahead (composite)</option>
+                    <option value="towing_ram">Towing + RAM (severely restricted)</option>
+                    <option value="submerged_tow_breadth_lt25">Partly Submerged Tow (&lt;25 m breadth)</option>
+                    <option value="submerged_tow_breadth_ge25">Partly Submerged Tow (≥25 m breadth)</option>
+                    <option value="submerged_tow_len_gt100">Partly Submerged Tow (&gt;100 m length)</option>
+                </optgroup>
+                <optgroup label="Restricted">
+                    <option value="nuc">Not Under Command</option>
+                    <option value="ram">Restricted Maneuverability</option>
+                    <option value="cbd">Constrained by Draft</option>
+                </optgroup>
+                <optgroup label="Anchored/Aground">
+                    <option value="anchor">At Anchor</option>
+                    <option value="pilot_anchor">Pilot at Anchor</option>
+                    <option value="aground">Aground</option>
+                </optgroup>
+                <optgroup label="Special">
+                    <option value="pilot">Pilot Vessel</option>
+                    <option value="air_cushion">Air-cushion</option>
+                    <option value="wig">WIG Craft</option>
+                    <option value="diving_ops">Diving Operations</option>
+                    <option value="dredging_obstruction_port">Dredging (port obstruction)</option>
+                    <option value="dredging_obstruction_starboard">Dredging (starboard obstruction)</option>
+                    <option value="mine_clearance">Mine Clearance</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div style="margin: 6px 0; display: none;">
+            <label>Status:</label>
+            <select id="spawnStatus" style="width: 100%; margin-top: 4px;">
+                <optgroup label="Normal Operations">
+                    <option value="underway">Underway</option>
+                    <option value="stopped">Stopped</option>
+                </optgroup>
+                <optgroup label="Anchored/Grounded">
+                    <option value="anchored">Anchored</option>
+                    <option value="aground">Aground</option>
+                </optgroup>
+                <optgroup label="Restricted Ability">
+                    <option value="nuc">Not Under Command (NUC)</option>
+                    <option value="ram">Restricted in Ability to Manoeuvre (RAM)</option>
+                    <option value="cbd">Constrained by Draft (CBD)</option>
+                </optgroup>
+                <optgroup label="Working Vessels">
+                    <option value="fishing">Engaged in Fishing</option>
+                    <option value="trawling">Trawling</option>
+                    <option value="diving">Diving Operations</option>
+                    <option value="dredging">Dredging/Underwater Operations</option>
+                    <option value="mine_clearance">Mine Clearance</option>
+                </optgroup>
+                <optgroup label="Towing Operations">
+                    <option value="towing">Towing</option>
+                    <option value="pushing">Pushing/Alongside</option>
+                    <option value="being_towed">Being Towed</option>
+                </optgroup>
+                <optgroup label="Special Vessels">
+                    <option value="pilot">Pilot Vessel</option>
+                    <option value="air_cushion">Air-cushion Operation</option>
+                    <option value="wig">WIG Craft Operation</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div style="margin: 6px 0;">
+            <label>Heading: <span id="headingValue">000°</span></label>
+            <input id="spawnHeading" type="range" min="0" max="359" step="1" value="0"
+                style="width: 100%; margin-top: 4px;">
+        </div>
+
+        <div style="margin: 6px 0;">
+            <label>Speed: <span id="speedValue">5.0</span> knots</label>
+            <input id="spawnSpeed" type="range" min="0" max="15" step="0.5" value="5"
+                style="width: 100%; margin-top: 4px;">
+        </div>
+
+        <div style="margin: 6px 0;">
+            <label>Distance: <span id="distanceValue">80</span>m</label>
+            <input id="spawnDistance" type="range" min="30" max="150" step="10" value="80"
+                style="width: 100%; margin-top: 4px;">
+        </div>
+
+        <div style="margin: 10px 0;">
+            <button id="spawnVesselBtn" class="primary" style="width: 100%;">Spawn Vessel</button>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+    <div class="telescope-overlay" id="telescopeOverlay"></div>
+    <div class="zoom-close" id="zoomClose">×</div>
+
+    <!-- Light Tooltip -->
+    <div id="lightTooltip" class="light-tooltip" style="display: none;">
+        <div class="tooltip-content"></div>
+    </div>
+    <div class="subtitle" id="subtitle"></div>
+
+    <!-- Fog Sounds Menu -->
+    <div class="fog-sounds-menu" id="fogSoundsMenu">
+        <button class="fog-sounds-close" id="fogSoundsClose">×</button>
+        <h2>Maritime Fog Signals</h2>
+        <div id="fogSoundsList">
+            <!-- Fog sound items will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Identification Modal -->
+    <div class="modal" id="idModal">
+        <div class="card">
+            <h3>Identify Vessel</h3>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px">
+                <select id="guessType" style="flex:1">
+                    <option value="power_lt50">Power-driven (&lt;50 m)</option>
+                    <option value="power_ge50">Power-driven (≥50 m)</option>
+                    <option value="pushing">Pushing/Alongside (tug)</option>
+                    <option value="towing_le200">Towing (≤200 m)</option>
+                    <option value="towing_gt200">Towing (&gt;200 m)</option>
+                    <option value="tow_object">Tow (object/barge)</option>
+                    <option value="towing_ram">Towing + RAM</option>
+                    <option value="sailing">Sailing (under sail)</option>
+                    <option value="sailing_tricolor">Sailing (tricolor lantern)</option>
+                    <option value="anchor">At anchor</option>
+                    <option value="pilot_anchor">Pilot at anchor</option>
+                    <option value="aground">Aground</option>
+                    <option value="trawling">Fishing (trawling)</option>
+                    <option value="fishing">Fishing (other)</option>
+                    <option value="fishing_gear_long">Fishing (gear &gt;150 m)</option>
+                    <option value="dredging_obstruction">Dredging/Underwater ops</option>
+                    <option value="diving_ops">Diving operations</option>
+                    <option value="nuc">Not Under Command (NUC)</option>
+                    <option value="ram">Restricted in Manoeuvre (RAM)</option>
+                    <option value="cbd">Constrained by Draft (CBD)</option>
+                    <option value="air_cushion">Air-cushion (non-displacement)</option>
+                    <option value="wig">WIG craft</option>
+                    <option value="pilot">Pilot vessel</option>
+                </select>
+                <button id="submitGuess" class="primary">Submit</button>
+                <button id="cancelGuess">Cancel</button>
+            </div>
+            <div id="idHint" style="font-size:12px; opacity:.9"></div>
+        </div>
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // ====== Basic setup ======
+        const app = document.getElementById('app');
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+        renderer.setSize(innerWidth, innerHeight);
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        app.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0a1428); // Deep night blue instead of black
+        scene.fog = new THREE.FogExp2(0x1a2040, 0.003); // Slightly blue-tinted fog
+
+        const camera = new THREE.PerspectiveCamera(70, innerWidth / innerHeight, 0.1, 4000);
+        camera.position.set(0, 2, 8);
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; controls.enablePan = true; controls.target.set(0, 1.5, 0);
+
+        // Camera view management
+        let currentView = 'free';
+        const viewSettings = {
+            free: {
+                position: new THREE.Vector3(0, 2, 8),
+                target: new THREE.Vector3(0, 1.5, 0),
+                enableRotate: true,
+                enablePan: true,
+                enableZoom: true,
+                minDistance: 1,
+                maxDistance: 1200, // Hard cap below star dome
+                minPolarAngle: Math.PI * 0.1, // Prevent underground viewing (18° above horizon)
+                maxPolarAngle: Math.PI
+            },
+            firstPerson: {
+                position: new THREE.Vector3(0, 1.8, 0),
+                target: new THREE.Vector3(0, 1.8, -1),
+                enableRotate: true,
+                enablePan: false,
+                enableZoom: false,
+                minDistance: 0.1,
+                maxDistance: 0.1,
+                minPolarAngle: Math.PI * 0.3,
+                maxPolarAngle: Math.PI * 0.7
+            },
+
+        };
+
+        function setView(viewName) {
+            const settings = viewSettings[viewName];
+            if (!settings) return;
+
+            currentView = viewName;
+
+            // Update camera position and target
+            camera.position.copy(settings.position);
+            controls.target.copy(settings.target);
+
+            // Update controls settings
+            controls.enableRotate = settings.enableRotate;
+            controls.enablePan = settings.enablePan;
+            controls.enableZoom = settings.enableZoom;
+            controls.minDistance = settings.minDistance;
+            controls.maxDistance = settings.maxDistance;
+            controls.minPolarAngle = settings.minPolarAngle;
+            controls.maxPolarAngle = settings.maxPolarAngle;
+
+            // Update controls
+            controls.update();
+
+            // Update button states
+            document.querySelectorAll('[id$="ViewBtn"]').forEach(btn => btn.classList.remove('primary'));
+            document.getElementById(viewName + 'ViewBtn').classList.add('primary');
+
+            // Show toast notification
+            const viewNames = { free: 'Free View', firstPerson: 'First Person' };
+            toast(`Switched to ${viewNames[viewName]}`);
+        }
+
+        // Ground (dark water plane with subtle blue tint) - 50x50 NM training area
+        const waterSize = 50 * 1852; // 50 NM in meters (92,600m)
+        const waterGeo = new THREE.PlaneGeometry(waterSize, waterSize, 1, 1);
+        const waterMat = new THREE.MeshBasicMaterial({ color: 0x0d1b2a, fog: true }); // Dark blue water
+        const water = new THREE.Mesh(waterGeo, waterMat);
+        water.rotation.x = -Math.PI / 2; water.position.y = 0;
+        scene.add(water);
+
+        // Improved lighting - warmer ambient with cooler moonlight
+        scene.add(new THREE.AmbientLight(0x1a1a2e, 0.4)); // Subtle warm ambient
+        const moon = new THREE.DirectionalLight(0x4a6fa5, 0.6); // Cooler moonlight
+        moon.position.set(-10, 20, -10);
+        scene.add(moon);
+
+        // Improved sky dome with gradient-like effect
+        const skyDome = new THREE.Mesh(
+            new THREE.SphereGeometry(2000, 32, 16),
+            new THREE.MeshBasicMaterial({
+                color: 0x162447, // Deep night sky blue
+                side: THREE.BackSide,
+                fog: false
+            })
+        );
+        scene.add(skyDome);
+
+        // Add stars to the night sky
+        function createStarfield() {
+            const starGeometry = new THREE.BufferGeometry();
+            const starCount = 1500;
+            const starPositions = new Float32Array(starCount * 3);
+            const starColors = new Float32Array(starCount * 3);
+
+            for (let i = 0; i < starCount; i++) {
+                // Generate random positions on a sphere (radius 1800, inside sky dome)
+                const radius = 1800;
+                const theta = Math.random() * Math.PI * 2; // Azimuth
+                const phi = Math.acos(2 * Math.random() - 1); // Elevation (uniform distribution)
+
+                const x = radius * Math.sin(phi) * Math.cos(theta);
+                const y = Math.abs(radius * Math.cos(phi)) + 50; // Keep stars above horizon
+                const z = radius * Math.sin(phi) * Math.sin(theta);
+
+                starPositions[i * 3] = x;
+                starPositions[i * 3 + 1] = y;
+                starPositions[i * 3 + 2] = z;
+
+                // Vary star colors (white to slightly blue/yellow)
+                const brightness = 0.5 + Math.random() * 0.5; // 0.5 to 1.0
+                const colorVariation = Math.random();
+
+                if (colorVariation < 0.7) {
+                    // Most stars are white
+                    starColors[i * 3] = brightness;     // R
+                    starColors[i * 3 + 1] = brightness; // G
+                    starColors[i * 3 + 2] = brightness; // B
+                } else if (colorVariation < 0.85) {
+                    // Some stars are slightly blue
+                    starColors[i * 3] = brightness * 0.8;     // R
+                    starColors[i * 3 + 1] = brightness * 0.9; // G
+                    starColors[i * 3 + 2] = brightness;       // B
+                } else {
+                    // Some stars are slightly yellow
+                    starColors[i * 3] = brightness;           // R
+                    starColors[i * 3 + 1] = brightness * 0.9; // G
+                    starColors[i * 3 + 2] = brightness * 0.7; // B
+                }
+            }
+
+            starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+            starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+            const starMaterial = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                fog: false // We'll handle fog manually for stars
+            });
+
+            const stars = new THREE.Points(starGeometry, starMaterial);
+            stars.userData.isStarfield = true; // Mark for fog updates
+            scene.add(stars);
+        }
+        createStarfield();
+
+        // Cardinal direction markers
+        function createCardinalMarkers() {
+            const cardinals = [
+                { name: 'N', angle: 0, pos: new THREE.Vector3(0, 0, -500) },
+                { name: 'NE', angle: 45, pos: new THREE.Vector3(354, 0, -354) },
+                { name: 'E', angle: 90, pos: new THREE.Vector3(500, 0, 0) },
+                { name: 'SE', angle: 135, pos: new THREE.Vector3(354, 0, 354) },
+                { name: 'S', angle: 180, pos: new THREE.Vector3(0, 0, 500) },
+                { name: 'SW', angle: 225, pos: new THREE.Vector3(-354, 0, 354) },
+                { name: 'W', angle: 270, pos: new THREE.Vector3(-500, 0, 0) },
+                { name: 'NW', angle: 315, pos: new THREE.Vector3(-354, 0, -354) }
+            ];
+
+            cardinals.forEach(cardinal => {
+                // Create text sprite for cardinal direction with degrees
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = 128;
+                canvas.height = 80; // Increased height for degree numbers
+
+                context.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                context.textAlign = 'center';
+
+                // Draw degree number on top
+                context.font = 'bold 20px Arial';
+                context.fillText(`${cardinal.angle}°`, 64, 25);
+
+                // Draw cardinal direction below
+                context.font = 'bold 32px Arial';
+                context.fillText(cardinal.name, 64, 55);
+
+                const texture = new THREE.CanvasTexture(canvas);
+                const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true, fog: false });
+                const sprite = new THREE.Sprite(spriteMaterial);
+
+                sprite.position.copy(cardinal.pos);
+                sprite.position.y = 15; // Slightly above water level
+                sprite.scale.set(40, 25, 1); // Increased height scale for degree numbers
+
+                scene.add(sprite);
+            });
+        }
+        createCardinalMarkers();
+
+        // Create vessel information display sprite
+        // Analyze vessel lights and return accurate description (only visible lights)
+        function analyzeLights(vessel) {
+            const lightCounts = {};
+            const lightDetails = [];
+
+            // Use single source of truth for bearing calculation
+            const ang = getRelativeBearing(vessel, camera);
+
+            vessel.traverse(obj => {
+                if (obj instanceof THREE.Sprite && obj.userData.kind) {
+                    const kind = obj.userData.kind;
+                    const position = obj.position;
+                    const color = obj.material.color;
+
+                    // Check if this light should be visible from current viewing angle
+                    let visible = true;
+                    if (kind === 'allwhite' || kind === 'allred' || kind === 'allgreen' || kind === 'allyellow' ||
+                        kind === 'flash_yellow' || kind === 'flash_red' || kind === 'red' || kind === 'green') {
+                        visible = true; // All-round lights always visible
+                    } else {
+                        visible = sectorVisible(kind, ang); // Sector lights depend on bearing
+                    }
+
+                    // Only include lights that are actually visible
+                    if (!visible) return;
+
+                    // Get actual color from the light - use the kind instead of trying to detect color
+                    let colorName = 'white';
+                    // For lights created by addStack or addLight, use the kind to determine color
+                    if (kind === 'allred' || kind === 'red') colorName = 'red';
+                    else if (kind === 'allgreen' || kind === 'green') colorName = 'green';
+                    else if (kind === 'allyellow' || kind === 'yellow') colorName = 'yellow';
+                    else if (kind === 'allwhite' || kind === 'white') colorName = 'white';
+                    else if (kind === 'port') colorName = 'red';
+                    else if (kind === 'starboard') colorName = 'green';
+                    // Fallback to color detection for other cases
+                    else if (color.r > 0.8 && color.g < 0.3 && color.b < 0.3) colorName = 'red';
+                    else if (color.r < 0.1 && color.g > 0.8) colorName = 'green';
+                    else if (color.r > 0.8 && color.g > 0.8 && color.b < 0.3) colorName = 'yellow';
+                    else colorName = 'white';
+
+                    // Determine light type and description with position info
+                    let description = '';
+                    let lightKey = '';
+
+                    if (kind === 'masthead') {
+                        // Count mastheads and distinguish by position
+                        const mastCount = (lightCounts['masthead'] || 0) + 1;
+                        lightCounts['masthead'] = mastCount;
+
+                        if (mastCount === 1) {
+                            if (position.z < -0.5) description = 'Forward masthead (white, 225°)';
+                            else description = 'Masthead (white, 225°)';
+                        } else {
+                            if (position.z < -0.5) description = 'Forward masthead (white, 225°)';
+                            else description = 'After masthead (white, 225°, higher)';
+                        }
+                        lightKey = `masthead_${position.z.toFixed(1)}_${position.y.toFixed(1)}`;
+                    } else if (kind === 'port') {
+                        description = `Port sidelight (${colorName}, 112.5°)`;
+                        lightKey = 'port';
+                    } else if (kind === 'starboard') {
+                        description = `Starboard sidelight (${colorName}, 112.5°)`;
+                        lightKey = 'starboard';
+                    } else if (kind === 'stern') {
+                        description = `Stern light (${colorName}, 135°)`;
+                        lightKey = 'stern';
+                    } else if (kind === 'towing') {
+                        description = `Towing light (${colorName}, 135°)`;
+                        lightKey = 'towing';
+                    } else if (kind === 'allwhite' || kind === 'white') {
+                        // Check if it's an anchor light by position
+                        if (position.y > 1.5) {
+                            description = `Anchor light (${colorName}, all-round)`;
+                            lightKey = `anchor_${position.z.toFixed(1)}`;
+                        } else {
+                            description = `All-round ${colorName}`;
+                            lightKey = `allround_${colorName}_${position.y.toFixed(1)}`;
+                        }
+                    } else if (kind === 'allred' || kind === 'red') {
+                        description = `All-round ${colorName}`;
+                        lightKey = `allround_${colorName}`;
+                    } else if (kind === 'allgreen' || kind === 'green') {
+                        description = `All-round ${colorName}`;
+                        lightKey = `allround_${colorName}`;
+                    } else if (kind === 'allyellow' || kind === 'yellow') {
+                        description = `All-round ${colorName}`;
+                        lightKey = `allround_${colorName}`;
+                    } else if (kind === 'flash_yellow') {
+                        description = `Flashing ${colorName} (all-round)`;
+                        lightKey = 'flash_yellow';
+                    } else if (kind === 'flash_red') {
+                        description = `Flashing ${colorName} (all-round)`;
+                        lightKey = 'flash_red';
+                    }
+
+                    if (description && lightKey) {
+                        // Avoid duplicates by using unique keys
+                        if (!lightDetails.some(light => light.key === lightKey)) {
+                            lightDetails.push({ description, key: lightKey, y: position.y });
+                        }
+                    }
+                }
+            });
+
+            // Sort lights by height (highest first) for better organization
+            lightDetails.sort((a, b) => b.y - a.y);
+
+            return lightDetails.map(light => light.description);
+        }
+
+        function createVesselInfoSprite(vessel) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 300;
+            canvas.height = 180; // Increased height for light descriptions
+
+            const texture = new THREE.CanvasTexture(canvas);
+            const spriteMaterial = new THREE.SpriteMaterial({
+                map: texture,
+                transparent: true,
+                fog: false,
+                depthTest: true,
+                depthWrite: false
+            });
+            const sprite = new THREE.Sprite(spriteMaterial);
+
+            sprite.position.set(0, 10, 0); // Very high above vessel to ensure lights are completely visible
+            sprite.scale.set(15, 9, 1); // Increased height to accommodate light descriptions
+            sprite.visible = false; // Initially hidden
+
+            return sprite;
+        }
+
+        // Update vessel info display
+        function updateVesselInfo(vessel) {
+            if (!vessel.userData.infoSprite) return;
+
+            const canvas = vessel.userData.infoSprite.material.map.image;
+            const context = canvas.getContext('2d');
+
+            // Clear canvas
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (!isLearningMode) return;
+
+            // Background - more transparent to not block lights
+            context.fillStyle = 'rgba(0, 0, 0, 0.6)';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+            context.strokeRect(2, 2, canvas.width - 4, canvas.height - 4);
+
+            // Text styling
+            context.fillStyle = '#ffffff';
+            context.font = 'bold 16px Arial';
+            context.textAlign = 'left';
+
+            // Vessel type
+            const vesselLabel = labelFor(vessel.userData.type);
+            context.fillText(`Type: ${vesselLabel}`, 10, 25);
+
+            // Heading (direction vessel is facing)
+            // Convert Three.js rotation to compass heading: rotation.y = 0 means facing North
+            const heading = ((THREE.MathUtils.radToDeg(-vessel.rotation.y) % 360 + 360) % 360);
+            const headingCardinal = getCardinalDirection(heading);
+            context.fillText(`Heading: ${heading.toFixed(0)}° (${headingCardinal})`, 10, 45);
+
+            // Status
+            let status = 'Underway';
+            if (vessel.userData.type.includes('anchor')) {
+                status = 'At Anchor';
+            } else if (vessel.userData.type.includes('aground')) {
+                status = 'Aground';
+            } else if (vessel.userData.type.includes('nuc')) {
+                status = vessel.userData.makingWay ? 'NUC (Underway)' : 'NUC (Stopped)';
+            } else if (!vessel.userData.makingWay) {
+                status = 'Stopped';
+            }
+
+            context.fillText(`Status: ${status}`, 10, 65);
+
+            // Speed indication
+            const speedKnots = vessel.userData.speed === 0 ? '0.0' : Math.abs(vessel.userData.speed * 10).toFixed(1);
+            context.fillText(`Speed: ${speedKnots} knots`, 10, 85);
+
+            // Light information
+            const lights = analyzeLights(vessel);
+            context.fillStyle = '#ffff88'; // Slightly yellow for light info
+            context.font = 'bold 14px Arial';
+            context.fillText('Lights:', 10, 110);
+
+            // Display lights (limit to avoid overflow)
+            context.font = '12px Arial';
+            context.fillStyle = '#ffffff';
+            const maxLights = 4; // Limit to prevent text overflow
+            for (let i = 0; i < Math.min(lights.length, maxLights); i++) {
+                context.fillText(`• ${lights[i]}`, 15, 130 + (i * 15));
+            }
+
+            if (lights.length > maxLights) {
+                context.fillStyle = '#cccccc';
+                context.fillText(`... and ${lights.length - maxLights} more`, 15, 130 + (maxLights * 15));
+            }
+
+            // Update texture
+            vessel.userData.infoSprite.material.map.needsUpdate = true;
+        }
+
+        // Convert degrees to cardinal direction
+        function getCardinalDirection(degrees) {
+            const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+            const index = Math.round(degrees / 22.5) % 16;
+            return directions[index];
+        }
+
+        // Calculate gradual fog visibility based on distance and fog density
+        function calculateFogVisibility(distance, fogDensity, forFogScenario = false) {
+            if (fogDensity === 0) return 1.0; // No fog, full visibility
+
+            // In fog scenario, learning mode should show vessels clearly for educational purposes
+            if (forFogScenario && isLearningMode) {
+                // In learning mode, bypass fog calculation and make vessel fully visible
+                return 1.0;
+            }
+
+            // Apply fog effect
+            // Normalize fog density to percentage (0.02 = 100% fog)
+            const fogPercent = Math.min(fogDensity / 0.02, 1.0);
+
+            // Gradual fog visibility calculation with 5 levels
+            // 0% fog: Clear conditions
+            // 25% fog: Slight reduction at distance, close objects fully visible  
+            // 50% fog: Moderate reduction, distant objects fade
+            // 75% fog: Heavy reduction, medium distance objects fade
+            // 100% fog: Very heavy reduction, only close objects visible
+
+            let visibility = 1.0;
+
+            // Distance-based falloff - gentle curve
+            const distanceFactor = Math.exp(-distance * fogDensity * 15);
+
+            // Apply fog reduction based on level
+            if (fogPercent === 0) {
+                // 0% fog: clear conditions
+                visibility = 1.0;
+            } else if (fogPercent <= 0.25) {
+                // 25% fog: minimal impact, only affects distant objects
+                visibility = Math.max(0.8, distanceFactor);
+            } else if (fogPercent <= 0.5) {
+                // 50% fog: moderate impact
+                visibility = Math.max(0.6, distanceFactor * 0.8);
+            } else if (fogPercent <= 0.75) {
+                // 75% fog: heavy impact
+                visibility = Math.max(0.3, distanceFactor * 0.6);
+            } else {
+                // 100% fog: very heavy impact but still some visibility at close range
+                visibility = Math.max(0.1, distanceFactor * 0.3);
+            }
+
+            return Math.max(0, Math.min(1, visibility));
+        }
+
+        // Update all vessel info displays
+        function updateVesselInfoDisplay() {
+            vessels.forEach(vessel => {
+                if (vessel.userData.infoSprite) {
+                    vessel.userData.infoSprite.visible = isLearningMode;
+                    if (isLearningMode) {
+                        updateVesselInfo(vessel);
+                    }
+                }
+            });
+        }
+
+        // ====== Audio setup (positional) ======
+        const listener = new THREE.AudioListener();
+        camera.add(listener);
+        let masterGain = listener.context.createGain();
+        masterGain.gain.value = 0.6; // default volume
+        masterGain.connect(listener.context.destination);
+
+        // Ensure audio context is activated on user interaction
+        function ensureAudioContext() {
+            if (listener.context.state === 'suspended') {
+                console.log('🔊 Resuming suspended audio context...');
+                listener.context.resume().then(() => {
+                    console.log('🔊 Audio context resumed successfully');
+                    toast('Audio activated');
+                }).catch(err => {
+                    console.error('❌ Failed to resume audio context:', err);
+                    toast('Audio activation failed');
+                });
+            } else {
+                console.log('🔊 Audio context already active:', listener.context.state);
+            }
+        }
+
+        function makeToneBuffer(freq = 440, dur = 0.5, type = 'sine') { // simple sine for horn; bell via higher freq
+            const sr = listener.context.sampleRate; const len = Math.floor(dur * sr);
+            const buf = listener.context.createBuffer(1, len, sr);
+            const data = buf.getChannelData(0);
+            for (let i = 0; i < len; i++) { data[i] = Math.sin(2 * Math.PI * freq * i / sr) * Math.exp(-3 * i / len); }
+            return buf;
+        }
+        const BUF = {
+            long: makeToneBuffer(330, 1.2), // long blast ~1.2s (compressed from 4-6s)
+            short: makeToneBuffer(330, 0.35),
+            bell: makeToneBuffer(880, 0.2, 'sine'),
+            gong: makeToneBuffer(220, 0.6, 'sine'),
+        };
+
+        // ====== Audio Player Creation ======
+        // This function now creates non-positional (global) audio sources attached to the camera.
+        function makeGlobalPlayer() {
+            const g = new THREE.Group(); // Use a group as a container for the audio sources
+
+            const srcLong = new THREE.Audio(listener);
+            srcLong.setBuffer(makeToneBuffer(350, 1.2)); // Low tone for long blast
+            srcLong.setVolume(0.7);
+            g.add(srcLong);
+
+            const srcShort = new THREE.Audio(listener);
+            srcShort.setBuffer(makeToneBuffer(440, 0.4)); // Higher tone for short blast
+            srcShort.setVolume(0.5);
+            g.add(srcShort);
+
+            const srcBell = new THREE.Audio(listener);
+            srcBell.setBuffer(makeToneBuffer(1200, 0.8, 'triangle')); // Metallic tone for bell
+            srcBell.setVolume(0.6);
+            g.add(srcBell);
+
+            return { group: g, long: srcLong, short: srcShort, bell: srcBell };
+        }
+
+        function playPattern(player, pattern) {
+            // pattern: array of steps {t:secondsFromNow, kind:'long'|'short'|'bell'|'gong'}; repeats every cycle
+            const ctx = listener.context;
+            const start = ctx.currentTime + 0.1;
+            for (const step of pattern.steps) {
+                const at = start + step.t;
+                const src = step.kind === 'long' ? player.long : step.kind === 'short' ? player.short : player.bell;
+                setTimeout(() => { src.stop(); src.play(); showSubtitle(step.caption || step.kind); }, (step.t * 1000));
+            }
+            setTimeout(() => playPattern(player, pattern), pattern.cycle * 1000); // loop
+        }
+
+        function showSubtitle(text) { if (!subtitlesOn) return; const el = document.getElementById('subtitle'); el.textContent = text; el.style.display = 'block'; clearTimeout(el._t); el._t = setTimeout(() => { el.style.display = 'none' }, 1000); }
+
+        // ====== Lights — sector visibility rules ======
+        const deg = THREE.MathUtils.degToRad;
+
+        // Single source of truth for relative bearing calculation
+        function getRelativeBearing(vessel, observer) {
+            // Get vessel's forward direction (bow pointing)
+            const vesselForward = new THREE.Vector3(0, 0, -1).applyQuaternion(vessel.quaternion).setY(0).normalize();
+
+            // Get direction from vessel to observer
+            const toObserver = new THREE.Vector3().copy(observer.position).sub(vessel.position).setY(0).normalize();
+
+            // Calculate signed angle: positive = starboard side, negative = port side
+            let angle = THREE.MathUtils.radToDeg(Math.acos(THREE.MathUtils.clamp(vesselForward.dot(toObserver), -1, 1)));
+            const crossProduct = vesselForward.clone().cross(toObserver).y;
+
+            // Apply sign: positive for starboard (right), negative for port (left)
+            // Cross product is positive when observer is to PORT, so flip the sign
+            return crossProduct > 0 ? -angle : angle;
+        }
+
+        function sectorVisible(kind, ang) {
+            // 0° = dead ahead, ±180° = dead astern
+            if (kind === 'masthead') return Math.abs(ang) <= 112.5;   // 225°
+            if (kind === 'stern') return Math.abs(ang) >= 112.5;   // 135° centered astern
+            if (kind === 'towing') return Math.abs(ang) >= 112.5;   // same as stern
+            if (kind === 'port') return ang <= 0 && ang >= -112.5;
+            if (kind === 'starboard') return ang >= 0 && ang <= 112.5;
+            return true;
+        }
+
+        const COLORS = { port: 0xff4040, starboard: 0x00e68c, white: 0xffffff, yellow: 0xffd400, red: 0xff4040, green: 0x00e68c };
+
+        function dot(color) { // sprite glow
+            const mat = new THREE.SpriteMaterial({ color, transparent: true, opacity: 1, depthWrite: false, blending: THREE.AdditiveBlending });
+            const s = new THREE.Sprite(mat); s.scale.setScalar(0.35); return s;
+        }
+
+
+
+        // ====== Vessel factory ======
+        let VESSEL_ID = 1;
+        function makeVessel(type, opts = {}) {
+            const g = new THREE.Group();
+            g.name = 'vessel';
+            // Correctly default makingWay to true unless specified otherwise
+            g.userData = { id: VESSEL_ID++, type, identified: false, makingWay: opts.makingWay !== false, lenGE50: !!opts.lenGE50, towGT200: !!opts.towGT200 };
+            // Create boat-shaped hull using simple primitives
+            // Main hull body - elongated and flattened
+            const hullGeometry = new THREE.BoxGeometry(0.5, 0.3, 2.4);
+            const hullMaterial = new THREE.MeshBasicMaterial({ color: 0x2a2a3a });
+            const hull = new THREE.Mesh(hullGeometry, hullMaterial);
+            hull.position.y = 0.4;
+            g.add(hull);
+
+            // Bow (pointed front)
+            const bowGeometry = new THREE.ConeGeometry(0.25, 0.6, 6);
+            const bowMaterial = new THREE.MeshBasicMaterial({ color: 0x2a2a3a });
+            const bow = new THREE.Mesh(bowGeometry, bowMaterial);
+            bow.rotation.x = Math.PI / 2; // Point forward
+            bow.position.set(0, 0.4, -1.5);
+            g.add(bow);
+
+            // Stern (flat back)
+            const sternGeometry = new THREE.BoxGeometry(0.4, 0.25, 0.1);
+            const sternMaterial = new THREE.MeshBasicMaterial({ color: 0x252535 });
+            const stern = new THREE.Mesh(sternGeometry, sternMaterial);
+            stern.position.set(0, 0.4, 1.25);
+            g.add(stern);
+
+            // Bridge/superstructure
+            const bridgeGeometry = new THREE.BoxGeometry(0.4, 0.4, 0.8);
+            const bridgeMaterial = new THREE.MeshBasicMaterial({ color: 0x3a3a4a });
+            const bridge = new THREE.Mesh(bridgeGeometry, bridgeMaterial);
+            bridge.position.set(0, 0.8, 0.1);
+            g.add(bridge);
+
+            // Light positions (approx)
+            const mastY = 2.0; const sideY = 1.2; const sternZ = 1.2; const bowZ = -1.2;
+
+            function addLight(kind, colorKey, pos) {
+                const s = dot(COLORS[colorKey]); s.position.copy(pos); s.userData = { kind, colorKey };
+                g.add(s); return s;
+            }
+            function addStack(kinds, pos, dy = 0.25) {
+                const group = new THREE.Group(); group.position.copy(pos);
+                const base = - (kinds.length - 1) / 2 * dy;
+                kinds.forEach((k, i) => {
+                    const sp = dot(COLORS[k]);
+                    sp.position.y = base + i * dy;
+                    // Use proper all-round light kinds
+                    const allRoundKind = k === 'white' ? 'allwhite' : k === 'red' ? 'allred' : k === 'green' ? 'allgreen' : k === 'yellow' ? 'allyellow' : k;
+                    sp.userData = { kind: allRoundKind, allround: true };
+                    group.add(sp);
+                });
+                g.add(group); return group;
+            }
+            function addFlashing(colorKey, pos, period = 1.0, duty = 0.5) {
+                const s = dot(COLORS[colorKey]); s.position.copy(pos);
+                const flashKind = colorKey === 'yellow' ? 'flash_yellow' : colorKey === 'red' ? 'flash_red' : colorKey;
+                s.userData = { kind: flashKind, allround: true, blink: { period, duty } };
+                g.add(s); return s;
+            }
+
+            // ===== Standard types =====
+            if (type === 'power_lt50' || type === 'power_ge50') {
+                if (type === 'power_lt50') {
+                    // Single masthead forward
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY, bowZ * 0.4));
+                } else {
+                    // Forward masthead
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY, bowZ * 0.4));
+                    // After masthead (higher and abaft)
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.35, 0.4));
+                }
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1));
+                addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1));
+                addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+            }
+            if (type === 'sailing') {
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1));
+                addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1));
+                addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+            }
+            if (type === 'anchor') {
+                if (opts.lenGE50) {
+                    // Forward anchor light (higher)
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY + 0.4, -0.5));
+                    // Aft anchor light (lower)
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY - 0.2, 0.6));
+                } else {
+                    // Single anchor light
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY, 0));
+                }
+            }
+            if (type === 'aground') {
+                if (opts.lenGE50) {
+                    // Forward anchor light (higher)
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY + 0.4, -0.5));
+                    // Aft anchor light (lower)
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY - 0.2, 0.6));
+                } else {
+                    // Single anchor light
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY, 0));
+                }
+                // Two all-round reds vertically at mast
+                addStack(['red', 'red'], new THREE.Vector3(0, mastY + 0.8, 0));
+            }
+            if (type === 'trawling') {
+                addStack(['green', 'white'], new THREE.Vector3(0, mastY, 0));
+                if (opts.lenGE50) {
+                    // Forward masthead
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.5, bowZ * 0.4));
+                    // After masthead (higher and abaft)
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.85, 0.4));
+                }
+                if (opts.makingWay) { addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ)); }
+            }
+            if (type === 'fishing') {
+                addStack(['red', 'white'], new THREE.Vector3(0, mastY, 0));
+                if (opts.makingWay) { addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ)); }
+            }
+            if (type === 'towing_le200' || type === 'towing_gt200') {
+                const m = type === 'towing_gt200' ? 3 : 2;
+                // Forward masthead
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY, bowZ * 0.4));
+                // After mastheads (higher and abaft)
+                for (let i = 1; i < m; i++) {
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY + i * 0.35, 0.4));
+                }
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1));
+                addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1));
+                addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+                addLight('towing', 'yellow', new THREE.Vector3(0, sideY + 0.5, sternZ)); // towing light above stern (sector light)
+            }
+            if (type === 'nuc') {
+                addStack(['red', 'red'], new THREE.Vector3(0, mastY, 0));
+                if (opts.makingWay) { addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ)); }
+            }
+            if (type === 'ram') {
+                addStack(['red', 'white', 'red'], new THREE.Vector3(0, mastY, 0));
+                if (opts.makingWay) { addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ)); }
+            }
+            if (type === 'cbd') {
+                addStack(['red', 'red', 'red'], new THREE.Vector3(0, mastY, 0));
+                if (opts.lenGE50) {
+                    // Forward masthead
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.7, bowZ * 0.4));
+                    // After masthead (higher and abaft)
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY + 1.05, 0.4));
+                } else {
+                    // Single masthead for <50m
+                    addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.7, bowZ * 0.4));
+                }
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+            }
+            if (type === 'pilot') {
+                addStack(['white', 'red'], new THREE.Vector3(0, mastY, 0));
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+            }
+
+            // ===== New special cases =====
+            if (type === 'pushing_alongside' || type === 'pushing_ahead') {
+                // Rule 24(b): two mastheads; sidelights; stern (no yellow over white aft)
+                for (let i = 0; i < 2; i++) addLight('masthead', 'white', new THREE.Vector3(0, mastY + i * 0.35, bowZ * 0.4));
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1));
+                addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1));
+                addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+            }
+            if (type === 'tow_object') {
+                // The tow (aftmost unit): sidelights + sternlight only
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1));
+                addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1));
+                addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+            }
+            if (type === 'fishing_gear_long_port' || type === 'fishing_gear_long_starboard') {
+                // Red over white + an extra all-round white in direction of gear (>150 m)
+                addStack(['red', 'white'], new THREE.Vector3(0, mastY, 0));
+                const dir = (type === 'fishing_gear_long_port') ? -1 : 1;
+                const extra = dot(COLORS.white); extra.position.set(0.6 * dir, mastY, 0); extra.userData = { kind: 'allwhite', allround: true }; g.add(extra);
+            }
+            if (type === 'dredging_obstruction_port' || type === 'dredging_obstruction_starboard') {
+                // RAM red-white-red + two red on obstructed side, two green on safe side
+                addStack(['red', 'white', 'red'], new THREE.Vector3(0, mastY, 0));
+                const obstructPort = (type === 'dredging_obstruction_port');
+                const leftX = -0.8, rightX = 0.8;
+                // Obstructed side (two red)
+                addStack(['red', 'red'], new THREE.Vector3(obstructPort ? leftX : rightX, sideY + 0.2, 0), 0.18);
+                // Safe side (two green)
+                addStack(['green', 'green'], new THREE.Vector3(obstructPort ? rightX : leftX, sideY + 0.2, 0), 0.18);
+                if (opts.makingWay) { addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ)); }
+            }
+            if (type === 'diving_ops') {
+                // Same night lights as RAM
+                addStack(['red', 'white', 'red'], new THREE.Vector3(0, mastY, 0));
+            }
+            if (type === 'air_cushion') {
+                // Power-driven + flashing yellow all-round
+                // Forward masthead
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY, bowZ * 0.4));
+                // After masthead (higher and abaft)
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.35, 0.4));
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+                addFlashing('yellow', new THREE.Vector3(0, mastY + 0.9, 0), 1.0, 0.5);
+            }
+            if (type === 'wig') {
+                // Power-driven + high-intensity all-round flashing red
+                // Forward masthead
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY, bowZ * 0.4));
+                // After masthead (higher and abaft)
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.35, 0.4));
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+                addFlashing('red', new THREE.Vector3(0, mastY + 0.9, 0), 0.8, 0.5);
+            }
+            if (type === 'pilot_anchor') {
+                // Anchor lights + pilot white over red (no running lights)
+                if (opts.lenGE50) {
+                    // Forward anchor light (higher)
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY + 0.4, -0.5));
+                    // Aft anchor light (lower)
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY - 0.2, 0.6));
+                } else {
+                    // Single anchor light
+                    addLight('allwhite', 'white', new THREE.Vector3(0, mastY, 0));
+                }
+                addStack(['white', 'red'], new THREE.Vector3(0, mastY + 0.6, 0));
+            }
+            if (type === 'sailing_tricolor_small') {
+                // Combined tricolor at masthead: port, starboard, stern sectors from masthead position
+                addLight('port', 'port', new THREE.Vector3(0, mastY + 0.4, 0));
+                addLight('starboard', 'green', new THREE.Vector3(0, mastY + 0.4, 0));
+                addLight('stern', 'white', new THREE.Vector3(0, mastY + 0.4, 0));
+            }
+            if (type === 'mine_clearance') {
+                // Three all-round greens in a triangle + power-driven lights
+                addStack(['green'], new THREE.Vector3(0, mastY + 0.7, 0));
+                const g1 = dot(COLORS.green); g1.position.set(-0.6, mastY + 0.3, 0); g1.userData = { kind: 'allgreen', allround: true }; g.add(g1);
+                const g2 = dot(COLORS.green); g2.position.set(0.6, mastY + 0.3, 0); g2.userData = { kind: 'allgreen', allround: true }; g.add(g2);
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.5, bowZ * 0.4));
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1)); addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1)); addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+            }
+
+            // --- Towing + RAM (severely restricted in ability to manoeuvre)
+            if (type === 'towing_ram') {
+                // Three mastheads in a vertical line (towing unit)
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY, bowZ * 0.4));
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.35, 0.4));
+                addLight('masthead', 'white', new THREE.Vector3(0, mastY + 0.70, 0.4));
+                // RAM: red–white–red all-round
+                addStack(['red', 'white', 'red'], new THREE.Vector3(0, mastY + 1.1, 0));
+                // Running/tow lights
+                addLight('port', 'port', new THREE.Vector3(-0.45, sideY, -0.1));
+                addLight('starboard', 'green', new THREE.Vector3(0.45, sideY, -0.1));
+                addLight('stern', 'white', new THREE.Vector3(0, sideY, sternZ));
+                addLight('towing', 'yellow', new THREE.Vector3(0, sideY + 0.5, sternZ));
+            }
+
+            // --- Partly submerged tow (object being towed) <25 m breadth
+            if (type === 'submerged_tow_breadth_lt25') {
+                // One all-round white at each extremity (fore & aft)
+                addStack(['white'], new THREE.Vector3(0, mastY, bowZ));   // forward extremity
+                addStack(['white'], new THREE.Vector3(0, mastY, sternZ)); // aft extremity
+            }
+
+            // --- Partly submerged tow (object) ≥25 m breadth
+            if (type === 'submerged_tow_breadth_ge25') {
+                // Two all-round whites vertically at each end
+                addStack(['white', 'white'], new THREE.Vector3(0, mastY, bowZ), 0.22);
+                addStack(['white', 'white'], new THREE.Vector3(0, mastY, sternZ), 0.22);
+            }
+
+            // --- Partly submerged tow (object) >100 m length
+            if (type === 'submerged_tow_len_gt100') {
+                // Two all-round whites vertically at each end + intermediates along length
+                addStack(['white', 'white'], new THREE.Vector3(0, mastY, bowZ), 0.22);
+                addStack(['white', 'white'], new THREE.Vector3(0, mastY, sternZ), 0.22);
+                // Simple approximation: drop extra whites between ends
+                const steps = 2; // increase if you want more markers
+                for (let i = 1; i <= steps; i++) {
+                    const z = bowZ + (sternZ - bowZ) * (i / (steps + 1));
+                    addStack(['white'], new THREE.Vector3(0, mastY, z));
+                }
+            }
+
+            // Apply all options to vessel's userData
+            Object.assign(g.userData, opts);
+
+            // Attach a global audio player for the Fog Sounds menu to use if needed.
+            // This player is no longer positional.
+            g.userData.player = makeGlobalPlayer();
+
+            const pick = new THREE.Mesh(new THREE.SphereGeometry(0.8, 12, 8), new THREE.MeshBasicMaterial({ visible: false }));
+            g.add(pick); g.userData.pick = pick;
+
+            // Create vessel info display for learning mode
+            g.userData.infoSprite = createVesselInfoSprite(g);
+            g.add(g.userData.infoSprite);
+
+            // Create path line indicator
+            const pathGeometry = new THREE.BufferGeometry();
+            const pathLength = 50; // Length of path line in front of vessel
+            // Path line in local vessel coordinates - forward is negative Z
+            const pathPoints = [
+                new THREE.Vector3(0, 0.2, 0), // Start at vessel center, slightly above water
+                new THREE.Vector3(0, 0.2, -pathLength) // Extend forward (negative Z in local space)
+            ];
+            pathGeometry.setFromPoints(pathPoints);
+
+            const pathMaterial = new THREE.LineBasicMaterial({
+                color: 0x00ffff, // Cyan color for visibility
+                transparent: true,
+                opacity: 0.6,
+                fog: true
+            });
+
+            const pathLine = new THREE.Line(pathGeometry, pathMaterial);
+            pathLine.userData.isPathLine = true;
+            g.add(pathLine);
+            g.userData.pathLine = pathLine;
+            // Initial visibility based on makingWay and speed
+            pathLine.visible = (g.userData.makingWay !== false) && (g.userData.speed !== 0);
+
+
+
+            // Set spawn time for auto-removal after 3 minutes
+            g.userData.spawnTime = performance.now();
+            g.userData.lifetime = 180000; // 3 minutes in milliseconds
+
+            scene.add(g);
+            return g;
+        }
+
+        // ====== Scenario management ======
+        const vessels = [];
+        function clearVessels() { vessels.splice(0).forEach(v => scene.remove(v)); }
+
+        function rand(min, max) { return Math.random() * (max - min) + min; }
+        function randChoice(a) { return a[Math.floor(Math.random() * a.length)]; }
+
+        function placeAround(radius) {
+            const ang = rand(0, Math.PI * 2);
+            return new THREE.Vector3(Math.sin(ang) * radius, 0, Math.cos(ang) * radius);
+        }
+
+        // Light tooltip system
+        function getLightDescription(kind, colorKey) {
+            const descriptions = {
+                'masthead': 'White masthead light - Shows forward direction and indicates power-driven vessel',
+                'port': 'Red port (left) light - Shows port side, visible from ahead to 2 points abaft beam',
+                'starboard': 'Green starboard (right) light - Shows starboard side, visible from ahead to 2 points abaft beam',
+                'stern': 'White stern light - Shows from astern, visible 135° across stern',
+                'allwhite': 'White all-round light - Visible 360°, used for anchored vessels or special purposes',
+                'allred': 'Red all-round light - Visible 360°, indicates vessel not under command or restricted',
+                'allgreen': 'Green all-round light - Visible 360°, used for fishing or special operations',
+                'allyellow': 'Yellow all-round light - Visible 360°, used for towing or special operations',
+                'flash_yellow': 'Flashing yellow light - Air cushion vessel or special operations',
+                'flash_red': 'Flashing red light - Wing-in-ground craft or emergency',
+                'towing': 'Yellow towing light - Above stern light, indicates vessel towing',
+                'anchor': 'White anchor light - All-round light for vessels at anchor'
+            };
+
+            const baseDesc = descriptions[kind] || `${colorKey} light`;
+
+            // Add color-specific context
+            const colorContext = {
+                'red': 'Port side indicator',
+                'green': 'Starboard side indicator',
+                'white': 'Navigation or identification light',
+                'yellow': 'Special operations or towing light',
+                'port': 'Port (left) side - red sector'
+            };
+
+            const context = colorContext[colorKey] || '';
+            return context ? `${baseDesc}\n${context}` : baseDesc;
+        }
+
+        function setupLightTooltips(vessel) {
+            const tooltip = document.getElementById('lightTooltip');
+            const tooltipContent = tooltip.querySelector('.tooltip-content');
+
+            vessel.traverse((child) => {
+                if (child.userData && (child.userData.kind || child.userData.colorKey)) {
+                    const kind = child.userData.kind || 'light';
+                    const colorKey = child.userData.colorKey || 'white';
+
+                    // Store tooltip info for raycasting
+                    child.userData.tooltipInfo = {
+                        kind,
+                        colorKey,
+                        description: getLightDescription(kind, colorKey)
+                    };
+                }
+            });
+        }
+
+        function spawnVessel(type, options = {}) {
+            const v = makeVessel(type, options);
+            // Place somewhere around the observer
+            const p = placeAround(rand(40, 140));
+            v.position.copy(p);
+            // Set a random heading
+            v.rotation.y = rand(0, Math.PI * 2);
+
+            // Set speed conditionally based on status and makingWay property
+            const isStationary = type.includes('anchor') || type.includes('aground');
+            if (isStationary) {
+                v.userData.speed = 0;
+                v.userData.makingWay = false;
+            } else if (v.userData.makingWay === false) {
+                v.userData.speed = 0; // If not making way, speed must be 0
+            } else {
+                v.userData.speed = rand(1.5, 8.0) * 0.4; // Assign a random speed (60% slower) if it is underway
+                // Always move forward relative to heading; remove random sign flip
+            }
+
+            vessels.push(v);
+
+            // Setup light tooltips for this vessel
+            setupLightTooltips(v);
+
+            return v;
+        }
+
+        // Precise vessel spawning from menu
+        function spawnVesselPrecise(type, heading, speed, distance, status) {
+            const options = {
+                lenGE50: Math.random() < 0.5, // Random length for variety
+                makingWay: status === 'underway'
+            };
+
+            const v = makeVessel(type, options);
+
+            // Calculate position at specified distance and heading from camera
+            const headingRad = THREE.MathUtils.degToRad(heading);
+            const x = Math.sin(headingRad) * distance;
+            const z = Math.cos(headingRad) * distance;
+            v.position.set(x, 0, z);
+
+            // Set vessel heading (direction it's facing)
+            // Convert compass heading to Three.js rotation: 0° = North (-Z), 90° = East (+X)
+            v.rotation.y = -headingRad;
+
+            // Set speed based on status
+            const stationaryStatuses = ['stopped', 'anchored', 'aground', 'nuc', 'diving', 'dredging', 'mine_clearance'];
+            const isStationary = stationaryStatuses.includes(status) || type.includes('anchor') || type.includes('aground');
+
+            if (isStationary) {
+                v.userData.speed = 0;
+                v.userData.makingWay = false;
+            } else {
+                v.userData.speed = (speed / 10) * 0.4; // Convert knots to internal speed units (60% slower)
+                v.userData.makingWay = true;
+            }
+
+            // Set spawn time for auto-removal (override the one set in makeVessel)
+            v.userData.spawnTime = performance.now();
+            v.userData.lifetime = 180000; // 3 minutes
+
+            vessels.push(v);
+            return v;
+        }
+
+        function setupScenario(kind) {
+            currentScenario = kind; // Track current scenario
+            clearVessels();
+            stopAllAudio();
+            if (kind === 'night_basic') {
+                // Get fog level from slider
+                const fogLevel = parseInt(document.getElementById('fogRng').value);
+                const fogLevels = [0, 0.005, 0.01, 0.015, 0.02]; // 0%, 25%, 50%, 75%, 100%
+                const fogValue = fogLevels[fogLevel];
+
+                scene.fog.density = fogValue * 0.3; // Reduced scene fog
+                scene.userData = scene.userData || {};
+                scene.userData.customFogDensity = fogValue;
+
+                // Get ship count from slider
+                const shipCount = parseInt(document.getElementById('shipCountRng').value);
+
+                // Pool of vessel types for random selection
+                const vesselPool = [
+                    'power_lt50', 'power_ge50', 'sailing', 'sailing_tricolor_small',
+                    'anchor', 'pilot_anchor', 'aground', 'trawling', 'fishing',
+                    'fishing_gear_long_port', 'fishing_gear_long_starboard',
+                    'towing_le200', 'towing_gt200', 'nuc', 'ram', 'cbd',
+                    'dredging_obstruction_port', 'dredging_obstruction_starboard',
+                    'diving_ops', 'air_cushion', 'wig', 'mine_clearance', 'pilot'
+                ];
+
+                // Spawn the specified number of random vessels
+                for (let i = 0; i < shipCount; i++) {
+                    const randomType = vesselPool[Math.floor(Math.random() * vesselPool.length)];
+                    const options = {
+                        makingWay: Math.random() < 0.7, // 70% chance of making way
+                        lenGE50: Math.random() < 0.5,   // 50% chance of being ≥50m
+                        towGT200: Math.random() < 0.3   // 30% chance of tow >200m
+                    };
+                    spawnVessel(randomType, options);
+                }
+            }
+
+            // Update vessel info displays after scenario setup
+            setTimeout(() => updateVesselInfoDisplay(), 100);
+        }
+
+        function tweenFog(target, ms) { const start = scene.fog.density; const t0 = performance.now(); function step() { const t = (performance.now() - t0) / ms; if (t >= 1) { scene.fog.density = target; return; } scene.fog.density = start + (target - start) * t; requestAnimationFrame(step); } step(); }
+
+        // ====== Signals (compressed timing for training) ======
+        function setSignal(vessel, kind) {
+            const player = vessel.userData.player;
+            const base = vessel.userData.player; if (!player) return;
+            let pattern = null;
+            if (kind === 'motor') pattern = { cycle: 10, steps: [{ t: 0, kind: 'long', caption: 'Motor: long blast' }] };
+            if (kind === 'sailing') pattern = { cycle: 12, steps: [{ t: 0, kind: 'long', caption: 'Sailing: long' }, { t: 2, kind: 'short', caption: '+ short' }, { t: 3, kind: 'short', caption: '+ short' }] };
+            if (kind === 'anchor') pattern = { cycle: 10, steps: [{ t: 0, kind: 'bell', caption: 'Anchor: rapid bell' }, { t: 0.2, kind: 'bell' }, { t: 0.4, kind: 'bell' }, { t: 0.6, kind: 'bell' }, { t: 0.8, kind: 'bell' }] };
+            if (kind === 'anchor_large') pattern = { cycle: 12, steps: [{ t: 0, kind: 'bell', caption: 'Anchor (large): bell' }, { t: 1.5, kind: 'bell' }, { t: 3.0, kind: 'bell' }, { t: 4.5, kind: 'bell' }, { t: 6.0, kind: 'bell' }, { t: 8.0, kind: 'bell' }] };
+            if (kind === 'aground') pattern = { cycle: 14, steps: [{ t: 0, kind: 'bell', caption: 'Aground: 3 bell' }, { t: 0.3, kind: 'bell' }, { t: 0.6, kind: 'bell' }, { t: 1.5, kind: 'bell', caption: 'rapid' }, { t: 1.7, kind: 'bell' }, { t: 1.9, kind: 'bell' }, { t: 2.1, kind: 'bell' }, { t: 2.3, kind: 'bell' }, { t: 3.2, kind: 'bell', caption: '3 bell' }, { t: 3.5, kind: 'bell' }, { t: 3.8, kind: 'bell' }] };
+            if (pattern) playPattern(player, pattern);
+        }
+
+        function stopAllAudio() {
+            vessels.forEach(v => { const p = v.userData.player; if (!p) return; try { p.long.stop(); p.short.stop(); p.bell.stop(); } catch (e) { } });
+            // stopSequentialFogSignals is removed as it's obsolete
+        }
+
+        // ====== Fog Sounds System ======
+        let fogSoundPlayers = {}; // Track active fog sound players
+        let globalFogPlayer = null; // A single, persistent global player for the menu
+        let currentFogSounds = []; // Track currently playing fog sounds
+        let sequentialFogSignals = []; // Track vessels for sequential fog signal playback
+        let currentSignalIndex = 0;
+        let currentSignalRepeat = 0; // Track how many times current vessel has signaled
+        let maxRepeats = 3; // Minimum 3 times per vessel (can be 3-4)
+        let sequentialSignalTimer = null;
+        let currentScenario = 'mixed_challenge'; // Track current scenario for fog visibility logic
+
+        // Mouse and tooltip tracking
+        const mouse = new THREE.Vector2();
+        const raycaster = new THREE.Raycaster();
+        let currentHoveredLight = null;
+
+        // Define fog sound patterns with educational information
+        const fogSoundPatterns = {
+            motor: {
+                name: "Power-Driven Vessel (Making Way)",
+                pattern: "— (one prolonged blast)",
+                description: "Power-driven vessels making way through water sound one prolonged blast at intervals of not more than 2 minutes.",
+                cycle: 10,
+                steps: [{ t: 0, kind: 'long', caption: 'Motor: long blast' }]
+            },
+            motor_stopped: {
+                name: "Power-Driven Vessel (Stopped)",
+                pattern: "— — (two prolonged blasts)",
+                description: "Power-driven vessels stopped and not making way sound two prolonged blasts in succession with 2-second interval at intervals of not more than 2 minutes.",
+                cycle: 12,
+                steps: [
+                    { t: 0, kind: 'long', caption: 'Motor stopped: long' },
+                    { t: 2, kind: 'long', caption: '+ long' }
+                ]
+            },
+            fishing: {
+                name: "Vessel Engaged in Fishing (Not Trawling)",
+                pattern: "— • • (one long + two short)",
+                description: "Vessels engaged in fishing (other than trawling) sound one prolonged blast followed by two short blasts at intervals of not more than 2 minutes.",
+                cycle: 12,
+                steps: [
+                    { t: 0, kind: 'long', caption: 'Fishing: long' },
+                    { t: 2, kind: 'short', caption: '+ short' },
+                    { t: 3, kind: 'short', caption: '+ short' }
+                ]
+            },
+            trawling: {
+                name: "Vessel Engaged in Fishing (Trawling)",
+                pattern: "— — • (two long, each followed by short)",
+                description: "Vessels engaged in fishing by trawling sound two prolonged blasts, each followed by one short blast, at intervals of not more than 2 minutes.",
+                cycle: 16,
+                steps: [
+                    { t: 0, kind: 'long', caption: 'Trawling: long' },
+                    { t: 2, kind: 'short', caption: '+ short' },
+                    { t: 4, kind: 'long', caption: '+ long' },
+                    { t: 6, kind: 'short', caption: '+ short' }
+                ]
+            },
+            anchor: {
+                name: "Vessel at Anchor (<100m)",
+                pattern: "♪♪♪♪♪ (rapid bell)",
+                description: "Vessels at anchor under 100 meters ring a bell rapidly for about 5 seconds at intervals of not more than 1 minute.",
+                cycle: 10,
+                steps: [
+                    { t: 0, kind: 'bell', caption: 'Anchor: rapid bell' },
+                    { t: 0.2, kind: 'bell' },
+                    { t: 0.4, kind: 'bell' },
+                    { t: 0.6, kind: 'bell' },
+                    { t: 0.8, kind: 'bell' }
+                ]
+            },
+            anchor_large: {
+                name: "Vessel at Anchor (≥100m)",
+                pattern: "♪ ♪ ♪ ♪ ♪ ♪ (slow bell)",
+                description: "Vessels at anchor 100 meters or more ring a bell for 5 seconds, followed by a gong for 5 seconds, at intervals of not more than 1 minute.",
+                cycle: 12,
+                steps: [
+                    { t: 0, kind: 'bell', caption: 'Anchor (large): bell' },
+                    { t: 1.5, kind: 'bell' },
+                    { t: 3.0, kind: 'bell' },
+                    { t: 4.5, kind: 'bell' },
+                    { t: 6.0, kind: 'bell' },
+                    { t: 8.0, kind: 'bell' }
+                ]
+            },
+            aground: {
+                name: "Vessel Aground",
+                pattern: "♪♪♪ ♪♪♪♪♪ ♪♪♪ (3 + rapid + 3)",
+                description: "Vessels aground give three distinct strokes on a bell, followed by rapid bell ringing, followed by three distinct strokes.",
+                cycle: 14,
+                steps: [
+                    { t: 0, kind: 'bell', caption: 'Aground: 3 bell' },
+                    { t: 0.3, kind: 'bell' },
+                    { t: 0.6, kind: 'bell' },
+                    { t: 1.5, kind: 'bell', caption: 'rapid' },
+                    { t: 1.7, kind: 'bell' },
+                    { t: 1.9, kind: 'bell' },
+                    { t: 2.1, kind: 'bell' },
+                    { t: 2.3, kind: 'bell' },
+                    { t: 3.2, kind: 'bell', caption: '3 bell' },
+                    { t: 3.5, kind: 'bell' },
+                    { t: 3.8, kind: 'bell' }
+                ]
+            },
+            nuc: {
+                name: "Not Under Command",
+                pattern: "— • • (one long + two short)",
+                description: "Vessels not under command sound one prolonged blast followed by two short blasts at intervals of not more than 2 minutes.",
+                cycle: 12,
+                steps: [
+                    { t: 0, kind: 'long', caption: 'NUC: long' },
+                    { t: 2, kind: 'short', caption: '+ short' },
+                    { t: 3, kind: 'short', caption: '+ short' }
+                ]
+            },
+            ram: {
+                name: "Restricted in Ability to Maneuver",
+                pattern: "— • • (one long + two short)",
+                description: "Vessels restricted in ability to maneuver sound one prolonged blast followed by two short blasts at intervals of not more than 2 minutes.",
+                cycle: 12,
+                steps: [
+                    { t: 0, kind: 'long', caption: 'RAM: long' },
+                    { t: 2, kind: 'short', caption: '+ short' },
+                    { t: 3, kind: 'short', caption: '+ short' }
+                ]
+            },
+            constrained_by_draft: {
+                name: "Vessel Constrained by Draft",
+                pattern: "• • • (three short blasts)",
+                description: "Vessels constrained by their draft sound three short blasts at intervals of not more than 2 minutes.",
+                cycle: 12,
+                steps: [
+                    { t: 0, kind: 'short', caption: 'CBD: short' },
+                    { t: 1, kind: 'short', caption: '+ short' },
+                    { t: 2, kind: 'short', caption: '+ short' }
+                ]
+            }
+        };
+
+        function createFogSoundsMenu() {
+            const fogSoundsList = document.getElementById('fogSoundsList');
+            fogSoundsList.innerHTML = '';
+
+            Object.entries(fogSoundPatterns).forEach(([key, sound]) => {
+                const item = document.createElement('div');
+                item.className = 'fog-sound-item';
+
+                const showDescription = isLearningMode;
+
+                item.innerHTML = `
+                    <div class="fog-sound-info">
+                        <div class="fog-sound-name">${sound.name}</div>
+                        <div class="fog-sound-pattern">${sound.pattern}</div>
+                        ${showDescription ? `<div class="fog-sound-description">${sound.description}</div>` : ''}
+                    </div>
+                    <div class="fog-sound-controls">
+                        <button class="fog-sound-btn" data-action="play" data-sound="${key}">Play</button>
+                        <button class="fog-sound-btn" data-action="stop" data-sound="${key}">Stop</button>
+                    </div>
+                `;
+
+                fogSoundsList.appendChild(item);
+            });
+
+            // Add event listeners for fog sound controls
+            fogSoundsList.addEventListener('click', (e) => {
+                if (e.target.classList.contains('fog-sound-btn')) {
+                    const action = e.target.dataset.action;
+                    const soundKey = e.target.dataset.sound;
+
+                    if (action === 'play') {
+                        playFogSound(soundKey);
+                    } else if (action === 'stop') {
+                        stopFogSound(soundKey);
+                    }
+                }
+            });
+        }
+
+        // Mapping from fog sound patterns to vessel types and configurations
+        const fogSoundToVessel = {
+            motor: { type: 'power_ge50', options: { makingWay: true } },
+            motor_stopped: { type: 'power_ge50', options: { makingWay: false } },
+            fishing: { type: 'fishing', options: { makingWay: true } },
+            trawling: { type: 'trawling', options: { makingWay: true, lenGE50: true } },
+            anchor: { type: 'anchor', options: { makingWay: false, lenGE50: false } },
+            anchor_large: { type: 'anchor', options: { makingWay: false, lenGE50: true } },
+            aground: { type: 'aground', options: { makingWay: false, lenGE50: true } },
+            nuc: { type: 'nuc', options: { makingWay: true } },
+            ram: { type: 'ram', options: { makingWay: true } },
+            constrained_by_draft: { type: 'cbd', options: { makingWay: true, lenGE50: true } }
+        };
+
+        function playFogSound(soundKey) {
+            const pattern = fogSoundPatterns[soundKey];
+            if (!pattern) return;
+
+            // Stop any sound that is currently playing from the menu
+            stopAllFogSounds();
+
+            // Clear all existing vessels to show only the one making the sound
+            clearVessels();
+
+            // Spawn the appropriate vessel for this fog sound
+            const vesselConfig = fogSoundToVessel[soundKey];
+            if (vesselConfig) {
+                spawnVessel(vesselConfig.type, vesselConfig.options);
+
+                // Update vessel info display to show the description
+                setTimeout(() => {
+                    updateVesselInfoDisplay();
+                    // Force the vessel info to be visible by setting identified to true
+                    if (vessels.length > 0) {
+                        vessels[0].userData.identified = true;
+                        updateVesselInfoDisplay();
+                    }
+                }, 100);
+            }
+
+            // Initialize the global player if it doesn't exist
+            if (!globalFogPlayer) {
+                console.log('🔊 Initializing global fog player for menu.');
+                globalFogPlayer = makeGlobalPlayer();
+            }
+
+            fogSoundPlayers[soundKey] = globalFogPlayer;
+            currentFogSounds.push(soundKey);
+
+            // Update button states
+            updateFogSoundButtons(soundKey, 'playing');
+            updateGlobalStopButtonVisibility();
+
+            // Play the pattern
+            playFogPattern(globalFogPlayer, pattern, soundKey);
+
+            toast(`Playing: ${pattern.name}`);
+        }
+
+        function stopFogSound(soundKey) {
+            if (fogSoundPlayers[soundKey]) {
+                const player = fogSoundPlayers[soundKey];
+                try {
+                    player.long.stop();
+                    player.short.stop();
+                    player.bell.stop();
+                } catch (e) {
+                    console.warn('⚠️ Error stopping existing sounds:', e);
+                }
+
+                delete fogSoundPlayers[soundKey];
+                currentFogSounds = currentFogSounds.filter(s => s !== soundKey);
+
+                // Clear vessels when stopping the sound
+                clearVessels();
+
+                // Update button states
+                updateFogSoundButtons(soundKey, 'stopped');
+                updateGlobalStopButtonVisibility();
+
+                toast(`Stopped: ${fogSoundPatterns[soundKey]?.name || 'Sound'}`);
+            }
+        }
+
+        function stopAllFogSounds() {
+            Object.keys(fogSoundPlayers).forEach(soundKey => {
+                // Stop the sound without clearing vessels for each one (to avoid multiple clears)
+                const player = fogSoundPlayers[soundKey];
+                try {
+                    player.long.stop();
+                    player.short.stop();
+                    player.bell.stop();
+                } catch (e) {
+                    console.warn('⚠️ Error stopping existing sounds:', e);
+                }
+                delete fogSoundPlayers[soundKey];
+            });
+
+            // Clear all sounds and vessels once
+            currentFogSounds = [];
+            clearVessels();
+
+            // Update UI states
+            updateFogSoundButtons(null, 'stopped');
+            updateGlobalStopButtonVisibility();
+
+            toast('All fog sounds stopped');
+        }
+
+        function playFogPattern(player, pattern, soundKey) {
+            // Check if sound was stopped before playing
+            if (!fogSoundPlayers[soundKey]) return;
+
+            const ctx = listener.context;
+            const start = ctx.currentTime + 0.1;
+
+            pattern.steps.forEach(step => {
+                setTimeout(() => {
+                    // Check again if sound is still active
+                    if (!fogSoundPlayers[soundKey]) return;
+
+                    const src = step.kind === 'long' ? player.long : step.kind === 'short' ? player.short : player.bell;
+                    src.stop();
+                    src.play();
+                    showSubtitle(step.caption || step.kind);
+                }, step.t * 1000);
+            });
+
+            // Schedule next cycle
+            setTimeout(() => {
+                if (fogSoundPlayers[soundKey]) {
+                    playFogPattern(player, pattern, soundKey);
+                }
+            }, pattern.cycle * 1000);
+        }
+
+        function updateFogSoundButtons(soundKey, state) {
+            const buttons = document.querySelectorAll(`[data-sound="${soundKey}"]`);
+            buttons.forEach(btn => {
+                if (btn.dataset.action === 'play') {
+                    btn.classList.toggle('playing', state === 'playing');
+                    btn.textContent = state === 'playing' ? 'Playing...' : 'Play';
+                }
+            });
+        }
+
+        function updateGlobalStopButtonVisibility() {
+            const globalStopBtn = document.getElementById('globalStopSounds');
+            const hasActiveSounds = currentFogSounds.length > 0;
+            globalStopBtn.style.display = hasActiveSounds ? 'block' : 'none';
+        }
+
+        // ====== Visual Fog Signal Animation System ======
+        function createFogSignalAnimation(vessel) {
+            // Create a pulsing ring animation when vessel emits fog signal
+            const ringGeometry = new THREE.RingGeometry(0.5, 1.0, 16);
+            const ringMaterial = new THREE.MeshBasicMaterial({
+                color: 0x88ccff,
+                transparent: true,
+                opacity: 0.8,
+                side: THREE.DoubleSide
+            });
+            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+
+            // Position ring at vessel location, slightly above water
+            ring.position.copy(vessel.position);
+            ring.position.y = 0.1;
+            ring.rotation.x = -Math.PI / 2; // Lay flat on water surface
+
+            scene.add(ring);
+
+            // Animate the ring expanding and fading
+            const startTime = performance.now();
+            const duration = 2000; // 2 seconds
+
+            function animateRing() {
+                const elapsed = performance.now() - startTime;
+                const progress = elapsed / duration;
+
+                if (progress >= 1) {
+                    scene.remove(ring);
+                    return;
+                }
+
+                // Expand ring
+                const scale = 1 + progress * 3; // Expand to 4x size
+                ring.scale.set(scale, scale, 1);
+
+                // Fade out
+                ring.material.opacity = 0.8 * (1 - progress);
+
+                requestAnimationFrame(animateRing);
+            }
+
+            animateRing();
+        }
+
+        function highlightVesselEmittingSound(vessel, duration = 3000) {
+            // Add a temporary highlight to the vessel
+            const originalEmissive = {};
+
+            vessel.traverse(obj => {
+                if (obj.isMesh && obj.material) {
+                    originalEmissive[obj.uuid] = obj.material.emissive ? obj.material.emissive.clone() : new THREE.Color(0x000000);
+                    obj.material.emissive = new THREE.Color(0x004488); // Blue glow
+                }
+            });
+
+            // Remove highlight after duration
+            setTimeout(() => {
+                vessel.traverse(obj => {
+                    if (obj.isMesh && obj.material && originalEmissive[obj.uuid]) {
+                        obj.material.emissive = originalEmissive[obj.uuid];
+                    }
+                });
+            }, duration);
+        }
+
+        // ====== Visibility update per frame ======
+        const tmpVec = new THREE.Vector3();
+        function updateLightsVisibility(v) {
+            // Use single source of truth for bearing calculation
+            const ang = getRelativeBearing(v, camera);
+
+            const t = performance.now() * 0.001;
+            v.traverse(obj => {
+                if (!(obj instanceof THREE.Sprite)) return;
+                const kind = obj.userData.kind;
+                let vis = true;
+                if (kind === 'allwhite' || kind === 'allred' || kind === 'allgreen' || kind === 'allyellow' ||
+                    kind === 'flash_yellow' || kind === 'flash_red' || kind === 'red' || kind === 'green') {
+                    vis = true; // All-round lights always visible
+                } else {
+                    vis = sectorVisible(kind, ang); // Sector lights depend on bearing (masthead, stern, towing, port, starboard)
+                }
+
+                // Light visibility is now stable with constant vessel headings
+                // blinking (flashing lights)
+                if (obj.userData.blink) { const { period, duty } = obj.userData.blink; const ph = (t % period); vis = vis && (ph < duty * period); }
+
+                // Apply gradual fog visibility
+                if (vis) {
+                    const distance = v.position.distanceTo(camera.position);
+                    const fogDensity = scene.userData?.customFogDensity || scene.fog.density;
+                    const isInFogScenario = false; // No longer have dedicated fog scenario
+                    const fogVisibility = calculateFogVisibility(distance, fogDensity, isInFogScenario);
+
+                    // Set opacity based on fog
+                    obj.material.opacity = fogVisibility;
+                    obj.visible = fogVisibility > 0.02; // Keep visible until very faded
+                } else {
+                    obj.visible = false;
+                }
+                // Colorblind mode tinting - preserve original colors
+                if (!obj.userData.originalColor) {
+                    obj.userData.originalColor = obj.material.color.getHex();
+                }
+
+                if (colorblindOn) {
+                    if (kind === 'port') obj.material.color.set(0xff8080);
+                    else if (kind === 'starboard') obj.material.color.set(0x80ffd1);
+                    else if (kind === 'masthead' || kind === 'stern' || kind === 'allwhite') obj.material.color.set(0xf0f0f0);
+                    else if (kind === 'yellow') obj.material.color.set(0xffe066);
+                    else if (kind === 'red' && obj.userData.allround) obj.material.color.set(0xff9090);
+                    else if (kind === 'green' && obj.userData.allround) obj.material.color.set(0x90ffd8);
+                } else {
+                    // Restore original color when colorblind mode is off
+                    obj.material.color.setHex(obj.userData.originalColor);
+                }
+            });
+        }
+
+        // ====== Animate vessels (straight line movement with auto-removal) ======
+        function tickVessels(dt) {
+            const currentTime = performance.now();
+            const sceneBoundary = 500; // Scene boundary radius
+
+            // Process vessels in reverse order so we can safely remove them
+            for (let i = vessels.length - 1; i >= 0; i--) {
+                const v = vessels[i];
+
+                // Check if vessel should be removed after 3 minutes
+                const age = currentTime - v.userData.spawnTime;
+                if (age >= v.userData.lifetime) {
+                    // Remove vessel
+                    scene.remove(v);
+                    vessels.splice(i, 1);
+                    continue;
+                }
+
+                // Calculate forward vector (used for both movement and path line)
+                const fw = new THREE.Vector3(0, 0, -1).applyQuaternion(v.quaternion);
+
+                // Move along forward vector in straight line (constant heading)
+                if (v.userData.speed !== 0) {
+                    v.position.addScaledVector(fw, v.userData.speed * dt);
+                }
+                // Keep path line visibility in sync for stationary vessels
+                if (v.userData.pathLine) {
+                    v.userData.pathLine.visible = showPathLines && v.userData.speed !== 0 && v.userData.makingWay !== false;
+                }
+
+
+
+                // Check if vessel has reached scene boundary
+                const distanceFromCenter = Math.sqrt(v.position.x * v.position.x + v.position.z * v.position.z);
+                if (distanceFromCenter > sceneBoundary) {
+                    // Remove vessel that reached boundary
+                    scene.remove(v);
+                    vessels.splice(i, 1);
+                    continue;
+                }
+
+                updateLightsVisibility(v);
+
+                // Apply fog visibility to vessel hull
+                const distance = v.position.distanceTo(camera.position);
+                const fogDensity = scene.userData?.customFogDensity || scene.fog.density;
+                const isInFogScenario = false; // No longer have dedicated fog scenario
+                const fogVisibility = calculateFogVisibility(distance, fogDensity, isInFogScenario);
+
+                // Update hull and path line opacity based on fog
+                v.traverse(child => {
+                    if (child.isMesh && child.material && !child.userData.isLight) {
+                        child.material.transparent = true;
+                        child.material.opacity = fogVisibility;
+                        child.visible = fogVisibility > 0.02;
+                    } else if (child.userData.isPathLine && child.material) {
+                        child.material.transparent = true;
+                        child.material.opacity = fogVisibility * 0.6; // Path line slightly more transparent
+                        child.visible = fogVisibility > 0.1;
+                    }
+                });
+
+                v.userData.player.group.position.copy(v.position);
+
+                // Update vessel info in learning mode
+                if (isLearningMode && v.userData.infoSprite) {
+                    updateVesselInfo(v);
+                }
+            }
+        }
+
+        // ====== Picking / identify ======
+        const ray = new THREE.Raycaster();
+        let pickTarget = null;
+
+        function openIdentify(v) {
+            pickTarget = v;
+            const modal = document.getElementById('idModal');
+            const hint = document.getElementById('idHint');
+            hint.textContent = 'Select the vessel type based on visible lights (and sounds in fog).';
+            modal.style.display = 'flex';
+        }
+
+        // Mouse move handler for light tooltips
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = (e.clientX / innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+
+            updateLightTooltip(e);
+        });
+
+        function updateLightTooltip(event) {
+            const tooltip = document.getElementById('lightTooltip');
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(vessels, true);
+
+            let foundLight = null;
+            for (const intersect of intersects) {
+                if (intersect.object.userData?.tooltipInfo) {
+                    foundLight = intersect.object;
+                    break;
+                }
+            }
+
+            if (foundLight && foundLight !== currentHoveredLight) {
+                currentHoveredLight = foundLight;
+                const info = foundLight.userData.tooltipInfo;
+                const lightType = info.kind.charAt(0).toUpperCase() + info.kind.slice(1).replace(/([A-Z])/g, ' $1');
+
+                tooltip.querySelector('.tooltip-content').innerHTML = `
+                    <div class="tooltip-light-type">${lightType} Light</div>
+                    <div class="tooltip-description">${info.description.replace(/\n/g, '<br>')}</div>
+                `;
+
+                tooltip.style.display = 'block';
+                tooltip.style.left = (event.clientX + 10) + 'px';
+                tooltip.style.top = (event.clientY - 10) + 'px';
+            } else if (!foundLight && currentHoveredLight) {
+                currentHoveredLight = null;
+                tooltip.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('click', (e) => {
+            mouse.x = (e.clientX / innerWidth) * 2 - 1;
+            mouse.y = -(e.clientY / innerHeight) * 2 + 1;
+            ray.setFromCamera(mouse, camera);
+            const hits = ray.intersectObjects(vessels.map(v => v.userData.pick));
+            if (hits.length) { const obj = hits[0].object; const v = vessels.find(v => v.userData.pick === obj); openIdentify(v); }
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') { // identify nearest
+                e.preventDefault(); // Prevent page scroll
+                const v = vessels.slice().sort((a, b) => a.position.distanceTo(camera.position) - b.position.distanceTo(camera.position))[0];
+                if (v) openIdentify(v);
+            }
+            if (e.key.toLowerCase() === 'p') togglePause();
+
+            // Zoom keyboard shortcuts
+            if (e.key === '1') setZoom(1);
+            if (e.key === '2') setZoom(2);
+            if (e.key === '5') setZoom(5);
+            if (e.key === '0') setZoom(10); // 0 for 10x (since 10 is two keys)
+
+            // Mode toggle
+            if (e.key.toLowerCase() === 'l') setMode(true);  // L for Learning
+            if (e.key.toLowerCase() === 't') setMode(false); // T for Testing
+
+            // View controls
+            if (e.key.toLowerCase() === 'f') setView('free');       // F for Free view
+            if (e.key.toLowerCase() === 'v') setView('firstPerson'); // V for First person View
+
+            // Sound controls
+            if (e.key.toLowerCase() === 's') {                      // S to stop all fog sounds
+                if (Object.keys(fogSoundPlayers).length > 0) {
+                    stopAllFogSounds();
+                    toast('All fog sounds stopped (S key)');
+                }
+            }
+
+            // Zoom controls
+            if (e.key === 'Escape') setZoom(1);                     // ESC to reset zoom
+
+
+        });
+
+        document.getElementById('submitGuess').onclick = () => {
+            const sel = document.getElementById('guessType').value;
+            if (!pickTarget) return closeModal();
+            const correct = normalizeType(pickTarget.userData.type);
+            const ok = sel === correct;
+            updateScore(ok);
+            toast(ok ? 'Correct ✅' : `Incorrect ❌  (was ${labelFor(correct)})`);
+            if (ok) pickTarget.userData.identified = true;
+            closeModal();
+        };
+        document.getElementById('cancelGuess').onclick = closeModal;
+        function closeModal() { document.getElementById('idModal').style.display = 'none'; pickTarget = null; }
+
+        function normalizeType(t) {
+            if (t === 'power_lt50' || t === 'power_ge50') return t;
+            if (t === 'towing_le200' || t === 'towing_gt200') return t;
+            if (t === 'pushing_alongside' || t === 'pushing_ahead') return 'pushing';
+            if (t === 'pushing_ahead') return 'pushing';
+            if (t === 'towing_ram') return 'towing_ram';
+            if (t.startsWith('submerged_tow_')) return t; // keep distinct
+            if (t === 'tow_object') return 'tow_object';
+            if (t === 'fishing_gear_long_port' || t === 'fishing_gear_long_starboard') return 'fishing_gear_long';
+            if (t === 'dredging_obstruction_port' || t === 'dredging_obstruction_starboard') return 'dredging_obstruction';
+            if (t === 'sailing_tricolor_small') return 'sailing_tricolor';
+            if (t === 'pilot_anchor') return 'pilot_anchor';
+            if (t === 'diving_ops') return 'diving_ops';
+            if (t === 'air_cushion') return 'air_cushion';
+            if (t === 'wig') return 'wig';
+            return t;
+        }
+        function labelFor(t) {
+            const map = {
+                power_lt50: 'Power (<50 m)', power_ge50: 'Power (≥50 m)',
+                pushing: 'Pushing/Alongside (tug)', tow_object: 'Tow (object/barge)',
+                towing_le200: 'Towing (≤200 m)', towing_gt200: 'Towing (>200 m)',
+                sailing: 'Sailing', sailing_tricolor: 'Sailing (tricolor lantern)',
+                anchor: 'Anchor', pilot_anchor: 'Pilot at anchor', aground: 'Aground',
+                trawling: 'Fishing (trawl)', fishing: 'Fishing (other)', fishing_gear_long: 'Fishing (gear >150 m)',
+                dredging_obstruction: 'Dredging/Underwater ops', diving_ops: 'Diving operations',
+                nuc: 'NUC', ram: 'RAM', cbd: 'CBD', air_cushion: 'Air-cushion', wig: 'WIG craft', pilot: 'Pilot',
+                pushing_ahead: 'Pushing Ahead (composite)',
+                towing_ram: 'Towing + RAM',
+                submerged_tow_breadth_lt25: 'Partly Submerged Tow (<25 m breadth)',
+                submerged_tow_breadth_ge25: 'Partly Submerged Tow (≥25 m breadth)',
+                submerged_tow_len_gt100: 'Partly Submerged Tow (>100 m length)'
+            }; return map[t] || t;
+        }
+
+        // ====== Scoring & progress ======
+        let score = 0, attempts = 0, streak = 0;
+        function updateScore(correct) {
+            attempts++; if (correct) { score += 10; streak++; } else { streak = 0; score = Math.max(0, score - 5); }
+            const acc = attempts ? Math.round((score / (attempts * 10)) * 100) : 0;
+            document.getElementById('scoreBox').innerHTML = `Score: <b>${score}</b> • Attempts: ${attempts} • Accuracy: <b>${acc}%</b> • Streak: <b>${streak}</b>`;
+            localStorage.setItem('navTrainerStats', JSON.stringify({ score, attempts, streak }));
+        }
+        (function loadStats() { try { const s = JSON.parse(localStorage.getItem('navTrainerStats') || '{}'); if (s.attempts) { score = s.score || 0; attempts = s.attempts || 0; streak = s.streak || 0; updateScore(false); attempts--; } } catch (e) { } })();
+
+        function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.style.display = 'block'; clearTimeout(t._t); t._t = setTimeout(() => t.style.display = 'none', 1600); }
+
+        // ====== UI controls ======
+
+        document.getElementById('startBtn').onclick = () => {
+            // Ensure audio context is active before starting scenario
+            ensureAudioContext();
+            setupScenario(document.getElementById('scenario').value);
+        };
+
+
+        // Stop audio when scenario dropdown changes
+        document.getElementById('scenario').addEventListener('change', () => {
+            stopAllAudio();
+            stopAllFogSounds();
+            updateFogSoundsButtonVisibility();
+            updateGlobalStopButtonVisibility(); // Hide global stop button when changing scenarios
+        });
+
+        // Fog sounds menu integration
+        function updateFogSoundsButtonVisibility() {
+            const scenario = document.getElementById('scenario').value;
+            const fogSoundsBtn = document.getElementById('fogSoundsBtn');
+
+            // Show fog sounds button for scenarios that can benefit from fog signal training
+            if (scenario === 'night_basic') {
+                fogSoundsBtn.style.display = 'inline-block';
+            } else {
+                fogSoundsBtn.style.display = 'none';
+            }
+        }
+
+        // Fog sounds button event handler
+        document.getElementById('fogSoundsBtn').addEventListener('click', () => {
+            const fogSoundsMenu = document.getElementById('fogSoundsMenu');
+            createFogSoundsMenu(); // Refresh menu based on current learning mode
+            fogSoundsMenu.style.display = 'block';
+        });
+
+        // Fog sounds menu close button
+        document.getElementById('fogSoundsClose').addEventListener('click', () => {
+            document.getElementById('fogSoundsMenu').style.display = 'none';
+        });
+
+        // Close fog sounds menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const fogSoundsMenu = document.getElementById('fogSoundsMenu');
+            const fogSoundsBtn = document.getElementById('fogSoundsBtn');
+
+            if (fogSoundsMenu.style.display === 'block' &&
+                !fogSoundsMenu.contains(e.target) &&
+                !fogSoundsBtn.contains(e.target)) {
+                fogSoundsMenu.style.display = 'none';
+            }
+        });
+
+        // Update fog sounds button visibility on page load
+        updateFogSoundsButtonVisibility();
+
+        // Global stop sounds button event handler
+        document.getElementById('globalStopSounds').addEventListener('click', () => {
+            stopAllFogSounds();
+            toast('All fog sounds stopped');
+        });
+
+        // Zoom functionality
+        let currentZoom = 1;
+        const zoomLevels = { '1x': 1, '2x': 2, '5x': 5, '10x': 10 };
+
+        function setZoom(level) {
+            currentZoom = level;
+            // Clamp FOV to prevent extreme telephoto effect that bypasses distance limits
+            const minFOV = 15; // Allows ~4.7x max effective zoom, prevents star dome visibility
+            camera.fov = Math.max(minFOV, 70 / level);
+            camera.updateProjectionMatrix();
+
+            // Show telescope barrel effect and close button for zoom > 1x
+            const telescopeOverlay = document.getElementById('telescopeOverlay');
+            const zoomClose = document.getElementById('zoomClose');
+            if (level > 1) {
+                telescopeOverlay.classList.add('active');
+                zoomClose.classList.add('active');
+            } else {
+                telescopeOverlay.classList.remove('active');
+                zoomClose.classList.remove('active');
+            }
+
+            // Update button states
+            document.querySelectorAll('[id^="zoom"]').forEach(btn => btn.classList.remove('primary'));
+            document.getElementById(`zoom${level}x`).classList.add('primary');
+        }
+
+        // Zoom button event listeners
+        Object.keys(zoomLevels).forEach(zoomKey => {
+            document.getElementById(`zoom${zoomKey}`).onclick = () => setZoom(zoomLevels[zoomKey]);
+        });
+
+        // Close zoom button
+        document.getElementById('zoomClose').onclick = () => setZoom(1);
+
+        // Learning/Testing mode functionality
+        let isLearningMode = true;
+
+        function setMode(learning) {
+            isLearningMode = learning;
+            // Update button state - always learning mode
+            document.getElementById('learningMode').classList.add('primary');
+
+            // Update vessel info visibility
+            updateVesselInfoDisplay();
+
+            // Update fog sounds menu if it's open (to show/hide descriptions)
+            const fogSoundsMenu = document.getElementById('fogSoundsMenu');
+            if (fogSoundsMenu.style.display === 'block') {
+                createFogSoundsMenu();
+            }
+
+            // Update vessel display
+            updateVesselInfoDisplay();
+
+            // Update help text
+            const helpBox = document.getElementById('helpBox');
+            helpBox.innerHTML = '<b>Learning Mode:</b> Vessel information is displayed. Use this to learn vessel types and light patterns.';
+        }
+
+        // Mode button event listener - always learning mode
+        document.getElementById('learningMode').onclick = () => setMode(true);
+
+
+
+        // View control functionality
+        document.getElementById('freeViewBtn').onclick = () => setView('free');
+        document.getElementById('firstPersonViewBtn').onclick = () => setView('firstPerson');
+
+        // Path lines always visible for moving vessels
+        let showPathLines = true;
+
+        document.getElementById('pauseBtn').onclick = () => togglePause();
+        let paused = false; function togglePause() { paused = !paused; document.getElementById('pauseBtn').textContent = paused ? 'Resume' : 'Pause'; if (!paused) lastT = performance.now(); }
+
+        // Fog level control
+        const fogRng = document.getElementById('fogRng');
+        fogRng.addEventListener('input', () => {
+            const fogLevel = parseInt(fogRng.value);
+            // Convert discrete levels to fog density values
+            const fogLevels = [0, 0.005, 0.01, 0.015, 0.02]; // 0%, 25%, 50%, 75%, 100%
+            const fogValue = fogLevels[fogLevel];
+
+            // Update scene fog density
+            scene.fog.density = fogValue * 0.3; // 30% of value for scene fog
+            // Store full fog value for custom visibility calculations
+            scene.userData = scene.userData || {};
+            scene.userData.customFogDensity = fogValue;
+
+            // Update fog level display
+            const fogLabels = ['Clear', '25%', '50%', '75%', '100%'];
+            toast(`Fog: ${fogLabels[fogLevel]}`);
+        });
+
+        // Ship count control
+        const shipCountRng = document.getElementById('shipCountRng');
+        shipCountRng.addEventListener('input', () => {
+            const shipCount = parseInt(shipCountRng.value);
+            toast(`Ship Count: ${shipCount}`);
+        });
+
+        // Removed UI buttons: colorblind and subtitles (handlers disabled)
+        let colorblindOn = false;
+        let subtitlesOn = false;
+        // document.getElementById('colorblindBtn').onclick = ... removed
+        // document.getElementById('subtitlesBtn').onclick = ... removed
+
+        // Spawn menu functionality
+        let spawnMenuVisible = false;
+        document.getElementById('spawnMenuBtn').onclick = () => {
+            spawnMenuVisible = !spawnMenuVisible;
+            document.getElementById('spawnPanel').style.display = spawnMenuVisible ? 'block' : 'none';
+            document.getElementById('spawnMenuBtn').textContent = spawnMenuVisible ? 'Close Menu' : 'Spawn Menu';
+        };
+
+        // Update spawn menu value displays
+        document.getElementById('spawnHeading').oninput = (e) => {
+            document.getElementById('headingValue').textContent = String(e.target.value).padStart(3, '0') + '°';
+        };
+        document.getElementById('spawnSpeed').oninput = (e) => {
+            document.getElementById('speedValue').textContent = parseFloat(e.target.value).toFixed(1);
+        };
+        document.getElementById('spawnDistance').oninput = (e) => {
+            document.getElementById('distanceValue').textContent = e.target.value;
+        };
+
+        // Handle vessel type changes to disable/enable status and speed for specialized types
+        document.getElementById('spawnVesselType').addEventListener('change', function () {
+            const vesselType = this.value;
+            const speedInput = document.getElementById('spawnSpeed');
+            const speedLabel = speedInput.previousElementSibling;
+
+            // Define the primary status and default speed for EVERY vessel type.
+            // This map is the single source of truth now that the Status dropdown is removed.
+            const vesselProperties = {
+                // Generic Types (speed is user-adjustable)
+                'power_lt50': { status: 'underway', speed: 8, fixed: false },
+                'power_ge50': { status: 'underway', speed: 8, fixed: false },
+                'sailing': { status: 'underway', speed: 5, fixed: false },
+                'sailing_tricolor_small': { status: 'underway', speed: 5, fixed: false },
+
+                // Fixed State Vessels (speed is locked)
+                'anchor': { status: 'anchored', speed: 0, fixed: true },
+                'pilot_anchor': { status: 'anchored', speed: 0, fixed: true },
+                'aground': { status: 'aground', speed: 0, fixed: true },
+                'towing_le200': { status: 'towing', speed: 6, fixed: true },
+                'towing_gt200': { status: 'towing', speed: 4, fixed: true },
+                'towing_ram': { status: 'towing', speed: 3, fixed: true },
+                'pushing_alongside': { status: 'pushing', speed: 5, fixed: true },
+                'pushing_ahead': { status: 'pushing', speed: 4, fixed: true },
+                'submerged_tow_breadth_lt25': { status: 'being_towed', speed: 3, fixed: true },
+                'submerged_tow_breadth_ge25': { status: 'being_towed', speed: 3, fixed: true },
+                'submerged_tow_len_gt100': { status: 'being_towed', speed: 2, fixed: true },
+                'tow_object': { status: 'being_towed', speed: 4, fixed: true },
+                'diving_ops': { status: 'diving', speed: 0, fixed: true },
+                'trawling': { status: 'trawling', speed: 3, fixed: true },
+                'fishing_gear_long_port': { status: 'fishing', speed: 1, fixed: true },
+                'fishing_gear_long_starboard': { status: 'fishing', speed: 1, fixed: true },
+                'dredging_obstruction_port': { status: 'dredging', speed: 1, fixed: true },
+                'dredging_obstruction_starboard': { status: 'dredging', speed: 1, fixed: true },
+                'nuc': { status: 'nuc', speed: 0, fixed: true },
+                'ram': { status: 'ram', speed: 2, fixed: true },
+                'cbd': { status: 'cbd', speed: 3, fixed: true },
+                'fishing': { status: 'fishing', speed: 2, fixed: true },
+                'mine_clearance': { status: 'mine_clearance', speed: 2, fixed: true },
+                'pilot': { status: 'pilot', speed: 8, fixed: true },
+                'air_cushion': { status: 'air_cushion', speed: 12, fixed: true },
+                'wig': { status: 'wig', speed: 15, fixed: true }
+            };
+
+            const props = vesselProperties[vesselType] || { status: 'underway', speed: 8, fixed: false };
+
+            if (props.fixed) {
+                // Disable and set fixed values for speed
+                speedInput.disabled = true;
+                speedInput.style.opacity = '0.5';
+                speedInput.value = props.speed;
+                speedLabel.style.opacity = '0.5';
+                document.getElementById('speedValue').textContent = props.speed + ' knots';
+            } else {
+                // Enable controls for flexible vessels and set a default speed
+                speedInput.disabled = false;
+                speedInput.style.opacity = '1';
+                speedLabel.style.opacity = '1';
+                speedInput.value = props.speed; // Set a sensible default
+                document.getElementById('speedValue').textContent = props.speed + ' knots';
+            }
+        });
+
+        // Spawn vessel button handler
+        document.getElementById('spawnVesselBtn').onclick = () => {
+            const type = document.getElementById('spawnVesselType').value;
+            const heading = parseInt(document.getElementById('spawnHeading').value);
+            const speed = parseFloat(document.getElementById('spawnSpeed').value);
+            const distance = parseInt(document.getElementById('spawnDistance').value);
+
+            // This map is the single source of truth now that the Status dropdown is removed.
+            const vesselProperties = {
+                // ... (This map is duplicated for now, but could be refactored to be a single global const)
+                'power_lt50': { status: 'underway', speed: 8, fixed: false },
+                'power_ge50': { status: 'underway', speed: 8, fixed: false },
+                'sailing': { status: 'underway', speed: 5, fixed: false },
+                'sailing_tricolor_small': { status: 'underway', speed: 5, fixed: false },
+                'anchor': { status: 'anchored', speed: 0, fixed: true },
+                'pilot_anchor': { status: 'anchored', speed: 0, fixed: true },
+                'aground': { status: 'aground', speed: 0, fixed: true },
+                'towing_le200': { status: 'towing', speed: 6, fixed: true },
+                'towing_gt200': { status: 'towing', speed: 4, fixed: true },
+                'towing_ram': { status: 'towing', speed: 3, fixed: true },
+                'pushing_alongside': { status: 'pushing', speed: 5, fixed: true },
+                'pushing_ahead': { status: 'pushing', speed: 4, fixed: true },
+                'submerged_tow_breadth_lt25': { status: 'being_towed', speed: 3, fixed: true },
+                'submerged_tow_breadth_ge25': { status: 'being_towed', speed: 3, fixed: true },
+                'submerged_tow_len_gt100': { status: 'being_towed', speed: 2, fixed: true },
+                'tow_object': { status: 'being_towed', speed: 4, fixed: true },
+                'diving_ops': { status: 'diving', speed: 0, fixed: true },
+                'trawling': { status: 'trawling', speed: 3, fixed: true },
+                'fishing_gear_long_port': { status: 'fishing', speed: 1, fixed: true },
+                'fishing_gear_long_starboard': { status: 'fishing', speed: 1, fixed: true },
+                'dredging_obstruction_port': { status: 'dredging', speed: 1, fixed: true },
+                'dredging_obstruction_starboard': { status: 'dredging', speed: 1, fixed: true },
+                'nuc': { status: 'nuc', speed: 0, fixed: true },
+                'ram': { status: 'ram', speed: 2, fixed: true },
+                'cbd': { status: 'cbd', speed: 3, fixed: true },
+                'fishing': { status: 'fishing', speed: 2, fixed: true },
+                'mine_clearance': { status: 'mine_clearance', speed: 2, fixed: true },
+                'pilot': { status: 'pilot', speed: 8, fixed: true },
+                'air_cushion': { status: 'air_cushion', speed: 12, fixed: true },
+                'wig': { status: 'wig', speed: 15, fixed: true }
+            };
+
+            const props = vesselProperties[type] || { status: 'underway', speed: 8, fixed: false };
+            const status = props.status;
+
+            const vessel = spawnVesselPrecise(type, heading, speed, distance, status);
+
+            // Toast with type and derived status
+            const statusLabels = {
+                underway: 'Underway', stopped: 'Stopped', anchored: 'Anchored', aground: 'Aground',
+                nuc: 'NUC', ram: 'RAM', cbd: 'CBD', fishing: 'Fishing', trawling: 'Trawling',
+                diving: 'Diving Ops', dredging: 'Dredging', mine_clearance: 'Mine Clearance',
+                towing: 'Towing', pushing: 'Pushing', being_towed: 'Being Towed',
+                pilot: 'Pilot Ops', air_cushion: 'Air-cushion', wig: 'WIG'
+            };
+            const statusLabel = statusLabels[status] || status;
+            toast(`Spawned ${labelFor(type)} (${statusLabel}) at ${heading}° (${getCardinalDirection(heading)})`);
+        };
+
+        // Window resize handling
+        window.addEventListener('resize', () => {
+            camera.aspect = innerWidth / innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(innerWidth, innerHeight);
+        });
+
+
+
+
+
+
+
+        // ====== Main loop ======
+        let lastT = performance.now();
+        function updateStarVisibility() {
+            const fogDensity = scene.userData?.customFogDensity || scene.fog.density;
+            const fogPercent = Math.min(fogDensity / 0.02, 1.0);
+            scene.traverse(obj => {
+                if (obj.userData && obj.userData.isStarfield && obj.material) {
+                    let starOpacity = 0.8;
+                    if (fogPercent > 0.1) {
+                        const fadeStart = 0.1;
+                        const fadeRange = 0.4 - fadeStart; // fully gone by ~40%
+                        const fadeAmount = Math.max(0, Math.min(1, (fogPercent - fadeStart) / fadeRange));
+                        starOpacity *= (1 - fadeAmount);
+                    }
+                    obj.material.transparent = true;
+                    obj.material.opacity = starOpacity;
+                    obj.visible = starOpacity > 0.05;
+                }
+            });
+        }
+
+        // Enforce camera constraints to prevent underground viewing
+        function enforceCameraConstraints() {
+            const minHeight = 0.5; // Minimum height above water surface (y=0)
+            if (camera.position.y < minHeight) {
+                // Smoothly adjust camera position to prevent jarring jumps
+                camera.position.y = Math.max(camera.position.y, minHeight);
+                controls.target.y = Math.max(controls.target.y, minHeight);
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (typeof paused !== 'undefined' && paused) { renderer.render(scene, camera); return; }
+            const now = performance.now();
+            const dt = Math.min(0.05, (now - lastT) / 1000);
+            lastT = now;
+            controls.update();
+            enforceCameraConstraints(); // Ensure camera stays above water
+            tickVessels(dt);
+            updateStarVisibility();
+            renderer.render(scene, camera);
+        }
+        animate();
+    </script>
+</body>
+
+</html>
+
+</html>

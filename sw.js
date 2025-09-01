@@ -11,6 +11,7 @@ const STATIC_ASSETS = [
   '/hobbies.html',
   '/project-management.html',
   '/sailing-timeline.html',
+  '/maritime-navigation-trainer.html',
   '/css/style.css',
   '/images/coding.jpg',
   '/images/hobbies.jpg',

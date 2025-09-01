@@ -213,6 +213,18 @@
                 <li><a href="sailing-timeline.html">Sailing</a></li>
                 <li><a href="coder.html">Coder</a></li>
                 <li><a href="project-management.html">Project Management</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Projects <span class="dropdown-arrow">▼</span></a>
+                                        <ul class="dropdown-menu">
+                        <li><a href="#" onclick="launchNavigationTrainer(); return false;">Maritime Navigation Trainer</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li class="dropdown-header">Firefox Addons</li>
+                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/ollama-web-chat/" target="_blank">Ollama Web Chat</a></li>
+                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/chatgpt3conversationbackup/" target="_blank">ChatGPT3 Conversation Backup</a></li>
+                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/find-the-elevation/" target="_blank">Find the Elevation!</a></li>
+                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/homegate-ch-scraper/" target="_blank">Homegate.ch Scraper</a></li>
+                    </ul>
+                </li>
                 <li><a href="hobbies.html">Hobbies</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
@@ -837,6 +849,62 @@
             });
         } else {
             console.log('Service Worker not supported');
+        }
+    </script>
+
+    <!-- Navigation Dropdown and Full-Screen Launch Script -->
+    <script>
+        // Dropdown functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const dropdown = document.querySelector('.dropdown');
+            if (dropdown) {
+                const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+                // Toggle dropdown on click
+                dropdownToggle.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function (e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        });
+
+        // Full-screen navigation trainer launcher
+        function launchNavigationTrainer() {
+            const width = screen.width;
+            const height = screen.height;
+            const features = `width=${width},height=${height},toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=yes,copyhistory=no,fullscreen=yes`;
+
+            // Open in new window with full screen
+            const trainerWindow = window.open('maritime-navigation-trainer.html', 'MaritimeNavigationTrainer', features);
+
+            // Try to make it fullscreen (may require user gesture)
+            if (trainerWindow) {
+                trainerWindow.focus();
+                // Attempt to enter fullscreen after a brief delay
+                setTimeout(() => {
+                    if (trainerWindow.document && trainerWindow.document.documentElement) {
+                        try {
+                            if (trainerWindow.document.documentElement.requestFullscreen) {
+                                trainerWindow.document.documentElement.requestFullscreen();
+                            } else if (trainerWindow.document.documentElement.webkitRequestFullscreen) {
+                                trainerWindow.document.documentElement.webkitRequestFullscreen();
+                            } else if (trainerWindow.document.documentElement.msRequestFullscreen) {
+                                trainerWindow.document.documentElement.msRequestFullscreen();
+                            }
+                        } catch (e) {
+                            console.log('Fullscreen request failed:', e);
+                        }
+                    }
+                }, 500);
+            }
         }
     </script>
 </body>

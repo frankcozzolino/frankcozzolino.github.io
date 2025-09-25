@@ -27,6 +27,7 @@
 - **Hero**: Full-height carousel with navigation
 - **Sailing**: Skills radar chart + interactive map
 - **Professional**: Timeline + certifications sidebar
+- **Coding**: GitHub-style portfolio with projects and skills
 - **Hobbies**: Card grid with overlay text
 
 ## CSS Classes

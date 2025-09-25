@@ -9,175 +9,602 @@
     <!-- RSS Feed Discovery -->
     <link rel="alternate" type="application/rss+xml" title="Frank Cozzolino - Blog &amp; Insights" href="/rss.xml">
     <style>
-        /* Coder Page Specific Navigation */
-        .nav-menu a:hover {
-            color: #ff8c00 !important;
-            text-shadow: 0 2px 8px rgba(255, 140, 0, 0.3) !important;
+        /* Enhanced GitHub-Style Portfolio Styles */
+        body {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%);
+            background-attachment: fixed;
+            color: #e6edf3;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            overflow-x: hidden;
         }
 
-        /* Coder Page Specific Styles */
-        .vanta-hero {
-            height: 100vh;
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 25% 25%, #58a6ff15 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, #f85149 15 1px, transparent 1px);
+            background-size: 100px 100px, 80px 80px;
+            animation: float 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .github-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 40px;
+        }
+
+        /* Enhanced Hero Section */
+        .github-hero {
+            text-align: center;
+            padding: 80px 0;
+            border-bottom: 1px solid #30363d;
+            margin-bottom: 40px;
+            position: relative;
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, rgba(248, 81, 73, 0.1) 100%);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-header {
             display: flex;
+            flex-direction: column;
             align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid #58a6ff;
+            object-fit: cover;
+            box-shadow:
+                0 0 30px rgba(88, 166, 255, 0.3),
+                0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 30px rgba(88, 166, 255, 0.3), 0 8px 32px rgba(0, 0, 0, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 0 40px rgba(88, 166, 255, 0.5), 0 12px 40px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            border-color: #f85149;
+        }
+
+        .profile-info h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin: 0;
+            background: linear-gradient(135deg, #58a6ff 0%, #f85149 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
+                filter: hue-rotate(20deg);
+            }
+        }
+
+        .profile-title {
+            font-size: 1.4rem;
+            color: #7d8590;
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
             justify-content: center;
+            margin-top: 24px;
+        }
+
+        .profile-stats span {
+            background: linear-gradient(135deg, #21262d 0%, #161b22 100%);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            border: 1px solid #30363d;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-content {
-            text-align: center;
-            color: white;
-            z-index: 10;
-            max-width: 800px;
-            padding: 0 20px;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        .profile-stats span::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(88, 166, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
 
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        .profile-stats span:hover::before {
+            left: 100%;
         }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 300;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-        }
-
-        .linkedin-chat-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff8c00, #ffd700);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
-        }
-
-        .linkedin-chat-btn:hover {
+        .profile-stats span:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border-color: #58a6ff;
+            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2);
         }
 
-        .articles-section {
-            padding: 80px 20px;
-            background: white;
+        /* Available for hire special styling */
+        .hire-status {
+            background: linear-gradient(135deg, #238636 0%, #2ea043 100%) !important;
+            border-color: #238636 !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            animation: hire-pulse 2s ease-in-out infinite alternate;
         }
 
-        .articles-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        @keyframes hire-pulse {
+            0% {
+                box-shadow: 0 4px 12px rgba(35, 134, 54, 0.3);
+                transform: scale(1);
+            }
+
+            100% {
+                box-shadow: 0 8px 20px rgba(35, 134, 54, 0.5);
+                transform: scale(1.02);
+            }
+        }
+
+        .hire-status:hover {
+            border-color: #2ea043 !important;
+            box-shadow: 0 12px 30px rgba(35, 134, 54, 0.4) !important;
+            transform: translateY(-2px) scale(1.02) !important;
+        }
+
+        /* Latest Projects Section */
+        .projects-section {
+            margin-bottom: 60px;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2c3e50;
+            font-size: 1.8rem;
             font-weight: 600;
+            color: #f0f6fc;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            padding-bottom: 12px;
         }
 
-        .articles-grid {
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #58a6ff, #f85149);
+            border-radius: 2px;
+        }
+
+        .section-title:hover::after {
+            animation: expand-line 0.5s ease-in-out;
+        }
+
+        @keyframes expand-line {
+
+            0%,
+            100% {
+                width: 60px;
+            }
+
+            50% {
+                width: 120px;
+            }
+        }
+
+        .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            gap: 20px;
         }
 
-        .article-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        .project-card {
+            background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 28px;
             transition: all 0.3s ease;
-            border: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .article-card:hover {
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #58a6ff, #f85149, #238636);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #58a6ff;
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow:
+                0 12px 40px rgba(88, 166, 255, 0.15),
+                0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .article-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #2c3e50;
-            line-height: 1.4;
+        .project-card:hover::before {
+            opacity: 1;
         }
 
-        .article-excerpt {
-            color: #6c757d;
-            line-height: 1.6;
-            margin-bottom: 20px;
+        .project-card.featured {
+            border-color: #f85149;
+            background: linear-gradient(135deg, #1c2128 0%, #22171b 100%);
         }
 
-        .article-meta {
+        .project-card.featured::before {
+            background: linear-gradient(90deg, #f85149, #ff6b35, #f85149);
+            opacity: 1;
+        }
+
+        .project-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            color: #868e96;
+            align-items: flex-start;
+            margin-bottom: 12px;
         }
 
-        .read-more {
-            color: #0077b5;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+        .project-header h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #58a6ff;
+            margin: 0;
         }
 
-        .read-more:hover {
-            color: #005885;
-        }
-
-        .medium-badge {
-            background: #00ab6c;
-            color: white;
+        .project-date {
+            font-size: 0.75rem;
+            color: #7d8590;
+            background: #21262d;
             padding: 4px 8px;
             border-radius: 4px;
-            font-size: 0.8rem;
+        }
+
+        .project-description {
+            color: #e6edf3;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tech-tag {
+            background: #1f6feb;
+            color: #ffffff;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
             font-weight: 500;
         }
 
+        .project-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .project-actions a {
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .project-actions a:hover {
+            text-decoration: underline;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin-bottom: 60px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-3px);
+            border-color: #238636;
+            box-shadow:
+                0 8px 30px rgba(35, 134, 54, 0.15),
+                0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #238636, #2ea043, #238636);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .skill-category:hover::before {
+            opacity: 1;
+        }
+
+        .skill-category h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin: 0 0 16px 0;
+        }
+
+        .skill-progress {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 12px;
+            background: #21262d;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #39d353, #26a641, #39d353);
+            border-radius: 8px;
+            transition: width 1.5s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(57, 211, 83, 0.3);
+        }
+
+        .progress-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: progress-shimmer 2s infinite;
+        }
+
+        @keyframes progress-shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .skill-level {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #39d353;
+            min-width: 35px;
+        }
+
+        .skill-technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            background: #21262d;
+            color: #e6edf3;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #30363d;
+        }
+
+        /* Profile Links Section */
+        .profile-links {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #30363d;
+        }
+
+        .profile-links h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin-bottom: 24px;
+        }
+
+        .links-grid {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .profile-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #21262d 0%, #161b22 100%);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(88, 166, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .profile-link:hover::before {
+            left: 100%;
+        }
+
+        .profile-link:hover {
+            background: linear-gradient(135deg, #30363d 0%, #21262d 100%);
+            border-color: #58a6ff;
+            color: #58a6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2);
+        }
+
+        .profile-link.github:hover {
+            border-color: #f0f6fc;
+            color: #f0f6fc;
+        }
+
+        .profile-link.linkedin:hover {
+            border-color: #0077b5;
+            color: #0077b5;
+        }
+
+        .profile-link.resume:hover {
+            border-color: #39d353;
+            color: #39d353;
+        }
+
+        .profile-link.contact:hover {
+            border-color: #f85149;
+            color: #f85149;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
+            .github-container {
+                padding: 90px 16px 20px;
             }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .profile-header {
+                gap: 16px;
             }
 
-            .articles-grid {
+            .profile-info h1 {
+                font-size: 2rem;
+            }
+
+            .profile-stats {
+                gap: 12px;
+            }
+
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
 
-            .article-card {
-                padding: 20px;
+            .skills-grid {
+                grid-template-columns: 1fr;
             }
+
+            .links-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .profile-link {
+                width: 200px;
+                justify-content: center;
+            }
+        }
+
+        /* Navigation override for dark theme */
+        .main-nav {
+            background: rgba(13, 17, 23, 0.8) !important;
+            backdrop-filter: blur(12px);
         }
     </style>
 </head>
@@ -197,13 +624,18 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Projects <span class="dropdown-arrow">▼</span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#" onclick="launchNavigationTrainer(); return false;">Maritime Navigation Trainer</a></li>
+                        <li><a href="#" onclick="launchNavigationTrainer(); return false;">Maritime Navigation
+                                Trainer</a></li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-header">Firefox Addons</li>
-                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/ollama-web-chat/" target="_blank">Ollama Web Chat</a></li>
-                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/chatgpt3conversationbackup/" target="_blank">ChatGPT3 Conversation Backup</a></li>
-                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/find-the-elevation/" target="_blank">Find the Elevation!</a></li>
-                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/homegate-ch-scraper/" target="_blank">Homegate.ch Scraper</a></li>
+                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/ollama-web-chat/"
+                                target="_blank">Ollama Web Chat</a></li>
+                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/chatgpt3conversationbackup/"
+                                target="_blank">ChatGPT3 Conversation Backup</a></li>
+                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/find-the-elevation/"
+                                target="_blank">Find the Elevation!</a></li>
+                        <li><a href="https://addons.mozilla.org/en-US/firefox/addon/homegate-ch-scraper/"
+                                target="_blank">Homegate.ch Scraper</a></li>
                     </ul>
                 </li>
                 <li><a href="hobbies.html">Hobbies</a></li>
@@ -224,42 +656,36 @@
                             d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z" />
                     </svg>
                 </a>
-                <a href="https://www.linkedin.com/in/cozzolinofrancesco/" class="social-icon" title="LinkedIn">
+                <a href="https://linkedin.com/in/frank-cozzolino" class="social-icon" title="LinkedIn">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <title>LinkedIn</title>
                         <path
                             d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                 </a>
-                <a href="https://instagram.com/your-profile" class="social-icon" title="Instagram">
-                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <title>Instagram</title>
-                        <path
-                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                    </svg>
-                </a>
-                <a href="mailto:your.email@gmail.com" class="social-icon" title="Gmail">
+                <a href="mailto:frank@example.com" class="social-icon" title="Gmail">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <title>Gmail</title>
                         <path
                             d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
                     </svg>
                 </a>
-                <a href="https://github.com/YodaGitMaster" class="social-icon" title="GitHub">
+                <a href="https://github.com/frankcozzolino" class="social-icon" title="GitHub">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <title>GitHub</title>
                         <path
                             d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
                     </svg>
                 </a>
-                <a href="https://calendly.com/your-profile" class="social-icon" title="Schedule a Call">
-                    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <title>Calendar</title>
+                <a href="https://calendar.google.com/calendar/u/0?cid=your-calendar-id" class="social-icon"
+                    title="Calendar">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <title>Google Calendar</title>
                         <path
-                            d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H5V10h14v8z" />
+                            d="M22.5 13.5v8.25a.75.75 0 01-.75.75H2.25a.75.75 0 01-.75-.75V13.5h21zM21.75 2.25A.75.75 0 0122.5 3v9H1.5V3a.75.75 0 01.75-.75h19.5zM7.5 6a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM19.5 6a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                     </svg>
                 </a>
-                <a href="https://youtube.com/@your-channel" class="social-icon" title="YouTube">
+                <a href="https://youtube.com/@frankcozzolino" class="social-icon" title="YouTube">
                     <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <title>YouTube</title>
                         <path
@@ -270,129 +696,282 @@
         </div>
     </nav>
 
-    <!-- Vanta.js Hero Section -->
-    <section class="vanta-hero" id="vanta-canvas">
-        <div class="hero-content">
-            <h1 class="hero-title">Software Developer & Coder</h1>
-            <p class="hero-subtitle">Building innovative solutions with clean, efficient code</p>
-            <p class="hero-description">
-                Passionate about creating elegant, scalable software solutions that solve real-world problems.
-                From full-stack development to system architecture, I transform complex requirements into
-                maintainable, high-performance applications.
-            </p>
-            <a href="https://www.linkedin.com/in/cozzolinofrancesco/" class="linkedin-chat-btn" target="_blank">
-                Let's Connect on LinkedIn
-            </a>
-        </div>
-    </section>
-
-    <!-- Medium Articles Section -->
-    <section class="articles-section">
-        <div class="articles-container">
-            <h2 class="section-title">Coding & Development Insights</h2>
-            <div class="articles-grid">
-                <div class="article-card">
-                    <h3 class="article-title">The Art of Stakeholder Management in Digital Transformation</h3>
-                    <p class="article-excerpt">
-                        Explore proven strategies for managing diverse stakeholder expectations during complex digital
-                        transformation projects.
-                        Learn how to align technical and business objectives while maintaining project momentum.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
-                </div>
-
-                <div class="article-card">
-                    <h3 class="article-title">Agile vs Waterfall: Choosing the Right Methodology</h3>
-                    <p class="article-excerpt">
-                        A comprehensive guide to selecting the optimal project management methodology based on project
-                        scope,
-                        team dynamics, and organizational culture. Real-world case studies and decision frameworks.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
-                </div>
-
-                <div class="article-card">
-                    <h3 class="article-title">Solution Architecture: From Requirements to Implementation</h3>
-                    <p class="article-excerpt">
-                        Step-by-step approach to designing robust solution architectures that scale.
-                        Covering requirement analysis, technology selection, and implementation strategies.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
-                </div>
-
-                <div class="article-card">
-                    <h3 class="article-title">Risk Management in Software Development Projects</h3>
-                    <p class="article-excerpt">
-                        Proactive risk identification and mitigation strategies for software development projects.
-                        Tools, techniques, and best practices for maintaining project health and delivery timelines.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
-                </div>
-
-                <div class="article-card">
-                    <h3 class="article-title">Building High-Performance Project Teams</h3>
-                    <p class="article-excerpt">
-                        Leadership strategies for assembling and motivating cross-functional project teams.
-                        Focus on communication, collaboration, and continuous improvement in project delivery.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
-                    </div>
-                </div>
-
-                <div class="article-card">
-                    <h3 class="article-title">Digital Transformation: A Project Manager's Perspective</h3>
-                    <p class="article-excerpt">
-                        Insights from leading digital transformation initiatives across various industries.
-                        Key success factors, common pitfalls, and lessons learned from real-world implementations.
-                    </p>
-                    <div class="article-meta">
-                        <span class="medium-badge">Medium</span>
-                        <a href="#" class="read-more">Read Article →</a>
+    <div class="github-container">
+        <!-- Hero Section -->
+        <section class="github-hero">
+            <div class="profile-header">
+                <img src="images/signature.png" alt="Frank Cozzolino" class="profile-avatar">
+                <div class="profile-info">
+                    <h1>Frank Cozzolino</h1>
+                    <p class="profile-title">Full Stack Developer & Coastal Skipper</p>
+                    <div class="profile-stats">
+                        <span>12+ Projects</span>
+                        <span>8+ Languages</span>
+                        <span class="hire-status">⭐ Available for hire</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Vanta.js Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+        <!-- Latest Projects Section -->
+        <section class="projects-section">
+            <h2 class="section-title">
+                Latest Projects
+            </h2>
+            <div class="projects-grid" id="projects-container">
+                <!-- Projects will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <h2 class="section-title">
+                Skills Overall
+            </h2>
+            <div class="skills-grid" id="skills-container">
+                <!-- Skills will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Profile Links Section -->
+        <section class="profile-links">
+            <h2>Connect & Explore</h2>
+            <div class="links-grid">
+                <a href="https://github.com/YodaGitMaster" class="profile-link github" target="_blank">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                    </svg>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/cozzolinofrancesco/" class="profile-link linkedin" target="_blank">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="index.html" class="profile-link resume">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
+                    </svg>
+                    Portfolio
+                </a>
+                <a href="mailto:frank@example.com" class="profile-link contact">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                    </svg>
+                    Contact
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript for Dynamic Content -->
     <script>
-        VANTA.BIRDS({
-            el: "#vanta-canvas",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            backgroundColor: 0xfff5e6,
-            color1: 0xff8c00,
-            color2: 0xffd700,
-            colorMode: "lerpGradient",
-            birdSize: 1.50,
-            wingSpan: 20.00,
-            separation: 50.00,
-            alignment: 1.00,
-            cohesion: 1.00,
-            quantity: 3.00
-        })
+        // Projects Data
+        const projects = [
+            {
+                id: 1,
+                name: "Maritime Navigation Trainer",
+                date: "2025-01-15",
+                description: "Interactive 3D navigation training tool for maritime education with real-time compass, GPS simulation, and collision avoidance systems.",
+                technologies: ["Three.js", "WebGL", "JavaScript", "HTML5", "CSS3"],
+                status: "Active",
+                github: "https://github.com/YodaGitMaster",
+                demo: "maritime-navigation-trainer.html",
+                featured: true
+            },
+            {
+                id: 2,
+                name: "Personal Portfolio Website",
+                date: "2024-12-20",
+                description: "Responsive portfolio with sailing timeline, blog integration, and RSS feed. Features shared navigation system and mobile optimization.",
+                technologies: ["HTML5", "CSS3", "JavaScript", "RSS", "Service Worker"],
+                status: "Active",
+                github: "https://github.com/frankcozzolino/frankcozzolino.github.io",
+                demo: "index.html",
+                featured: true
+            },
+            {
+                id: 3,
+                name: "RSS Feed Generator",
+                date: "2024-11-10",
+                description: "Automated RSS feed generation from Medium articles with image extraction and GitHub Actions integration.",
+                technologies: ["Node.js", "XML", "GitHub Actions", "Medium API"],
+                status: "Active",
+                github: "https://github.com/YodaGitMaster",
+                demo: "rss.xml",
+                featured: false
+            },
+            {
+                id: 4,
+                name: "Blog System Integration",
+                date: "2024-10-15",
+                description: "Dynamic blog system with RSS parsing, article caching, and responsive card layouts.",
+                technologies: ["JavaScript", "RSS", "LocalStorage", "CSS Grid"],
+                status: "Active",
+                github: "https://github.com/YodaGitMaster",
+                demo: "blog.html",
+                featured: false
+            },
+            {
+                id: 5,
+                name: "Sailing Timeline Visualization",
+                date: "2024-09-20",
+                description: "Interactive timeline with animated boat, certification tracking, and responsive design for maritime achievements.",
+                technologies: ["JavaScript", "CSS Animations", "SVG", "JSON"],
+                status: "Active",
+                github: "https://github.com/YodaGitMaster",
+                demo: "sailing-timeline.html",
+                featured: false
+            },
+            {
+                id: 6,
+                name: "Firefox Browser Extensions",
+                date: "2024-08-10",
+                description: "Collection of productivity Firefox extensions including Ollama Web Chat, ChatGPT backup, and web scrapers.",
+                technologies: ["JavaScript", "WebExtensions", "HTML", "CSS"],
+                status: "Published",
+                github: "https://github.com/YodaGitMaster",
+                demo: "https://addons.mozilla.org/en-US/firefox/addon/ollama-web-chat/",
+                featured: false
+            }
+        ];
+
+        // Skills Data
+        const skills = {
+            frontend: {
+                level: 85,
+                technologies: ["JavaScript", "HTML5", "CSS3", "React", "Vue.js", "Three.js", "WebGL"],
+                color: "#1f6feb"
+            },
+            backend: {
+                level: 80,
+                technologies: ["Node.js", "Python", "PHP", "Express", "FastAPI", "REST APIs"],
+                color: "#39d353"
+            },
+            devops: {
+                level: 70,
+                technologies: ["GitHub Actions", "Docker", "CI/CD", "Service Workers", "PWA"],
+                color: "#f85149"
+            },
+            tools: {
+                level: 90,
+                technologies: ["Git", "VS Code", "Chrome DevTools", "Figma", "Postman"],
+                color: "#a5a5a5"
+            }
+        };
+
+        // Format date function
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        // Create project card
+        function createProjectCard(project) {
+            return `
+                <div class="project-card ${project.featured ? 'featured' : ''}">
+                    <div class="project-header">
+                        <h3>${project.name}</h3>
+                        <span class="project-date">${formatDate(project.date)}</span>
+                    </div>
+                    <p class="project-description">${project.description}</p>
+                    <div class="tech-stack">
+                        ${project.technologies.map(tech =>
+                `<span class="tech-tag">${tech}</span>`
+            ).join('')}
+                    </div>
+                    <div class="project-actions">
+                        ${project.github ? `<a href="${project.github}" target="_blank">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                            GitHub
+                        </a>` : ''}
+                        ${project.demo ? `<a href="${project.demo}" target="_blank">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                                <path d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                            </svg>
+                            Live Demo
+                        </a>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Create skill category
+        function createSkillCategory(category, data) {
+            return `
+                <div class="skill-category">
+                    <h3>${category.charAt(0).toUpperCase() + category.slice(1)}</h3>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${data.level}%; background: ${data.color};"></div>
+                        </div>
+                        <span class="skill-level">${data.level}%</span>
+                    </div>
+                    <div class="skill-technologies">
+                        ${data.technologies.map(tech =>
+                `<span class="skill-tag">${tech}</span>`
+            ).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function () {
+            // Populate projects
+            const projectsContainer = document.getElementById('projects-container');
+            projectsContainer.innerHTML = projects.map(createProjectCard).join('');
+
+            // Populate skills
+            const skillsContainer = document.getElementById('skills-container');
+            skillsContainer.innerHTML = Object.entries(skills)
+                .map(([category, data]) => createSkillCategory(category, data))
+                .join('');
+
+            // Animate progress bars
+            setTimeout(() => {
+                document.querySelectorAll('.progress-fill').forEach(fill => {
+                    fill.style.transition = 'width 1s ease-in-out';
+                });
+            }, 500);
+        });
+
+        // Dropdown functionality
+        const dropdown = document.querySelector('.dropdown');
+        if (dropdown) {
+            const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+
+            // Toggle dropdown on click
+            dropdownToggle.addEventListener('click', function (e) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        }
+
+        // Full-screen navigation trainer launcher
+        function launchNavigationTrainer() {
+            window.open('maritime-navigation-trainer.html', '_blank');
+        }
     </script>
 
     <!-- SERVICE WORKER REGISTRATION -->

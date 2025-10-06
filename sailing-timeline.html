@@ -179,6 +179,89 @@
             fill: #FF0000;
         }
 
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            padding: 8px 0;
+            z-index: 1001;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown.active .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu li {
+            list-style: none;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(74, 144, 226, 0.1);
+            color: #3498db;
+            padding-left: 20px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.1);
+            margin: 8px 0;
+        }
+
+        .dropdown-header {
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            margin-left: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Mobile Responsive Dropdown */
+        @media (max-width: 768px) {
+            .dropdown-menu {
+                min-width: 180px;
+                right: 0;
+                left: auto;
+            }
+
+            .dropdown-menu a {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
         /* Banner Section */
         .banner {
             background: rgba(74, 144, 226, 0.1);
@@ -584,6 +667,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Projects <span class="dropdown-arrow">▼</span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="hackathons-projects.html">Hackathons & Projects</a></li>
+                        <li class="dropdown-divider"></li>
                         <li><a href="#" onclick="launchNavigationTrainer(); return false;">Maritime Navigation
                                 Trainer</a></li>
                         <li class="dropdown-divider"></li>

@@ -37,14 +37,14 @@
 - **Change Detection**: Only commits and pushes when new articles are found
 - **Error Handling**: Comprehensive error handling and logging
 
-### Real Articles with Images (Latest 10)
-1. "AI isn't delivering value" and "Why Firing People for AI Agents is a Costly Mistake"
+### Real Articles with Images (Latest 10) - Updated 2025-09-25
+1. "The Lifelong Learning Manifesto: Why Education Must Be Reinvented for a 100+ Years of Working Life" (Sep 21, 2025)
+   - Image: https://cdn-images-1.medium.com/max/1024/1*IJL_0QBwUAIDeJQJs7uM5Q.png
+2. "Do Mushrooms Communicate? A Concise, Scientific Look at Fungal Signalling" (Aug 16, 2025)
+   - Image: https://cdn-images-1.medium.com/max/1024/1*tE7vLDQArpkZOzBIc4CbeQ.png
+3. "AI isn't delivering value" and "Why Firing People for AI Agents is a Costly Mistake" (Jul 17, 2025)
    - Image: https://cdn-images-1.medium.com/max/1024/1*-XloYdAw_hSW_izDAL06_Q.png
-2. "I am Sorry, but We will never talk to ET"
-   - Image: https://cdn-images-1.medium.com/max/1024/1*59rASJy1onpWv2dsBBhPrA.png
-3. "Little-known Google Auth Feature"
-   - Image: https://cdn-images-1.medium.com/max/1024/0*Ii2CrjYQfJw0L0Ud
-4. 7 additional articles with extracted images
+4. 7 additional articles with extracted images including ET communication, Google Auth, WWW future, Vibe Coding series, etc.
 
 ### RSS Feed Features
 - **Valid RSS 2.0**: Proper XML structure with all required elements
@@ -71,6 +71,20 @@
 - **Monitoring**: Monitor GitHub Actions workflow execution
 - **Optional**: Add RSS feed link to website navigation
 - **Optional**: Add feed analytics tracking
+
+### Hackathons & Projects Section - COMPLETED ✅
+- **Created**: `hackathons-projects.html` - New dedicated page for showcasing hackathons and projects
+- **Features**:
+  - Card-based layout with images, titles, descriptions, and external links
+  - Filter buttons (All Projects, Hackathons, Personal Projects)
+  - Responsive design for mobile and desktop
+  - Animated background and modern styling
+- **Data Structure**: `projects-data.json` - JSON file for adding real project entries with metadata
+- **Status**: Mock data removed, ready for real projects and hackathons
+- **Navigation**: Updated all HTML pages to include "Hackathons & Projects" in Projects dropdown
+- **Styling**: Consistent with existing website theme, uses animated background particles
+- **Interactive**: Filter functionality, hover effects, and smooth transitions
+- **Technical**: Async JSON loading for maintainable content management
 
 ### Usage Instructions
 **Manual Update**:

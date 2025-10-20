@@ -76,6 +76,29 @@
 - **Feed Analytics**: Track RSS feed usage and popular articles
 - **Multi-Source**: Extend to pull from multiple content sources beyond Medium
 
+## RSS Feed Update - 2025-10-20 09:52 UTC
+
+### Inputs
+- Source: `https://medium.com/feed/@francesco.cozzolino`
+- Script: `scripts/generate-rss.js`
+
+### Results
+- `rss.xml` lastBuildDate: Mon, 20 Oct 2025 09:52:01 GMT
+- Articles: 10
+- Newest titles:
+  - The Four Patterns Before Every Market Crash and Why the AI Boom Now Fits the Script (2025-10-19)
+  - They Think They Know When The Universe will end. (2025-10-19)
+  - What Sora 2 Says About the AI Bubble? (2025-10-18)
+
+### Observations
+- `<enclosure>` image URLs extracted correctly (Medium CDN, max/1024)
+- `<content:encoded>` includes full HTML from Medium; some posts include publication boilerplate and trackers
+- Blog integration via `blog.html?article=<slug>` intact
+
+### Actionables
+- Consider post-processing to strip Medium publication boilerplate in feed content
+- Investigate script push failure in `scripts/update-rss.bat` (commit succeeded; push reported error despite remote showing update in console)
+
 ### Developer Experience
 - **Simple Command**: Single `node scripts/generate-rss.js` command updates entire feed
 - **Clear Logging**: Detailed console output shows processed articles and status

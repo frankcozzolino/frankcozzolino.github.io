@@ -316,7 +316,9 @@
     <!-- Medium Articles Section -->
     <section class="articles-section">
         <div class="articles-container">
-            <h2 class="section-title">Latest Articles</h2>
+            <h2 class="section-title">Latest Articles <button onclick="clearRSSCache(); loadArticles();"
+                    style="margin-left:0.75rem;background:#f0f4f8;color:#2c3e50;border:1px solid #d9e2ec;padding:6px 10px;border-radius:6px;font-size:0.9rem;cursor:pointer;vertical-align:middle;">Refresh</button>
+            </h2>
             <div id="blog-content" class="articles-grid">
                 <!-- Articles will be loaded here dynamically -->
                 <div style="text-align:center;padding:3rem;color:#666;">

@@ -75,6 +75,18 @@
 - **Optional**: Add RSS feed link to website navigation
 - **Optional**: Add feed analytics tracking
 
+---
+
+## 2025-11-19 - Echoes of the Ashes CTA Buttons
+- **Last Completed Action**: Fixed clipped text on hero download buttons in `echoesoftheashes.html`
+- **Change Summary**:
+  - Updated `.buttons-container` to allow wrapping (`flex-wrap: wrap`) and center alignment
+  - Refactored `.download-btn` to use `inline-flex` alignment, removed overflow clipping, and added a comfortable `min-width`
+- **Current State**: Buttons show full text across desktop and mobile layouts
+- **Next Steps**:
+  - Visually verify on multiple zoom levels (90–125%) and devices
+  - Adjust `min-width` or padding if future label text changes
+
 ### Hackathons & Projects Section - COMPLETED ✅
 - **Created**: `hackathons-projects.html` - New dedicated page for showcasing hackathons and projects
 - **Features**:

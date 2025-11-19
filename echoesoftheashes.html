@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes of the Ashes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #1a5f7a 0%, #159895 100%);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        /* Background Image */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('images/d6746ca1-5086-4e59-8583-cf674114996b.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        /* Gradient Overlay */
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 8%;
+            max-width: 600px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo svg {
+            width: 50px;
+            height: 50px;
+            fill: #d4af37;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-style: italic;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .title-nowrap {
+            white-space: nowrap;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .download-btn {
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: normal;
+            min-width: 180px;
+        }
+
+        .download-btn.primary {
+            background: #d4af37;
+            color: #000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .download-btn.primary:hover {
+            background: #f0c857;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);
+        }
+
+        .download-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .download-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-right: 5%;
+        }
+
+        /* Footer Navigation */
+        .footer-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            padding: 1.5rem 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .footer-link:hover {
+            color: #d4af37;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-section {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                padding: 2rem;
+            }
+
+            .hero-image {
+                display: none;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .logo {
+                margin: 0 auto 2rem;
+            }
+
+            .buttons-container {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .download-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.8rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+
+            .footer-link {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content {
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                gap: 1rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            background: none;
+            border: none;
+            line-height: 1;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            color: #d4af37;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-content h2 {
+            font-size: 2rem;
+            color: #d4af37;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .modal-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero-section">
+        <div class="hero-content">
+            <!-- Logo Placeholder -->
+            <div class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="3" fill="none"/>
+                    <path d="M50 20 L65 50 L50 45 L35 50 Z" fill="currentColor"/>
+                    <circle cx="50" cy="50" r="8" fill="currentColor"/>
+                </svg>
+            </div>
+
+            <h1>Play<br><span class="title-nowrap">Echoes of the Ashes</span><br>Now</h1>
+
+            <div class="buttons-container">
+                <a href="https://hub.docker.com/r/francescocozzolino/echoes-of-the-ashes" target="_blank" rel="noopener noreferrer" class="download-btn primary">Download Ashes</a>
+                <a href="https://hub.docker.com/r/francescocozzolino/rust-compiler-backend" target="_blank" rel="noopener noreferrer" class="download-btn secondary">Download Rust Compiler</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <!-- Background image will show here -->
+        </div>
+    </div>
+
+    <footer class="footer-nav">
+        <div class="footer-content">
+            <a href="#" class="footer-link" onclick="openModal(); return false;">About Echoes of the Ashes</a>
+            <a href="#" class="footer-link">Help Us Improve</a>
+            <a href="https://www.docker.com/get-started" class="footer-link" target="_blank">Download Docker</a>
+            <a href="#" class="footer-link">About Hashes</a>
+            <a href="https://www.linkedin.com/in/cozzolinofrancesco/" class="footer-link" target="_blank">Support</a>
+        </div>
+    </footer>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2>About Echoes of the Ashes</h2>
+            <p>Echoes of the Ashes is a game developed and thought by Francesco Cozzolino as a way to teach Rust programming.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('aboutModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('aboutModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('aboutModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
+

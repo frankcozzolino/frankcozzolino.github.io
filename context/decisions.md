@@ -112,3 +112,17 @@
 - **Progressive Enhancement**: Could add more advanced features for modern browsers
 - **Accessibility Auditing**: Regular reviews to ensure inclusive design
 - **Content Management**: Consider headless CMS for easier timeline updates 
+
+---
+
+### 2025-11-19 - Echoes of the Ashes CTA Buttons Layout
+- **Decision**: Refactor hero download buttons to be content-driven and responsive rather than relying on overflow clipping.
+- **Implementation**:
+  - `.buttons-container` now uses `flex-wrap: wrap` with centered alignment to allow natural wrapping when space is constrained.
+  - `.download-btn` uses `display: inline-flex` with centered alignment, normal white-space, and a modest `min-width` for consistent CTA sizing.
+  - Removed `overflow: hidden` and unnecessary positioning to avoid text clipping and simplify future changes.
+- **Rationale**:
+  - Ensures full visibility of labels like “Download Ashes” and “Download Rust Compiler” across zoom levels and devices.
+  - More robust to future copy changes and localization, while maintaining the intended visual style.
+- **Rejected Alternative**:
+  - Fixed-width buttons sized to current labels—rejected as too brittle and less responsive.

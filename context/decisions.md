@@ -126,3 +126,12 @@
   - More robust to future copy changes and localization, while maintaining the intended visual style.
 - **Rejected Alternative**:
   - Fixed-width buttons sized to current labels—rejected as too brittle and less responsive.
+
+### 2025-11-19 - Echoes of the Ashes Homepage Navigation
+- **Decision**: Expose the `echoesoftheashes.html` game page directly from the main navigation.
+- **Implementation**:
+  - Added an `Echoes of the Ashes (Game)` entry under the `Projects` dropdown in the primary navbar on `index.html`.
+  - Mirrored this link in the mobile footer navigation for consistent access on small screens.
+- **Rationale**:
+  - Keeps the game discoverable as part of the broader projects ecosystem without overcrowding the top-level nav.
+  - Maintains desktop/mobile parity and leverages existing dropdown patterns.

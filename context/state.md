@@ -87,6 +87,15 @@
   - Visually verify on multiple zoom levels (90–125%) and devices
   - Adjust `min-width` or padding if future label text changes
 
+## 2025-11-19 - Echoes of the Ashes Navigation Link
+- **Last Completed Action**: Added navigation links to `echoesoftheashes.html` from the homepage.
+- **Changes**:
+  - Added `Echoes of the Ashes (Game)` under the `Projects` dropdown in `index.html` navbar.
+  - Added `Echoes of the Ashes` to the mobile footer navigation menu on the homepage.
+- **Current State**: Game page is reachable from both desktop and mobile navigation on the home page.
+- **Next Steps**:
+  - Optionally propagate the same nav link to other top-level pages for consistency.
+
 ### Hackathons & Projects Section - COMPLETED ✅
 - **Created**: `hackathons-projects.html` - New dedicated page for showcasing hackathons and projects
 - **Features**:
